@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import ButtonField from "../components/common/design/ButtonField";
 import Textinput from "../components/common/design/inputField";
-import firebase from '../firebase/firebase'
+import ModalField from "../components/common/design/Modalfield";
+import firebase from "../firebase/firebase";
 const Auth = () => {
   const [mobile, setmobile] = useState("");
   const [otp, setotp] = useState("");
+  const [open, setopen] = useState("");
   const [confirmResult, setconfirmResult] = useState(null);
 
   const verifyPhoneNumber = async () => {
@@ -16,6 +18,7 @@ const Auth = () => {
           mobile.toString().length
         );
       } else {
+        setopen(true);
         // dispatch(setLoading(true));
         const appVerifier = new firebase.auth.RecaptchaVerifier(
           "recaptcha-container",
@@ -25,7 +28,7 @@ const Auth = () => {
           .auth()
           .signInWithPhoneNumber(mobile, appVerifier);
         if (result) {
-          console.log(result)
+          console.log(result);
           alert("ok");
           // SetShowJobModal(true);
           setconfirmResult(result);
@@ -43,9 +46,9 @@ const Auth = () => {
       //  SetShowJobModal(false);
       e.preventDefault();
       if (otp) {
-        console.log(otp)
+        console.log(otp);
         const confirmOtp = await confirmResult.confirm(otp);
-        console.log(confirmOtp)
+        console.log(confirmOtp);
         if (confirmOtp) {
           console.log("Phone number verified successfully!");
           //  setIsPhoneValidate(true);
@@ -53,11 +56,11 @@ const Auth = () => {
         }
       } else {
         console.error("Invalid OTP");
-        console.log(otp,confirmOtp)
+        console.log(otp, confirmOtp);
         //  dispatch(setLoading(false));
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       //  router.reload();
       console.error("Invalid OTP please try again");
       //  dispatch(setLoading(false));
@@ -161,6 +164,12 @@ const Auth = () => {
 
             <ButtonField text="Signup" />
             <div id="recaptcha-container"></div>
+            <ModalField open={open} setopen={setopen} title="Verify Otp">
+              <div className="max-h-48 mt-2 px-2">
+                <h1>okkk</h1>
+                <Textinput />
+              </div>
+            </ModalField>
           </div>
         </div>
       </section>
