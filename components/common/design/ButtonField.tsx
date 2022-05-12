@@ -1,8 +1,8 @@
 import React from 'react'
 
-const ButtonField = ({
-  text,onClick
-}) => {
+import { ButtonFieldProps } from "component";
+
+const ButtonField: React.FC<ButtonFieldProps> = ({ text, onClick }) => {
   return (
     <button
       onClick={onClick}
@@ -11,6 +11,6 @@ const ButtonField = ({
       {text}
     </button>
   );
-}
+};
 
 export default ButtonField

@@ -1,4 +1,11 @@
-const Textinput = ({ type, value, onChange, text, placeholder }) => {
+import { InputFieldProps } from "component";
+const Textinput: React.FC<InputFieldProps> = ({
+  type,
+  value,
+  onChange,
+  text,
+  placeholder,
+}) => {
   return (
     <div className="relative mb-4">
       <label

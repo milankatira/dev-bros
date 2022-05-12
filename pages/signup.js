@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ButtonField from "../components/common/design/ButtonField";
-import Textinput from "../components/common/design/inputField";
+import Textinput from "../components/common/design/Textinput";
 import ModalField from "../components/common/design/Modalfield";
 import firebase from "../firebase/firebase";
 const Auth = () => {

@@ -1,6 +1,11 @@
 import React from "react";
-
-const ModalField = ({ title, open, setopen, children }) => {
+import { ModalFieldProps } from "component";
+const ModalField: React.FC<ModalFieldProps> = ({
+  title,
+  open,
+  setopen,
+  children,
+}) => {
   return (
     <div>
       <div
@@ -15,11 +20,7 @@ const ModalField = ({ title, open, setopen, children }) => {
             <button onClick={() => setopen(false)}>x</button>
           </div>
 
-
-          <div>
-
-          {children}
-          </div>
+          <div>{children}</div>
 
           <div className="px-4 py-2 border-t border-t-gray-500 flex justify-end items-center space-x-4">
             <button
