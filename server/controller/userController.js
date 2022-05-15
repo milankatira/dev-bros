@@ -5,21 +5,15 @@ const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 const cloudinary = require("cloudinary");
-const {
-  getTokenForEmailVarification,
-  checkTokenForEmailVerification,
-} = require("../helpers/auth");
+const { getTokenForEmailVarification } = require("../helpers/auth");
+
+const { checkTokenForEmailVerification } = require("../helpers/checkauth");
 
 const dotenv = require("dotenv");
 
 dotenv.config({ path: "../config/config.env" });
 
 exports.registerUser = catchAsyncError(async (req, res, next) => {
-  // const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-  //   folder: "avatars",
-  //   width: 150,
-  //   crop: "scale",
-  // });
   const { firstName, lastName, email, password, phoneNo } = req.body;
   const user = await User.create({
     firstName,
@@ -47,8 +41,10 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
 exports.verifyUser = catchAsyncError(async (req, res, next) => {
   const { token } = req.params;
 
+  // console.log(token);
   try {
     const decodedToken = await checkTokenForEmailVerification(token);
+    console.log(decodedToken);
     if (!decodedToken) {
       return {
         status: false,
@@ -78,7 +74,7 @@ exports.verifyUser = catchAsyncError(async (req, res, next) => {
     }
   } catch (err) {
     return res.status(500).json({
-      error,
+      err,
     });
   }
 });
@@ -235,7 +231,7 @@ exports.updateProfile = catchAsyncError(async (req, res, next) => {
     };
   }
 
-  const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+  await User.findByIdAndUpdate(req.user.id, newUserData, {
     new: true,
     runValidators: true,
     useFindAndModify: false,

@@ -4,20 +4,6 @@ const app = express();
 
 const cookieParser = require("cookie-parser");
 
-// const cors = require("cors");
-// const session = require("express-session");
-// const RedisClient = require("./config/redis.config.js");
-
-// console.log(process.env.SESSION_SECRET, "ff");
-// app.use(
-//   session({
-//     secret: process.env.SESSION_SECRET,
-//     store: new RedisStore({ client: RedisClient.getRedisClientForSession() }),
-//     saveUninitialized: true,
-//     resave: false,
-//   })
-// );
-
 app.use(express.json());
 
 app.use(cookieParser());
@@ -36,6 +22,8 @@ const order = require("./routes/orderRoutes");
 
 const payment = require("./routes/paymentRoute");
 
+const profile = require("./routes/profileRoutes");
+
 const dotenv = require("dotenv");
 
 dotenv.config({ path: "server/config/config.env" });
@@ -44,8 +32,6 @@ const cors = require("cors");
 const session = require("express-session");
 const RedisStore = require("connect-redis")(session);
 const RedisClient = require("./config/redis.config.js");
-
-console.log(process.env.SESSION_SECRET, "ffhhhh");
 
 app.use(
   session({
@@ -67,6 +53,8 @@ app.use("/api/v1", user);
 app.use("/api/v1", order);
 
 app.use("/api/v1", payment);
+
+app.use("/api/v1", profile);
 
 app.use(errorMiddleware);
 
