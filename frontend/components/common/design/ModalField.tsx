@@ -5,6 +5,7 @@ const ModalField: React.FC<ModalFieldProps> = ({
   open,
   setopen,
   children,
+  handleSubmit,
 }) => {
   return (
     <div>
@@ -25,9 +26,9 @@ const ModalField: React.FC<ModalFieldProps> = ({
           <div className="px-4 py-2 border-t border-t-gray-500 flex justify-end items-center space-x-4">
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
-              onClick={() => setopen(false)}
+              onClick={(e) => handleSubmit(e)}
             >
-              Close
+              submit
             </button>
           </div>
         </div>

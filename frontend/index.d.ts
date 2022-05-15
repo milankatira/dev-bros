@@ -10,11 +10,14 @@ declare module "component" {
     type?: string;
     placeholder?: string;
     text?: string | any;
+    name?: string | any;
+    error?: string | any;
   }
   export interface ModalFieldProps {
     title: string | any;
-    open: boolean;
+    open: boolean | any;
     setopen: any;
     children?: any;
+    handleSubmit ?: any;
   }
 }
