@@ -1,0 +1,24 @@
+{
+  "name": "inbabylon",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "stage": "NODE_ENV=staging pm2 start server.js --name hirefast-admin-staging --log-date-format 'YYYYMMDD'",
+    "prod": "NODE_ENV=prod pm2 start server.js --log-date-format 'YYYYMMDD'"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "admin-bro": "^2.2.4",
+    "admin-bro-expressjs": "^2.0.1",
+    "admin-bro-mongoose": "^0.5.0",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "express-formidable": "^1.2.0",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.11.15"
+  }
+}

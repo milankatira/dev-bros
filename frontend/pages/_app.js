@@ -1,6 +1,8 @@
 import "../styles/globals.css";
 import ProgressBar from "@badrap/bar-of-progress";
 import Router from "next/router";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+
 const progress = new ProgressBar({
   size: 4,
   color: "#A855F7",
