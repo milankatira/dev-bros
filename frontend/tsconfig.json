@@ -1,37 +1,30 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/", // path to output directory
-    "sourceMap": true, // allow sourcemap support
-    "strictNullChecks": true, // enable strict null checks as a best practice
-    "module": "esnext", // specify module code generation
-    "jsx": "preserve", // use typescript to transpile jsx to js
-    "target": "es5", // specify ECMAScript target version
-    "allowJs": true // allow a partial TypeScript and JavaScript codebase
-    ,
+    "target": "es5",
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
+    "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
+    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
+    "jsx": "preserve",
     "incremental": true
   },
-  "exclude": [
-    "node_modules"
-  ],
   "include": [
-    "index.d.ts",
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

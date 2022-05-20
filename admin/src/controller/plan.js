@@ -1,4 +1,4 @@
-const Plan = require("../model/plan");
+const Plan = require("../model/plans");
 
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");

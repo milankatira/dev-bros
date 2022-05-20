@@ -52,6 +52,19 @@ app.use(
   })
 );
 
+app.use(cookieParser());
+app.use("/static", express.static(`${__dirname}/static`));
+
+const corsOptions = {
+  origin: process.env.CORS_URL,
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
+
+
+app.use(cors(corsOptions));
+
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(fileUpload());
