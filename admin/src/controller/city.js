@@ -62,3 +62,13 @@ exports.GetCity = catchAsyncError(async (req, res, next) => {
     city,
   });
 });
+
+
+
+exports.GetCityByid = catchAsyncError(async (req, res, next) => {
+  let city = await City.findById(req.params.id);
+  res.status(200).json({
+    success: true,
+    city,
+  });
+});
