@@ -9,22 +9,17 @@ import { login } from "../api/auth/index";
 import toast from "react-hot-toast";
 import Router from "next/router";
 import { useCookies } from "react-cookie";
+import axios from "axios";
 const newlogin = () => {
   const [cookie, setCookie] = useCookies(["user"]);
 
-  const onFormSubmit = (data) => {
+  const onFormSubmit = async (data) => {
     const packet = {
       email: data.email,
       password: data.password,
     };
-    login(packet)
+     await login(packet)
       .then((res) => {
-        setCookie("token", JSON.stringify(res?.data?.token, res?.data?.user), {
-          path: "/",
-          maxAge: 3600, // Expires after 1hr
-          sameSite: true,
-        });
-
         toast.success(res?.data?.message);
         Router.push("/myprofile");
       })

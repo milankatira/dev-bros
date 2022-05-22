@@ -46,15 +46,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(fileUpload());
 
-app.use("/api/v1", product);
+const corsOptions = {
+  origin: process.env.SITE_URL,
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
 
-app.use("/api/v1", user);
+app.use(cors(corsOptions));
 
-app.use("/api/v1", order);
+app.use("/api", [product, user, order, profile]);
+// app.use("/api/v1", product);
 
-app.use("/api/v1", payment);
+// app.use("/api/v1", user);
 
-app.use("/api/v1", profile);
+// app.use("/api/v1", order);
+
+// app.use("/api/v1", payment);
+
+// app.use("/api/v1", profile);
 
 app.use(errorMiddleware);
 

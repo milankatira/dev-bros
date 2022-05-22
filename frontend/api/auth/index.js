@@ -12,7 +12,7 @@ const config = { headers: { "Content-Type": "application/json" } };
 
 export const login = (packet) =>
   axios
-    .post(login_url, packet, config)
+    .post(login_url, packet)
     .then((response) => response)
     .catch((err) => {
       throw err;

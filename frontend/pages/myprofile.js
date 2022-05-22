@@ -1,52 +1,8 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { user } from "../api/client/user";
 import axios from "axios";
 
 const myprofile = ({ userData }) => {
-  // console.log(userData, "user");
-
-  let data;
-  user()
-    .then((res) => {
-      data = res.data;
-    })
-    .catch((err) => {
-      data = err.response;
-    });
-
-  console.log(data);
-
-
-  useEffect(() => {
-      let headersList = {
-        Accept: "*/*",
-        "User-Agent": "Thunder Client (https://www.thunderclient.com)",
-        "Content-Type": "application/json",
-      };
-      let bodyContent = JSON.stringify({
-        firstName: "mkd",
-        lastName: "frddf",
-        email: "milankatira26@gmail.com",
-        password: "12345678",
-        phoneNo: "+917283899803",
-        location: "mk",
-        profile_pic: "dddddcddd",
-      });
-      let reqOptions = {
-        url: "http://localhost:4000/api/me",
-        method: "GET",
-        headers: headersList,
-        data: bodyContent,
-      };
-      let userData;
-      axios.request(reqOptions).then(function (response) {
-        console.log(response.data);
-        userData = response.data;
-      }).catch(function (error) {
-        console.log(error);
-        userData = error;
-      });
-  }, []);
   return (
     <div>
       <main className="profile-page">
@@ -92,7 +48,7 @@ const myprofile = ({ userData }) => {
                     <div className="relative">
                       <img
                         alt="..."
-                        src="/img/team-2-800x800.jpg"
+                        src={userData?.profile?.profile_pic}
                         className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                       />
                     </div>
@@ -132,11 +88,11 @@ const myprofile = ({ userData }) => {
                 </div>
                 <div className="text-center mt-12">
                   <h3 className="text-4xl font-semibold leading-normal mb-2 text-sky-700 mb-2">
-                    Jenna Stones
+                    {userData?.user?.firstName} {userData?.user.lastName}
                   </h3>
                   <div className="text-sm leading-normal mt-0 mb-2 text-sky-400 font-bold uppercase">
                     <i className="fas fa-map-marker-alt mr-2 text-lg text-sky-400"></i>{" "}
-                    Los Angeles, California
+                    {userData?.profile?.location}
                   </div>
                   <div className="mb-2 text-sky-600 mt-10">
                     <i className="fas fa-briefcase mr-2 text-lg text-sky-400"></i>
@@ -178,49 +134,13 @@ const myprofile = ({ userData }) => {
 
 export default myprofile;
 
-// export async function getServerSideProps(context) {
-//   // let userData =  await user();
-
-//   let headersList = {
-//     Accept: "*/*",
-//     "User-Agent": "Thunder Client (https://www.thunderclient.com)",
-//     "Content-Type": "application/json",
-//   };
-
-//   let bodyContent = JSON.stringify({
-//     firstName: "mkd",
-//     lastName: "frddf",
-//     email: "milankatira26@gmail.com",
-//     password: "12345678",
-//     phoneNo: "+917283899803",
-//     location: "mk",
-//     profile_pic: "dddddcddd",
-//   });
-
-//   let reqOptions = {
-//     url: "http://localhost:4000/api/me",
-//     method: "GET",
-//     headers: headersList,
-//     data: bodyContent,
-//   };
-
-//   let userData;
-//   axios.request(reqOptions).then(function (response) {
-//     console.log(response.data);
-//     userData = response.data;
-//   }).catch(function (error) {
-//     console.log(error);
-//     userData = error;
-//   });
-
-//   // let userData;
-//   // await user().then((res) => {
-//   //   userData = res.data;
-//   // }).catch(err=>{
-//   //   userData=err.response.data
-//   // });
-
-//   return {
-//     props: { userData: userData },
-//   };
-// }
+export async function getServerSideProps({ req }) {
+  const res = await axios.get("http://localhost:3000/api/user/me", {
+    withCredentials: true,
+    headers: {
+      Cookie: req.headers.cookie,
+    },
+  });
+  const data = await res.data;
+  return { props: { userData: data } };
+}
