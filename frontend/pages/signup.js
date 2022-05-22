@@ -84,16 +84,16 @@ const Auth = () => {
           console.log(props);
           return (
             <Form>
-              <section className="text-gray-600 body-font">
-                <div className="container px-5 py-10 flex flex-wrap items-center">
-                  <div className="lg:w-1/2  md:pr-16 lg:pr-0 pr-0">
+              <section className="text-gray-600 body-font p-10">
+                <div className="container flex flex-wrap items-center">
+                  <div className="lg:w-1/2 md:w-1/2">
                     <img
                       src="/assets/login.png"
                       alt=""
                       className="w-auto h-1/2"
                     />
                   </div>
-                  <div className="lg:w-1/2 md:w-1/2 rounded-lg p-40 flex flex-col md:ml-auto w-full mt-30 md:mt-0">
+                  <div className="lg:w-1/2 md:w-1/2  rounded-lg lg:pl-40 p-0 flex flex-col md:ml-auto w-full mt-30 md:mt-0">
                     <h2 className="text-gray-900 text-[30px] font-medium title-font mb-5">
                       Signup to my Web
                     </h2>

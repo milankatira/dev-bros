@@ -8,7 +8,7 @@ const form_validation = {
   password_short: "Password is too short.",
   password_long: "Password is too long.",
 };
-export const signup = yup.object().shape({
+export const Signup = yup.object().shape({
   firstName: yup
     .string()
     .required(form_validation.firstName_required)

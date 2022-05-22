@@ -6,7 +6,7 @@ const ButtonField: React.FC<ButtonFieldProps> = ({ text, onClick }) => {
   return (
     <button
       onClick={onClick}
-      className="text-white font-medium rounded-lg bg-blue-500 border py-2 px-8 focus:focus:border-blue-500 focus:ring-2 focus:ring-blue-300 text-base outline-none transition-colors duration-200 ease-in-out hover:bg-blue-600 "
+      className="bg-gray-800 text-white active:bg-gray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
     >
       {text}
     </button>

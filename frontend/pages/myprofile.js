@@ -1,6 +1,52 @@
-import React from "react";
+import React,{useEffect} from "react";
+import { user } from "../api/client/user";
+import axios from "axios";
 
-const myprofile = () => {
+const myprofile = ({ userData }) => {
+  // console.log(userData, "user");
+
+  let data;
+  user()
+    .then((res) => {
+      data = res.data;
+    })
+    .catch((err) => {
+      data = err.response;
+    });
+
+  console.log(data);
+
+
+  useEffect(() => {
+      let headersList = {
+        Accept: "*/*",
+        "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+        "Content-Type": "application/json",
+      };
+      let bodyContent = JSON.stringify({
+        firstName: "mkd",
+        lastName: "frddf",
+        email: "milankatira26@gmail.com",
+        password: "12345678",
+        phoneNo: "+917283899803",
+        location: "mk",
+        profile_pic: "dddddcddd",
+      });
+      let reqOptions = {
+        url: "http://localhost:4000/api/me",
+        method: "GET",
+        headers: headersList,
+        data: bodyContent,
+      };
+      let userData;
+      axios.request(reqOptions).then(function (response) {
+        console.log(response.data);
+        userData = response.data;
+      }).catch(function (error) {
+        console.log(error);
+        userData = error;
+      });
+  }, []);
   return (
     <div>
       <main className="profile-page">
@@ -131,3 +177,50 @@ const myprofile = () => {
 };
 
 export default myprofile;
+
+// export async function getServerSideProps(context) {
+//   // let userData =  await user();
+
+//   let headersList = {
+//     Accept: "*/*",
+//     "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+//     "Content-Type": "application/json",
+//   };
+
+//   let bodyContent = JSON.stringify({
+//     firstName: "mkd",
+//     lastName: "frddf",
+//     email: "milankatira26@gmail.com",
+//     password: "12345678",
+//     phoneNo: "+917283899803",
+//     location: "mk",
+//     profile_pic: "dddddcddd",
+//   });
+
+//   let reqOptions = {
+//     url: "http://localhost:4000/api/me",
+//     method: "GET",
+//     headers: headersList,
+//     data: bodyContent,
+//   };
+
+//   let userData;
+//   axios.request(reqOptions).then(function (response) {
+//     console.log(response.data);
+//     userData = response.data;
+//   }).catch(function (error) {
+//     console.log(error);
+//     userData = error;
+//   });
+
+//   // let userData;
+//   // await user().then((res) => {
+//   //   userData = res.data;
+//   // }).catch(err=>{
+//   //   userData=err.response.data
+//   // });
+
+//   return {
+//     props: { userData: userData },
+//   };
+// }

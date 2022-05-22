@@ -7,32 +7,28 @@ import { intialValue } from "../constant/initial_value";
 import { Login } from "../validator/login";
 import { login } from "../api/auth/index";
 import toast from "react-hot-toast";
-import Router from "next/router";
-import { useCookies } from "react-cookie";
+
 const newlogin = () => {
-  const [cookie, setCookie] = useCookies(["user"]);
-
-  const onFormSubmit = (data) => {
-    const packet = {
-      email: data.email,
-      password: data.password,
-    };
-    login(packet)
-      .then((res) => {
-        setCookie("token", JSON.stringify(res?.data?.token, res?.data?.user), {
-          path: "/",
-          maxAge: 3600, // Expires after 1hr
-          sameSite: true,
+  
+    const onFormSubmit = (data) => {
+      const packet = {
+        email: data.email,
+        password: data.password,
+      };
+      login(packet)
+        .then((res) => {
+          toast.success(res.data.message);
+          console.log(res.data);
+        })
+        .catch((err) => {
+          toast.error(err.response.data.message);
+          // console.log(err?.response?.data?.message);
         });
+    };
 
-        toast.success(res?.data?.message);
-        Router.push("/myprofile");
-      })
-      .catch((err) => {
-        toast.error(err?.response?.data?.message);
-      });
-  };
 
+
+  
   return (
     <div>
       <Formik
@@ -86,6 +82,7 @@ const newlogin = () => {
                           </div>
 
                           <div className="relative w-full mb-3">
+                        
                             <Textinput
                               text="password"
                               name="password"
