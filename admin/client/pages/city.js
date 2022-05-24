@@ -4,6 +4,7 @@ import Router from "next/router";
 import Link from 'next/link';
 import Sidebar from "../components/layout/sidebar";
 const dashboard = ({ city }) => {
+  console.log(city,"city")
   const [check, setcheck] = useState();
   const [List, setList] = useState(city);
   const [MasterChecked, setMasterChecked] = useState();
@@ -199,10 +200,8 @@ const dashboard = ({ city }) => {
 
 export default dashboard;
 
-// Dashboard.layout = Sidebar;
-
 export async function getServerSideProps(context) {
-  let city = await axios.get("http://localhost:8000/api/v1/city");
+  let city = await axios.get("http://localhost:3001/api/city");
   return {
     props: { city: city?.data?.city },
   };
