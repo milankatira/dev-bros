@@ -52,6 +52,8 @@ const GetCity = async (req, res) => {
       return next(new ErrorHandler('city not found', 404));
     }
 
+    // res.set('Cache-Control', 'public, max-age=31557600');
+
     res.status(200).json({
       success: true,
       city,

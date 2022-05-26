@@ -8,10 +8,8 @@ import { Login } from "../validator/login";
 import { login } from "../api/auth/index";
 import toast from "react-hot-toast";
 import Router from "next/router";
-import { useCookies } from "react-cookie";
 import axios from "axios";
 const newlogin = () => {
-  const [cookie, setCookie] = useCookies(["user"]);
 
   const onFormSubmit = async (data) => {
     const packet = {

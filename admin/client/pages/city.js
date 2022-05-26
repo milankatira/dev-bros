@@ -200,7 +200,8 @@ const dashboard = ({ city }) => {
 
 export default dashboard;
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps({req,res}) {
+
   let city = await axios.get("http://localhost:3001/api/city");
   return {
     props: { city: city?.data?.city },
