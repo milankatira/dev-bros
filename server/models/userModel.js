@@ -38,9 +38,15 @@ const userSchema = new mongoose.Schema({
     required: [true, "Please enter your phoneno"],
     minlength: [13, "Password must be atleast 13 characters"],
   },
+
   role: {
-    type: String,
-    default: "candidate",
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user_roles',
+  },
+
+  location: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'city',
   },
   createdAt: {
     type: Date,
@@ -83,4 +89,4 @@ userSchema.methods.getResetPasswordToken = async function () {
   return resetToken;
 };
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("user", userSchema);

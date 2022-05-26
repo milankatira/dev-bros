@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useEffect } from 'react';
 import { user } from '../api/client/user';
 import axios from 'axios';

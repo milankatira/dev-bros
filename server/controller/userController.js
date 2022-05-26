@@ -4,6 +4,11 @@ const catchAsyncError = require("../middleware/catchAsyncError");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
+const UserSkillModel = require("../models/user_skill");
+const EducationModel = require("../models/education_details");
+const ExperienceModel = require("../models/professional_expericance");
+const UserPreferenceModal = require("../models/user_preferance");
+
 const cloudinary = require("cloudinary");
 const { getTokenForEmailVarification } = require("../helpers/auth");
 
@@ -239,6 +244,99 @@ exports.updateProfile = catchAsyncError(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
+  });
+});
+
+exports.addProfile = catchAsyncError(async (req, res, next) => {
+  const {
+    employment_type,
+    expected_salary,
+    salary_preference,
+    willing_to_relocate,
+    prefered_location,
+    skills,
+    fresher,
+    profile_picture,
+    experience_details,
+    education_details,
+    location,
+  } = userData;
+
+  if (location) {
+    const user_location = await User.findById(req.user.id);
+    user_location.location = location;
+    await user_location.save();
+  }
+
+  if (profile_picture) {
+    const authData = await userDataModel.findOne({ user_id: id });
+    authData.profile_picture = profile_picture;
+    await authData.save();
+  }
+
+  // store skills data into user_skills table
+  await Promise.all(
+    skills.map(async (singleSkills) => {
+      const skill = new UserSkillModel({
+        skill: singleSkills.skill,
+        year_of_experience: singleSkills.year_of_experience,
+        last_used: singleSkills.last_used,
+        user_id: id,
+      });
+      await skill.save();
+    })
+  );
+
+  // store education data into education_details table
+  await Promise.all(
+    education_details.map(async (singleValue) => {
+      const educationData = new EducationModel({
+        degree: singleValue.degree,
+        institution: singleValue.institution,
+        description: singleValue.description,
+        started_year: singleValue.started_year,
+        passing_year: singleValue.passing_year,
+        marks: singleValue.marks,
+        user_id: id,
+      });
+      await educationData.save();
+    })
+  );
+
+  if (!fresher) {
+    // store experience data into professional_experience table
+    await Promise.all(
+      experience_details.map(async (singleValue) => {
+        const experienceData = new ExperienceModel({
+          company: singleValue.company,
+          designation: singleValue.designation,
+          description: singleValue.description,
+          start_at: singleValue.start_at,
+          end_at: singleValue.end_at,
+          is_current_employement: singleValue.is_current_employement,
+          user_id: id,
+        });
+        await experienceData.save();
+      })
+    );
+  }
+
+  //  store value in user_preference
+  const User = new UserPreferenceModal({
+    user_id: id,
+    employment_type,
+    expected_salary,
+    salary_preference,
+    willing_to_relocate,
+    prefered_location,
+  });
+
+  await User.save();
+ 
+
+  res.status(200).json({
+    success: true,
+    message:"user profile added successfully"
   });
 });
 

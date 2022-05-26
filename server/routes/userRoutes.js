@@ -37,6 +37,7 @@ router.route("/me").get(isAuthenticUser, getUsserDetails);
 
 router.route("/me/update").put(isAuthenticUser, updateProfile);
 
+router.route("/me/add-profile")
 router
   .route("/admin/users")
   .get(isAuthenticUser, authorizeRoles("admin"), getAllUser);
