@@ -46,7 +46,6 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
 exports.verifyUser = catchAsyncError(async (req, res, next) => {
   const { token } = req.params;
 
-  // console.log(token);
   try {
     const decodedToken = await checkTokenForEmailVerification(token);
     console.log(decodedToken);

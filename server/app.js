@@ -20,6 +20,8 @@ const user = require("./routes/userRoutes");
 
 const order = require("./routes/orderRoutes");
 
+const generic_data = require("./routes/generic_data");
+
 const payment = require("./routes/paymentRoute");
 
 const profile = require("./routes/profileRoutes");
@@ -54,16 +56,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use("/api", [product, user, order, profile]);
-// app.use("/api/v1", product);
-
-// app.use("/api/v1", user);
-
-// app.use("/api/v1", order);
-
-// app.use("/api/v1", payment);
-
-// app.use("/api/v1", profile);
+app.use("/api", [product, user, order, profile, generic_data]);
 
 app.use(errorMiddleware);
 

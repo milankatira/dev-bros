@@ -17,8 +17,6 @@ export default async (req, res) => {
   switch (method) {
     case 'GET':
       await GetCity(req, res);
-
-      // await handler(req, res);
       break;
     case 'POST':
       await AddCity(req, res);
@@ -75,29 +73,7 @@ const handler = async (req, res) => {
       res.status(200).json(JSON.parse(response));
     } else {
       console.log("FFFFF")
-      // Waiting 1 second to simulate a slow response from another DB query
-      // await new Promise((resolve) =>
-      //   setTimeout(resolve, 1000)
-      // );
-      // As a contrived example, let's say this is the expected result from the database
       const data = await City.find();
-
-      // try {
-      //   const city = await City.find();
-      //   console.log(city, 'city');
-
-      //   res.status(200).json({
-      //     success: true,
-      //     city,
-      //   });
-      // } catch (error) {
-      //   res.json({
-      //     success: false,
-      //     message: error.message,
-      //   });
-      // }
-
-      // Here we are caching the result for 15 seconds to Redis
       client.setex(key, 2, JSON.stringify(data));
       res.status(200).json(data);
     }

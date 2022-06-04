@@ -13,6 +13,17 @@ declare module "component" {
     name?: string | any;
     error?: string | any;
   }
+
+  
+  export interface SelectFieldProps {
+    error?: string | any;
+    options?: any;
+    name: string;
+    inputLabel?: string;
+    styles?: string;
+    defaultValue?: string | any;
+  }
+
   export interface ModalFieldProps {
     title: string | any;
     open: boolean | any;
