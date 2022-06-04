@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
     "axios": "^0.26.1",
     "bcryptjs": "^2.4.3",
     "bluebird": "^3.7.2",
@@ -40,6 +41,6 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
     "stripe": "^8.218.0",
-    "validator": "^13.7.0" 
+    "validator": "^13.7.0"
   }
 }
