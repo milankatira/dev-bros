@@ -13,6 +13,7 @@ const form_validation = {
   employment_type: "Please select employment type.",
   salary: "Expected salary is required.",
   salary_preferences: "Please select salary preference.",
+  salary_preferance_number: "salary preference must be number.",
   prefered_location: "Please select prefered location.",
   degree: "Please select degree.",
   institute: "Please select institute.",
@@ -53,7 +54,10 @@ export const Profile = yup.object().shape({
   location: yup.string().required(form_validation.location_required),
   employmentType: yup.string().required(form_validation.employment_type),
   expectedSalary: yup.number().required(form_validation.salary),
-  SalaryPreference: yup.string().required(form_validation.salary_preferences),
+  SalaryPreference: yup
+    .number()
+    .typeError(form_validation.salary_preferance_number)
+    .required(form_validation.salary_preferences),
   preferedLocation: yup.string().required(form_validation.prefered_location),
 
   education_details: yup

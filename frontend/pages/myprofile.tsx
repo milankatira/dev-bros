@@ -3,7 +3,6 @@ import { user } from '../api/client/user';
 import axios from 'axios';
 import Link from 'next/link'
 const myprofile = ({ userData }) => {
-
   return (
     <div>
       <main className='profile-page'>

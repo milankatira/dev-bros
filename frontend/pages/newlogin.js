@@ -18,17 +18,12 @@ const newlogin = () => {
       login(packet)
         .then((res) => {
           toast.success(res.data.message);
-          console.log(res.data);
         })
         .catch((err) => {
           toast.error(err.response.data.message);
-          // console.log(err?.response?.data?.message);
         });
     };
 
-
-
-  
   return (
     <div>
       <Formik

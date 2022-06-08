@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import ButtonField from "../components/common/design/ButtonField";
 import Textinput from "../components/common/design/Textinput";
 import { intialValue } from "../constant/initial_value";
@@ -9,13 +9,16 @@ import { login } from "../api/auth/index";
 import toast from "react-hot-toast";
 import Router from "next/router";
 const newlogin = () => {
-
-  const onFormSubmit = async (data) => {
+  interface Data {
+    email: string;
+    password: string;
+  }
+  const onFormSubmit = async (data: Data) => {
     const packet = {
       email: data.email,
       password: data.password,
     };
-     await login(packet)
+    await login(packet)
       .then((res) => {
         toast.success(res?.data?.message);
         Router.push("/myprofile");
@@ -33,7 +36,6 @@ const newlogin = () => {
         onSubmit={onFormSubmit}
       >
         {(props) => {
-          console.log(props);
           return (
             <Form>
               <div className="mx-auto mt-36 px-4 h-full flex flex-col justify-center align-middle">

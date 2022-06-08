@@ -1,13 +1,21 @@
 import React, { useState } from "react";
 import { Profile } from "../../validator/profile";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, FieldArray } from "formik";
 import Textinput from "../common/design/Textinput";
+import ButtonField from "../common/design/ButtonField";
 import SelectField from "../common/design/SelectField";
 import { getCity } from "../../api/admin";
 
-export default function CardSettings({ userData, initialValue, city }) {
+export default function CardSettings({
+  userData,
+  initialValue,
+  city,
+  degree,
+  designation,
+  institution,
+}) {
   const [image, setImage] = useState("");
-  console.log(city, "city");
+  console.log(initialValue, "initialValue");
   function captureImage(e) {
     const file = e.target.files[0];
 
@@ -18,7 +26,6 @@ export default function CardSettings({ userData, initialValue, city }) {
       reader.readAsDataURL(file);
       reader.onloadend = function () {
         setImage(reader.result);
-        // dispatch(setAvatar(reader.result));
       };
     }
   }
@@ -55,6 +62,143 @@ export default function CardSettings({ userData, initialValue, city }) {
                     <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
                       User Information
                     </h6>
+
+                    <FieldArray
+                      name="education_details"
+                      render={(arrayHelpers) => (
+                        <div>
+                          {props.values.education_details &&
+                          props.values.education_details.length > 0 ? (
+                            props.values.education_details.map(
+                              (education, index) => (
+                                <React.Fragment key={index}>
+                                  <div className="form-container">
+                                    <SelectField
+                                      // errors={
+                                      //   errors.education_details &&
+                                      //   errors?.education_details[index]
+                                      //     ?.degree
+                                      // }
+
+                                      options={degree}
+                                      inputLabel="Select Degree"
+                                      name={`education_details[${index}].degree`}
+                                      fullWidth={true}
+                                      styles="inputMargin marginbottom"
+                                      defaultValue={education.degree}
+                                      onClick={() => setAddDegree(true)}
+                                    />
+
+                                    <SelectField
+                                      // errors={
+                                      //   props.errors.education_details &&
+                                      //   errors?.education_details[index]
+                                      //     ?.institute
+                                      // }
+
+                                      // touched={
+                                      //   touched.education_details &&
+                                      //   touched?.education_details[index]
+                                      //     ?.institute
+                                      // }
+                                      options={institution}
+                                      inputLabel="Select Institute"
+                                      name={`education_details[${index}].institute`}
+                                      fullWidth={true}
+                                      defaultValue={education.institute}
+                                      styles="inputMargin_1 marginbottom"
+                                      onClick={() => setAddNewinstitute(true)}
+                                    />
+                                  </div>
+                                  <div className="form-container">
+                                    <Textinput
+                                      fullWidth={true}
+                                      label="Description"
+                                      name={`education_details[${index}].educationDescription`}
+                                      styles="inputMargin marginbottom"
+                                      defaultValue={
+                                        education.educationDescription
+                                      }
+                                    />
+                                    <Textinput
+                                      fullWidth={true}
+                                      label="Grades/ Percentage"
+                                      name={`education_details[${index}].marks`}
+                                      defaultValue={education.marks}
+                                      styles="inputMargin_1 marginbottom"
+                                    />
+                                  </div>
+                                  <div className="form-container">
+                                    <Textinput
+                                      fullWidth={true}
+                                      type="date"
+                                      label="Started Year"
+                                      name={`education_details[${index}].startedYear`}
+                                      styles="inputMargin marginbottom"
+                                      InputLabelProps={{ shrink: true }}
+                                      // defaultValue={moment(
+                                      //   education.startedYear
+                                      // )
+                                      //   .format("YYYY-MM-DD")
+                                      //   .toString()}
+                                    />
+                                    <Textinput
+                                      fullWidth={true}
+                                      type="date"
+                                      label="Passing Year"
+                                      name={`education_details[${index}].passingYear`}
+                                      InputLabelProps={{ shrink: true }}
+                                      styles="inputMargin_1 marginbottom"
+                                      defaultValue={
+                                        education.passingYear
+                                          ? moment(education.passingYear)
+                                              .format("YYYY-MM-DD")
+                                              .toString()
+                                          : "dd-mm-yyyy"
+                                      }
+                                    />
+                                  </div>
+                                  <div className="form-container_button">
+                                    {props.values.education_details.length !==
+                                    1 ? (
+                                      <ButtonField
+                                        onClick={() =>
+                                          arrayHelpers.remove(index)
+                                        }
+                                        buttonText="Remove"
+                                        styles="addButton"
+                                      />
+                                    ) : null}
+                                    {props.values.education_details.length ===
+                                    index + 1 ? (
+                                      <ButtonField
+                                        onClick={() =>
+                                          arrayHelpers.push({
+                                            degree: "",
+                                            institute: "",
+                                            educationDescription: "",
+                                            marks: "",
+                                            startedYear: "",
+                                            passingYear: "",
+                                          })
+                                        }
+                                        buttonText="Add"
+                                        styles="addButton"
+                                      />
+                                    ) : null}
+                                  </div>
+                                </React.Fragment>
+                              )
+                            )
+                          ) : (
+                            <ButtonField
+                              onClick={() => arrayHelpers.push("")}
+                              buttonText="Add a Education"
+                            />
+                          )}
+                        </div>
+                      )}
+                    />
 
                     <div className="flex flex-col flex-wrap justify-center items-center">
                       <div className="w-6/12 h-6/12 sm:w-4/12 sm:h-4/12 px-4 flex flex-col items-center">
@@ -128,18 +272,78 @@ export default function CardSettings({ userData, initialValue, city }) {
 
                       <div className="w-full lg:w-6/12 px-4">
                         <div className="relative w-full mb-3">
-                          <Textinput
-                            text="preferedLocation"
-                            type="preferedLocation"
+                          <SelectField
                             name="preferedLocation"
+                            inputLabel="preferedLocation"
+                            options={city}
                             error={
                               props.touched &&
                               props.touched.preferedLocation &&
                               props.errors.preferedLocation
                             }
+                          />
+                        </div>
+                      </div>
+
+                      <div className="w-full lg:w-6/12 px-4">
+                        <div className="relative w-full mb-3">
+                          <Textinput
+                            text="SalaryPreference"
+                            type="SalaryPreference"
+                            name="SalaryPreference"
+                            error={
+                              props.touched &&
+                              props.touched.SalaryPreference &&
+                              props.errors.SalaryPreference
+                            }
                             placeholder="+9111221221212"
                           />
                         </div>
+                      </div>
+                    </div>
+
+                    <div className="w-full lg:w-6/12 px-4">
+                      <div className="relative w-full mb-3">
+                        <SelectField
+                          name="degree"
+                          inputLabel="degree"
+                          options={degree}
+                          error={
+                            props.touched &&
+                            props.touched.degree &&
+                            props.errors.degree
+                          }
+                        />
+                      </div>
+                    </div>
+
+                    <div className="w-full lg:w-6/12 px-4">
+                      <div className="relative w-full mb-3">
+                        <SelectField
+                          name="designation"
+                          inputLabel="designation"
+                          options={designation}
+                          error={
+                            props.touched &&
+                            props.touched.designation &&
+                            props.errors.designation
+                          }
+                        />
+                      </div>
+                    </div>
+
+                    <div className="w-full lg:w-6/12 px-4">
+                      <div className="relative w-full mb-3">
+                        <SelectField
+                          name="institution"
+                          inputLabel="institution"
+                          options={institution}
+                          error={
+                            props.touched &&
+                            props.touched.institution &&
+                            props.errors.institution
+                          }
+                        />
                       </div>
                     </div>
 
