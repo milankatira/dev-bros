@@ -1,4 +1,4 @@
-const City=require("../models/city");
+const City=require("../database/city");
 
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");
@@ -55,7 +55,6 @@ exports.DeleteCity = catchAsyncError(async (req, res, next) => {
 
 exports.GetCity = catchAsyncError(async (req, res, next) => {
   const city = await City.find();
-
   res.status(200).json({
     success: true,
     city,

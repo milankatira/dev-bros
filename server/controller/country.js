@@ -1,4 +1,4 @@
-const Country = require("../models/country");
+const Country = require("../database/country");
 
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");

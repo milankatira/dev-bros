@@ -1,4 +1,4 @@
-const Profile = require("../models/profileModel");
+const Profile = require("../database/profileModel");
 const catchAsyncError = require("../middleware/catchAsyncError");
 const ErrorHandler = require("../utils/errorhandler");
 

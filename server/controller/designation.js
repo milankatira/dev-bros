@@ -1,4 +1,4 @@
-const Designation = require("../models/designation");
+const Designation = require("../database/designation");
 
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");

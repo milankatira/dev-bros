@@ -1,4 +1,4 @@
-const EmployementType = require("../models/employment_type");
+const EmployementType = require("../database/employment_type");
 
 const catchAsyncError = require("../middleware/catchAsyncError");
 

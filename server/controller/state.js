@@ -1,4 +1,4 @@
-const State = require("../models/state");
+const State = require("../database/state");
 
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");

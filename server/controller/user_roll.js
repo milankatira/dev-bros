@@ -1,4 +1,4 @@
-const UserRoll = require("../models/user_rolls");
+const UserRoll = require("../database/user_rolls");
 
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");

@@ -1,4 +1,4 @@
-const Skill=require("../models/skills");
+const Skill=require("../database/skills");
 
 const catchAsyncError = require("../middleware/catchAsyncError");
 

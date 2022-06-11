@@ -18,6 +18,8 @@ const product = require("./routes/productRoute");
 
 const user = require("./routes/userRoutes");
 
+const jobs=require("./routes/jobs");
+
 const order = require("./routes/orderRoutes");
 
 const generic_data = require("./routes/generic_data");
@@ -55,8 +57,8 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use("/static", express.static(`${__dirname}/storage`));
-app.use("/api", [product, user, order, profile, generic_data]);
+app.use("/static", express.static(`${__dirname}/static`));
+app.use("/api", [product, user, order, profile, generic_data, jobs]);
 
 
 app.use(errorMiddleware);

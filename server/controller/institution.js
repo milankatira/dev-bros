@@ -1,4 +1,4 @@
-const Institution = require("../models/institution");
+const Institution = require("../database/institution");
 
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");

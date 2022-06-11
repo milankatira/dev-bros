@@ -4,14 +4,14 @@ const sendToken = (user, statusCode, res) => {
   console.log(token, "token");
   const options = {
     expires: new Date(Date.now() + 70000000),
-    // httpOnly: true,
+    httpOnly: true,
   };
 
   res
     .status(statusCode)
-    // .cookie("token", token, {
-    //   expires: new Date(Date.now() + 70000000),
-    // })
+    .cookie("token", token, {
+      expires: new Date(Date.now() + 70000000),
+    })
     .json({
       success: true,
       user,
