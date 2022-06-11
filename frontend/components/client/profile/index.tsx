@@ -2,16 +2,26 @@ import React from "react";
 import CardSettings from "../../Cards/CardSettings";
 import { intialValue } from "../../../constant/initial_value";
 
-const index = ({ userData, city, degree, institution ,designation
+const index = ({
+  city,
+  degree,
+  institution,
+  designation,
+  fresher,
+  setfresher,
+  skill,
+  employementType,
 }) => {
-  console.log(city);
   return (
     <CardSettings
-      userData={userData}
+      skill={skill}
+      fresher={fresher}
+      setfresher={setfresher}
       city={city}
       degree={degree}
       institution={institution}
       designation={designation}
+      employementType={employementType}
       initialValue={intialValue.profile}
     />
   );

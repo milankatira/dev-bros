@@ -3,6 +3,7 @@ declare module "component" {
   export interface ButtonFieldProps {
     text?: string | any;
     onClick?: MyFunctionType;
+    type?:string;
   }
   export interface InputFieldProps {
     value?: string | any;

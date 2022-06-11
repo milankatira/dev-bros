@@ -28,7 +28,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
           Select a {inputLabel}
         </option>
         {options &&
-          options.map((singleValue: any) => (
+          options?.map((singleValue: any) => (
             <option value={singleValue._id} key={singleValue._id}>
               {singleValue.department
                 ? singleValue.department

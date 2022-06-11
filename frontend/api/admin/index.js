@@ -9,6 +9,8 @@ import {
   get_plan,
   get_state,
   get_subcription_plan,
+  get_skill,
+  get_employement_type,
 } from "../../constant/api_url";
 
 export const getCity = () => {
@@ -77,6 +79,24 @@ export const getState = () => {
 export const getSubcriptionPlan = () => {
   return axios
     .get(get_subcription_plan)
+    .then((response) => response)
+    .catch((err) => {
+      throw err;
+    });
+};
+
+export const getSkill = () => {
+  return axios
+    .get(get_skill)
+    .then((response) => response)
+    .catch((err) => {
+      throw err;
+    });
+};
+
+export const getEmployementType = () => {
+  return axios
+    .get(get_employement_type)
     .then((response) => response)
     .catch((err) => {
       throw err;

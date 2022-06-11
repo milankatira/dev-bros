@@ -8,14 +8,15 @@ const UserSkillModel = require("../models/user_skill");
 const EducationModel = require("../models/education_details");
 const ExperienceModel = require("../models/professional_expericance");
 const UserPreferenceModal = require("../models/user_preferance");
-
+const userDataModel = require("../models/profileModel");
 const cloudinary = require("cloudinary");
 const { getTokenForEmailVarification } = require("../helpers/auth");
 
 const { checkTokenForEmailVerification } = require("../helpers/checkauth");
 
 const dotenv = require("dotenv");
-
+const Jimp = require("jimp");
+const path = require("path");
 dotenv.config({ path: "../config/config.env" });
 
 exports.registerUser = catchAsyncError(async (req, res, next) => {
@@ -255,11 +256,12 @@ exports.addProfile = catchAsyncError(async (req, res, next) => {
     prefered_location,
     skills,
     fresher,
-    profile_picture,
+    profile_img,
     experience_details,
     education_details,
     location,
-  } = userData;
+
+  } = req.body;
 
   if (location) {
     const user_location = await User.findById(req.user.id);
@@ -267,20 +269,33 @@ exports.addProfile = catchAsyncError(async (req, res, next) => {
     await user_location.save();
   }
 
-  if (profile_picture) {
-    const authData = await userDataModel.findOne({ user_id: id });
-    authData.profile_picture = profile_picture;
+  if (profile_img) {
+    // Image Base64
+    const buffer = Buffer.from(
+      profile_img.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""),
+      "base64"
+    );
+    const imagePath = `${Date.now()}-${Math.round(Math.random() * 1e9)}.png`;
+    // 32478362874-3242342342343432.png
+
+    const jimResp = await Jimp.read(buffer);
+    jimResp
+      .resize(150, Jimp.AUTO)
+      .write(path.resolve(__dirname, `../storage/${imagePath}`));
+
+    const authData = await userDataModel.findOne({ user_id: req.user.id });
+    authData.profile_pic = imagePath;
     await authData.save();
   }
 
   // store skills data into user_skills table
   await Promise.all(
-    skills.map(async (singleSkills) => {
+    JSON.parse(skills).map(async (singleSkills) => {
       const skill = new UserSkillModel({
         skill: singleSkills.skill,
-        year_of_experience: singleSkills.year_of_experience,
-        last_used: singleSkills.last_used,
-        user_id: id,
+        year_of_experience: singleSkills.yearExp,
+        last_used: singleSkills.lastUsed,
+        user_id: req.user.id,
       });
       await skill.save();
     })
@@ -288,15 +303,15 @@ exports.addProfile = catchAsyncError(async (req, res, next) => {
 
   // store education data into education_details table
   await Promise.all(
-    education_details.map(async (singleValue) => {
+    JSON.parse(education_details).map(async (singleValue) => {
       const educationData = new EducationModel({
         degree: singleValue.degree,
-        institution: singleValue.institution,
-        description: singleValue.description,
-        started_year: singleValue.started_year,
-        passing_year: singleValue.passing_year,
+        institution: singleValue.institute,
+        description: singleValue.educationDescription,
+        started_year: singleValue.startedYear,
+        passing_year: singleValue.passingYear,
         marks: singleValue.marks,
-        user_id: id,
+        user_id: req.user.id,
       });
       await educationData.save();
     })
@@ -305,15 +320,15 @@ exports.addProfile = catchAsyncError(async (req, res, next) => {
   if (!fresher) {
     // store experience data into professional_experience table
     await Promise.all(
-      experience_details.map(async (singleValue) => {
+      JSON.parse(experience_details).map(async (singleValue) => {
         const experienceData = new ExperienceModel({
           company: singleValue.company,
           designation: singleValue.designation,
-          description: singleValue.description,
-          start_at: singleValue.start_at,
-          end_at: singleValue.end_at,
-          is_current_employement: singleValue.is_current_employement,
-          user_id: id,
+          description: singleValue.experienceDescription,
+          start_at: singleValue.startDate,
+          end_at: singleValue.endDate,
+          is_current_employement: singleValue.currentlyWorking,
+          user_id: req.user.id,
         });
         await experienceData.save();
       })
@@ -321,8 +336,8 @@ exports.addProfile = catchAsyncError(async (req, res, next) => {
   }
 
   //  store value in user_preference
-  const User = new UserPreferenceModal({
-    user_id: id,
+  const UserPrederance = new UserPreferenceModal({
+    user_id: req.user.id,
     employment_type,
     expected_salary,
     salary_preference,
@@ -330,12 +345,11 @@ exports.addProfile = catchAsyncError(async (req, res, next) => {
     prefered_location,
   });
 
-  await User.save();
- 
+  await UserPrederance.save();
 
   res.status(200).json({
     success: true,
-    message:"user profile added successfully"
+    message: "user profile added successfully",
   });
 });
 

@@ -44,7 +44,7 @@ app.use(
   })
 );
 
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(fileUpload());
 
@@ -55,8 +55,9 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
+app.use("/static", express.static(`${__dirname}/storage`));
 app.use("/api", [product, user, order, profile, generic_data]);
+
 
 app.use(errorMiddleware);
 
