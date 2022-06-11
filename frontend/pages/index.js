@@ -2,20 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import axios from 'axios';
 const index = () => {
-  React.useEffect(() => {
-    axios
-      .get('http://localhost:4000/api/me', {
-        withCredentials: true,
-        // headers: {
-        //   Cookie: req.headers.cookie,
-        // },
-      })
-      .then((res) => {
-        console.log(res, 'Res');
-      });
-  }, []);
   return (
     <div>
       <main>
@@ -132,7 +119,7 @@ const index = () => {
                   Working with us is a pleasure
                 </h3>
                 <p className='text-lg font-light leading-relaxed mt-4 mb-4 text-sky-600'>
-                  Don't let your uses guess by attaching
+                 let your uses guess by attaching
                   tooltips and popoves to any element. Just
                   make sure you enable them first via
                   JavaScript.
@@ -140,7 +127,7 @@ const index = () => {
                 <p className='text-lg font-light leading-relaxed mt-0 mb-4 text-sky-600'>
                   The kit comes with three pre-built pages
                   to help you get started faster. You can
-                  change the text and images and you're good
+                  change the text and images and good
                   to go. Just make sure you enable them
                   first via JavaScript.
                 </p>
@@ -225,7 +212,7 @@ const index = () => {
                     The extension comes with three pre-built
                     pages to help you get started faster.
                     You can change the text and images and
-                    you're good to go.
+                     good to go.
                   </p>
                   <ul className='list-none mt-6'>
                     <li className='py-2'>
@@ -476,7 +463,7 @@ const index = () => {
                 <p className='mt-2 mb-4 text-sky-400'>
                   Some quick example text to build on the
                   card title and make up the bulk of the
-                  card's content.
+                   content.
                 </p>
               </div>
               <div className='w-full lg:w-3/12 px-4 text-center'>
@@ -489,7 +476,7 @@ const index = () => {
                 <p className='mt-2 mb-4 text-sky-400'>
                   Some quick example text to build on the
                   card title and make up the bulk of the
-                  card's content.
+                   content.
                 </p>
               </div>
               <div className='w-full lg:w-3/12 px-4 text-center'>
@@ -502,7 +489,7 @@ const index = () => {
                 <p className='mt-2 mb-4 text-sky-400'>
                   Some quick example text to build on the
                   card title and make up the bulk of the
-                  card's content.
+                  content.
                 </p>
               </div>
             </div>

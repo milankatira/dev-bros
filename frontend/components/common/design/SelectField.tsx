@@ -21,10 +21,14 @@ const SelectField: React.FC<SelectFieldProps> = ({
       <Field
         as="select"
         name={name}
+        value={defaultValue}
         className="select-none border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
       >
+        <option value="none" selected disabled hidden>
+          Select a {inputLabel}
+        </option>
         {options &&
-          options.map((singleValue: any) => (
+          options?.map((singleValue: any) => (
             <option value={singleValue._id} key={singleValue._id}>
               {singleValue.department
                 ? singleValue.department

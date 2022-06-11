@@ -81,7 +81,6 @@ const Auth = () => {
         onSubmit={console.log("ok")}
       >
         {(props) => {
-          console.log(props);
           return (
             <Form>
               <section className="text-gray-600 body-font p-10">
@@ -111,33 +110,21 @@ const Auth = () => {
                       text="firstName"
                       type="text"
                       name="firstName"
-                      // value={mobile}
-                      // onChange={(e) => setmobile(e.target.value)}
                       placeholder="+9111221221212"
-                      // value={value}
-                      // onChange={onChange}
                     />
 
                     <Textinput
                       text="lastName"
                       name="lastName"
                       type="text"
-                      // value={mobile}
-                      // onChange={(e) => setmobile(e.target.value)}
                       placeholder="+9111221221212"
-                      // value={value}
-                      // onChange={onChange}
                     />
 
                     <Textinput
                       text="e-mail"
                       type="text"
                       name="email"
-                      // value={mobile}
-                      // onChange={(e) => setmobile(e.target.value)}
                       placeholder="+9111221221212"
-                      // value={value}
-                      // onChange={onChange}
                     />
 
                     <div className="relative mb-4">
