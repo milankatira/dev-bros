@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-// import Profile from "../components/client/profile";
 import {
   getCity,
   getDegree,

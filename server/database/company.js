@@ -43,6 +43,10 @@ const CompanySchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'city',
   },
+  user_id: {
+    type: Schema.Types.ObjectId,
+    ref: 'user',
+  }
 });
 
 module.exports = mongoose.model('company', CompanySchema);

@@ -18,6 +18,7 @@ export default function CardSettings({
   employementType,
 }) {
   const [image, setImage] = useState<any>("");
+
   function captureImage(e) {
     const file = e.target.files[0];
     console.log(file)
@@ -40,7 +41,6 @@ export default function CardSettings({
   };
 
   const handleSubmit = (data: any) => {
-    console.log(data);
 
     const formdata = new FormData();
     if (!image) {
@@ -74,6 +74,7 @@ export default function CardSettings({
 
     addProfile(formdata);
   };
+  
   return (
     <>
       <Formik

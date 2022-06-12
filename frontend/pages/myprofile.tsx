@@ -140,15 +140,14 @@ const myprofile = ({ userData }) => {
 export default myprofile;
 
 export async function getServerSideProps({ req }) {
-  const res = await axios.get(
-    'http://localhost:4000/api/me',
-    {
-      withCredentials: true,
-      headers: {
-        Cookie: req.headers.cookie,
-      },
-    }
-  );
+  console.log(req.headers.cookie,"FFFf")
+  const res = await axios.get("http://localhost:4000/api/me", {
+    withCredentials: true,
+    headers: {
+      "Access-Control-Allow-Credentials": true,
+      Cookie: req?.headers?.cookie,
+    },
+  });
   const data = await res.data;
   return { props: { userData: data } };
 }
