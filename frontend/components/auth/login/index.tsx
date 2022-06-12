@@ -1,5 +1,7 @@
 import React from "react";
 import Link from "next/link";
+import cookie from "cookie";
+import { setCookies } from "cookies-next";
 import { Formik, Form } from "formik";
 import ButtonField from "../../common/design/ButtonField";
 import Textinput from "../../common/design/Textinput";
@@ -21,6 +23,15 @@ const newlogin = () => {
     await login(packet)
       .then((res) => {
         toast.success(res?.data?.message);
+        const serialized = cookie.serialize("token", res?.data?.token, {
+          httpOnly: false,
+          secure: process.env.MODE_ENV !== "development",
+          sameSite: "strict",
+          maxAge: 60 * 60 * 24 * 1, // 1 day
+          path: "/",
+        });
+      //  ("Set-Cookie", serialized);
+       setCookies("token",res.data.token);
         Router.push("/myprofile");
       })
       .catch((err) => {

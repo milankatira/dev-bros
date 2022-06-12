@@ -20,6 +20,7 @@
     "bcryptjs": "^2.4.3",
     "chart.js": "2.9.4",
     "cookie": "^0.5.0",
+    "cookies-next": "^2.0.4",
     "dropzone": "^6.0.0-beta.2",
     "firebase": "^8.3.1",
     "formik": "^2.2.9",
