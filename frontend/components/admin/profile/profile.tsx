@@ -6,7 +6,9 @@ import { getCity } from "../../../api/admin";
 import { UseEffectOnce } from "../../../hook/useEffectOnce";
 import { Formik, Form, Field, FieldArray } from "formik";
 import { company_profile } from "../../../validator/compnay";
-
+import Textinput from "../../common/design/Textinput";
+import SelectField from "../../common/design/SelectField";
+import ButtonField from "../../common/design/ButtonField";
 export default function UpdateProfile(
   {
     city,
@@ -66,6 +68,36 @@ export default function UpdateProfile(
                                 className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                                 placeholder="www.example.com"
                               />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div>
+                          <div className="flex flex-wrap">
+                            <div className="w-full lg:w-6/12 px-4">
+                              <div className="relative w-full mb-3">
+                                <Textinput
+                                  text="name"
+                                  type="name"
+                                  name="name"
+                                  error={touched && touched.name && errors.name}
+                                  placeholder="+9111221221212"
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="flex flex-wrap">
+                            <div className="w-full lg:w-6/12 px-4">
+                              <div className="relative w-full mb-3">
+                                <Textinput
+                                  text="name"
+                                  type="name"
+                                  name="name"
+                                  error={touched && touched.name && errors.name}
+                                  placeholder="+9111221221212"
+                                />
+                              </div>
                             </div>
                           </div>
                         </div>

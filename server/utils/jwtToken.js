@@ -5,7 +5,6 @@ const sendToken = (user, statusCode, res) => {
   const serialized = cookie.serialize("token", token, {
     httpOnly: false,
     secure: process.env.MODE_ENV !== "development",
-    // sameSite: "strict",
     maxAge: 60 * 60 * 24 * 1, // 1 day
     path: "/",
   });

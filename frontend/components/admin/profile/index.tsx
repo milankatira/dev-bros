@@ -34,15 +34,17 @@ export default function Index() {
   };
 
   return (
-    <UpdateProfile
-      city={city}
-      logo={logo}
-      setlogo={setlogo}
-      image={image}
-      setImage={setImage}
-      handleSubmit={handleSubmit}
-      handleImage={handleImage}
-      initialValues={intialValue.company_profile}
-    />
+    city && (
+      <UpdateProfile
+        city={city}
+        logo={logo}
+        setlogo={setlogo}
+        image={image}
+        setImage={setImage}
+        handleSubmit={handleSubmit}
+        handleImage={handleImage}
+        initialValues={intialValue.company_profile}
+      />
+    )
   );
 }

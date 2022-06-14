@@ -5,7 +5,11 @@ import Router from "next/router";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Toaster } from "react-hot-toast";
 import { CookiesProvider } from "react-cookie";
-import Navbar from "../layouts/navbar";
+import dynamic from "next/dynamic";
+const Navbar = dynamic(() => import("../layouts/navbar"), {
+  ssr: false,
+});
+
 const progress = new ProgressBar({
   size: 4,
   color: "#A855F7",
