@@ -40,8 +40,10 @@ const userSchema = new mongoose.Schema({
   },
 
   role: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'user_roles',
+    type: String,
+    enum: ["user", "company", "admin"],
+    default: "user",
+    required: [true, "Please enter your role"],
   },
 
   location: {

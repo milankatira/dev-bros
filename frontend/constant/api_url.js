@@ -17,7 +17,7 @@ export const verify_email_url = (token) =>
 
 //TODO USER URL
 
-export const user_profile_url = `${server_url}/api/user/me`;
+export const user_profile_url = `${server_url}/api/me`;
 
 export const update_profile_url = `${server_url}/api/user/me/update`;
 
@@ -43,3 +43,8 @@ export const get_skill = `${server_url}/api/skill`;
 export const get_subcription_plan = `${server_url}/api/subcription_plan`;
 
 export const get_employement_type = `${server_url}/api/employement_type`;
+
+
+//TODO COMPANY URL 
+
+export const company = `${server_url}/api/company`;

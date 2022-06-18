@@ -4,7 +4,7 @@ import moment from "moment";
 const form_validation = {
   company_name: "Company name is required",
   number_of_eployees: "Number of eployees is required",
-  company_name: "Company name is required",
+  company_url: "Company url is required",
   foundation_year: "Foundation year is required",
   foundation_valid_year: "Invalid Date",
   headquter: "headquter location is required",
@@ -15,7 +15,7 @@ const form_validation = {
 
 export const company_profile = yup.object().shape({
   name: yup.string().required(form_validation.company_name),
-  company_url: yup.string(),
+  company_url: yup.string().required(form_validation.company_url),
   number_of_eployees: yup.number().required(form_validation.number_of_eployees),
   foundation_year: yup
     .date()

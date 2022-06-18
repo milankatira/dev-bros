@@ -4,8 +4,7 @@ const app = express();
 
 const cookieParser = require("cookie-parser");
 
-app.use(express.json());
-
+app.use(express.json({ limit: "8mb" }));
 app.use(cookieParser());
 
 const bodyParser = require("body-parser");
@@ -18,7 +17,7 @@ const product = require("./routes/productRoute");
 
 const user = require("./routes/userRoutes");
 
-const jobs=require("./routes/jobs");
+const jobs = require("./routes/jobs");
 
 const order = require("./routes/orderRoutes");
 
@@ -27,6 +26,8 @@ const generic_data = require("./routes/generic_data");
 const payment = require("./routes/paymentRoute");
 
 const profile = require("./routes/profileRoutes");
+
+const company = require("./routes/company");
 
 const dotenv = require("dotenv");
 
@@ -57,9 +58,8 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use("/static", express.static(`${__dirname}/static`));
-app.use("/api", [product, user, order, profile, generic_data, jobs]);
-
+app.use(express.static(`${__dirname}/static`));
+app.use("/api", [product, user, order, profile, generic_data, jobs, company]);
 
 app.use(errorMiddleware);
 

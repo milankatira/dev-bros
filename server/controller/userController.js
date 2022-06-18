@@ -20,13 +20,15 @@ const path = require("path");
 dotenv.config({ path: "../config/config.env" });
 
 exports.registerUser = catchAsyncError(async (req, res, next) => {
-  const { firstName, lastName, email, password, phoneNo } = req.body;
+  const { firstName, lastName, email, password, phoneNo, role } = req.body;
+
   const user = await User.create({
     firstName,
     lastName,
     email,
     password,
     phoneNo,
+    role,
   });
 
   const tokenForEmailVarification = await getTokenForEmailVarification({
@@ -260,7 +262,6 @@ exports.addProfile = catchAsyncError(async (req, res, next) => {
     experience_details,
     education_details,
     location,
-
   } = req.body;
 
   if (location) {
@@ -283,7 +284,9 @@ exports.addProfile = catchAsyncError(async (req, res, next) => {
       .resize(150, Jimp.AUTO)
       .write(path.resolve(__dirname, `../static/${imagePath}`));
 
+    console.log(imagePath, "imagepath");
     const authData = await userDataModel.findOne({ user_id: req.user.id });
+    console.log(authData, "authDATA");
     authData.profile_pic = imagePath;
     await authData.save();
   }
