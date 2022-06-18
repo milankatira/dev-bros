@@ -1,14 +1,14 @@
-const User = require("../models/userModel");
+const User = require("../database/userModel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
-const UserSkillModel = require("../models/user_skill");
-const EducationModel = require("../models/education_details");
-const ExperienceModel = require("../models/professional_expericance");
-const UserPreferenceModal = require("../models/user_preferance");
-const userDataModel = require("../models/profileModel");
+const UserSkillModel = require("../database/user_skill");
+const EducationModel = require("../database/education_details");
+const ExperienceModel = require("../database/professional_expericance");
+const UserPreferenceModal = require("../database/user_preferance");
+const userDataModel = require("../database/profileModel");
 const cloudinary = require("cloudinary");
 const { getTokenForEmailVarification } = require("../helpers/auth");
 
@@ -20,13 +20,15 @@ const path = require("path");
 dotenv.config({ path: "../config/config.env" });
 
 exports.registerUser = catchAsyncError(async (req, res, next) => {
-  const { firstName, lastName, email, password, phoneNo } = req.body;
+  const { firstName, lastName, email, password, phoneNo, role } = req.body;
+
   const user = await User.create({
     firstName,
     lastName,
     email,
     password,
     phoneNo,
+    role,
   });
 
   const tokenForEmailVarification = await getTokenForEmailVarification({
@@ -260,7 +262,6 @@ exports.addProfile = catchAsyncError(async (req, res, next) => {
     experience_details,
     education_details,
     location,
-
   } = req.body;
 
   if (location) {
@@ -281,9 +282,11 @@ exports.addProfile = catchAsyncError(async (req, res, next) => {
     const jimResp = await Jimp.read(buffer);
     jimResp
       .resize(150, Jimp.AUTO)
-      .write(path.resolve(__dirname, `../storage/${imagePath}`));
+      .write(path.resolve(__dirname, `../static/${imagePath}`));
 
+    console.log(imagePath, "imagepath");
     const authData = await userDataModel.findOne({ user_id: req.user.id });
+    console.log(authData, "authDATA");
     authData.profile_pic = imagePath;
     await authData.save();
   }

@@ -1,4 +1,4 @@
-const State = require("../models/state");
+const State = require("../database/state");
 
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");
@@ -6,7 +6,6 @@ const catchAsyncError = require("../middleware/catchAsyncError");
 exports.AddState = catchAsyncError(async (req, res, next) => {
   try {
     const state = await State.create(req.body);
-
     res.status(201).json({
       success: true,
       state,

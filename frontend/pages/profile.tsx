@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-// import Profile from "../components/client/profile";
 import {
   getCity,
   getDegree,
@@ -25,11 +24,6 @@ export default function MyProfile() {
   const [skill, setskill] = useState<any>();
   const [fresher, setfresher] = useState<boolean>();
   const [employementType, setemployementType] = useState<any>();
-  // console.log(city, degree, designation, institution, "mData");
-
-  // UseEffectOnce(() => {
-  //   console.log("ok");
-  // });
 
   UseEffectOnce(() => {
     const promise1 = Promise.resolve(getCity());
@@ -38,9 +32,6 @@ export default function MyProfile() {
     const promise4 = Promise.resolve(getDesignation());
     const promise5 = axios.get("http://localhost:4000/api/me", {
       withCredentials: true,
-      // headers: {
-      //   Cookie: req.headers.cookie,
-      // },
     });
     const promise6 = Promise.resolve(getSkill());
     const promise7 = Promise.resolve(getEmployementType());

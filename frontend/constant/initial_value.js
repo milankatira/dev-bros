@@ -59,4 +59,19 @@ export const intialValue = {
       },
     ],
   },
+
+  company_profile: {
+    name: "",
+    company_url: "",
+    number_of_eployees: "",
+    foundation_year: "",
+    headquter: "",
+    address: [
+      {
+        street: "",
+        city: "",
+      },
+    ],
+  },
+  
 };

@@ -1,4 +1,4 @@
-const SubcriptionPlan = require("../models/subcription_plans");
+const SubcriptionPlan = require("../database/subcription_plans");
 
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");

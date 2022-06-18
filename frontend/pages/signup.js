@@ -6,7 +6,7 @@ import firebase from "../firebase/firebase";
 import { Formik, Form, Field } from "formik";
 import { intialValue } from "../constant/initial_value";
 import { signup } from "../validator/signup";
-
+import { register } from "../api/auth/index";
 const Auth = () => {
   const [mobile, setmobile] = useState("");
   const [otp, setotp] = useState("");
@@ -73,12 +73,19 @@ const Auth = () => {
     }
   };
 
+  const handleRegister = (data) => {
+    const packet = {
+      ...data,
+      phoneNo: mobile,
+    };
+    register(packet);
+  };
   return (
     <div>
       <Formik
         initialValues={intialValue.signup}
         validationSchema={signup}
-        onSubmit={console.log("ok")}
+        onSubmit={(data) => handleRegister(data)}
       >
         {(props) => {
           return (
@@ -105,28 +112,30 @@ const Auth = () => {
                         Log in
                       </span>
                     </div>
-
                     <Textinput
                       text="firstName"
                       type="text"
                       name="firstName"
                       placeholder="+9111221221212"
                     />
-
                     <Textinput
                       text="lastName"
                       name="lastName"
                       type="text"
                       placeholder="+9111221221212"
                     />
-
                     <Textinput
                       text="e-mail"
                       type="text"
                       name="email"
                       placeholder="+9111221221212"
                     />
-
+                    <Textinput
+                      text="password"
+                      type="text"
+                      name="password"
+                      placeholder="+9111221221212"
+                    />
                     <div className="relative mb-4">
                       <label
                         htmlFor="email"
@@ -142,11 +151,9 @@ const Auth = () => {
                         className="w-full bg-white rounded-lg border-2 border-gray-300 focus:border-blue-200 focus:ring-1 focus:ring-blue-200 text-lg font-sans font-medium outline-none text-gray-700 py-1 px-3 leading-7 transition-colors duration-200 ease-in-out"
                       />
                     </div>
-
                     <div className="mb-5 flex justify-end">
                       <ButtonField text="sendOtp" onClick={verifyPhoneNumber} />
                     </div>
-
                     <ButtonField text="Signup" />
                     <div id="recaptcha-container"></div>
                     <ModalField
@@ -156,7 +163,6 @@ const Auth = () => {
                       title="Verify Otp"
                     >
                       <div className="max-h-48 mt-2 px-2">
-                        <h1>submit</h1>
                         <div className="relative mb-4">
                           <label
                             htmlFor="email"

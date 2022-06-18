@@ -1,5 +1,5 @@
-const Order = require("../models/orderModel");
-const Product = require("../models/productModel");
+const Order = require("../database/orderModel");
+const Product = require("../database/productModel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");
 

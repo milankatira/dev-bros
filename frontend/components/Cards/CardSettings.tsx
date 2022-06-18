@@ -18,6 +18,7 @@ export default function CardSettings({
   employementType,
 }) {
   const [image, setImage] = useState<any>("");
+
   function captureImage(e) {
     const file = e.target.files[0];
     console.log(file)
@@ -40,11 +41,12 @@ export default function CardSettings({
   };
 
   const handleSubmit = (data: any) => {
-    console.log(data);
 
     const formdata = new FormData();
     if (!image) {
+      
       toast.error("Candidate image required ");
+      return
     } else if (image) {
       console.log(image);
       formdata.append("profile_img", image);
@@ -61,80 +63,18 @@ export default function CardSettings({
       "education_details",
       JSON.stringify(data.education_details)
     );
-    // formdata.append("skills", JSON.stringify(data.skills));
-    // formdata.append("skills", JSON.stringify(data.skills));
-
-    // for (let i = 0; i < data.education_details.length; i += 1) {
-    //   formdata.append(
-    //     `education_details[${i}][degree]`,
-    //     data.education_details[i].degree
-    //   );
-    //   formdata.append(
-    //     `education_details[${i}][institution]`,
-    //     data.education_details[i].institute
-    //   );
-    //   formdata.append(
-    //     `education_details[${i}][description]`,
-    //     data.education_details[i].educationDescription
-    //   );
-    //   formdata.append(
-    //     `education_details[${i}][marks]`,
-    //     data.education_details[i].marks
-    //   );
-    //   formdata.append(
-    //     `education_details[${i}][started_year]`,
-    //     data.education_details[i].startedYear
-    //   );
-    //   formdata.append(
-    //     `education_details[${i}][passing_year]`,
-    //     data.education_details[i].passingYear
-    //   );
-    // }
-
+  
     if (fresher) {
-      formdata.append("fresher", true);
+      formdata.append("fresher", fresher);
     }
     formdata.append(
       "experience_details",
       JSON.stringify(data?.experience_details)
     );
 
-    // for (let i = 0; i < data?.experience_details?.length; i += 1) {
-    //   formdata.append(
-    //     `experience_details[${i}][company]`,
-    //     data.experience_details[i].company
-    //   );
-    //   formdata.append(
-    //     `experience_details[${i}][designation]`,
-    //     data.experience_details[i].designation
-    //   );
-    //   if (data.experience_details[i].currentlyWorking) {
-    //     formdata.append(
-    //       `experience_details[${i}][is_current_employement]`,
-    //       data.experience_details[i].currentlyWorking
-    //     );
-    //   } else {
-    //     formdata.append(
-    //       `experience_details[${i}][end_at]`,
-    //       data.experience_details[i].endDate
-    //     );
-    //     formdata.append(
-    //       `experience_details[${i}][is_current_employement]`,
-    //       false
-    //     );
-    //   }
-    //   formdata.append(
-    //     `experience_details[${i}][description]`,
-    //     data.experience_details[i].experienceDescription
-    //   );
-    //   formdata.append(
-    //     `experience_details[${i}][start_at]`,
-    //     data.experience_details[i].startDate
-    //   );
-    // }
-
     addProfile(formdata);
   };
+  
   return (
     <>
       <Formik

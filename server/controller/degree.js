@@ -1,4 +1,4 @@
-const Degree = require("../models/degree");
+const Degree = require("../database/degree");
 
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");
