@@ -29,6 +29,8 @@ const profile = require("./routes/profileRoutes");
 
 const company = require("./routes/company");
 
+const exam = require("./routes/exam");
+
 const dotenv = require("dotenv");
 
 dotenv.config({ path: "server/config/config.env" });
@@ -59,7 +61,16 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.static(`${__dirname}/static`));
-app.use("/api", [product, user, order, profile, generic_data, jobs, company]);
+app.use("/api", [
+  product,
+  user,
+  order,
+  profile,
+  generic_data,
+  jobs,
+  company,
+  exam,
+]);
 
 app.use(errorMiddleware);
 

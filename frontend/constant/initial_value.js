@@ -73,5 +73,16 @@ export const intialValue = {
       },
     ],
   },
-  
+
+  Exam: {
+    exam_name: "",
+    start_time: "",
+    end_time: "",
+    description: "",
+    exam_type: "",
+    date: "",
+    passing_mark: "",
+    total_mark: " ",
+    totalQuestion: " ",
+  },
 };

@@ -48,3 +48,8 @@ export const get_employement_type = `${server_url}/api/employement_type`;
 //TODO COMPANY URL 
 
 export const company = `${server_url}/api/company`;
+
+export const exam = `${server_url}/api/exam`;
+
+export const exam_id = (id) =>
+  `${server_url}/api/exam:${id}`;

@@ -56,8 +56,6 @@ export default function CardSettings({
     formdata.append("salary_preference", data.SalaryPreference);
     formdata.append("prefered_location[0]", data.preferedLocation);
     formdata.append("location", data.location);
-
-    console.log(data.skills);
     formdata.append("skills", JSON.stringify(data.skills));
     formdata.append(
       "education_details",
@@ -703,7 +701,6 @@ export default function CardSettings({
 
                     <ButtonField
                       type="submit"
-                      // onClick={() => arrayHelpers.remove(index)}
                       text="Submit"
                     />
                   </div>

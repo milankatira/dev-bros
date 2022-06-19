@@ -16,3 +16,9 @@ const masterConfig = {
 };
 
 export const { server_url } = masterConfig[process.env.ENV];
+
+
+export const exam_type = {
+  MCQ: "MCQ",
+  CODING: "CODING",
+};
