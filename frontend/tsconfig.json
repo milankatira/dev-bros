@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "hook/useInfinateScroll.jsx"  ],
   "exclude": [
     "node_modules"
   ]

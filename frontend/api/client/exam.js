@@ -13,6 +13,15 @@ export const getExamById = async (id) => {
     });
 };
 
+export const GetAllExam = async (queryParams) => {
+  return await axios
+    .get(exam, { params: queryParams })
+    .then((response) => response)
+    .catch((err) => {
+      throw err;
+    });
+};
+
 export const addExam = async (packet) => {
   return await axios
     .post(exam, packet)
@@ -20,16 +29,16 @@ export const addExam = async (packet) => {
     .catch((err) => {
       throw err;
     });
-}
+};
 
-export const updateExam = async (id,packet) => {
+export const updateExam = async (id, packet) => {
   return await axios
     .put(exam_id(id), packet)
     .then((response) => response)
     .catch((err) => {
       throw err;
     });
-}
+};
 
 export const deleteExam = async (id) => {
   return await axios
@@ -38,5 +47,4 @@ export const deleteExam = async (id) => {
     .catch((err) => {
       throw err;
     });
-}
-
+};

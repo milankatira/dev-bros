@@ -3,7 +3,7 @@ import UpdateProfile from "../../components/admin/profile";
 const AddProfile = () => {
   return (
     <>
-      <UpdateProfile />
+      <UpdateProfile userData={undefined} />
     </>
   );
 };

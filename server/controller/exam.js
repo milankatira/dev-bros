@@ -33,7 +33,7 @@ exports.AddExam = catchAsyncError(async (req, res, next) => {
 
 exports.UpdateExam = catchAsyncError(async (req, res, next) => {
   try {
-    const { id } = req.params.id;
+    const { id } = req.params;
     const examValue = await ExamModal.findByIdAndUpdate(id, req.body);
     const exam = await examValue.save();
     res.status(201).json({
@@ -47,7 +47,7 @@ exports.UpdateExam = catchAsyncError(async (req, res, next) => {
 
 exports.deleteExam = catchAsyncError(async (req, res, next) => {
   try {
-    const { id } = req.params.id;
+    const { id } = req.params;
 
     const exam = await ExamModal.findByIdAndDelete(id);
 
@@ -62,9 +62,24 @@ exports.deleteExam = catchAsyncError(async (req, res, next) => {
 
 exports.getExamById = catchAsyncError(async (req, res, next) => {
   try {
-    const { id } = req.params.id;
-
+    const { id } = req.params;
     const exam = await ExamModal.findById(id);
+    res.status(201).json({
+      success: true,
+      exam,
+    });
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
+  }
+});
+
+exports.GetAllExam = catchAsyncError(async (req, res, next) => {
+  try {
+    const limit =
+      req.query && req.query.itemsPerPage ? req.query.itemsPerPage : 10;
+    const skip = req.query && req.query.offset ? req.query.offset : 0;
+
+    const exam = await ExamModal.find().limit(Number(limit)).skip(Number(skip));
     res.status(201).json({
       success: true,
       exam,
