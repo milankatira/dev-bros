@@ -1,6 +1,8 @@
 import React from "react";
 import { useRouter } from "next/router";
+import Router from "next/router";
 import axios from "axios";
+import Link from "next/link";
 const Index = ({ Data }) => {
   const router = useRouter();
   const { id } = router.query;
@@ -216,7 +218,12 @@ const Index = ({ Data }) => {
         <section className="text-gray-600 body-font w-1/2">
           <div className="container py-4 mx-auto">
             <div className="flex flex-col sm:flex-row sm:items-center items-end justify-start mx-auto">
-              <button className="flex-shrink-0 text-white bg-blue-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded ml-4 text-lg mt-10 sm:mt-0">
+            
+              <button className="flex-shrink-0 text-white bg-blue-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded ml-4 text-lg mt-10 sm:mt-0"
+              onClick={()=>{
+                 Router.push(`/company/${Data._id}/questions`);
+              }}
+              >
                 Preview
               </button>
 

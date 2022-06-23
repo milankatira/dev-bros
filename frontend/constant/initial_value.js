@@ -85,4 +85,15 @@ export const intialValue = {
     total_mark: " ",
     totalQuestion: " ",
   },
+
+  mcqQuestions: {
+    questions: [
+      {
+        question: "",
+        mcqs: ["", "", "", ""],
+        answer: "",
+        level: "easy",
+      },
+    ],
+  },
 };

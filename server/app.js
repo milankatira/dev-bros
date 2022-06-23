@@ -33,6 +33,8 @@ const exam = require("./routes/exam");
 
 const dotenv = require("dotenv");
 
+const question=require('./routes/question');
+
 dotenv.config({ path: "server/config/config.env" });
 
 const cors = require("cors");
@@ -70,6 +72,7 @@ app.use("/api", [
   jobs,
   company,
   exam,
+  question
 ]);
 
 app.use(errorMiddleware);

@@ -1,11 +1,7 @@
 import React, { useState } from "react";
-import toast from "react-hot-toast";
 import Dropzone from "react-dropzone";
 import { server_url } from "../../../config/app_config";
-import { intialValue } from "../../../constant/initial_value";
-import { getCity } from "../../../api/admin";
-import { UseEffectOnce } from "../../../hook/useEffectOnce";
-import { Formik, Form, Field, FieldArray } from "formik";
+import { Formik, Form, FieldArray } from "formik";
 import { company_profile } from "../../../validator/compnay";
 import Textinput from "../../common/design/Textinput";
 import SelectField from "../../common/design/SelectField";

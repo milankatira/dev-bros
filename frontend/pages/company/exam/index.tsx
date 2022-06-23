@@ -30,41 +30,8 @@ const Index = ({ Data }) => {
     const [pageNumber, setPageNumber] = useState(1);
 
     // const { books, hasMore, loading, error } = useBookSearch(pageNumber);
-
-  // const [lastElementRef] = useInfiniteScroll(
-  //   HasMore
-  //     ? loadMoreItems
-  //     : () => {
-  //         console.log("HasMore is false");
-  //       },
-  //   IsFetching
-  // );
-  // function loadMoreItems() {
-  //   setIsFetching(true);
-
-  //   GetAllExam({ itemsPerPage: 0, offset: 10 });
-  //   console.log(Page, "page");
-  //   setPage((prevPageNumber) => prevPageNumber + 1);
-  // }
-
   return (
     <div>
-      {/* <HeaderTitleContainer title="My exam" button={true}>
-        <button
-          type="button"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          onClick={toggleModal}
-        >
-          create exam
-        </button>
-      </HeaderTitleContainer>
-      <AddExamModal
-        open={openAddExamModal}
-        toggleModal={toggleModal}
-        setExamData={setExamDataForModal}
-        examData={examDataForModal}
-      /> */}
-
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-wrap -m-4">

@@ -53,3 +53,7 @@ export const exam = `${server_url}/api/exam`;
 
 export const exam_id = (id) =>
   `${server_url}/api/exam:${id}`;
+
+//TODO QUESTION 
+
+export const questions = `${server_url}/api/questions`;

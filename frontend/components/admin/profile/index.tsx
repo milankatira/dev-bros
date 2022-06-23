@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import toast from "react-hot-toast";
 import { getCity } from "../../../api/admin";
 import { UseEffectOnce } from "../../../hook/useEffectOnce";
 import UpdateProfile from "./profile";
 import { intialValue } from "../../../constant/initial_value";
 import { addCompany, getCompany } from "../../../api/client/compnay";
+
 export default function Index({ userData }) {
   const [companyProfile, setcompanyProfile] = useState();
   const [image, setImage] = useState<any>("");
@@ -19,6 +19,7 @@ export default function Index({ userData }) {
     getCity().then((res) => {
       setcity(res.data.city);
     });
+
     if (userData) {
       getCompany().then(async (res) => {
         await setcompanyProfile(res?.data?.company);
@@ -80,7 +81,6 @@ export default function Index({ userData }) {
       });
   };
 
-  // console.log(initialValue,"initialValue");
   return (
     city &&
     (userData ? (
