@@ -30,7 +30,6 @@ exports.addQuestion = catchAsyncError(async (req, res, next) => {
   }
 });
 
-
 exports.updateQuestion = catchAsyncError(async (req, res, next) => {
   try {
     const { question, mcqs, answer, level, exam_id } = req.body.questions[0];
@@ -44,6 +43,20 @@ exports.updateQuestion = catchAsyncError(async (req, res, next) => {
       company_id: userId,
     };
     const Data = await QuestionModal.findByIdAndUpdate(id, packet);
+    res.status(201).json({
+      success: true,
+      Data,
+    });
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
+  }
+});
+
+exports.getQuestion = catchAsyncError(async (req, res, next) => {
+  try {
+    const Data = await QuestionModal.find({
+      exam_id: req.params.exam_id,
+    });
     res.status(201).json({
       success: true,
       Data,

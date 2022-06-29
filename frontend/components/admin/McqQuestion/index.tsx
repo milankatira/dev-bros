@@ -9,8 +9,6 @@ const Index = () => {
   console.log(router.query.exam_id, "mmm");
 
   const handleSubmit = (data) => {
-    console.log(data, "data");
-
     const packet = {
       data,
       exam_id: router.query.exam_id,

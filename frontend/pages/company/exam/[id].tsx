@@ -218,21 +218,25 @@ const Index = ({ Data }) => {
         <section className="text-gray-600 body-font w-1/2">
           <div className="container py-4 mx-auto">
             <div className="flex flex-col sm:flex-row sm:items-center items-end justify-start mx-auto">
-            
-              <button className="flex-shrink-0 text-white bg-blue-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded ml-4 text-lg mt-10 sm:mt-0"
-              onClick={()=>{
-                 Router.push(`/company/${Data._id}/questions`);
-              }}
+              <button
+                className="flex-shrink-0 text-white bg-blue-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded ml-4 text-lg mt-10 sm:mt-0"
+                onClick={() => {
+                  Router.push(`/company/${Data._id}/questions`);
+                }}
               >
-                Preview
+                addExam
               </button>
 
-              <button className="mx-4 flex-shrink-0 text-white bg-blue-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0">
-                Assign test
+              <button
+                className="mx-4 flex-shrink-0 text-white bg-blue-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0"
+                onClick={() => {
+                  Router.push(`/company/${Data._id}/allquestions`);
+                }}
+              >
+                View Question
               </button>
             </div>
           </div>
-          
         </section>
 
         <section className="text-gray-600 body-font w-1/2">
@@ -249,7 +253,6 @@ const Index = ({ Data }) => {
           </div>
         </section>
       </section>
-
     </div>
   );
 };
