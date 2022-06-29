@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+
+import { useAuthcontext } from "../context/context/Auth";
+import { UseEffectOnce } from "../hook/useEffectOnce";
 const Header = () => {
+  const { auth, Auth_api } = useAuthcontext();
+
+  console.log(auth.loading, "auth");
   const [navbar, setnavbar] = useState<boolean>(false);
+
+  UseEffectOnce(() => {
+    Auth_api.AuthStatus();
+  });
   const changeBg = () => {
     if (typeof window !== "undefined") {
       if (window.scrollY >= 80) {
@@ -95,3 +105,5 @@ const Header = () => {
 };
 
 export default Header;
+
+

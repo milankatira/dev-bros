@@ -5,6 +5,7 @@ import {
 } from "../../constant/api_url";
 import axios from "axios";
 axios.defaults.withCredentials = true;
+
 export const user = () =>
   axios
     .get(user_profile_url)
