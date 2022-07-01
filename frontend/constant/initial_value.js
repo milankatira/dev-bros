@@ -96,4 +96,7 @@ export const intialValue = {
       },
     ],
   },
+  exam_link: {
+    exam_link: "",
+  },
 };

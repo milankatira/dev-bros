@@ -42,6 +42,15 @@ const session = require("express-session");
 const RedisStore = require("connect-redis")(session);
 const RedisClient = require("./config/redis.config.js");
 
+
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -55,13 +64,6 @@ app.use(
 
 app.use(fileUpload());
 
-const corsOptions = {
-  origin: process.env.SITE_URL,
-  credentials: true,
-  optionsSuccessStatus: 200,
-};
-
-app.use(cors(corsOptions));
 app.use(express.static(`${__dirname}/static`));
 app.use("/api", [
   product,

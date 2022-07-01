@@ -30,6 +30,8 @@ function AuthProvider(props) {
     user().then((res) => {
       dispatch(setLoading(false));
       dispatch(authStatusSuccess(res.data));
+    }).catch(err=>{
+      dispatch(setLoading(false));
     });
   };
 

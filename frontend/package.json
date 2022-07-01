@@ -17,6 +17,7 @@
     "@popperjs/core": "2.9.1",
     "@tailwindcss/forms": "0.2.1",
     "@tinymce/tinymce-react": "^4.1.0",
+    "@typescript-eslint/eslint-plugin": "^5.30.0",
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
     "chart.js": "2.9.4",
