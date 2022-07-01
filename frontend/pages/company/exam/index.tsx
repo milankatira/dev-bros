@@ -20,7 +20,7 @@ const Index = ({ Data }) => {
     totalQuestion: " ",
   };
 
-  const [openAddExamModal, setOpenAddExamModal] = useState(false);
+  const [openAddExamModal, setOpenAddExamModal] = useState(true);
   const [examDataForModal, setExamDataForModal] = useState<any>(initialValues);
   const toggleModal = () => setOpenAddExamModal(!openAddExamModal);
   const [IsFetching, setIsFetching] = useState(false);

@@ -242,9 +242,11 @@ const Index = ({ Data }) => {
         <section className="text-gray-600 body-font w-1/2">
           <div className="container py-4 mx-auto">
             <div className="flex flex-col sm:flex-row sm:items-center items-end justify-end mx-auto">
-              <button className="flex-shrink-0 text-white bg-blue-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0">
-                Preview
-              </button>
+              <Link href="preview">
+                <button className="flex-shrink-0 text-white bg-blue-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0">
+                  Preview
+                </button>
+              </Link>
 
               <button className="mx-4 flex-shrink-0 text-white bg-blue-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0">
                 Assign test

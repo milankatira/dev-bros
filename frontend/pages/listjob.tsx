@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 
 const Listjob = ({ job }) => {
-
   return (
     <div className="py-8 flex flex-wrap md:flex-nowrap">
       <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
@@ -45,6 +44,8 @@ const Listjob = ({ job }) => {
 
 
 const listJob = ({ jobData }) => {
+console.log(jobData, "job");
+
   return (
     <div>
       <section className="text-gray-600 body-font overflow-hidden">
