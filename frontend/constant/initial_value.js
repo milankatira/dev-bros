@@ -11,6 +11,13 @@ export const intialValue = {
     password: "",
   },
 
+  assignExam: {
+    name: "",
+    date: "",
+    start_time: "",
+    end_time: "",
+  },
+
   profile: {
     firstName: "",
     lastName: "",

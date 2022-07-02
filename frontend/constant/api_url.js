@@ -57,3 +57,12 @@ export const exam_id = (id) =>
 //TODO QUESTION 
 
 export const questions = `${server_url}/api/questions`;
+
+
+//TODO CANDIDATES 
+
+export const candidates = `${server_url}/api/candidates`;
+
+//TODO ASSIGN EXAM
+
+export const assignExam=`${server_url}/api/assignexam`;

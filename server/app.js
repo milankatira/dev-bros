@@ -5,6 +5,7 @@ const app = express();
 const cookieParser = require("cookie-parser");
 
 app.use(express.json({ limit: "8mb" }));
+
 app.use(cookieParser());
 
 const bodyParser = require("body-parser");
@@ -34,6 +35,12 @@ const exam = require("./routes/exam");
 const dotenv = require("dotenv");
 
 const question=require('./routes/question');
+
+const candidateGroup=require('./routes/candidates');
+
+const group=require("./routes/group");
+
+const assignExam=require("./routes/assignexam");
 
 dotenv.config({ path: "server/config/config.env" });
 
@@ -74,7 +81,10 @@ app.use("/api", [
   jobs,
   company,
   exam,
-  question
+  question,
+  candidateGroup,
+  group,
+  assignExam,
 ]);
 
 app.use(errorMiddleware);

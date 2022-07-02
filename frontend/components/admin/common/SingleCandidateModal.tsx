@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
-import CloseIcon from "@material-ui/icons/Close";
+// import CloseIcon from "@material-ui/icons/Close";
 // import { useDispatch, useSelector } from "react-redux";
 // import { AppState } from "../../../../store/reducers";
-import {
-  Grid,
-  Typography,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-} from "@material-ui/core";
+import { getCandidates, AddAssignExam } from "../../../api/client/compnay";
+// import {
+//   Grid,
+//   h6,
+//   Table,
+//   TableBody,
+//   tr,
+//   TableContainer,
+//   TableHead,
+//   TableRow,
+//   Paper,
+// } from "@material-ui/core";
 import { useDropzone } from "react-dropzone";
 import { toast } from "react-toastify";
-import ArrowBackIosNewIcon from "@material-ui/icons/ArrowBackIos";
+// import ArrowBackIosNewIcon from "@material-ui/icons/ArrowBackIos";
 import { Form, Formik } from "formik";
 import Textinput from "../../common/design/Textinput";
 import ButtonField from "../../common/design/ButtonField";
@@ -33,10 +34,11 @@ import CustomModalField from "../../../components/common/design/CustomModal";
 import { intialValue } from "../../../constant/initial_value";
 // import { validationSchema } from "../../../../constant/validation_schema";
 // import { addCandidateGroup } from "../../../../store/actions/candidate_group";
-import { CircularProgress } from "@material-ui/core";
+// import { CircularProgress } from "@material-ui/core";
 import Link from "next/link";
 // import { user_id } from "../../../../interface/admin/apiData";
 import { candidateGroup } from "../../../validator/candidateGroup";
+import AssignExamModal from "./AssignExamModal";
 interface Props {
   open?: boolean;
   toggleModal: () => void;
@@ -123,6 +125,8 @@ const SingleCandidateModal: React.FC<Props> = ({
       end_time: examDetails?.end_time,
     };
     toggleModal;
+    console.log(packet,"packet")
+    AddAssignExam(packet);
     // dispatch(assignExamToCandidate(packet));
   };
 
@@ -166,6 +170,14 @@ const SingleCandidateModal: React.FC<Props> = ({
     },
   });
 
+  useEffect(() => {
+    {
+      open &&
+        getCandidates().then((res) => {
+          setCandidates(res.data.candidates);
+        });
+    }
+  }, [open]);
   return (
     <CustomModalField
       open={open}
@@ -186,43 +198,43 @@ const SingleCandidateModal: React.FC<Props> = ({
             }
           }}
         >
-          <ArrowBackIosNewIcon className="back_icons_modal" />
+          <button className="back_icons_modal" />
         </button>
-        <Typography
-          variant="h6"
-          component="span"
+        <h6
+          // variant="h6"
+          // component="span"
           className="test_group_creation"
         >
           {true ? "Create New Group" : "Assign Exam To Candidate"}
-        </Typography>
-        <CloseIcon onClick={toggleModal} className="modal_cross" />
+        </h6>
+        <button onClick={toggleModal} className="modal_cross" />
       </div>
       <br />
-      <Grid
-        container
-        direction="column"
-        alignItems="center"
+      <div
+        // container
+        // direction="column"
+        // alignItems="center"
         className="scheduleJobMeeting"
       >
         {step == 1 && (
-          <TableContainer component={Paper}>
-            <Table aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell></TableCell>
-                  <TableCell>Sr</TableCell>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Email</TableCell>
-                  <TableCell>Phone</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
+          <div>
+            <table aria-label="simple table">
+              <th>
+                {/* <TableRow> */}
+                  <tr></tr>
+                  <tr>Sr</tr>
+                  <tr>Name</tr>
+                  <tr>Email</tr>
+                  <tr>Phone</tr>
+                {/* </TableRow> */}
+              </th>
+              <tbody>
                 {true ? (
                   candidates && candidates.length > 0 ? (
                     candidates.map((candidate: any, index: number) => (
-                      <TableRow key={candidate?._id}>
-                        <TableCell>
-                          {isGroup ? (
+                      <tr key={candidate?._id}>
+                        <tr>
+                          {false ? (
                             <input
                               type="checkbox"
                               checked={candidatesIds[candidate?._id]}
@@ -238,36 +250,39 @@ const SingleCandidateModal: React.FC<Props> = ({
                               onClick={() => setCandidate(candidate._id)}
                             />
                           )}
-                        </TableCell>
+                        </tr>
 
-                        <TableCell align="left">{index + 1}</TableCell>
-                        <TableCell align="left">{candidate?.name}</TableCell>
-                        <TableCell>
+                        <tr>{index + 1}</tr>
+                        <tr>
+                          {candidate?.firstName + " " + candidate?.lastName}
+                        </tr>
+                        <tr>
                           <Link href={`mailto:${candidate?.email}`}>
                             <a>{candidate?.email}</a>
                           </Link>
-                        </TableCell>
-                        <TableCell>
+                        </tr>
+                        <tr>
                           <Link href={`tel:91${candidate?.phone}`}>
-                            <a>{candidate?.phone}</a>
+                            <a>{candidate?.phoneNo}</a>
                           </Link>
-                        </TableCell>
-                      </TableRow>
+                        </tr>
+                      </tr>
                     ))
                   ) : (
-                    <TableCell>No User found</TableCell>
+                    <tr>No User found</tr>
                   )
                 ) : (
-                  <div className="loaderContainer loaderContainerCandidate">
-                    <CircularProgress
-                      color="primary"
-                      className="loaders-singleCandidate"
-                    />
-                  </div>
+                  // <div className="loaderContainer loaderContainerCandidate">
+                  //   <CircularProgress
+                  //     color="primary"
+                  //     className="loaders-singleCandidate"
+                  //   />
+                  // </div>
+                  null
                 )}
-              </TableBody>
-            </Table>
-          </TableContainer>
+              </tbody>
+            </table>
+          </div>
         )}
         {step == 2 && (
           <Formik
@@ -276,7 +291,7 @@ const SingleCandidateModal: React.FC<Props> = ({
             validationSchema={candidateGroup}
           >
             {({ errors, touched }) => (
-              <Grid item lg={8} sm={9} xs={10}>
+              <div>
                 <Form>
                   <h2>Add details for your group</h2>
                   <Textinput
@@ -297,9 +312,7 @@ const SingleCandidateModal: React.FC<Props> = ({
                       errors.description
                     }
                   />
-                  <Typography className="margin-top">
-                    Company Brochure
-                  </Typography>
+                  <h6 className="margin-top">Company Brochure</h6>
                   <div {...getRootProps({ className: "dropzone" })}>
                     <div className="file_btn_submit">
                       Choose File
@@ -309,12 +322,12 @@ const SingleCandidateModal: React.FC<Props> = ({
                   </div>
                   <ButtonField type="submit" text="Submit" />
                 </Form>
-              </Grid>
+              </div>
             )}
           </Formik>
         )}
-      </Grid>
-      {!false && (
+      </div>
+      {true && (
         <button
           className="editExamQues assignBtn3 assignBtn3-candidates"
           disabled={candidate === ""}
@@ -325,7 +338,8 @@ const SingleCandidateModal: React.FC<Props> = ({
           + Assign Test
         </button>
       )}
-      {true && (
+
+      {false && (
         <footer className="examFooter">
           {step !== 2 && (
             <button
@@ -344,12 +358,12 @@ const SingleCandidateModal: React.FC<Props> = ({
           )}
         </footer>
       )}
-      {/* <AssignExamModal
+      <AssignExamModal
         open={openAssignModal}
         toggleModal={toggleAssignModal}
         handleAssignCandidate={handleAssignCandidate}
         examName={examName}
-      /> */}
+      />
     </CustomModalField>
   );
 };

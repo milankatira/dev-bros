@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Grid,
-  Table,
-  TableContainer,
-  TableRow,
-  Typography,
-  TableCell,
-  TableHead,
-} from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
+// import {
+//   // Accordion,
+//   // AccordionDetails,
+//   // AccordionSummary,
+//   div,
+//   Table,
+//   TableContainer,
+//   TableRow,
+//   h4,
+//   TableCell,
+//   TableHead,
+// } from "@material-ui/core";
+// import CloseIcon from "@material-ui/icons/Close";
 
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+// import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 // import { image_url } from "../../../../constant/api_urls";
 // import ModalField from "../../../common/Material_Ui/ModalField";
 import CustomModalField from "../../../components/common/design/CustomModal";
 // import { AppState } from "../../../../store/reducers";
 // import { getCandidateGroup } from "../../../../store/actions/candidate_group";
 // import { assignExamToCandidate } from "../../../../store/actions/candidates";
-import { CircularProgress } from "@material-ui/core";
+// import { CircularProgress } from "@material-ui/core";
 
 // import AssignExamModal from "../AssignExamModal/AssignExamModal";
 // import Pagination from "@material-ui/lab/Pagination";
@@ -125,27 +125,24 @@ const CandidateGroupModal: React.FC<Props> = ({
       // ModalDesign="exam_modal_body group_modal"
     >
       <div className="exam_modal_heading">
-        <Typography
-          variant="h6"
-          component="span"
+        <h4
+          // variant="h6"
+          // component="span"
           className="test_candidates-grp"
         >
           Assign test to groups of candidates
-        </Typography>
-        <CloseIcon onClick={toggleModal} className="modal_cross" />
+        </h4>
+        <button onClick={toggleModal} className="modal_cross" />
       </div>
-      <Grid
-        container
-        direction="row"
-        alignItems="center"
+      <div
+        // direction="row"
+        // alignItems="center"
         className="group-container"
       >
-        <Grid item lg={12} className="createGrpBtn">
-          <button className="editExamQues">
-            + Create New Group
-          </button>
-        </Grid>
-        <Grid item lg={12}>
+        <div className="createGrpBtn">
+          <button className="editExamQues">+ Create New Group</button>
+        </div>
+        {/* <div item lg={12}>
           {groups && groups.length > 0 ? (
             groups.map((group: any, index: any) => (
               <Accordion
@@ -155,9 +152,9 @@ const CandidateGroupModal: React.FC<Props> = ({
                 className="group-accordion"
               >
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                  <Typography className="group-name">
+                  <h4 className="group-name">
                     <b>{group?.title}</b>
-                  </Typography>
+                  </h4>
                 </AccordionSummary>
                 <AccordionDetails className="group-description">
                   <div className="groups-section">
@@ -235,9 +232,9 @@ const CandidateGroupModal: React.FC<Props> = ({
               />
             </div>
           ) : null} */}
-        </Grid>
+        {/* </div> */}
         <br />
-      </Grid>
+      </div>
       {/* <AssignExamModal
         open={openAssignModal}
         toggleModal={toggleAssignModal}

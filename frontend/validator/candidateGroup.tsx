@@ -1,6 +1,5 @@
 import * as yup from "yup";
 
-
 const form_validation = {
   title_required:"title is required",
   description_required:"description is required",
