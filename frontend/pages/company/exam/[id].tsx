@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Router from "next/router";
 import axios from "axios";
 import Link from "next/link";
+import SelectOptionModal from "../../../components/admin/common/SelectOptionModal";
 const Index = ({ Data }) => {
   const router = useRouter();
   const { id } = router.query;
+  const [optionOptionModal, setOptionOptionModal] = useState<boolean>(false);
+  const [openGroupModal, setOpenGroupModal] = React.useState(false);
+  
+  const toggleOptionModal = () => setOptionOptionModal(!optionOptionModal);
+  const toggleGroupModal = () => setOpenGroupModal(!openGroupModal);
+
+const handleIsGroupSelection = (isGroup: boolean) => {
+  console.log(isGroup,"oooz");
+  // setIsGroup(isGroup);
+  // setOptionOptionModal(false);
+  if (isGroup) {
+    // setOpenGroupModal(true);
+  } else {
+    // setshowModal(true);
+  }
+};
 
   return (
     <div>
@@ -248,13 +265,29 @@ const Index = ({ Data }) => {
                 </button>
               </Link>
 
-              <button className="mx-4 flex-shrink-0 text-white bg-blue-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0">
+              <button
+                className="mx-4 flex-shrink-0 text-white bg-blue-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0"
+                onClick={() => setOptionOptionModal(true)}
+              >
                 Assign test
               </button>
             </div>
           </div>
         </section>
       </section>
+
+      <SelectOptionModal
+        open={optionOptionModal}
+        toggleModal={toggleOptionModal}
+        handleIsGroupSelection={handleIsGroupSelection}
+      />
+
+      <CandidateGroupModal
+        exam_id={router.query.id}
+        open={openGroupModal}
+        toggleModal={toggleGroupModal}
+        // handleAddGroupModal={handleAddGroupModal}
+      />
     </div>
   );
 };
