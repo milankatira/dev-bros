@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 import {
   Accordion,
   AccordionDetails,
@@ -29,19 +29,19 @@ import { CircularProgress } from "@material-ui/core";
 interface Props {
   open?: boolean;
   toggleModal: () => void;
-  exam_id: string;
-  handleAddGroupModal: () => void;
+  exam_id: any;
+  // handleAddGroupModal: () => void;
   examName?: string;
 }
 
 const CandidateGroupModal: React.FC<Props> = ({
-  open,
   exam_id,
+  open,
   toggleModal,
-  handleAddGroupModal,
+  // handleAddGroupModal,
   examName,
 }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [page, setPage] = useState<number>(1);
   const [count, setCount] = useState<number[] | any>([]);
 
@@ -141,7 +141,7 @@ const CandidateGroupModal: React.FC<Props> = ({
         className="group-container"
       >
         <Grid item lg={12} className="createGrpBtn">
-          <button className="editExamQues" onClick={handleAddGroupModal}>
+          <button className="editExamQues">
             + Create New Group
           </button>
         </Grid>

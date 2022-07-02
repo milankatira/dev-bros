@@ -4,25 +4,29 @@ import Router from "next/router";
 import axios from "axios";
 import Link from "next/link";
 import SelectOptionModal from "../../../components/admin/common/SelectOptionModal";
+import CandidateGroupModal from "../../../components/admin/common/CandidateGroupModal";
+import SingleCandidateModal from "../../../components/admin/common/SingleCandidateModal";
 const Index = ({ Data }) => {
   const router = useRouter();
   const { id } = router.query;
   const [optionOptionModal, setOptionOptionModal] = useState<boolean>(false);
   const [openGroupModal, setOpenGroupModal] = React.useState(false);
-  
+  const [showModal, setshowModal] = useState(false);
+
   const toggleOptionModal = () => setOptionOptionModal(!optionOptionModal);
   const toggleGroupModal = () => setOpenGroupModal(!openGroupModal);
+  const displayModal = () => setshowModal(!showModal);
 
-const handleIsGroupSelection = (isGroup: boolean) => {
-  console.log(isGroup,"oooz");
-  // setIsGroup(isGroup);
-  // setOptionOptionModal(false);
-  if (isGroup) {
-    // setOpenGroupModal(true);
-  } else {
-    // setshowModal(true);
-  }
-};
+  const handleIsGroupSelection = (isGroup: boolean) => {
+    console.log(isGroup, "oooz");
+    // setIsGroup(isGroup);
+    // setOptionOptionModal(false);
+    if (isGroup) {
+      setOpenGroupModal(true);
+    } else {
+      setshowModal(true);
+    }
+  };
 
   return (
     <div>
@@ -287,6 +291,14 @@ const handleIsGroupSelection = (isGroup: boolean) => {
         open={openGroupModal}
         toggleModal={toggleGroupModal}
         // handleAddGroupModal={handleAddGroupModal}
+      />
+
+      <SingleCandidateModal
+        exam_id={router.query.id}
+        open={showModal}
+        toggleModal={displayModal}
+        setModal={setshowModal}
+        // isGroup={isGroup}
       />
     </div>
   );
