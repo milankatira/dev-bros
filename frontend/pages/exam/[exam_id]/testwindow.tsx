@@ -2,9 +2,13 @@
 import questions from "./questions.json";
 import Head from "next/head";
 import { useState } from "react";
+import { useRouter } from "next/router";
 import axios from "axios";
+import { Submitexam } from "../../../api/client/user";
 export default function Home({ Data }) {
-  console.log(Data, "data");
+  const router = useRouter();
+  const { exam_id } = router.query;
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [score, setScore] = useState(0);
@@ -40,6 +44,23 @@ export default function Home({ Data }) {
     }
     setScore(newScore);
     setShowScore(true);
+  };
+
+  const handleSubmitExam = () => {
+    console.log();
+    const Array = [
+      {
+        question_id: exam_id,
+        answer: "ww",
+        level: "easy",
+      },
+    ];
+    const packet = {
+      assign_exam_id: exam_id,
+      exam_id: exam_id,
+      questions: Array,
+    };
+    Submitexam(packet);
   };
 
   return (
@@ -86,6 +107,8 @@ export default function Home({ Data }) {
           </button>
         </div>
       </>
+
+      <button onClick={handleSubmitExam}>Submit</button>
     </div>
   );
 }

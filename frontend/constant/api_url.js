@@ -21,7 +21,7 @@ export const user_profile_url = `${server_url}/api/me`;
 
 export const update_profile_url = `${server_url}/api/user/me/update`;
 
-export const add_profile_url=`${server_url}/api/add-profile`;
+export const add_profile_url = `${server_url}/api/add-profile`;
 
 //TODO GENERIC URL
 export const get_city = `${server_url}/api/city`;
@@ -44,33 +44,29 @@ export const get_subcription_plan = `${server_url}/api/subcription_plan`;
 
 export const get_employement_type = `${server_url}/api/employement_type`;
 
-
-//TODO COMPANY URL 
+//TODO COMPANY URL
 
 export const company = `${server_url}/api/company`;
 
 export const exam = `${server_url}/api/exam`;
 
-export const exam_id = (id) =>
-  `${server_url}/api/exam:${id}`;
+export const exam_id = (id) => `${server_url}/api/exam:${id}`;
 
-//TODO QUESTION 
+//TODO QUESTION
 
 export const questions = `${server_url}/api/questions`;
 
-
-//TODO CANDIDATES 
+//TODO CANDIDATES
 
 export const candidates = `${server_url}/api/candidates`;
 
 //TODO ASSIGN EXAM
 
-export const assignExam=`${server_url}/api/assignexam`;
+export const assignExam = `${server_url}/api/assignexam`;
 
 //TODO COMPILE CODE
 
 export const compileCode = `${server_url}/api/compilecode`;
-
 
 //TODO ASSIGN CANDIDATE
 
@@ -79,3 +75,7 @@ export const assignCandidate = `${server_url}/api/assigncandidate`;
 //TODO NOTIFY MEMBER
 
 export const notifyStatus = (id) => `${server_url}/api/notify/${id}`;
+
+//TODO SUBMIT EXAM
+
+export const SubmitExam = `${server_url}/api/submit_exam`;

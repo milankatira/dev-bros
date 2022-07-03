@@ -34,15 +34,17 @@ const exam = require("./routes/exam");
 
 const dotenv = require("dotenv");
 
-const question=require('./routes/question');
+const question = require("./routes/question");
 
-const candidateGroup=require('./routes/candidates');
+const candidateGroup = require("./routes/candidates");
 
-const group=require("./routes/group");
+const group = require("./routes/group");
 
-const assignExam=require("./routes/assignexam");
+const assignExam = require("./routes/assignexam");
 
-const code=require("./routes/code");
+const code = require("./routes/code");
+
+const result = require("./routes/result");
 
 dotenv.config({ path: "server/config/config.env" });
 
@@ -50,7 +52,6 @@ const cors = require("cors");
 const session = require("express-session");
 const RedisStore = require("connect-redis")(session);
 const RedisClient = require("./config/redis.config.js");
-
 
 const corsOptions = {
   origin: "http://localhost:3000",
@@ -69,8 +70,6 @@ app.use(
   })
 );
 
-// app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(fileUpload());
 
 app.use(express.static(`${__dirname}/static`));
@@ -87,7 +86,8 @@ app.use("/api", [
   candidateGroup,
   group,
   assignExam,
-  code
+  code,
+  result,
 ]);
 
 app.use(errorMiddleware);

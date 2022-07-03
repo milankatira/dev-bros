@@ -2,7 +2,7 @@ import {
   user_profile_url,
   update_profile_url,
   add_profile_url,
-  
+  SubmitExam,
 } from "../../constant/api_url";
 import axios from "axios";
 axios.defaults.withCredentials = true;
@@ -26,6 +26,14 @@ export const updateProfile = (packet) =>
 export const addProfile = (packet) =>
   axios
     .post(add_profile_url, packet)
+    .then((response) => response)
+    .catch((err) => {
+      throw err;
+    });
+
+export const Submitexam = (packet) =>
+  axios
+    .post(SubmitExam, packet)
     .then((response) => response)
     .catch((err) => {
       throw err;

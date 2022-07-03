@@ -1,8 +1,9 @@
 import React from "react";
-
-import axios from 'axios';
-const details = ({ Data }) => {
-  console.log(Data, "Data");
+import { useRouter } from "next/router";
+import Link from "next/link";
+const Exam = () => {
+  const router = useRouter();
+  const { exam_id } = router.query;
   return (
     <div>
       <section className="text-gray-600 body-font">
@@ -50,10 +51,12 @@ const details = ({ Data }) => {
             />
           </div>
         </div>
+        <Link href={`${exam_id}/testwindow`}>
+          <button>ok</button>
+        </Link>
       </section>
     </div>
   );
 };
 
-export default details;
-
+export default Exam;

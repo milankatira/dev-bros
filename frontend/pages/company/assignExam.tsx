@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React, { useState } from "react";
-import Past from "../../components/admin/assignExam/past";
-import Previous from "../../components/admin/assignExam/previous";
+import Past from "../../components/admin/assignExam/Past";
 import { UseEffectOnce } from "../../hook/useEffectOnce";
 import { GetAssignCandidate } from "../../api/client/compnay";
 import moment from "moment";
