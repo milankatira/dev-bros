@@ -46,4 +46,15 @@ export const AddAssignExam = async (packet) => {
     .catch((err) => {
       throw err;
     });
+
+};
+
+
+export const GetAssignExam = async () => {
+  return await axios
+    .get(assignExam)
+    .then((response) => response)
+    .catch((err) => {
+      throw err;
+    });
 };
