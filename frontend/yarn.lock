@@ -2849,6 +2849,11 @@ isstream@~0.1.2:
   resolved "https://registry.npmjs.org/isstream/-/isstream-0.1.2.tgz"
   integrity sha1-R+Y/evVa+m+S4VAOaQ64uFKcCZo=
 
+jdoodle-api@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/jdoodle-api/-/jdoodle-api-0.0.1.tgz#f941e1004c37f0f4853c7934384c830aafedb783"
+  integrity sha512-5Cz2qdJlYJNLhDwUl2fY5Q+5DvxbpACXPJDoQBDc4DgQdWtipP9d2B0z7jZzD2NBe0F7D1PJhl8DbgfK3aYRAQ==
+
 js-base64@^2.4.3:
   version "2.6.4"
   resolved "https://registry.npmjs.org/js-base64/-/js-base64-2.6.4.tgz"

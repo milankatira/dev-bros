@@ -1447,6 +1447,11 @@ isexe@^2.0.0:
   resolved "https://registry.npmjs.org/isexe/-/isexe-2.0.0.tgz"
   integrity sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=
 
+jdoodle-api@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/jdoodle-api/-/jdoodle-api-0.0.1.tgz#f941e1004c37f0f4853c7934384c830aafedb783"
+  integrity sha512-5Cz2qdJlYJNLhDwUl2fY5Q+5DvxbpACXPJDoQBDc4DgQdWtipP9d2B0z7jZzD2NBe0F7D1PJhl8DbgfK3aYRAQ==
+
 jimp@^0.16.1:
   version "0.16.1"
   resolved "https://registry.npmjs.org/jimp/-/jimp-0.16.1.tgz"

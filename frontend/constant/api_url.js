@@ -66,3 +66,7 @@ export const candidates = `${server_url}/api/candidates`;
 //TODO ASSIGN EXAM
 
 export const assignExam=`${server_url}/api/assignexam`;
+
+//TODO COMPILE CODE
+
+export const compileCode = `${server_url}/api/compilecode`;

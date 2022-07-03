@@ -1,5 +1,10 @@
 import axios from "axios";
-import { company, candidates, assignExam } from "../../constant/api_url";
+import {
+  company,
+  candidates,
+  assignExam,
+  compileCode,
+} from "../../constant/api_url";
 
 axios.defaults.withCredentials = true;
 
@@ -46,13 +51,20 @@ export const AddAssignExam = async (packet) => {
     .catch((err) => {
       throw err;
     });
-
 };
-
 
 export const GetAssignExam = async () => {
   return await axios
     .get(assignExam)
+    .then((response) => response)
+    .catch((err) => {
+      throw err;
+    });
+};
+
+export const CompileCode = async (packet) => {
+  return await axios
+    .post(compileCode, packet)
     .then((response) => response)
     .catch((err) => {
       throw err;

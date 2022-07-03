@@ -42,6 +42,8 @@ const group=require("./routes/group");
 
 const assignExam=require("./routes/assignexam");
 
+const code=require("./routes/code");
+
 dotenv.config({ path: "server/config/config.env" });
 
 const cors = require("cors");
@@ -85,6 +87,7 @@ app.use("/api", [
   candidateGroup,
   group,
   assignExam,
+  code
 ]);
 
 app.use(errorMiddleware);
