@@ -4,6 +4,8 @@ import {
   candidates,
   assignExam,
   compileCode,
+  assignCandidate,
+  notifyStatus,
 } from "../../constant/api_url";
 
 axios.defaults.withCredentials = true;
@@ -65,6 +67,24 @@ export const GetAssignExam = async () => {
 export const CompileCode = async (packet) => {
   return await axios
     .post(compileCode, packet)
+    .then((response) => response)
+    .catch((err) => {
+      throw err;
+    });
+};
+
+export const GetAssignCandidate = async () => {
+  return await axios
+    .get(assignCandidate)
+    .then((response) => response)
+    .catch((err) => {
+      throw err;
+    });
+};
+
+export const NotifyMember = async (id) => {
+  return await axios
+    .post(notifyStatus(id))
     .then((response) => response)
     .catch((err) => {
       throw err;

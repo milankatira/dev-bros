@@ -10,7 +10,7 @@ import { UseEffectOnce } from "../hook/useEffectOnce";
 const Header = () => {
   const { auth, Auth_api } = useAuthcontext();
 
-  console.log(auth.loading, "auth");
+  console.log(auth.authStatus?.user.role, "auth");
   const [navbar, setnavbar] = useState<boolean>(false);
 
   UseEffectOnce(() => {
@@ -122,18 +122,34 @@ const Header = () => {
               >
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
               </svg>
-              <span className="ml-3 text-xl">MilanKatira</span>
+              <span className="ml-3 text-xl">
+                {auth.authStatus?.user?.firstName}
+              </span>
             </a>
-            <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-              <Link href="/login">
-                <a className="mr-4 hover:text-gray-900">First Link</a>
-              </Link>
-              <Link href="/signup">
-                <a className="mr-4 hover:text-gray-900">Second Link</a>
-              </Link>
-              <a className="mr-4 hover:text-gray-900">thirdlink</a>
-              <a className="mr-4 hover:text-gray-900">Fourth Link</a>
-            </nav>
+
+            {auth.authStatus?.user.role == "company" ? (
+              <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+                <Link href="/company/profile">
+                  <a className="mr-4 hover:text-gray-900">MyProfile</a>
+                </Link>
+                <Link href="/company/exam">
+                  <a className="mr-4 hover:text-gray-900">My exam</a>
+                </Link>
+                <a className="mr-4 hover:text-gray-900">thirdlink</a>
+                <a className="mr-4 hover:text-gray-900">Fourth Link</a>
+              </nav>
+            ) : (
+              <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+                <Link href="/login">
+                  <a className="mr-4 hover:text-gray-900">First Link</a>
+                </Link>
+                <Link href="/signup">
+                  <a className="mr-4 hover:text-gray-900">Second Link</a>
+                </Link>
+                <a className="mr-4 hover:text-gray-900">thirdlink</a>
+                <a className="mr-4 hover:text-gray-900">Fourth Link</a>
+              </nav>
+            )}
           </div>
         </header>
       )}
@@ -141,4 +157,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

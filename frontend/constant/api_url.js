@@ -70,3 +70,12 @@ export const assignExam=`${server_url}/api/assignexam`;
 //TODO COMPILE CODE
 
 export const compileCode = `${server_url}/api/compilecode`;
+
+
+//TODO ASSIGN CANDIDATE
+
+export const assignCandidate = `${server_url}/api/assigncandidate`;
+
+//TODO NOTIFY MEMBER
+
+export const notifyStatus = (id) => `${server_url}/api/notify/${id}`;

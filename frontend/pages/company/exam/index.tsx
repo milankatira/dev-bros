@@ -74,59 +74,73 @@ const Index = () => {
     <div>
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
+          <section className="text-gray-600 body-font">
+            <div className="container pb-24 mx-auto">
+              <div className="lg:w-2/3 flex flex-col sm:flex-row sm:items-center items-start mx-auto">
+                <h1 className="flex-grow sm:pr-16 text-2xl font-medium title-font text-gray-900">
+                  Slow-carb next level shoindxgoitch ethical authentic,
+                  scenester sriracha forage.
+                </h1>
+                <button className="flex-shrink-0 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0">
+                  AddEXAM
+                </button>
+              </div>
+            </div>
+          </section>
+
           <div className="flex flex-wrap -m-4">
             {books &&
               books.length &&
               books?.map((book, index) => {
                 if (books.length === index + 1) {
                   return (
-
-                      <Link href={`exam/${book._id}`}>
-                        <div className="lg:w-1/4 md:w-1/2 p-4 w-full" ref={lastBookElementRef} key={book}>
-                          <a className="block relative h-48 rounded overflow-hidden">
-                            <img
-                              alt="ecommerce"
-                              className="object-cover object-center w-full h-full block"
-                              src="https://dummyimage.com/428x268"
-                            />
-                          </a>
-                          <div className="mt-4">
-                            <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
-                              {book.exam_type}
-                            </h3>
-                            <h2 className="text-gray-900 title-font text-lg font-medium">
-                              {book.exam_name}
-                            </h2>
-                            <p className="mt-1">{book.description}</p>
-                          </div>
+                    <Link href={`exam/${book._id}`}>
+                      <div
+                        className="lg:w-1/4 md:w-1/2 p-4 w-full"
+                        ref={lastBookElementRef}
+                        key={book}
+                      >
+                        <a className="block relative h-48 rounded overflow-hidden">
+                          <img
+                            alt="ecommerce"
+                            className="object-cover object-center w-full h-full block"
+                            src="https://dummyimage.com/428x268"
+                          />
+                        </a>
+                        <div className="mt-4">
+                          <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
+                            {book.exam_type}
+                          </h3>
+                          <h2 className="text-gray-900 title-font text-lg font-medium">
+                            {book.exam_name}
+                          </h2>
+                          <p className="mt-1">{book.description}</p>
                         </div>
-                      </Link>
+                      </div>
+                    </Link>
                   );
                 } else {
                   return (
-                      <Link href={`exam/${book._id}`}>
-                        <div
-                          className="lg:w-1/4 md:w-1/2 p-4 w-full"
-                          key={book}
-                        >
-                          <a className="block relative h-48 rounded overflow-hidden">
-                            <img
-                              alt="ecommerce"
-                              className="object-cover object-center w-full h-full block"
-                              src="https://dummyimage.com/428x268"
-                            />
-                          </a>
-                          <div className="mt-4">
-                            <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
-                              {book.exam_type}
-                            </h3>
-                            <h2 className="text-gray-900 title-font text-lg font-medium">
-                              {book.exam_name}
-                            </h2>
-                            <p className="mt-1">{book.description}</p>
-                          </div>
+                    <Link href={`exam/${book._id}`}>
+                      <div className="lg:w-1/4 md:w-1/2 p-4 w-full" key={book}>
+                        <a className="block relative h-48 rounded overflow-hidden">
+                          <img
+                            alt="ecommerce"
+                            className="object-cover object-center w-full h-full block"
+                            src="https://dummyimage.com/428x268"
+                          />
+                        </a>
+                        <div className="mt-4">
+                          <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
+                            {book.exam_type}
+                          </h3>
+                          <h2 className="text-gray-900 title-font text-lg font-medium">
+                            {book.exam_name}
+                          </h2>
+                          <p className="mt-1">{book.description}</p>
                         </div>
-                      </Link>
+                      </div>
+                    </Link>
                   );
                 }
               })}
