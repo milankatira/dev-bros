@@ -10,7 +10,10 @@ import { Login } from "../../../validator/login";
 import { login } from "../../../api/auth/index";
 import toast from "react-hot-toast";
 import Router from "next/router";
-const newlogin = () => {
+import { useAuthcontext } from "../../../context/context/Auth";
+const NewLogin = () => {
+  const { auth, Auth_api } = useAuthcontext();
+
   interface Data {
     email: string;
     password: string;
@@ -20,7 +23,7 @@ const newlogin = () => {
       email: data.email,
       password: data.password,
     };
-    await login(packet)
+     Auth_api.LoginUser(packet)
       .then((res) => {
         toast.success(res?.data?.message);
         const serialized = cookie.serialize("token", res?.data?.token, {
@@ -30,8 +33,8 @@ const newlogin = () => {
           maxAge: 60 * 60 * 24 * 1, // 1 day
           path: "/",
         });
-      //  ("Set-Cookie", serialized);
-       setCookies("token",res.data.token);
+        //  ("Set-Cookie", serialized);
+        setCookies("token", res.data.token);
         Router.push("/myprofile");
       })
       .catch((err) => {
@@ -60,9 +63,6 @@ const newlogin = () => {
                         <hr className="mt-6 border-b-1 border-gray-300" />
                       </div>
                       <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                        <div className="text-gray-400 text-center mb-3 font-bold">
-                          <small>Or sign in with credentials</small>
-                        </div>
                         <div>
                           <div className="relative w-full mb-3">
                             <Textinput
@@ -74,7 +74,7 @@ const newlogin = () => {
                                 props.touched.email &&
                                 props.errors.email
                               }
-                              placeholder="+9111221221212"
+                              placeholder="Email address"
                             />
                           </div>
 
@@ -83,7 +83,7 @@ const newlogin = () => {
                               text="password"
                               name="password"
                               type="password"
-                              placeholder="+9111221221212"
+                              placeholder="password"
                               error={
                                 props.touched &&
                                 props.touched.password &&
@@ -97,7 +97,7 @@ const newlogin = () => {
                                 id="customCheckLogin"
                                 type="checkbox"
                                 defaultChecked
-                                className="form-checkbox border-0 rounded text-gray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
+                                className="form-checkbox border-0 rounded text-gray-600 ml-1 w-5 h-5 ease-linear transition-all duration-150"
                               />
                               <span className="ml-2 text-sm font-semibold text-gray-600">
                                 Remember me
@@ -116,15 +116,18 @@ const newlogin = () => {
                         <a
                           href="#pablo"
                           onClick={(e) => e.preventDefault()}
-                          className="text-gray-200"
+                          className="text-gray-600 text-sm font-semibold"
                         >
-                          <small>Forgot password?</small>
+                          Forgot password?
                         </a>
                       </div>
                       <div className="w-1/2 text-right">
                         <Link href="/auth/register">
-                          <a href="#pablo" className="text-gray-200">
-                            <small>Create new account</small>
+                          <a
+                            href="#pablo"
+                            className="text-gray-600 text-sm font-semibold"
+                          >
+                        Create new account
                           </a>
                         </Link>
                       </div>
@@ -140,4 +143,4 @@ const newlogin = () => {
   );
 };
 
-export default newlogin;
+export default NewLogin;

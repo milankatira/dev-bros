@@ -27,7 +27,7 @@ const Textinput: React.FC<InputFieldProps> = ({
         className="border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
       />
 
-      <span className="text-red-700 font-sans font-semibold">{error}</span>
+      <span className="text-red-500 font-sans font-semibold">{error}</span>
     </div>
   );
 };

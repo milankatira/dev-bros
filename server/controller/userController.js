@@ -187,10 +187,11 @@ exports.resetPassword = catchAsyncError(async (req, res, next) => {
 
 exports.getUsserDetails = catchAsyncError(async (req, res, next) => {
   const user = await User.findById(req.user.id);
-
+  const pic = await userDataModel.findOne({ user_id: req.user.id });
   res.status(200).json({
     status: true,
     user,
+    pic:pic.profile_pic,
   });
 });
 
