@@ -6,6 +6,7 @@ import {
   compileCode,
   assignCandidate,
   notifyStatus,
+  group,
 } from "../../constant/api_url";
 
 axios.defaults.withCredentials = true;
@@ -85,6 +86,15 @@ export const GetAssignCandidate = async () => {
 export const NotifyMember = async (id) => {
   return await axios
     .post(notifyStatus(id))
+    .then((response) => response)
+    .catch((err) => {
+      throw err;
+    });
+};
+
+export const AddGroup = async (packet) => {
+  return await axios
+    .post(group, packet)
     .then((response) => response)
     .catch((err) => {
       throw err;

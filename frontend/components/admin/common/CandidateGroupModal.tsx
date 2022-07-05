@@ -1,4 +1,6 @@
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
+import { getCandidates } from "../../../api/client/compnay";
 // import { useDispatch, useSelector } from "react-redux";
 // import {
 //   // Accordion,
@@ -30,7 +32,7 @@ interface Props {
   open?: boolean;
   toggleModal: () => void;
   exam_id: any;
-  // handleAddGroupModal: () => void;
+  handleAddGroupModal: () => void;
   examName?: string;
 }
 
@@ -38,7 +40,7 @@ const CandidateGroupModal: React.FC<Props> = ({
   exam_id,
   open,
   toggleModal,
-  // handleAddGroupModal,
+  handleAddGroupModal,
   examName,
 }) => {
   // const dispatch = useDispatch();
@@ -55,7 +57,7 @@ const CandidateGroupModal: React.FC<Props> = ({
   const [expanded, setExpanded] = React.useState<boolean | any>(false);
   const [openAssignModal, setOpenAssignModal] = React.useState<boolean>(false);
   const [groupId, setGroupId] = React.useState<string>("");
-
+  const [candidates, setcandidates] = useState('');
   const toggleAssignModal = () => setOpenAssignModal(!openAssignModal);
 
   const handleChange = (panel: string) => (event: any, isExpanded: boolean) => {
@@ -63,6 +65,17 @@ const CandidateGroupModal: React.FC<Props> = ({
   };
 
   const itemsPerPage = 5;
+
+  useEffect(() => {
+    getCandidates()
+      .then((res) => {
+        setcandidates(res?.data?.candidates);
+        console.log(res?.data, "Res");
+      })
+      .catch((err) => {
+        console.log(err, "Err");
+      });
+  }, []);
   // useEffect(() => {
   //   dispatch(getCandidateGroup(itemsPerPage, offset));
   // }, [dispatch, candidateGroupState.addcandidateGroup, itemsPerPage, offset]);
@@ -140,7 +153,7 @@ const CandidateGroupModal: React.FC<Props> = ({
         className="group-container"
       >
         <div className="createGrpBtn">
-          <button className="editExamQues">+ Create New Group</button>
+          <button className="editExamQues">Create New Group</button>
         </div>
         {/* <div item lg={12}>
           {groups && groups.length > 0 ? (
@@ -233,6 +246,71 @@ const CandidateGroupModal: React.FC<Props> = ({
             </div>
           ) : null} */}
         {/* </div> */}
+
+        <div>
+          <table aria-label="simple table">
+            <th>
+              {/* <TableRow> */}
+              <tr></tr>
+              <tr>Sr</tr>
+              <tr>Name</tr>
+              <tr>Email</tr>
+              <tr>Phone</tr>
+              {/* </TableRow> */}
+            </th>
+            <tbody>
+              {true ? (
+                candidates && candidates.length > 0 ? (
+                  candidates.map((candidate: any, index: number) => (
+                    <tr key={candidate?._id}>
+                      <tr>
+                        {false ? (
+                          <input
+                            type="checkbox"
+                            checked={candidatesIds[candidate?._id]}
+                            onChange={handleCheckboxChange}
+                            name={candidate?._id}
+                            value={candidate?._id ? candidate?._id : ""}
+                          />
+                        ) : (
+                          <input
+                            type="radio"
+                            id="myCheck"
+                            name="candidate"
+                            // onClick={() => setCandidate(candidate._id)}
+                          />
+                        )}
+                      </tr>
+
+                      <tr>{index + 1}</tr>
+                      <tr>
+                        {candidate?.firstName + " " + candidate?.lastName}
+                      </tr>
+                      <tr>
+                        <Link href={`mailto:${candidate?.email}`}>
+                          <a>{candidate?.email}</a>
+                        </Link>
+                      </tr>
+                      <tr>
+                        <Link href={`tel:91${candidate?.phone}`}>
+                          <a>{candidate?.phoneNo}</a>
+                        </Link>
+                      </tr>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>No User found</tr>
+                )
+              ) : // <div className="loaderContainer loaderContainerCandidate">
+              //   <CircularProgress
+              //     color="primary"
+              //     className="loaders-singleCandidate"
+              //   />
+              // </div>
+              null}
+            </tbody>
+          </table>
+        </div>
         <br />
       </div>
       {/* <AssignExamModal

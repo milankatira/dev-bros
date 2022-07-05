@@ -79,3 +79,7 @@ export const notifyStatus = (id) => `${server_url}/api/notify/${id}`;
 //TODO SUBMIT EXAM
 
 export const SubmitExam = `${server_url}/api/submit_exam`;
+
+//TODO GROUP
+
+export const group = `${server_url}/api/group`;

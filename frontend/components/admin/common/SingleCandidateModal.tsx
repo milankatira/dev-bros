@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // import CloseIcon from "@material-ui/icons/Close";
 // import { useDispatch, useSelector } from "react-redux";
 // import { AppState } from "../../../../store/reducers";
-import { getCandidates, AddAssignExam } from "../../../api/client/compnay";
+import { getCandidates, AddAssignExam, AddGroup } from "../../../api/client/compnay";
 // import {
 //   Grid,
 //   h6,
@@ -144,7 +144,7 @@ const SingleCandidateModal: React.FC<Props> = ({
         formdata.append(`userId[${i}]`, filtered[i]);
       }
       toggleModal();
-      // dispatch(addCandidateGroup(formdata));
+      AddGroup(formdata);
     } else {
       const formdata = new FormData();
       formdata.append("title", data.title);
@@ -153,7 +153,7 @@ const SingleCandidateModal: React.FC<Props> = ({
         formdata.append(`userId[${i}]`, filtered[i]);
       }
       toggleModal();
-      // dispatch(addCandidateGroup(formdata));
+      AddGroup(formdata);
     }
   };
 
@@ -327,7 +327,7 @@ const SingleCandidateModal: React.FC<Props> = ({
           </Formik>
         )}
       </div>
-      {true && (
+      {false && (
         <button
           className="editExamQues assignBtn3 assignBtn3-candidates"
           disabled={candidate === ""}
@@ -339,19 +339,19 @@ const SingleCandidateModal: React.FC<Props> = ({
         </button>
       )}
 
-      {false && (
+      {true && (
         <footer className="examFooter">
           {step !== 2 && (
             <button
               type="button"
               className="backNextBtn nextBtn"
               onClick={() => setStep(step + 1)}
-              disabled={
-                candidatesIds.length < 2 ||
-                Object.keys(candidatesIds).filter(
-                  (key: any) => candidatesIds[key]
-                ).length < 2
-              }
+              // disabled={
+              //   candidatesIds.length < 2 ||
+              //   Object.keys(candidatesIds).filter(
+              //     (key: any) => candidatesIds[key]
+              //   ).length < 2
+              // }
             >
               Next
             </button>

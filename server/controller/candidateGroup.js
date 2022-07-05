@@ -18,6 +18,7 @@ exports.AddGroup = catchAsyncError(async (req, res, next) => {
       success: true,
       group,
     });
+    
   } catch (error) {
     return next(new ErrorHandler(error.message, 500));
   }
