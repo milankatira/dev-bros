@@ -134,9 +134,7 @@ const Header = () => {
                 >
                   <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                 </svg>
-                <span className="ml-3 text-xl">
-                 devbros
-                </span>
+                <span className="ml-3 text-xl">devbros</span>
               </a>
             )}
 
@@ -150,6 +148,17 @@ const Header = () => {
                 </Link>
                 <a className="mr-4 hover:text-gray-900">thirdlink</a>
                 <a className="mr-4 hover:text-gray-900">Fourth Link</a>
+              </nav>
+            ) : auth.authStatus?.user.role == "candidate" ? (
+              <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+                <Link href="/login">
+                  <a className="mr-4 hover:text-gray-900">Myprofile</a>
+                </Link>
+                <Link href="/signup">
+                  <a className="mr-4 hover:text-gray-900">List job</a>
+                </Link>
+                <a className="mr-4 hover:text-gray-900">My exam</a>
+                <a className="mr-4 hover:text-gray-900">Logout</a>
               </nav>
             ) : (
               <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">

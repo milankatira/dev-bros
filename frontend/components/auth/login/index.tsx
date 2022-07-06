@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 import Router from "next/router";
 import { useAuthcontext } from "../../../context/context/Auth";
 const NewLogin = () => {
-  const { auth, Auth_api } = useAuthcontext();
+  const { Auth_api } = useAuthcontext();
 
   interface Data {
     email: string;
@@ -91,6 +91,7 @@ const NewLogin = () => {
                               }
                             />
                           </div>
+             
                           <div>
                             <label className="inline-flex items-center cursor-pointer">
                               <input
@@ -108,6 +109,7 @@ const NewLogin = () => {
                           <div className="text-center mt-6">
                             <ButtonField text="Signup" />
                           </div>
+                          
                         </div>
                       </div>
                     </div>
