@@ -79,11 +79,16 @@ exports.GetAllExam = catchAsyncError(async (req, res, next) => {
       req.query && req.query.itemsPerPage ? req.query.itemsPerPage : 10;
     const skip = req.query && req.query.offset ? req.query.offset : 0;
 
-    const exam = await ExamModal.find().limit(Number(limit)).skip(Number(skip));
+    const exam = await ExamModal.find()
+      .limit(Number(limit))
+      .skip(Number(skip))
+      .sort({ createdAt: -1 });
+
     res.status(201).json({
       success: true,
       exam,
     });
+
   } catch (error) {
     return next(new ErrorHandler(error.message, 500));
   }

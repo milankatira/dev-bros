@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import CustomModalField from "../../../components/common/design/CustomModal";
 import HeaderTitleContainer from "../../../components/common/design/HeaderTitleContainer";
 import { UseEffectOnce } from "../../../hook/useEffectOnce";
-// import input from "../../common/design/input";
+// import BasicTextinput from "../../common/design/BasicTextinput";
 import { exam_type } from "../../constant/app_constant";
 import { Formik, Form, Field, FieldArray } from "formik";
 import { intialValue } from "../../../constant/initial_value";
-import {
-   addExam 
-} from '../../../api/client/exam';
+import BasicTextinput from "../../common/design/BasicTextInput";
+import { addExam } from "../../../api/client/exam";
 import toast from "react-hot-toast";
 interface Props {
   exam_id?: string;
@@ -55,8 +54,9 @@ const AddExamModal: any = ({
       toast.error("Invalid passing marks");
     } else {
       addExam(packet).then((res) => {
-        console.log(res.data)
-      }); 
+        console.log(res.data);
+        toggleModal();
+      });
       // dispatch(addExam(packet));
     }
   };
@@ -64,9 +64,9 @@ const AddExamModal: any = ({
   return (
     <div>
       <CustomModalField open={open}>
-        <div className="flex justify-between w-full">
+        <div className="flex justify-between p-2">
           {step !== 1 ? (
-            <div className="flex justify-center ">
+            <div className="flex justify-center">
               <button
                 className="backNextBtn1 backBtn1"
                 onClick={() => setStep(step - 1)}
@@ -100,6 +100,7 @@ const AddExamModal: any = ({
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2}
+            onClick={toggleModal}
           >
             <path
               strokeLinecap="round"
@@ -108,14 +109,14 @@ const AddExamModal: any = ({
             />
           </svg>
         </div>
+        <hr className="border-b-1 border-gray-300" />
 
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center w-[700px]">
           {step === 1 && (
             <>
-              <br />
-              <div className="examModalHead">Choose Test Type</div>
-              <div className="examDate">
-                <div className="select-option-sec">
+              <div className="my-4">Choose Test Type</div>
+              <div className="flex flex-row justify-between w-[300px]">
+                <div className="">
                   <div
                     className={`web-img-section ${
                       examData?.exam_type === exam_type.MCQ &&
@@ -137,7 +138,7 @@ const AddExamModal: any = ({
                   </div>
                   <b>MCQS</b>
                 </div>
-                <div className="select-option-sec">
+                <div className="">
                   <div
                     className={`web-img-section ${
                       examData?.exam_type === exam_type.CODING &&
@@ -165,7 +166,7 @@ const AddExamModal: any = ({
 
           {step === 2 && (
             <>
-              <div className="examModalHead">
+              <div className="font-bold text-lg">
                 {exam_id ? "Update" : "Create"} Test Details
               </div>
               <span className="examModalTitle">
@@ -173,82 +174,47 @@ const AddExamModal: any = ({
                 <br /> colleagues understand the test purpose.
               </span>
               <div className="exam_modal_box">
-                <div className="exam_Inputs">
-                  <label>
-                    <b>Name:</b>
-                  </label>
-                  <input
-                    // className="margin-top"
-                    value={examData?.exam_name}
+                <div className="exam_Inputs w-[500px]">
+                  <BasicTextinput
+                    text="name"
+                    name={examData?.exam_name}
                     onChange={(e) => {
                       setExamData({
                         ...examData,
                         exam_name: e.target.value,
                       });
                     }}
-                    // id="outlined-basic"
-                    // text="Test Name"
-                    // name="exam_name"
-                    // variant="outlined"
-                    // fullWidth
                   />
-                  <br />
-                  <br />
 
-                  <label>
-                    <b>Description:</b>
-                  </label>
-                  <input
-                    value={examData?.description}
+                  <BasicTextinput
+                    text="description"
+                    name={examData?.description}
                     onChange={(e) => {
                       setExamData({
                         ...examData,
                         description: e.target.value,
                       });
                     }}
-                    // id="outlined-basic"
-                    // text="Exam Description"
-                    // name="exam description"
-                    // variant="outlined"
-                    // className="margin-top"
-                    // multiline
-                    // rows={2}
-                    // fullWidth
                   />
-                  <br />
-                  <br />
 
-                  <label>
-                    <b>total questions:</b>
-                  </label>
-                  <input
-                    // className="margin-top"
+                  <BasicTextinput
+                    text="total questions"
                     type="number"
-                    value={examData?.totalQuestion}
+                    name={examData?.totalQuestion}
                     onChange={(e: any) => {
                       setExamData({
                         ...examData,
                         totalQuestion: e.target.value,
                       });
                     }}
-                    // id="outlined-basic"
-                    // text="total Question"
-                    // name="exam_name"
-                    // variant="outlined"
-                    // fullWidth
                   />
-
-                  <br />
-                  <br />
 
                   <div className="inputs-for-exam">
                     <div>
                       <section>
-                        <label>
-                          <b>Total Marks:</b>
-                        </label>
-                        <input
-                          value={examData?.total_mark}
+                        <BasicTextinput
+                          text="Total Marks"
+                          name={examData?.total_mark}
                           type="number"
                           onChange={(e) => {
                             setExamData({
@@ -256,22 +222,14 @@ const AddExamModal: any = ({
                               total_mark: e.target.value,
                             });
                           }}
-                          // id="outlined-basic"
-                          // text="Total Marks"
-                          // name="total marks"
-                          // variant="outlined"
-                          // className="margin-top margin-left22"
-                          // fullWidth
                         />
                       </section>
                     </div>
                     <div>
                       <section>
-                        <label>
-                          <b>Passing Marks:</b>
-                        </label>
-                        <input
-                          value={examData?.passing_mark}
+                        <BasicTextinput
+                          text="Passing Marks"
+                          name={examData?.passing_mark}
                           onChange={(e) => {
                             setExamData({
                               ...examData,
@@ -279,12 +237,6 @@ const AddExamModal: any = ({
                             });
                           }}
                           type="number"
-                          // id="outlined-basic"
-                          // text="Passing Marks"
-                          // name="passing marks"
-                          // variant="outlined"
-                          // className="margin-top"
-                          // fullWidth
                         />
                       </section>
                     </div>

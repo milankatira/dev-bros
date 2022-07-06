@@ -19,7 +19,7 @@ const Index = () => {
     totalQuestion: " ",
   };
 
-  const [openAddExamModal, setOpenAddExamModal] = useState(true);
+  const [openAddExamModal, setOpenAddExamModal] = useState(false);
   const [examDataForModal, setExamDataForModal] = useState<any>(initialValues);
   const toggleModal = () => setOpenAddExamModal(!openAddExamModal);
   const [pageNumber, setPageNumber] = useState(1);
@@ -81,7 +81,10 @@ const Index = () => {
                   Slow-carb next level shoindxgoitch ethical authentic,
                   scenester sriracha forage.
                 </h1>
-                <button className="flex-shrink-0 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0">
+                <button
+                  className="flex-shrink-0 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0"
+                  onClick={() => setOpenAddExamModal(true)}
+                >
                   AddEXAM
                 </button>
               </div>
@@ -149,9 +152,15 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      <AddExamModal
+        open={openAddExamModal}
+        toggleModal={toggleModal}
+        setExamData={setExamDataForModal}
+        examData={examDataForModal}
+      />
     </div>
   );
 };
 
 export default Index;
-
