@@ -50,7 +50,7 @@ export const company = `${server_url}/api/company`;
 
 export const exam = `${server_url}/api/exam`;
 
-export const exam_id = (id) => `${server_url}/api/exam:${id}`;
+export const exam_id = (id) => `${server_url}/api/exam/${id}`;
 
 //TODO QUESTION
 

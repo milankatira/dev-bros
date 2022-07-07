@@ -79,7 +79,19 @@ exports.GetAllExam = catchAsyncError(async (req, res, next) => {
       req.query && req.query.itemsPerPage ? req.query.itemsPerPage : 10;
     const skip = req.query && req.query.offset ? req.query.offset : 0;
 
-    const exam = await ExamModal.find()
+    const { name } = req.query;
+    const { type } = req.query;
+
+    const query = {};
+
+    if (name) {
+      query.exam_name = new RegExp(name, "i");
+    }
+    if (type) {
+      query.exam_type = type;
+    }
+
+    const exam = await ExamModal.find(query)
       .limit(Number(limit))
       .skip(Number(skip))
       .sort({ createdAt: -1 });
@@ -88,7 +100,6 @@ exports.GetAllExam = catchAsyncError(async (req, res, next) => {
       success: true,
       exam,
     });
-
   } catch (error) {
     return next(new ErrorHandler(error.message, 500));
   }
