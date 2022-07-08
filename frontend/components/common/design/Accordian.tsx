@@ -29,11 +29,11 @@ const Accordion = ({ isPast, content }: AccordionProps) => {
         <td className="px-6 py-4">{content?.total_mark}</td>
         <td className="px-6 py-4">{content?.passing_mark}</td>
         <td className="px-6 py-4">{content?.exam_type}</td>
-        {isOpened ? (
+        {/* {isOpened ? (
           <button onClick={HandleOpening}>close</button>
         ) : (
           <button onClick={HandleOpening}>open</button>
-        )}
+        )} */}
       </div>
       <div
         ref={contentElement}

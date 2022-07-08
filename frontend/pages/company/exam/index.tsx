@@ -156,6 +156,7 @@ const Index = () => {
               books?.map((book, index) => {
                 if (books.length === index + 1) {
                   return (
+                    
                     <div
                       className="lg:w-1/4 md:w-1/2 p-4 w-full border-2 border-red-600"
                       ref={lastBookElementRef}
@@ -181,6 +182,7 @@ const Index = () => {
                         <p className="mt-1">{book.description}</p>
                       </div>
                     </div>
+
                   );
                 } else {
                   return (

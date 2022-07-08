@@ -4,7 +4,7 @@ import Past from "../../components/admin/assignExam/Past";
 import { UseEffectOnce } from "../../hook/useEffectOnce";
 import { GetAssignCandidate } from "../../api/client/compnay";
 import moment from "moment";
-const assignExam = () => {
+const AssignExam = () => {
   const [step, setstep] = useState("dashboard");
   const [exams, setexams] = useState();
   console.log(exams, "exams");
@@ -105,4 +105,4 @@ const assignExam = () => {
   );
 };
 
-export default assignExam;
+export default AssignExam;

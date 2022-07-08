@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import CandidateGroupModal from "../../components/admin/common/CandidateGroupModal";
 import SingleCandidateModal from "../../components/admin/common/SingleCandidateModal";
-
-const Grouplist = () => {
+import axios from "axios";
+import Accordion from "../../components/admin/group-list/Accordian";
+const Grouplist = ({ GroupData }) => {
+  console.log(GroupData, "GroupData");
   const [isGroup, setIsGroup] = useState<boolean>(false);
   const [showModal, setshowModal] = useState<boolean>(false);
   const [openModal, setOpenModal] = React.useState(false);
@@ -40,6 +42,14 @@ const Grouplist = () => {
         </div>
       </section>
 
+      <section>
+        list of group
+        {GroupData.group.map((item, index) => (
+          <>
+            <Accordion content={item} title={item.name} isPast={false} />
+          </>
+        ))}
+      </section>
       {/* <CandidateGroupModal
         // exam_id={exam_id}
         open={openModal}
@@ -51,10 +61,24 @@ const Grouplist = () => {
         // exam_id={exam_id}
         open={showModal}
         toggleModal={displayModal}
-        setModal={setshowModal} exam_id={undefined}        // isGroup={isGroup}
+        setModal={setshowModal}
+        exam_id={undefined} // isGroup={isGroup}
       />
     </div>
   );
 };
 
 export default Grouplist;
+
+export async function getServerSideProps({ req }) {
+  const res = await axios.get("http://localhost:4000/api/group", {
+    withCredentials: true,
+    headers: {
+      "Access-Control-Allow-Credentials": true,
+      Cookie: req?.headers?.cookie,
+    },
+  });
+  const data = await res.data;
+
+  return { props: { GroupData: data } };
+}
