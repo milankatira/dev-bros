@@ -48,7 +48,7 @@ interface Props {
   toggleModal: () => void;
   exam_id: any;
   setModal: (arg: boolean) => void;
-  // isGroup: boolean;
+  isGroup: boolean;
   examName?: string;
 }
 
@@ -57,9 +57,10 @@ const SingleCandidateModal: React.FC<Props> = ({
   open,
   exam_id,
   setModal,
-  // isGroup,
+  isGroup,
   examName,
 }) => {
+  console.log(isGroup, "isGroup");
   // const dispatch = useDispatch();
   // const candidateGroupState = useSelector(
   //   (state: AppState) => state.candidateGroup
@@ -73,10 +74,6 @@ const SingleCandidateModal: React.FC<Props> = ({
   const [openAssignModal, setOpenAssignModal] = React.useState<boolean>(false);
 
   const toggleAssignModal = () => setOpenAssignModal(!openAssignModal);
-
-  // useEffect(() => {
-  //   if (open) dispatch(fetchCandidatesList());
-  // }, [open]); //eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     setStep(1);
@@ -185,11 +182,10 @@ const SingleCandidateModal: React.FC<Props> = ({
         )}
 
         <h6
-          // variant="h6"
-          // component="span"
-          className="test_group_creation"
+       
+       className="test_group_creation"
         >
-          {false ? "Createhhhh New Group" : "Assign Exam To Candidate"}
+          {isGroup ? "Createhhhh New Group" : "Assign Exam To Candidate"}
         </h6>
         <div className="p-4 flex justify-end">
           <svg
@@ -225,7 +221,7 @@ const SingleCandidateModal: React.FC<Props> = ({
                 {candidates.map((candidate: any, index: number) => (
                   <tr key={candidate._id} className="bg-white border-b ">
                     <td>
-                      {false ? (
+                      {isGroup ? (
                         <input
                           type="checkbox"
                           checked={candidatesIds[candidate?._id]}
@@ -369,7 +365,7 @@ const SingleCandidateModal: React.FC<Props> = ({
           </Formik>
         )}
       </div>
-      {true && (
+      {!isGroup && (
         <button
           className="editExamQues assignBtn3 assignBtn3-candidates"
           disabled={candidate === ""}
@@ -382,7 +378,7 @@ const SingleCandidateModal: React.FC<Props> = ({
         </button>
       )}
 
-      {false && (
+      {isGroup && (
         <footer className="examFooter">
           {step !== 2 && (
             <button

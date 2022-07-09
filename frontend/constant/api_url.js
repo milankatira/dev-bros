@@ -56,6 +56,8 @@ export const exam_id = (id) => `${server_url}/api/exam/${id}`;
 
 export const questions = `${server_url}/api/questions`;
 
+export const get_question = (id) => `${server_url}/api/questions/${id}`;
+
 //TODO CANDIDATES
 
 export const candidates = `${server_url}/api/candidates`;

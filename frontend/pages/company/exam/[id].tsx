@@ -8,6 +8,9 @@ import CandidateGroupModal from "../../../components/admin/common/CandidateGroup
 import SingleCandidateModal from "../../../components/admin/common/SingleCandidateModal";
 import moment from "moment";
 import ButtonField from "../../../components/common/design/ButtonField";
+import { UseEffectOnce } from "../../../hook/useEffectOnce";
+import { getQuestion } from "../../../api/client/question";
+import Accordion from "../../../components/admin/question/Accordian";
 const Index = ({ Data }) => {
   console.log(Data, "data");
   const router = useRouter();
@@ -15,15 +18,20 @@ const Index = ({ Data }) => {
   const [optionOptionModal, setOptionOptionModal] = useState<boolean>(false);
   const [openGroupModal, setOpenGroupModal] = React.useState(false);
   const [showModal, setshowModal] = useState(false);
-
+  const [isGroup, setIsGroup] = React.useState(false);
+  const [questions, setquestions] = useState([]);
   const toggleOptionModal = () => setOptionOptionModal(!optionOptionModal);
   const toggleGroupModal = () => setOpenGroupModal(!openGroupModal);
   const displayModal = () => setshowModal(!showModal);
+  console.log(questions, "questions");
+
+  const handleAddGroupModal = () => {
+    setIsGroup(true);
+    setshowModal(true);
+    setOptionOptionModal(false);
+  };
 
   const handleIsGroupSelection = (isGroup: boolean) => {
-    console.log(isGroup, "oooz");
-    // setIsGroup(isGroup);
-    // setOptionOptionModal(false);
     if (isGroup) {
       setOpenGroupModal(true);
     } else {
@@ -31,6 +39,9 @@ const Index = ({ Data }) => {
     }
   };
 
+  UseEffectOnce(() => {
+    getQuestion(id).then((res) => setquestions(res.data.Data));
+  });
   return (
     <div className="flex flex-row">
       <section className="w-2/3 mt-4 ml-4">
@@ -93,16 +104,20 @@ const Index = ({ Data }) => {
             </div>
 
             <div className="mt-4">
-              <div className="font-bold text-sm flex flex-row justify-between">Questions
-              <button className="bg-purple-700 text-white font-bold p-2 rounded-lg text-center">+ Add Question</button>
+              <div className="font-bold text-sm flex flex-row justify-between">
+                Questions
+                <button className="bg-purple-700 text-white font-bold p-2 rounded-lg text-center">
+                  + Add Question
+                </button>
               </div>
               <div className="bg-gray-100 p-2 pl-4 mt-2 font-semibold rounded-lg text-gray-400">
                 {Data.exam_name}
               </div>
             </div>
+            {questions && questions.map((data) => <Accordion content={data} />)}
           </div>
-          
-{/* 
+
+          {/* 
           <div className="container px-5 py-24 mx-auto">
             <div className="flex flex-wrap -mx-4 -my-8">
               <div className="py-8 px-4">
@@ -253,7 +268,7 @@ const Index = ({ Data }) => {
         exam_id={router.query.id}
         open={openGroupModal}
         toggleModal={toggleGroupModal}
-        // handleAddGroupModal={handleAddGroupModal}
+        handleAddGroupModal={handleAddGroupModal}
       />
 
       <SingleCandidateModal
@@ -261,7 +276,7 @@ const Index = ({ Data }) => {
         open={showModal}
         toggleModal={displayModal}
         setModal={setshowModal}
-        // isGroup={isGroup}
+        isGroup={isGroup}
       />
     </div>
   );
