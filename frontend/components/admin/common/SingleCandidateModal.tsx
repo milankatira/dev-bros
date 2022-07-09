@@ -136,7 +136,6 @@ const SingleCandidateModal: React.FC<Props> = ({
       AddGroup(formdata);
     }
   };
-
   const { getRootProps, getInputProps } = useDropzone({
     accept: "application/pdf,.doc,.docx",
     onDrop: (acceptedFiles) => {

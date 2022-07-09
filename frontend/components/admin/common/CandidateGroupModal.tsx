@@ -59,7 +59,7 @@ const CandidateGroupModal: React.FC<Props> = ({
   const [expanded, setExpanded] = React.useState<boolean | any>(false);
   const [openAssignModal, setOpenAssignModal] = React.useState<boolean>(false);
   const [groupId, setGroupId] = React.useState<string>("");
-  const [candidates, setcandidates] = useState("");
+  const [candidates, setcandidates] = useState([]);
   const toggleAssignModal = () => setOpenAssignModal(!openAssignModal);
 
   const handleChange = (panel: string) => (event: any, isExpanded: boolean) => {
