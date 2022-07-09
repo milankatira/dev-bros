@@ -2,9 +2,17 @@ import React, { useState } from "react";
 import CandidateGroupModal from "../../components/admin/common/CandidateGroupModal";
 import SingleCandidateModal from "../../components/admin/common/SingleCandidateModal";
 import axios from "axios";
-import Accordion from "../../components/admin/group-list/Accordian";
+// import Accordion from "../../components/admin/group-list/Accordian";
+import dynamic from "next/dynamic";
+const Accordion = dynamic(
+  () => import("../../components/admin/group-list/Accordian"),
+  {
+    ssr: false,
+  }
+);
+
 const Grouplist = ({ GroupData }) => {
-  console.log(GroupData, "GroupData");
+  console.log(GroupData,"DD")
   const [isGroup, setIsGroup] = useState<boolean>(false);
   const [showModal, setshowModal] = useState<boolean>(false);
   const [openModal, setOpenModal] = React.useState(false);

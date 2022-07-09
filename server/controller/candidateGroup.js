@@ -18,53 +18,51 @@ exports.AddGroup = catchAsyncError(async (req, res, next) => {
       success: true,
       group,
     });
-    
   } catch (error) {
     return next(new ErrorHandler(error.message, 500));
   }
 });
 
+exports.GetGroup = catchAsyncError(async (req, res, next) => {
+  try {
+    const limit =
+      req.query && req.query.itemsPerPage ? req.query.itemsPerPage : 10;
+    const skip = req.query && req.query.offset ? req.query.offset : 0;
 
-exports.GetGroup=catchAsyncError(async (req,res,next)=>{
-  try{
-        const limit =
-          req.query && req.query.itemsPerPage ? req.query.itemsPerPage : 10;
-        const skip = req.query && req.query.offset ? req.query.offset : 0;
-
-    const group=await GroupModal.find({user_id:req.user.id}).limit(Number(limit)).skip(Number(skip));
+    const group = await GroupModal.find({ user_id: req.user.id })
+      .limit(Number(limit))
+      .skip(Number(skip));
     res.status(201).json({
-      success:true,
-      group
-    })
-  }catch(error){
-    return next(new ErrorHandler(error.message,500))
+      success: true,
+      group,
+    });
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
   }
-})
+});
 
-
-exports.UpdateGroup=catchAsyncError(async (req,res,next)=>{
-  try{
-    const {id}=req.params;
-    const group=await GroupModal.findByIdAndUpdate(id,req.body);
+exports.UpdateGroup = catchAsyncError(async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const group = await GroupModal.findByIdAndUpdate(id, req.body);
     res.status(201).json({
-      success:true,
-      group
-    })
-  }catch(error){
-    return next(new ErrorHandler(error.message,500))
+      success: true,
+      group,
+    });
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
   }
-})
+});
 
-exports.DeleteGroup=catchAsyncError(async (req,res,next)=>{
-  try{
-    const {id}=req.params;
-    const group=await GroupModal.findByIdAndDelete(id);
+exports.DeleteGroup = catchAsyncError(async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const group = await GroupModal.findByIdAndDelete(id);
     res.status(201).json({
-      success:true,
-      group
-    })
-  }catch(error){
-    return next(new ErrorHandler(error.message,500))
+      success: true,
+      group,
+    });
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
   }
-})
-
+});

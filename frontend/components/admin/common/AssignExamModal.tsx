@@ -17,7 +17,7 @@ import { assignExam } from "../../../validator/assignExam";
 // import Textinput from "../../../common/Material_Ui/Textinput";
 
 // import ModalField from "../../../common/Material_Ui/ModalField";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 // import { AssignExamForms } from "../../../../interface/company";
 
 interface Props {
@@ -36,17 +36,18 @@ const AssignExamModal: React.FC<Props> = ({
   const minDate: string = moment(new Date()).format("YYYY-MM-DD").toString();
   const time = momentTz().tz("Asia/Kolkata").format("HH:mm");
 
-  const onSubmit = (data:any) => {
-    console.log(data,"data")
+  const onSubmit = (data: any) => {
+    console.log("dataa", data);
     if (
-      moment(data.date).format("YYYY-MM-DD").toString() == minDate &&
-      time > data.start_time
+      moment(data?.date).format("YYYY-MM-DD").toString() == minDate &&
+      time > data?.start_time
     ) {
       toast.error("Start time should be current time or upcoming time");
     } else {
-      if (data.start_time >= data.end_time) {
+      if (data?.start_time >= data?.end_time) {
         toast.error("End time should be more than Start time");
       } else {
+        toggleModal();
         handleAssignCandidate(data);
       }
     }
@@ -65,15 +66,13 @@ const AssignExamModal: React.FC<Props> = ({
         validationSchema={assignExam}
       >
         {({ errors, touched }) => (
-          <Form>
-            <div className="exam_modal_heading">
+          <Form className="w-[700px] p-4">
+            <div className="">
               <button className="backNextBtn1 backBtn1" onClick={toggleModal}>
                 <button className="back_icons_modal" />
               </button>
 
-              <h6>
-                Assign Exam
-              </h6>
+              <h6>Assign Exam</h6>
 
               <button onClick={toggleModal} className="modal_cross" />
             </div>
@@ -82,16 +81,11 @@ const AssignExamModal: React.FC<Props> = ({
               <br />
               <div className="examModalHead">Add additional details</div>
               <div>
-                <div
-                  className="exam_Inputs"
-                >
+                <div className="exam_Inputs">
                   <div className="inputs-for-exam">
                     <section className="exam-section5">
-                      <label>
-                        <b>Name of the Exam:</b>
-                      </label>
-
                       <Textinput
+                        text="Name of the Exam"
                         name="name"
                         type="text"
                         error={touched && touched.name && errors && errors.name}

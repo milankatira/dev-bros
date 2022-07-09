@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 // import CloseIcon from "@material-ui/icons/Close";
 // import { useDispatch, useSelector } from "react-redux";
 // import { AppState } from "../../../../store/reducers";
-import { getCandidates, AddAssignExam, AddGroup } from "../../../api/client/compnay";
+import {
+  getCandidates,
+  AddAssignExam,
+  AddGroup,
+} from "../../../api/client/compnay";
 // import {
 //   Grid,
 //   h6,
@@ -79,29 +83,6 @@ const SingleCandidateModal: React.FC<Props> = ({
     setcandidatesIds([]);
   }, [!open]); //eslint-disable-line react-hooks/exhaustive-deps
 
-  // useEffect(() => {
-  //   if (candidateState?.candidates?.data?.results?.candidates) {
-  //     setCandidates(candidateState?.candidates?.data?.results?.candidates);
-  //   }
-  // }, [candidateState?.candidates]); //eslint-disable-line react-hooks/exhaustive-deps
-
-  // useEffect(() => {
-  //   if (candidateState?.assign?.data?.results?.assign) {
-  //     setCandidate("");
-  //     setModal(false);
-  //     setOpenAssignModal(false);
-  //   }
-  // }, [candidateState?.assign]); //eslint-disable-line react-hooks/exhaustive-deps
-
-  // useEffect(() => {
-  //   if (candidateGroupState?.addcandidateGroup?.data?.results) {
-  //     setCandidate("");
-  //     setcandidatesIds([]);
-  //     setImage("");
-  //     setModal(false);
-  //   }
-  // }, [candidateGroupState?.addcandidateGroup]); //eslint-disable-line react-hooks/exhaustive-deps
-
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setcandidatesIds({
       ...candidatesIds,
@@ -124,10 +105,9 @@ const SingleCandidateModal: React.FC<Props> = ({
       start_time: examDetails?.start_time,
       end_time: examDetails?.end_time,
     };
-    toggleModal;
-    console.log(packet,"packet")
+
+    toggleModal();
     AddAssignExam(packet);
-    // dispatch(assignExamToCandidate(packet));
   };
 
   const onSubmit = (data: any) => {
@@ -185,55 +165,126 @@ const SingleCandidateModal: React.FC<Props> = ({
       // style="resumeModal"
       // ModalDesign="exam_modal_body assigned_test_modal"
     >
-      <div className="exam_modal_heading">
-        <button
-          type="button"
-          className="backNextBtn1 backBtn1"
-          onClick={() => {
-            if (step <= 1) {
-              setModal(false);
-              setcandidatesIds([]);
-            } else {
-              setStep(step - 1);
-            }
-          }}
-        >
-          <button className="back_icons_modal" />
-        </button>
+      <div className="flex justify-between items-center w-[700px]">
+        {step > 1 ? (
+          <button
+            className="backNextBtn1 backBtn1"
+            onClick={() => {
+              if (step <= 1) {
+                setModal(false);
+                setcandidatesIds([]);
+              } else {
+                setStep(step - 1);
+              }
+            }}
+          >
+            pk
+            {/* <button className="back_icons_modal" /> */}
+          </button>
+        ) : (
+          <span />
+        )}
+
         <h6
           // variant="h6"
           // component="span"
           className="test_group_creation"
         >
-          {true ? "Create New Group" : "Assign Exam To Candidate"}
+          {false ? "Createhhhh New Group" : "Assign Exam To Candidate"}
         </h6>
-        <button onClick={toggleModal} className="modal_cross" />
+        <div className="p-4 flex justify-end">
+          <svg
+            onClick={toggleModal}
+            className="h-4 w-4"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 320 512"
+          >
+            <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" />
+          </svg>
+        </div>
       </div>
       <br />
-      <div
-        // container
-        // direction="column"
-        // alignItems="center"
-        className="scheduleJobMeeting"
-      >
+      <div className="flex flex-row">
         {step == 1 && (
-          <div>
-            <table aria-label="simple table">
-              <th>
-                {/* <TableRow> */}
-                  <tr></tr>
-                  <tr>Sr</tr>
-                  <tr>Name</tr>
-                  <tr>Email</tr>
-                  <tr>Phone</tr>
-                {/* </TableRow> */}
-              </th>
+          <div className="flex flex-row">
+            <table className="text-sm text-left text-gray-500">
+              <thead className="text-xs uppercase bg-gray-50">
+                <tr>
+                  <th scope="col" className="px-6 py-3"></th>
+                  <th scope="col" className="px-6 py-3">
+                    Name
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Email
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Phone
+                  </th>
+                </tr>
+              </thead>
               <tbody>
-                {true ? (
+                {candidates.map((candidate: any, index: number) => (
+                  <tr key={candidate._id} className="bg-white border-b ">
+                    <td>
+                      {false ? (
+                        <input
+                          type="checkbox"
+                          checked={candidatesIds[candidate?._id]}
+                          onChange={handleCheckboxChange}
+                          name={candidate?._id}
+                          value={candidate?._id ? candidate?._id : ""}
+                        />
+                      ) : (
+                        <input
+                          type="radio"
+                          id="myCheck"
+                          name="candidate"
+                          onClick={() => setCandidate(candidate._id)}
+                        />
+                      )}
+                    </td>
+
+                    <td className="px-6 py-4">
+                      {candidate?.firstName + " " + candidate?.lastName}
+                    </td>
+                    <td className="px-6 py-4">
+                      <Link href={`mailto:${candidate?.email}`}>
+                        {candidate?.email}
+                      </Link>
+                    </td>
+                    <td className="px-6 py-4">
+                      {" "}
+                      <Link href={`tel:91${candidate?.phoneNo}`}>
+                        {candidate?.phoneNo}
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            {/* 
+            <table aria-label="simple table flex flex-row">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                    name
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    id
+                  </th>
+
+                  <th scope="col" className="px-6 py-3">
+                    <span className="sr-only">Edit</span>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody className="flex flex-row">
+                { ? (
                   candidates && candidates.length > 0 ? (
                     candidates.map((candidate: any, index: number) => (
                       <tr key={candidate?._id}>
-                        <tr>
+                        <td>
                           {false ? (
                             <input
                               type="checkbox"
@@ -250,38 +301,30 @@ const SingleCandidateModal: React.FC<Props> = ({
                               onClick={() => setCandidate(candidate._id)}
                             />
                           )}
-                        </tr>
+                        </td>
 
-                        <tr>{index + 1}</tr>
-                        <tr>
+                        <td>{index + 1}</td>
+                        <td>
                           {candidate?.firstName + " " + candidate?.lastName}
-                        </tr>
-                        <tr>
+                        </td>
+                        <td>
                           <Link href={`mailto:${candidate?.email}`}>
                             <a>{candidate?.email}</a>
                           </Link>
-                        </tr>
-                        <tr>
+                        </td>
+                        <td>
                           <Link href={`tel:91${candidate?.phone}`}>
                             <a>{candidate?.phoneNo}</a>
                           </Link>
-                        </tr>
+                        </td>
                       </tr>
                     ))
                   ) : (
                     <tr>No User found</tr>
                   )
-                ) : (
-                  // <div className="loaderContainer loaderContainerCandidate">
-                  //   <CircularProgress
-                  //     color="primary"
-                  //     className="loaders-singleCandidate"
-                  //   />
-                  // </div>
-                  null
-                )}
+                ) : null}
               </tbody>
-            </table>
+            </table> */}
           </div>
         )}
         {step == 2 && (
@@ -327,19 +370,20 @@ const SingleCandidateModal: React.FC<Props> = ({
           </Formik>
         )}
       </div>
-      {false && (
+      {true && (
         <button
           className="editExamQues assignBtn3 assignBtn3-candidates"
           disabled={candidate === ""}
           onClick={() => {
-            setOpenAssignModal(true);
+            // setOpenAssignModal();
+            toggleAssignModal();
           }}
         >
           + Assign Test
         </button>
       )}
 
-      {true && (
+      {false && (
         <footer className="examFooter">
           {step !== 2 && (
             <button

@@ -23,6 +23,8 @@ const Accordion = ({ content }: AccordionProps) => {
   };
   return (
     <div className="border border-indigo-400">
+      <td className="px-6 py-4">{content?._id}</td>
+
       {isOpened ? (
         <button onClick={HandleOpening}>close</button>
       ) : (

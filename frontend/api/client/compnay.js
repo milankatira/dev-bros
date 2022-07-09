@@ -100,3 +100,12 @@ export const AddGroup = async (packet) => {
       throw err;
     });
 };
+
+export const getGroup = async () => {
+  return await axios
+    .get(group)
+    .then((response) => response)
+    .catch((err) => {
+      throw err;
+    });
+};

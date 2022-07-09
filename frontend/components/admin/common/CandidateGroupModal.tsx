@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { getCandidates } from "../../../api/client/compnay";
+import { AddAssignExam, getGroup } from "../../../api/client/compnay";
 // import { useDispatch, useSelector } from "react-redux";
 // import {
 //   // Accordion,
@@ -20,6 +20,8 @@ import { getCandidates } from "../../../api/client/compnay";
 // import { image_url } from "../../../../constant/api_urls";
 // import ModalField from "../../../common/Material_Ui/ModalField";
 import CustomModalField from "../../../components/common/design/CustomModal";
+import Accordion from "../exam/Accordian";
+import AssignExamModal from "./AssignExamModal";
 // import { AppState } from "../../../../store/reducers";
 // import { getCandidateGroup } from "../../../../store/actions/candidate_group";
 // import { assignExamToCandidate } from "../../../../store/actions/candidates";
@@ -57,7 +59,7 @@ const CandidateGroupModal: React.FC<Props> = ({
   const [expanded, setExpanded] = React.useState<boolean | any>(false);
   const [openAssignModal, setOpenAssignModal] = React.useState<boolean>(false);
   const [groupId, setGroupId] = React.useState<string>("");
-  const [candidates, setcandidates] = useState('');
+  const [candidates, setcandidates] = useState("");
   const toggleAssignModal = () => setOpenAssignModal(!openAssignModal);
 
   const handleChange = (panel: string) => (event: any, isExpanded: boolean) => {
@@ -67,18 +69,14 @@ const CandidateGroupModal: React.FC<Props> = ({
   const itemsPerPage = 5;
 
   useEffect(() => {
-    getCandidates()
+    getGroup()
       .then((res) => {
-        setcandidates(res?.data?.candidates);
-        console.log(res?.data, "Res");
+        setcandidates(res?.data?.group);
       })
       .catch((err) => {
         console.log(err, "Err");
       });
   }, []);
-  // useEffect(() => {
-  //   dispatch(getCandidateGroup(itemsPerPage, offset));
-  // }, [dispatch, candidateGroupState.addcandidateGroup, itemsPerPage, offset]);
 
   const handleAssignCandidate = (examDetails: {
     name: string;
@@ -97,6 +95,7 @@ const CandidateGroupModal: React.FC<Props> = ({
     };
     // dispatch(assignExamToCandidate(packet));
     toggleModal();
+    AddAssignExam(packet);
   };
 
   // useEffect(() => {
@@ -137,188 +136,57 @@ const CandidateGroupModal: React.FC<Props> = ({
       // style="resumeModal"
       // ModalDesign="exam_modal_body group_modal"
     >
-      <div className="exam_modal_heading">
-        <h4
-          // variant="h6"
-          // component="span"
-          className="test_candidates-grp"
+      <div className="w-[700px] border-2 border-red-500">
+        <div className="flex justify-center">
+          <h4
+            // variant="h6"
+            // component="span"
+            className="text-base font-semibold"
+          >
+            Assign test to groups of candidates
+          </h4>
+          <button onClick={toggleModal} className="modal_cross" />
+        </div>
+        <div
+          // direction="row"
+          // alignItems="center"
+          className="group-container"
         >
-          Assign test to groups of candidates
-        </h4>
-        <button onClick={toggleModal} className="modal_cross" />
-      </div>
-      <div
-        // direction="row"
-        // alignItems="center"
-        className="group-container"
-      >
-        <div className="createGrpBtn">
-          <button className="editExamQues">Create New Group</button>
-        </div>
-        {/* <div item lg={12}>
-          {groups && groups.length > 0 ? (
-            groups.map((group: any, index: any) => (
+          <div className="flex justify-end mr-4">
+            <button
+              className="p-2 bg-red-400 text-white rounded-2xl"
+              onClick={handleAddGroupModal}
+            >
+              Create New Group
+            </button>
+          </div>
+
+          {candidates &&
+            candidates.map((data: any) => (
+              // onClick={() => {
+              //       setGroupId(group?._id);
+              //       setOpenAssignModal(true);
+              //     }}
+              // <h1 key={data._id}>{data.title}</h1>
               <Accordion
-                key={index}
-                expanded={expanded === `panel${index}`}
-                onChange={handleChange(`panel${index}`)}
-                className="group-accordion"
-              >
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                  <h4 className="group-name">
-                    <b>{group?.title}</b>
-                  </h4>
-                </AccordionSummary>
-                <AccordionDetails className="group-description">
-                  <div className="groups-section">
-                    <section>
-                      <b>Description</b>
-                      <div>{group?.description}</div>
-                    </section>
-                    <button
-                      className="editExamQues"
-                      onClick={() => {
-                        setGroupId(group?._id);
-                        setOpenAssignModal(true);
-                      }}
-                    >
-                      + Assign
-                    </button>
-                  </div>
-                  <br />
-
-                  <div className="title">
-                    <b>Corporate Profile</b>
-                  </div>
-                  <a
-                    // href={`${image_url}${group.profile_url}`}
-                    className="about_info"
-                    rel="noreferrer"
-                  >
-                    {group.name}
-                  </a>
-                  <TableContainer className="groupTableCon">
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>name</TableCell>
-                          <TableCell>email</TableCell>
-                          <TableCell>phone number</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      {false ? (
-                        group &&
-                        group.candidates.map((data: any, index: any) => {
-                          return (
-                            <TableRow key={index}>
-                              <TableCell>{data.name}</TableCell>
-                              <TableCell>{data.email}</TableCell>
-                              <TableCell>{data.phone}</TableCell>
-                            </TableRow>
-                          );
-                        })
-                      ) : (
-                        <div className="loaderContainer">
-                          <CircularProgress
-                            color="primary"
-                            className="loaderContainer2"
-                          />
-                        </div>
-                      )}
-                    </Table>
-                  </TableContainer>
-                </AccordionDetails>
-              </Accordion>
-            ))
-          ) : (
-            <span className="noQusFound">
-              No groups has been found. Please add new groups
-            </span>
-          )}
-          {/* {groups && groups.length > 0 ? (
-            <div className="PaginationContainer1 mob_width">
-              <Pagination
-                count={PaginationCount}
-                page={page}
-                onChange={HandleChange}
-                color="primary"
+                key={data._id}
+                content={data}
+                setOpenAssignModal={setOpenAssignModal}
+                setGroupId={setGroupId}
               />
-            </div>
-          ) : null} */}
-        {/* </div> */}
+            ))}
 
-        <div>
-          <table aria-label="simple table">
-            <th>
-              {/* <TableRow> */}
-              <tr></tr>
-              <tr>Sr</tr>
-              <tr>Name</tr>
-              <tr>Email</tr>
-              <tr>Phone</tr>
-              {/* </TableRow> */}
-            </th>
-            <tbody>
-              {true ? (
-                candidates && candidates.length > 0 ? (
-                  candidates.map((candidate: any, index: number) => (
-                    <tr key={candidate?._id}>
-                      <tr>
-                        {false ? (
-                          <input
-                            type="checkbox"
-                            checked={candidatesIds[candidate?._id]}
-                            onChange={handleCheckboxChange}
-                            name={candidate?._id}
-                            value={candidate?._id ? candidate?._id : ""}
-                          />
-                        ) : (
-                          <input
-                            type="radio"
-                            id="myCheck"
-                            name="candidate"
-                            // onClick={() => setCandidate(candidate._id)}
-                          />
-                        )}
-                      </tr>
-
-                      <tr>{index + 1}</tr>
-                      <tr>
-                        {candidate?.firstName + " " + candidate?.lastName}
-                      </tr>
-                      <tr>
-                        <Link href={`mailto:${candidate?.email}`}>
-                          <a>{candidate?.email}</a>
-                        </Link>
-                      </tr>
-                      <tr>
-                        <Link href={`tel:91${candidate?.phone}`}>
-                          <a>{candidate?.phoneNo}</a>
-                        </Link>
-                      </tr>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>No User found</tr>
-                )
-              ) : // <div className="loaderContainer loaderContainerCandidate">
-              //   <CircularProgress
-              //     color="primary"
-              //     className="loaders-singleCandidate"
-              //   />
-              // </div>
-              null}
-            </tbody>
-          </table>
+          <div></div>
+          <br />
         </div>
-        <br />
       </div>
-      {/* <AssignExamModal
+
+     <AssignExamModal
         open={openAssignModal}
         toggleModal={toggleAssignModal}
         handleAssignCandidate={handleAssignCandidate}
         examName={examName}
-      /> */}
+      /> 
     </CustomModalField>
   );
 };

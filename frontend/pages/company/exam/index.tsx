@@ -1,9 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import AddExamModal from "../../../components/admin/common/AddExamModal";
-import HeaderTitleContainer from "../../../components/common/design/HeaderTitleContainer";
 import axios from "axios";
-import useInfiniteScroll from "../../../hook/useInfinateScroll";
-import useBookSearch from "../../../hook/fetchHook";
 import { deleteExam, GetAllExam } from "../../../api/client/exam";
 import Link from "next/link";
 import Router from "next/router";

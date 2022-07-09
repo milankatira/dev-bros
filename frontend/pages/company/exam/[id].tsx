@@ -34,7 +34,7 @@ const Index = ({ Data }) => {
   return (
     <div className="flex flex-row">
       <section className="w-2/3 mt-4 ml-4">
-        {/* <section className="text-gray-600 body-font flex flex-row px-10">
+        <section className="text-gray-600 body-font flex flex-row px-10">
           <section className="text-gray-600 body-font w-1/2">
             <div className="container py-4 mx-auto">
               <div className="flex flex-col sm:flex-row sm:items-center items-end justify-start mx-auto">
@@ -77,7 +77,7 @@ const Index = ({ Data }) => {
               </div>
             </div>
           </section>
-        </section> */}
+        </section>
 
         <section className="text-gray-600 body-font overflow-hidden shadow-lg">
           <div className="px-6 py-4">
@@ -101,6 +101,7 @@ const Index = ({ Data }) => {
               </div>
             </div>
           </div>
+          
 {/* 
           <div className="container px-5 py-24 mx-auto">
             <div className="flex flex-wrap -mx-4 -my-8">
