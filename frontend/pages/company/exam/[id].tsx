@@ -13,7 +13,6 @@ import { getQuestion, RemoveQuestion } from "../../../api/client/question";
 import Accordion from "../../../components/admin/question/Accordian";
 import Swal from "sweetalert2";
 const Index = ({ Data }) => {
-  console.log(Data, "data");
   const router = useRouter();
   const { id } = router.query;
   const [optionOptionModal, setOptionOptionModal] = useState<boolean>(false);
@@ -165,6 +164,7 @@ const Index = ({ Data }) => {
                   content={data}
                   key={data._id}
                   DeleteHandler={DeleteHandler}
+                  exam_id={id}
                 />
               ))}
           </div>

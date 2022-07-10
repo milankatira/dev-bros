@@ -1,4 +1,5 @@
 import moment from "moment";
+import Router  from "next/router";
 import React, { useState, useRef } from "react";
 import { NotifyMember } from "../../../api/client/compnay";
 import ButtonField from "../../common/design/ButtonField";
@@ -7,9 +8,10 @@ type AccordionProps = {
   content: any;
   // isPast: boolean;
   DeleteHandler;
+  exam_id: string;
 };
 
-const Accordion = ({ content, DeleteHandler }: AccordionProps) => {
+const Accordion = ({ content, DeleteHandler, exam_id }: AccordionProps) => {
   const [isOpened, setOpened] = useState<boolean>(false);
   const [height, setHeight] = useState<string>("0px");
   const contentElement = useRef(null);
@@ -78,12 +80,15 @@ const Accordion = ({ content, DeleteHandler }: AccordionProps) => {
           <h1 className="pl-4">{content.answer}</h1>
         </div>
         <div className="ml-4 my-4 mb-4">
-          <button className="p-2 px-4 bg-red-400 rounded-md text-white">
+          <button
+            className="p-2 px-4 bg-red-400 rounded-md text-white"
+            onClick={() => Router.push(`/company/${exam_id}/${content._id}`)}
+          >
             Edit
           </button>
           <button
             className="p-2 px-4 bg-red-400 rounded-md ml-2 text-white"
-            onClick={()=>DeleteHandler(content._id)}
+            onClick={() => DeleteHandler(content._id)}
           >
             Delete
           </button>

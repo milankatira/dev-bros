@@ -60,7 +60,10 @@ export const get_question = (id) => `${server_url}/api/questions/${id}`;
 
 export const removequestions = `${server_url}/api/removequestions`;
 
-//TODO CANDIDATES
+export const get_single_question = (id) =>
+  `${server_url}/api/singlequestion/${id}`;
+
+  //TODO CANDIDATES
 
 export const candidates = `${server_url}/api/candidates`;
 
