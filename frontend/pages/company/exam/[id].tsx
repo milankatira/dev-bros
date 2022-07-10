@@ -9,8 +9,9 @@ import SingleCandidateModal from "../../../components/admin/common/SingleCandida
 import moment from "moment";
 import ButtonField from "../../../components/common/design/ButtonField";
 import { UseEffectOnce } from "../../../hook/useEffectOnce";
-import { getQuestion } from "../../../api/client/question";
+import { getQuestion, RemoveQuestion } from "../../../api/client/question";
 import Accordion from "../../../components/admin/question/Accordian";
+import Swal from "sweetalert2";
 const Index = ({ Data }) => {
   console.log(Data, "data");
   const router = useRouter();
@@ -42,6 +43,50 @@ const Index = ({ Data }) => {
   UseEffectOnce(() => {
     getQuestion(id).then((res) => setquestions(res.data.Data));
   });
+
+  const DeleteHandler = (question_id: string) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this job!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ok",
+    }).then((willDelete) => {
+      if (willDelete.isConfirmed) {
+        const packet = {
+          exam_id: id,
+          question_id,
+        };
+        RemoveQuestion(packet)
+          .then((res) => {
+            Swal.fire(
+              "Deleted!",
+              "Poof! Your imaginary file has been deleted!",
+              "success"
+            );
+          })
+          .catch((err) => {
+            console.log(err?.data,err?.response.data.message,"err")
+            Swal.fire("Error!", err?.response?.data?.message, "error");
+          });
+      } else {
+        Swal.fire("Cancelled", "Your job is not deleted!");
+      }
+    });
+  };
+
+  // const handleDeleteSingleQus = (qus_id: string) => {
+  //   const packet = {
+  //     qus_id,
+  //     exam_id,
+  //     isSingle: true,
+  //     is_delete: true,
+  //   };
+  //   DeleteHandler(createQuestion(packet, true));
+  // };
+
   return (
     <div className="flex flex-row">
       <section className="w-2/3 mt-4 ml-4">
@@ -114,7 +159,14 @@ const Index = ({ Data }) => {
                 {Data.exam_name}
               </div>
             </div>
-            {questions && questions.map((data) => <Accordion content={data} />)}
+            {questions &&
+              questions.map((data) => (
+                <Accordion
+                  content={data}
+                  key={data._id}
+                  DeleteHandler={DeleteHandler}
+                />
+              ))}
           </div>
 
           {/* 

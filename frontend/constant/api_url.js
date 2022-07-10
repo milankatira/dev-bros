@@ -58,6 +58,8 @@ export const questions = `${server_url}/api/questions`;
 
 export const get_question = (id) => `${server_url}/api/questions/${id}`;
 
+export const removequestions = `${server_url}/api/removequestions`;
+
 //TODO CANDIDATES
 
 export const candidates = `${server_url}/api/candidates`;

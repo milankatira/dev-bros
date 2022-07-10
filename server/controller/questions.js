@@ -30,6 +30,24 @@ exports.addQuestion = catchAsyncError(async (req, res, next) => {
   }
 });
 
+exports.RemoveQuestion = catchAsyncError(async (req, res, next) => {
+  try {
+    const { exam_id, question_id } = req.body;
+    const question = await QuestionModal.findById(question_id);
+    if (question.exam_id.length > 0) {
+      question.exam_id.remove(exam_id);
+      await QuestionModal.findByIdAndUpdate(question_id, question);
+      res.status(201).json({
+        success: true,
+      });
+    } else {
+      return next(new ErrorHandler("not found", 500));
+    }
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 404));
+  }
+});
+
 exports.updateQuestion = catchAsyncError(async (req, res, next) => {
   try {
     const { question, mcqs, answer, level, exam_id } = req.body.questions[0];

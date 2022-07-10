@@ -1,16 +1,22 @@
 import moment from "moment";
 import React, { useState, useRef } from "react";
 import { NotifyMember } from "../../../api/client/compnay";
+import ButtonField from "../../common/design/ButtonField";
 type AccordionProps = {
-  title: string;
+  // title: string;
   content: any;
-  isPast: boolean;
+  // isPast: boolean;
+  DeleteHandler;
 };
 
-const Accordion = ({ content }: AccordionProps) => {
+const Accordion = ({ content, DeleteHandler }: AccordionProps) => {
   const [isOpened, setOpened] = useState<boolean>(false);
   const [height, setHeight] = useState<string>("0px");
   const contentElement = useRef(null);
+  const toChars = (n) =>
+    `${n >= 26 ? toChars(Math.floor(n / 26) - 1) : ""}${
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[n % 26]
+    }`;
 
   const HandleOpening = () => {
     setOpened(!isOpened);
@@ -20,10 +26,13 @@ const Accordion = ({ content }: AccordionProps) => {
   const HandleNotify = (id) => {
     NotifyMember(id);
   };
+
   return (
     <div className="border">
-      <div className="flex justify-between p-4">
-        <td>{content?.question}</td>
+      <div className="flex justify-between px-4 py-3">
+        <td className="text-base font-semibold" onClick={HandleOpening}>
+          {content?.question}
+        </td>
         {isOpened ? (
           <svg
             className="w-4 h-4"
@@ -50,23 +59,35 @@ const Accordion = ({ content }: AccordionProps) => {
         style={{ height: height }}
         className="overflow-hidden transition-all duration-200"
       >
-        <h1 className="p-4">{content._id}</h1>
-        {/* <h1 className="p-4">{content._id}</h1>
-        <h1 className="p-4">{content._id}</h1>
-        <h1 className="p-4">{content._id}</h1>
-        <h1 className="p-4">{content._id}</h1>
-        <h1 className="p-4">{content._id}</h1>
-        <h1 className="p-4">{content._id}</h1>
-        <h1 className="p-4">{content._id}</h1>
-        <h1 className="p-4">{content._id}</h1>
-        <h1 className="p-4">{content._id}</h1>
-        <h1 className="p-4">{content._id}</h1>
-        <h1 className="p-4">{content._id}</h1>
-        <h1 className="p-4">{content._id}</h1>
-        <h1 className="p-4">{content._id}</h1> */}
+        <div className="flex justify-end">
+          {/* <h1 className="p-4">{content.level}</h1> */}
+          <h1 className="p-4">{`(Difficulty Level:${content.level})`}</h1>
+        </div>
 
-        {/* <h1>{content.name}</h1> */}
-        {/* <h1>{content.description}</h1> */}
+        {content.mcqs &&
+          content.mcqs.map((data, i) => (
+            <div className="ml-4" key={i}>
+              <h1 className="pl-4 mb-1">
+                {toChars(i) + "."} {data}
+              </h1>
+            </div>
+          ))}
+
+        <div className="ml-4 my-4 border-l-4 border-green-600">
+          <h1 className="pl-4 pt-4 text-green-700 font-bold">Correct Answer</h1>
+          <h1 className="pl-4">{content.answer}</h1>
+        </div>
+        <div className="ml-4 my-4 mb-4">
+          <button className="p-2 px-4 bg-red-400 rounded-md text-white">
+            Edit
+          </button>
+          <button
+            className="p-2 px-4 bg-red-400 rounded-md ml-2 text-white"
+            onClick={()=>DeleteHandler(content._id)}
+          >
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   );
