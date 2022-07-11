@@ -19,7 +19,7 @@ const FormForQuestion = ({ intialValue, handleSubmit, isEdit }) => {
       {({ values, errors, touched }: any) => {
         return (
           <Form noValidate autoComplete="off">
-            <div className="mt-10 m-40">
+            <div className="mt-10 mx-4 md:mx-40">
               <div className="flex justify-end">
                 <button
                   type="submit"
@@ -194,7 +194,6 @@ const FormForQuestion = ({ intialValue, handleSubmit, isEdit }) => {
                                 onClick={() =>
                                   arrayHelpers.push(intialValue.questions[0])
                                 }
-                                // buttonText="ADD Question"
                                 className="p-2 bg-red-400 rounded-lg mt-4 text-white"
                               >
                                 ADD Question
@@ -208,16 +207,11 @@ const FormForQuestion = ({ intialValue, handleSubmit, isEdit }) => {
                             onClick={() =>
                               arrayHelpers.push(intialValue.questions[0])
                             }
-                            // buttonText="ADD Question"
                             className="addQusBtn"
                           >
                             ADD Question
                           </button>
                         </div>
-                        // <button
-                        //   onClick={() => arrayHelpers.push("")}
-                        //   // buttonText="Add a Question"
-                        // />
                       )}
                     </>
                   )}

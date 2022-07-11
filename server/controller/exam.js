@@ -1,6 +1,7 @@
 const ExamModal = require("../database/exam");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");
+const UserModel = require("../database/userModel");
 
 exports.AddExam = catchAsyncError(async (req, res, next) => {
   try {
@@ -63,7 +64,12 @@ exports.deleteExam = catchAsyncError(async (req, res, next) => {
 exports.getExamById = catchAsyncError(async (req, res, next) => {
   try {
     const { id } = req.params;
-    const exam = await ExamModal.findById(id);
+    const exam = await ExamModal.findById(id).populate({
+      path: "user_id",
+      select: "firstName lastName email phoneNo",
+      model: UserModel,
+    });
+    console.log(exam, "exam");
     res.status(201).json({
       success: true,
       exam,

@@ -58,12 +58,16 @@ export const questions = `${server_url}/api/questions`;
 
 export const get_question = (id) => `${server_url}/api/questions/${id}`;
 
+export const get_all_question = (id) => `${server_url}/api/allquestions/${id}`;
+
+export const add_single_question = (id) => `${server_url}/api/addquestions/${id}`;
+
 export const removequestions = `${server_url}/api/removequestions`;
 
 export const get_single_question = (id) =>
   `${server_url}/api/singlequestion/${id}`;
 
-  //TODO CANDIDATES
+//TODO CANDIDATES
 
 export const candidates = `${server_url}/api/candidates`;
 

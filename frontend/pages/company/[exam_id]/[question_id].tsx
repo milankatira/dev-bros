@@ -20,13 +20,7 @@ const Question = () => {
   const { question_id } = router.query;
 
   console.log(questionData, "question_id ");
-  // useEffect(() => {
-  //   question_id &&
-  //     getSingleQuestion(question_id).then((res) =>
-  //       setquestionData(res.data.Data)
-  //     );
-  // }, [question_id]);
-
+ 
   const handleSubmit = (data) => {
     const packet = {
       data,

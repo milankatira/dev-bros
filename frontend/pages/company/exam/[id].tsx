@@ -9,9 +9,15 @@ import SingleCandidateModal from "../../../components/admin/common/SingleCandida
 import moment from "moment";
 import ButtonField from "../../../components/common/design/ButtonField";
 import { UseEffectOnce } from "../../../hook/useEffectOnce";
-import { getQuestion, RemoveQuestion } from "../../../api/client/question";
+import {
+  getallQuestion,
+  getQuestion,
+  RemoveQuestion,
+} from "../../../api/client/question";
 import Accordion from "../../../components/admin/question/Accordian";
 import Swal from "sweetalert2";
+import AddQuesModal from "../../../components/admin/question/AllQuesModal";
+import PdfModal from "../../../components/admin/question/PdfModal";
 const Index = ({ Data }) => {
   const router = useRouter();
   const { id } = router.query;
@@ -20,10 +26,22 @@ const Index = ({ Data }) => {
   const [showModal, setshowModal] = useState(false);
   const [isGroup, setIsGroup] = React.useState(false);
   const [questions, setquestions] = useState([]);
+  const [questionsDatas, setquestionsDatas] = useState([]);
+  const [open, setOpen] = useState<boolean>(false);
+  const [openPrintModal, setOpenPrintModal] = useState<boolean>(false);
   const toggleOptionModal = () => setOptionOptionModal(!optionOptionModal);
   const toggleGroupModal = () => setOpenGroupModal(!openGroupModal);
   const displayModal = () => setshowModal(!showModal);
-  console.log(questions, "questions");
+  const handleClosePrintModal = () => setOpenPrintModal(!openPrintModal);
+
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleAddGroupModal = () => {
     setIsGroup(true);
@@ -41,6 +59,7 @@ const Index = ({ Data }) => {
 
   UseEffectOnce(() => {
     getQuestion(id).then((res) => setquestions(res.data.Data));
+    getallQuestion(id).then((res) => setquestionsDatas(res.data.Data));
   });
 
   const DeleteHandler = (question_id: string) => {
@@ -67,7 +86,7 @@ const Index = ({ Data }) => {
             );
           })
           .catch((err) => {
-            console.log(err?.data,err?.response.data.message,"err")
+            console.log(err?.data, err?.response.data.message, "err");
             Swal.fire("Error!", err?.response?.data?.message, "error");
           });
       } else {
@@ -76,64 +95,9 @@ const Index = ({ Data }) => {
     });
   };
 
-  // const handleDeleteSingleQus = (qus_id: string) => {
-  //   const packet = {
-  //     qus_id,
-  //     exam_id,
-  //     isSingle: true,
-  //     is_delete: true,
-  //   };
-  //   DeleteHandler(createQuestion(packet, true));
-  // };
-
   return (
     <div className="flex flex-row">
       <section className="w-2/3 mt-4 ml-4">
-        <section className="text-gray-600 body-font flex flex-row px-10">
-          <section className="text-gray-600 body-font w-1/2">
-            <div className="container py-4 mx-auto">
-              <div className="flex flex-col sm:flex-row sm:items-center items-end justify-start mx-auto">
-                <button
-                  className="flex-shrink-0 text-white bg-blue-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded ml-4 text-lg mt-10 sm:mt-0"
-                  onClick={() => {
-                    Router.push(`/company/${Data._id}/questions`);
-                  }}
-                >
-                  addExam
-                </button>
-
-                <button
-                  className="mx-4 flex-shrink-0 text-white bg-blue-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0"
-                  onClick={() => {
-                    Router.push(`/company/${Data._id}/allquestions`);
-                  }}
-                >
-                  View Question
-                </button>
-              </div>
-            </div>
-          </section>
-
-          <section className="text-gray-600 body-font w-1/2">
-            <div className="container py-4 mx-auto">
-              <div className="flex flex-col sm:flex-row sm:items-center items-end justify-end mx-auto">
-                <Link href="preview">
-                  <button className="flex-shrink-0 text-white bg-blue-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0">
-                    Preview
-                  </button>
-                </Link>
-
-                <button
-                  className="mx-4 flex-shrink-0 text-white bg-blue-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0"
-                  onClick={() => setOptionOptionModal(true)}
-                >
-                  Assign test
-                </button>
-              </div>
-            </div>
-          </section>
-        </section>
-
         <section className="text-gray-600 body-font overflow-hidden shadow-lg">
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2 font-sans">
@@ -147,15 +111,17 @@ const Index = ({ Data }) => {
               </div>
             </div>
 
-            <div className="mt-4">
+            <div className="my-4">
               <div className="font-bold text-sm flex flex-row justify-between">
                 Questions
-                <button className="bg-purple-700 text-white font-bold p-2 rounded-lg text-center">
+                <button
+                  onClick={() => {
+                    Router.push(`/company/${Data._id}/questions`);
+                  }}
+                  className="bg-purple-700 text-white font-bold p-2 rounded-lg text-center"
+                >
                   + Add Question
                 </button>
-              </div>
-              <div className="bg-gray-100 p-2 pl-4 mt-2 font-semibold rounded-lg text-gray-400">
-                {Data.exam_name}
               </div>
             </div>
             {questions &&
@@ -168,69 +134,6 @@ const Index = ({ Data }) => {
                 />
               ))}
           </div>
-
-          {/* 
-          <div className="container px-5 py-24 mx-auto">
-            <div className="flex flex-wrap -mx-4 -my-8">
-              <div className="py-8 px-4">
-                <div className="h-full flex items-start">
-                  <div className="w-12 flex-shrink-0 flex flex-col text-center leading-none">
-                    <span className="font-medium text-lg text-gray-800 title-font leading-none">
-                      {Data.totalQuestion}
-                    </span>
-                  </div>
-                  <img src="/images/exam.png" className="w-8 h-8" />
-
-                  <div className="flex-grow pl-6">
-                    <h2 className="tracking-widest text-xs title-font font-medium text-pink-500 mb-1">
-                      {Data.exam_name}
-                    </h2>
-                    <h1 className="title-font text-xl font-medium text-gray-900 mb-3">
-                      {Data.description}
-                    </h1>
-
-                    <h1 className="title-font text-xl font-medium text-gray-900 mb-3">
-                      {Data.total_mark} total marks
-                    </h1>
-
-                    <h1 className="title-font text-xl font-medium text-gray-900 mb-3">
-                      {Data.passing_mark} passing marks
-                    </h1>
-
-                    <div className="flex flex-row items-center mb-3 ">
-                      <svg
-                        className="h-6 w-6"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 512 512"
-                      >
-                        <path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 464c-114.7 0-208-93.31-208-208S141.3 48 256 48s208 93.31 208 208S370.7 464 256 464zM256 336c-18 0-32 14-32 32s13.1 32 32 32c17.1 0 32-14 32-32S273.1 336 256 336zM289.1 128h-51.1C199 128 168 159 168 198c0 13 11 24 24 24s24-11 24-24C216 186 225.1 176 237.1 176h51.1C301.1 176 312 186 312 198c0 8-4 14.1-11 18.1L244 251C236 256 232 264 232 272V288c0 13 11 24 24 24S280 301 280 288V286l45.1-28c21-13 34-36 34-60C360 159 329 128 289.1 128z" />
-                      </svg>
-                      <h1 className="title-font text-xl font-medium text-gray-900 ml-4">
-                        {Data.totalQuestion} question
-                      </h1>
-                    </div>
-
-                    <h1 className="title-font text-xl font-medium text-gray-900 mb-3">
-                      {Data.exam_type}
-                    </h1>
-
-                    <div className="flex flex-row items-center mb-3">
-                      <svg
-                        className="h-6 w-6"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 448 512"
-                      >
-                        <path d="M160 32V64H288V32C288 14.33 302.3 0 320 0C337.7 0 352 14.33 352 32V64H400C426.5 64 448 85.49 448 112V160H0V112C0 85.49 21.49 64 48 64H96V32C96 14.33 110.3 0 128 0C145.7 0 160 14.33 160 32zM0 192H448V464C448 490.5 426.5 512 400 512H48C21.49 512 0 490.5 0 464V192zM64 304C64 312.8 71.16 320 80 320H112C120.8 320 128 312.8 128 304V272C128 263.2 120.8 256 112 256H80C71.16 256 64 263.2 64 272V304zM192 304C192 312.8 199.2 320 208 320H240C248.8 320 256 312.8 256 304V272C256 263.2 248.8 256 240 256H208C199.2 256 192 263.2 192 272V304zM336 256C327.2 256 320 263.2 320 272V304C320 312.8 327.2 320 336 320H368C376.8 320 384 312.8 384 304V272C384 263.2 376.8 256 368 256H336zM64 432C64 440.8 71.16 448 80 448H112C120.8 448 128 440.8 128 432V400C128 391.2 120.8 384 112 384H80C71.16 384 64 391.2 64 400V432zM208 384C199.2 384 192 391.2 192 400V432C192 440.8 199.2 448 208 448H240C248.8 448 256 440.8 256 432V400C256 391.2 248.8 384 240 384H208zM320 432C320 440.8 327.2 448 336 448H368C376.8 448 384 440.8 384 432V400C384 391.2 376.8 384 368 384H336C327.2 384 320 391.2 320 400V432z" />
-                      </svg>
-                      <h1 className="ml-4 title-font text-xl font-medium text-gray-900">
-                        {moment(Data.createdAt).format("Do MMMM YYYY")}
-                      </h1>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> */}
         </section>
       </section>
       <section className="w-1/3 flex justify-center mt-4">
@@ -249,11 +152,11 @@ const Index = ({ Data }) => {
               <h1 className="font-bold">total question</h1>
             </div>
 
-            <div className="flex flex-row items-center">
+            <div className="flex flex-row items-center" onClick={handleOpen}>
               <span className="text-center font-black text-xl text-blue-600 mr-2">
                 +
               </span>
-              <h1 className="font-bold text-black text-base">add question</h1>
+              <h1 className="font-bold text-black text-base">View question</h1>
             </div>
           </div>
 
@@ -272,8 +175,8 @@ const Index = ({ Data }) => {
             <span className="px-3 py-1 bg-gray-100 rounded-full text-lg font-bold text-gray-900">
               Actions
             </span>
-            <div className="flex flex-row items-center mt-4 mb-2">
-              <button className="bg-purple-100 p-2 rounded-md text-base font-bold flex flex-row items-center">
+            <div className="flex flex-row items-center mt-4 mb-2 flex-wrap">
+              <button className="bg-slate-100 p-2 rounded-md text-base font-bold flex flex-row items-center">
                 <svg
                   className="h-4 w-auto mr-2"
                   xmlns="http://www.w3.org/2000/svg"
@@ -284,7 +187,10 @@ const Index = ({ Data }) => {
                 Edit
               </button>
 
-              <button className="ml-4 bg-purple-100 p-2 rounded-md text-base font-bold flex flex-row items-center">
+              <button
+                onClick={() => setOpenPrintModal(true)}
+                className="ml-4 bg-slate-100 p-2 rounded-md text-base font-bold flex flex-row items-center"
+              >
                 <svg
                   className="h-4 w-auto mr-2"
                   xmlns="http://www.w3.org/2000/svg"
@@ -295,7 +201,7 @@ const Index = ({ Data }) => {
                 Print
               </button>
 
-              <button className="ml-4 bg-purple-100 p-2 rounded-md text-base font-bold  flex flex-row items-center">
+              <button className="ml-4 bg-slate-100 p-2 rounded-md text-base font-bold  flex flex-row items-center">
                 <svg
                   className="h-4 w-auto mr-2"
                   xmlns="http://www.w3.org/2000/svg"
@@ -305,6 +211,16 @@ const Index = ({ Data }) => {
                 </svg>
                 Delete
               </button>
+
+              <button className="ml-4 bg-slate-100 p-2 rounded-md text-base font-bold  flex flex-row items-center">
+                Assign test
+              </button>
+
+              <Link href="preview">
+                <button className="mt-4 bg-slate-100 p-2 rounded-md text-base font-bold  flex flex-row items-center">
+                  Preview
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -324,11 +240,26 @@ const Index = ({ Data }) => {
       />
 
       <SingleCandidateModal
-        exam_id={router.query.id}
+        exam_id={id}
         open={showModal}
         toggleModal={displayModal}
         setModal={setshowModal}
         isGroup={isGroup}
+      />
+
+      <AddQuesModal
+        open={open}
+        handleClose={handleClose}
+        questionsDatas={questionsDatas}
+        exam_id={id}
+      />
+
+      <PdfModal
+        open={openPrintModal}
+        handleClose={handleClosePrintModal}
+        questionsData={questions}
+        examdDetails={Data}
+        setOpen={setOpen}
       />
     </div>
   );

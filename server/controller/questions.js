@@ -32,10 +32,28 @@ exports.addQuestion = catchAsyncError(async (req, res, next) => {
 
 exports.RemoveQuestion = catchAsyncError(async (req, res, next) => {
   try {
-    const { exam_id, question_id } = req.body;
+    const { question_id, exam_id } = req.body;
     const question = await QuestionModal.findById(question_id);
     if (question.exam_id.length > 0) {
       question.exam_id.remove(exam_id);
+      await QuestionModal.findByIdAndUpdate(question_id, question);
+      res.status(201).json({
+        success: true,
+      });
+    } else {
+      return next(new ErrorHandler("not found", 500));
+    }
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 404));
+  }
+});
+
+exports.AddQuestionById = catchAsyncError(async (req, res, next) => {
+  try {
+    const { question_id } = req.body;
+    const question = await QuestionModal.findById(question_id);
+    if (question.exam_id) {
+      question.exam_id.push(req.params.exam_id);
       await QuestionModal.findByIdAndUpdate(question_id, question);
       res.status(201).json({
         success: true,
@@ -76,6 +94,21 @@ exports.getQuestion = catchAsyncError(async (req, res, next) => {
   try {
     const Data = await QuestionModal.find({
       exam_id: req.params.exam_id,
+    });
+    res.status(201).json({
+      success: true,
+      Data,
+    });
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
+  }
+});
+
+exports.getAllQuestion = catchAsyncError(async (req, res, next) => {
+  try {
+    const Data = await QuestionModal.find({
+      company_id: req.user.id,
+      exam_id: { $ne: req.params.exam_id },
     });
     res.status(201).json({
       success: true,

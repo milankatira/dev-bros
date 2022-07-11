@@ -8,7 +8,7 @@ type AccordionProps = {
   content: any;
   // isPast: boolean;
   DeleteHandler;
-  exam_id: string;
+  exam_id: string | string [];
 };
 
 const Accordion = ({ content, DeleteHandler, exam_id }: AccordionProps) => {
@@ -61,9 +61,8 @@ const Accordion = ({ content, DeleteHandler, exam_id }: AccordionProps) => {
         style={{ height: height }}
         className="overflow-hidden transition-all duration-200"
       >
-        <div className="flex justify-end">
-          {/* <h1 className="p-4">{content.level}</h1> */}
-          <h1 className="p-4">{`(Difficulty Level:${content.level})`}</h1>
+        <div className="flex justify-end -mt-4">
+          <h1 className="p-2">{`(Difficulty Level:${content.level})`}</h1>
         </div>
 
         {content.mcqs &&
