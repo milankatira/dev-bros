@@ -18,22 +18,25 @@ import Accordion from "../../../components/admin/question/Accordian";
 import Swal from "sweetalert2";
 import AddQuesModal from "../../../components/admin/question/AllQuesModal";
 import PdfModal from "../../../components/admin/question/PdfModal";
+import AddExamModal from "../../../components/admin/common/AddExamModal";
 const Index = ({ Data }) => {
   const router = useRouter();
   const { id } = router.query;
+const [examData, setexamData] = useState(Data);
   const [optionOptionModal, setOptionOptionModal] = useState<boolean>(false);
   const [openGroupModal, setOpenGroupModal] = React.useState(false);
   const [showModal, setshowModal] = useState(false);
   const [isGroup, setIsGroup] = React.useState(false);
   const [questions, setquestions] = useState([]);
   const [questionsDatas, setquestionsDatas] = useState([]);
+  const [openEditExamModal, setOpenEditExamModal] = useState(false);
   const [open, setOpen] = useState<boolean>(false);
   const [openPrintModal, setOpenPrintModal] = useState<boolean>(false);
   const toggleOptionModal = () => setOptionOptionModal(!optionOptionModal);
   const toggleGroupModal = () => setOpenGroupModal(!openGroupModal);
   const displayModal = () => setshowModal(!showModal);
   const handleClosePrintModal = () => setOpenPrintModal(!openPrintModal);
-
+  const toggleModal = () => setOpenEditExamModal(!openEditExamModal);
 
   const handleOpen = () => {
     setOpen(true);
@@ -176,7 +179,10 @@ const Index = ({ Data }) => {
               Actions
             </span>
             <div className="flex flex-row items-center mt-4 mb-2 flex-wrap">
-              <button className="bg-slate-100 p-2 rounded-md text-base font-bold flex flex-row items-center">
+              <button
+                onClick={() => setOpenEditExamModal(true)}
+                className="bg-slate-100 p-2 rounded-md text-base font-bold flex flex-row items-center"
+              >
                 <svg
                   className="h-4 w-auto mr-2"
                   xmlns="http://www.w3.org/2000/svg"
@@ -212,7 +218,10 @@ const Index = ({ Data }) => {
                 Delete
               </button>
 
-              <button className="ml-4 bg-slate-100 p-2 rounded-md text-base font-bold  flex flex-row items-center">
+              <button
+                onClick={() => setOptionOptionModal(true)}
+                className="ml-4 bg-slate-100 p-2 rounded-md text-base font-bold  flex flex-row items-center"
+              >
                 Assign test
               </button>
 
@@ -260,6 +269,14 @@ const Index = ({ Data }) => {
         questionsData={questions}
         examdDetails={Data}
         setOpen={setOpen}
+      />
+
+      <AddExamModal
+        open={openEditExamModal}
+        toggleModal={toggleModal}
+        exam_id={id}
+        examData={examData}
+        setExamData={setexamData}
       />
     </div>
   );

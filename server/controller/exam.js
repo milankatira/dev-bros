@@ -69,7 +69,6 @@ exports.getExamById = catchAsyncError(async (req, res, next) => {
       select: "firstName lastName email phoneNo",
       model: UserModel,
     });
-    console.log(exam, "exam");
     res.status(201).json({
       success: true,
       exam,

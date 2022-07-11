@@ -7,10 +7,10 @@ import { exam_type } from "../../constant/app_constant";
 import { Formik, Form, Field, FieldArray } from "formik";
 import { intialValue } from "../../../constant/initial_value";
 import BasicTextinput from "../../common/design/BasicTextInput";
-import { addExam } from "../../../api/client/exam";
+import { addExam, updateExam } from "../../../api/client/exam";
 import toast from "react-hot-toast";
 interface Props {
-  exam_id?: string;
+  exam_id: string | string[];
   toggleModal?: any;
   open?: boolean;
   setExamData: any;
@@ -53,11 +53,15 @@ const AddExamModal: any = ({
     if (parseInt(examData.passing_mark) > parseInt(examData.total_mark)) {
       toast.error("Invalid passing marks");
     } else {
-      addExam(packet).then((res) => {
-        console.log(res.data);
-        toggleModal();
-      });
-      // dispatch(addExam(packet));
+      if (exam_id) {
+        updateExam(exam_id, packet).then((res) => {
+          toggleModal();
+        });
+      } else {
+        addExam(packet).then((res) => {
+          toggleModal();
+        });
+      }
     }
   };
 
