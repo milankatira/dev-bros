@@ -107,7 +107,7 @@ const QueAccordion = ({ content, exam_id }: AccordionProps) => {
             </div>
           ))}
 
-        <div className="ml-4 my-4 border-l-4 border-green-600">
+        <div className="ml-4 my-4 border-r-2 border-l-4 border-green-600">
           <h1 className="pl-4 pt-4 text-green-700 font-bold">Correct Answer</h1>
           <h1 className="pl-4">{content.answer}</h1>
         </div>

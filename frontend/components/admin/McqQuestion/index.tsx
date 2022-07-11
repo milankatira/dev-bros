@@ -12,15 +12,11 @@ const Index = () => {
   const router = useRouter();
   const [questionData, setquestionData] = useState([]);
 
-  // console.log(questionData?.mcqs, "questionData");
-  // console.log(router.query.exam_id, router.query.question_id, "mmm");
-
   const handleSubmit = (data) => {
     const packet = {
       data,
       exam_id: router.query.exam_id,
     };
-    // console.log(packet, "packet");
     if (router.query.question_id) {
       updateSingleQuestion(router.query.question_id, packet);
       Router.push(

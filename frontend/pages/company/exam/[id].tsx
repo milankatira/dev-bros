@@ -19,10 +19,11 @@ import Swal from "sweetalert2";
 import AddQuesModal from "../../../components/admin/question/AllQuesModal";
 import PdfModal from "../../../components/admin/question/PdfModal";
 import AddExamModal from "../../../components/admin/common/AddExamModal";
+import { deleteExam } from "../../../api/client/exam";
 const Index = ({ Data }) => {
   const router = useRouter();
   const { id } = router.query;
-const [examData, setexamData] = useState(Data);
+  const [examData, setexamData] = useState(Data);
   const [optionOptionModal, setOptionOptionModal] = useState<boolean>(false);
   const [openGroupModal, setOpenGroupModal] = React.useState(false);
   const [showModal, setshowModal] = useState(false);
@@ -87,6 +88,38 @@ const [examData, setexamData] = useState(Data);
               "Poof! Your imaginary file has been deleted!",
               "success"
             );
+          })
+          .catch((err) => {
+            console.log(err?.data, err?.response.data.message, "err");
+            Swal.fire("Error!", err?.response?.data?.message, "error");
+          });
+      } else {
+        Swal.fire("Cancelled", "Your job is not deleted!");
+      }
+    });
+  };
+
+  // deleteExam(id)
+
+  const handleDeleteHandler = (exam_id: string | string[]) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this job!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ok",
+    }).then((willDelete) => {
+      if (willDelete.isConfirmed) {
+        deleteExam(exam_id)
+          .then((res) => {
+            Swal.fire(
+              "Deleted!",
+              "Poof! Your imaginary file has been deleted!",
+              "success"
+            );
+            Router.push('/company/exam')
           })
           .catch((err) => {
             console.log(err?.data, err?.response.data.message, "err");
@@ -207,7 +240,10 @@ const [examData, setexamData] = useState(Data);
                 Print
               </button>
 
-              <button className="ml-4 bg-slate-100 p-2 rounded-md text-base font-bold  flex flex-row items-center">
+              <button
+                onClick={() => handleDeleteHandler(id)}
+                className="ml-4 bg-slate-100 p-2 rounded-md text-base font-bold  flex flex-row items-center"
+              >
                 <svg
                   className="h-4 w-auto mr-2"
                   xmlns="http://www.w3.org/2000/svg"
