@@ -152,7 +152,7 @@ const Index = ({ Data }) => {
                 Questions
                 <button
                   onClick={() => {
-                    Router.push(`/company/${Data._id}/questions`);
+                    Router.push(`/company/${Data._id}/codingquestion`);
                   }}
                   className="bg-purple-700 text-white font-bold p-2 rounded-lg text-center"
                 >

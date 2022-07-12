@@ -103,6 +103,11 @@ export const intialValue = {
       },
     ],
   },
+
+  codingQuestion: {
+    level: "",
+    question: "",
+  },
   exam_link: {
     exam_link: "",
   },
@@ -110,5 +115,4 @@ export const intialValue = {
     title: "",
     description: "",
   },
-  
 };

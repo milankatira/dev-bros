@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { UseEffectOnce } from "../../../hook/useEffectOnce";
-import { getSingleQuestion } from "../../../api/client/question";
-import FormForQuestion from "../../../components/admin/McqQuestion/FormForQuestion";
-import { intialValue } from "../../../constant/initial_value";
 // import McqQuestions from "../../../components/admin/McqQuestion";
 
 import dynamic from "next/dynamic";
 const McqQuestions = dynamic(
-  () => import("../../../components/admin/McqQuestion"),
+  () => import("../../../../components/admin/codingQuestion"),
   {
     ssr: false,
   }
@@ -16,9 +12,8 @@ const McqQuestions = dynamic(
 
 const Question = () => {
   const router = useRouter();
-  const { question_id } = router.query;
+  const { coding_question_id } = router.query;
 
- 
   const handleSubmit = (data) => {
     const packet = {
       data,
@@ -29,9 +24,7 @@ const Question = () => {
 
   return (
     <div>
-      
-      <McqQuestions/>
-
+      <McqQuestions />
     </div>
   );
 };
