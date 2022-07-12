@@ -7,12 +7,22 @@ import {
   get_single_question,
   get_all_question,
   add_single_question,
+  coding_question,
 } from "../../constant/api_url";
 axios.defaults.withCredentials = true;
 
 export const addQuestion = async (packet) => {
   return await axios
     .post(questions, packet)
+    .then((response) => response)
+    .catch((err) => {
+      throw err;
+    });
+};
+
+export const addCodingQuestion = async (id, packet) => {
+  return await axios
+    .post(coding_question(id), packet)
     .then((response) => response)
     .catch((err) => {
       throw err;

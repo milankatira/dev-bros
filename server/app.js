@@ -36,6 +36,8 @@ const dotenv = require("dotenv");
 
 const question = require("./routes/question");
 
+const codingquestion = require("./routes/codingquestion");
+
 const candidateGroup = require("./routes/candidates");
 
 const group = require("./routes/group");
@@ -88,6 +90,7 @@ app.use("/api", [
   assignExam,
   code,
   result,
+  codingquestion,
 ]);
 
 app.use(errorMiddleware);

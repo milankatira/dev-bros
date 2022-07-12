@@ -60,12 +60,17 @@ export const get_question = (id) => `${server_url}/api/questions/${id}`;
 
 export const get_all_question = (id) => `${server_url}/api/allquestions/${id}`;
 
-export const add_single_question = (id) => `${server_url}/api/addquestions/${id}`;
+export const add_single_question = (id) =>
+  `${server_url}/api/addquestions/${id}`;
 
 export const removequestions = `${server_url}/api/removequestions`;
 
 export const get_single_question = (id) =>
   `${server_url}/api/singlequestion/${id}`;
+
+// TODO CODING QUESTION
+
+export const coding_question = (id) => `${server_url}/api/codingquestion/${id}`;
 
 //TODO CANDIDATES
 
