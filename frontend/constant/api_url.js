@@ -72,6 +72,8 @@ export const get_single_question = (id) =>
 
 export const coding_question = (id) => `${server_url}/api/codingquestion/${id}`;
 
+export const singlecodingquestion = (id) => `${server_url}/api/singlecodingquestion/${id}`;
+
 //TODO CANDIDATES
 
 export const candidates = `${server_url}/api/candidates`;

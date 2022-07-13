@@ -11,6 +11,7 @@ import ButtonField from "../../../components/common/design/ButtonField";
 import { UseEffectOnce } from "../../../hook/useEffectOnce";
 import {
   getallQuestion,
+  getCodingQuestion,
   getQuestion,
   RemoveQuestion,
 } from "../../../api/client/question";
@@ -20,6 +21,8 @@ import AddQuesModal from "../../../components/admin/question/AllQuesModal";
 import PdfModal from "../../../components/admin/question/PdfModal";
 import AddExamModal from "../../../components/admin/common/AddExamModal";
 import { deleteExam } from "../../../api/client/exam";
+import ReactHtmlParser from "react-html-parser";
+
 const Index = ({ Data }) => {
   const router = useRouter();
   const { id } = router.query;
@@ -29,6 +32,7 @@ const Index = ({ Data }) => {
   const [showModal, setshowModal] = useState(false);
   const [isGroup, setIsGroup] = React.useState(false);
   const [questions, setquestions] = useState([]);
+  const [codingQuestionData, setcodingQuestionData] = useState([]);
   const [questionsDatas, setquestionsDatas] = useState([]);
   const [openEditExamModal, setOpenEditExamModal] = useState(false);
   const [open, setOpen] = useState<boolean>(false);
@@ -62,8 +66,16 @@ const Index = ({ Data }) => {
   };
 
   UseEffectOnce(() => {
-    getQuestion(id).then((res) => setquestions(res.data.Data));
-    getallQuestion(id).then((res) => setquestionsDatas(res.data.Data));
+    console.log(Data.exam_type == "CODING", "vg");
+
+    if (Data.exam_type == "CODING") {
+      getCodingQuestion(id).then((res) =>
+        setcodingQuestionData(res.data.codingquestionData)
+      );
+    } else {
+      getQuestion(id).then((res) => setquestions(res.data.Data));
+      getallQuestion(id).then((res) => setquestionsDatas(res.data.Data));
+    }
   });
 
   const DeleteHandler = (question_id: string) => {
@@ -119,7 +131,7 @@ const Index = ({ Data }) => {
               "Poof! Your imaginary file has been deleted!",
               "success"
             );
-            Router.push('/company/exam')
+            Router.push("/company/exam");
           })
           .catch((err) => {
             console.log(err?.data, err?.response.data.message, "err");
@@ -150,14 +162,38 @@ const Index = ({ Data }) => {
             <div className="my-4">
               <div className="font-bold text-sm flex flex-row justify-between">
                 Questions
-                <button
-                  onClick={() => {
-                    Router.push(`/company/${Data._id}/codingquestion`);
-                  }}
-                  className="bg-purple-700 text-white font-bold p-2 rounded-lg text-center"
-                >
-                  + Add Question
-                </button>
+                {Data.exam_type == "CODING" ? (
+                  codingQuestionData ? (
+                    <button
+                      onClick={() => {
+                        Router.push(
+                          `/company/${Data._id}/coding/${codingQuestionData[0]._id}`
+                        );
+                      }}
+                      className="bg-purple-700 text-white font-bold p-2 rounded-lg text-center"
+                    >
+                      Edit Question
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        Router.push(`/company/${Data._id}/codingquestion`);
+                      }}
+                      className="bg-purple-700 text-white font-bold p-2 rounded-lg text-center"
+                    >
+                      + Add Question
+                    </button>
+                  )
+                ) : (
+                  <button
+                    onClick={() => {
+                      Router.push(`/company/${Data._id}/codingquestion`);
+                    }}
+                    className="bg-purple-700 text-white font-bold p-2 rounded-lg text-center"
+                  >
+                    + Add Question
+                  </button>
+                )}
               </div>
             </div>
             {questions &&
@@ -168,6 +204,12 @@ const Index = ({ Data }) => {
                   DeleteHandler={DeleteHandler}
                   exam_id={id}
                 />
+              ))}
+
+            {Data.exam_type == "CODING" &&
+              codingQuestionData &&
+              codingQuestionData.map((data) => (
+                <h1 key={data._id}>{ReactHtmlParser(data?.question)}</h1>
               ))}
           </div>
         </section>
@@ -187,13 +229,16 @@ const Index = ({ Data }) => {
               </span>
               <h1 className="font-bold">total question</h1>
             </div>
-
-            <div className="flex flex-row items-center" onClick={handleOpen}>
-              <span className="text-center font-black text-xl text-blue-600 mr-2">
-                +
-              </span>
-              <h1 className="font-bold text-black text-base">View question</h1>
-            </div>
+            {Data.exam_type == "MCQ" && (
+              <div className="flex flex-row items-center" onClick={handleOpen}>
+                <span className="text-center font-black text-xl text-blue-600 mr-2">
+                  +
+                </span>
+                <h1 className="font-bold text-black text-base">
+                  View question
+                </h1>
+              </div>
+            )}
           </div>
 
           <div className="mt-8 pl-6">
@@ -225,20 +270,22 @@ const Index = ({ Data }) => {
                 </svg>
                 Edit
               </button>
-
-              <button
-                onClick={() => setOpenPrintModal(true)}
-                className="ml-4 bg-slate-100 p-2 rounded-md text-base font-bold flex flex-row items-center"
-              >
-                <svg
-                  className="h-4 w-auto mr-2"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 512 512"
+              {Data.exam_type == "MCQ" && (
+                <button
+                  disabled={Data.exam_type == "CODING"}
+                  onClick={() => setOpenPrintModal(true)}
+                  className="ml-4 bg-slate-100 p-2 rounded-md text-base font-bold flex flex-row items-center"
                 >
-                  <path d="M448 192H64C28.65 192 0 220.7 0 256v96c0 17.67 14.33 32 32 32h32v96c0 17.67 14.33 32 32 32h320c17.67 0 32-14.33 32-32v-96h32c17.67 0 32-14.33 32-32V256C512 220.7 483.3 192 448 192zM384 448H128v-96h256V448zM432 296c-13.25 0-24-10.75-24-24c0-13.27 10.75-24 24-24s24 10.73 24 24C456 285.3 445.3 296 432 296zM128 64h229.5L384 90.51V160h64V77.25c0-8.484-3.375-16.62-9.375-22.62l-45.25-45.25C387.4 3.375 379.2 0 370.8 0H96C78.34 0 64 14.33 64 32v128h64V64z" />
-                </svg>
-                Print
-              </button>
+                  <svg
+                    className="h-4 w-auto mr-2"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512"
+                  >
+                    <path d="M448 192H64C28.65 192 0 220.7 0 256v96c0 17.67 14.33 32 32 32h32v96c0 17.67 14.33 32 32 32h320c17.67 0 32-14.33 32-32v-96h32c17.67 0 32-14.33 32-32V256C512 220.7 483.3 192 448 192zM384 448H128v-96h256V448zM432 296c-13.25 0-24-10.75-24-24c0-13.27 10.75-24 24-24s24 10.73 24 24C456 285.3 445.3 296 432 296zM128 64h229.5L384 90.51V160h64V77.25c0-8.484-3.375-16.62-9.375-22.62l-45.25-45.25C387.4 3.375 379.2 0 370.8 0H96C78.34 0 64 14.33 64 32v128h64V64z" />
+                  </svg>
+                  Print
+                </button>
+              )}
 
               <button
                 onClick={() => handleDeleteHandler(id)}

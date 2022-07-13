@@ -8,6 +8,7 @@ import {
   get_all_question,
   add_single_question,
   coding_question,
+  singlecodingquestion,
 } from "../../constant/api_url";
 axios.defaults.withCredentials = true;
 
@@ -20,9 +21,27 @@ export const addQuestion = async (packet) => {
     });
 };
 
-export const addCodingQuestion = async (id, packet) => {
+export const getCodingQuestion = async (id) => {
   return await axios
-    .post(coding_question(id), packet)
+    .get(coding_question(id))
+    .then((response) => response)
+    .catch((err) => {
+      throw err;
+    });
+};
+
+export const getsingleCodingQuestion = async (id) => {
+  return await axios
+    .get(singlecodingquestion(id))
+    .then((response) => response)
+    .catch((err) => {
+      throw err;
+    });
+};
+
+export const updatesingleCodingQuestion = async (id, packet) => {
+  return await axios
+    .put(singlecodingquestion(id), packet)
     .then((response) => response)
     .catch((err) => {
       throw err;
@@ -50,6 +69,15 @@ export const getallQuestion = async (id) => {
 export const addSingleQuestion = async (id, packet) => {
   return await axios
     .post(add_single_question(id), packet)
+    .then((response) => response)
+    .catch((err) => {
+      throw err;
+    });
+};
+
+export const addCodingQuestion = async (id, packet) => {
+  return await axios
+    .post(coding_question(id), packet)
     .then((response) => response)
     .catch((err) => {
       throw err;

@@ -1,19 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import FormForQuestion from "./FormForQuestion";
 import { intialValue } from "../../../constant/initial_value";
 import { useRouter } from "next/router";
 import Router from "next/router";
-import { addCodingQuestion } from "../../../api/client/question";
+import {
+  addCodingQuestion,
+  getsingleCodingQuestion,
+  updatesingleCodingQuestion,
+} from "../../../api/client/question";
 
 const Index = () => {
   const router = useRouter();
+  const [questionData, setquestionData] = useState("");
+  const [questionState, setquestionState] = useState();
+  console.log(questionState, "questionData__1");
+  useEffect(() => {
+    router.query.coding_question_id &&
+      getsingleCodingQuestion(router.query.coding_question_id).then((res) => {
+        setquestionData(res.data.codingquestionData.question);
+        setquestionState(res.data.codingquestionData);
+      });
+  }, [router.query.coding_question_id]);
 
   const handleSubmit = (data) => {
     const packet = {
-      question: data.data.question,
-      level: data.level,
+      question: questionData,
+      level: data.data.level,
     };
-    if (router.query.question_id) {
+
+    if (router.query.coding_question_id) {
+      updatesingleCodingQuestion(router.query.coding_question_id, packet);
       Router.push(`/company/exam/${router.query.exam_id}`);
     } else {
       addCodingQuestion(router.query.exam_id, packet);
@@ -23,7 +39,25 @@ const Index = () => {
 
   return (
     <div>
-      <FormForQuestion handleSubmit={handleSubmit} intialValue={intialValue.codingQuestion} />
+      {questionData &&
+      questionData &&
+      questionState &&
+      questionState.level !== undefined ? (
+        <FormForQuestion
+          isEdit={true}
+          handleSubmit={handleSubmit}
+          intialValue={questionState}
+          questionData={questionData}
+          setquestionData={setquestionData}
+        />
+      ) : (
+        <FormForQuestion
+          handleSubmit={handleSubmit}
+          intialValue={intialValue.codingQuestion}
+          questionData={questionData}
+          setquestionData={setquestionData}
+        />
+      )}
     </div>
   );
 };
