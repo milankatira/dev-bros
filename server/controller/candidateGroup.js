@@ -4,13 +4,15 @@ const catchAsyncError = require("../middleware/catchAsyncError");
 
 exports.AddGroup = catchAsyncError(async (req, res, next) => {
   try {
-    const { profile_url, name, title, description, candidates } = req.body;
+    const { profile_url, name, title, description, userId } = req.body;
+   console.log(userId,"DD")
+    JSON.parse(userId);
     const group = await GroupModal.create({
       profile_url,
       name,
       title,
       description,
-      candidates,
+      candidates: JSON.parse(userId),
       user_id: req.user.id,
     });
 

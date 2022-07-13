@@ -117,20 +117,16 @@ const SingleCandidateModal: React.FC<Props> = ({
       formdata.append("profile", image);
       formdata.append("title", data.title);
       formdata.append("description", data.description);
-      for (let i = 0; i < filtered.length; i++) {
-        formdata.append(`userId[${i}]`, filtered[i]);
-      }
-      toggleModal();
+      formdata.append(`userId`, filtered);
+      formdata.append(`userId`, JSON.stringify(filtered));
       AddGroup(formdata);
     } else {
       const formdata = new FormData();
       formdata.append("title", data.title);
       formdata.append("description", data.description);
-      for (let i = 0; i < filtered.length; i++) {
-        formdata.append(`userId[${i}]`, filtered[i]);
-      }
-      toggleModal();
+      formdata.append(`userId`, JSON.stringify(filtered));
       AddGroup(formdata);
+      toggleModal();
     }
   };
   const { getRootProps, getInputProps } = useDropzone({

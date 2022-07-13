@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import "react-loading-skeleton/dist/skeleton.css";
 
 import Link from "next/link";
 
@@ -146,8 +145,12 @@ const Header = () => {
                 <Link href="/company/exam">
                   <a className="mr-4 hover:text-gray-900">My exam</a>
                 </Link>
-                <a className="mr-4 hover:text-gray-900">thirdlink</a>
-                <a className="mr-4 hover:text-gray-900">Fourth Link</a>
+                <Link href="/company/assignExam">
+                  <a className="mr-4 hover:text-gray-900">assign exam</a>
+                </Link>
+                <Link href="/company/group-list">
+                  <a className="mr-4 hover:text-gray-900">GroupList</a>
+                </Link>
               </nav>
             ) : auth.authStatus?.user.role == "candidate" ? (
               <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
