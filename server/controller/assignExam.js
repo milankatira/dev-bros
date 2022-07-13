@@ -96,10 +96,8 @@ exports.updateNotifyStatus = catchAsyncError(async (req, res, next) => {
   try {
     const { id } = req.params;
 
-
-    console.log(id);
     const assignExam = await AssignExamModal.findByIdAndUpdate(id, {
-      notify: true,
+      notify: req.body.notify,
     });
 
     res.status(201).json({

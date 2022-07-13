@@ -1,6 +1,7 @@
 import moment from "moment";
 import React, { useState, useRef } from "react";
 import { NotifyMember } from "../../../api/client/compnay";
+import Switch from "./switch";
 type AccordionProps = {
   title: string;
   content: any;
@@ -79,12 +80,15 @@ const Accordion = ({ isPast, content }: AccordionProps) => {
                     From {data?.start_time} to {data?.end_time}
                   </td>
                   {!isPast && (
-                    <td
-                      className="px-6 py-4"
-                      scope="col"
-                      onClick={() => HandleNotify(data?._id)}
-                    >
-                      {data?.notify ? "Yes" : "No"}
+                    <td className="px-6 py-4" scope="col">
+                      <Switch
+                        checked={data?.notify}
+                        onClick={() =>
+                          NotifyMember(data?._id, {
+                            notify: !data?.notify,
+                          })
+                        }
+                      />
                     </td>
                   )}
                 </tr>

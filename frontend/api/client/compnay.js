@@ -83,9 +83,9 @@ export const GetAssignCandidate = async () => {
     });
 };
 
-export const NotifyMember = async (id) => {
+export const NotifyMember = async (id,packet) => {
   return await axios
-    .post(notifyStatus(id))
+    .post(notifyStatus(id), packet)
     .then((response) => response)
     .catch((err) => {
       throw err;
