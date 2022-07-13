@@ -299,7 +299,6 @@ exports.addProfile = catchAsyncError(async (req, res, next) => {
     await authData.save();
   }
 
-  // store skills data into user_skills table
   await Promise.all(
     JSON.parse(skills).map(async (singleSkills) => {
       const skill = new UserSkillModel({
@@ -312,7 +311,6 @@ exports.addProfile = catchAsyncError(async (req, res, next) => {
     })
   );
 
-  // store education data into education_details table
   await Promise.all(
     JSON.parse(education_details).map(async (singleValue) => {
       const educationData = new EducationModel({

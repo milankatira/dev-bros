@@ -42,7 +42,7 @@ const Grouplist = ({ GroupData }) => {
                   onClick={handleAddGroupModal}
                   className="flex-shrink-0 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0"
                 >
-                  AddEXAM
+                  Add Group
                 </button>
               </div>
             </div>
@@ -58,15 +58,9 @@ const Grouplist = ({ GroupData }) => {
           </>
         ))}
       </section>
-      {/* <CandidateGroupModal
-        // exam_id={exam_id}
-        open={openModal}
-        toggleModal={toggleModal}
-        handleAddGroupModal={handleAddGroupModal}
-      /> */}
-
+    
       <SingleCandidateModal
-        // exam_id={exam_id}
+        isGroup={isGroup}
         open={showModal}
         toggleModal={displayModal}
         setModal={setshowModal}
