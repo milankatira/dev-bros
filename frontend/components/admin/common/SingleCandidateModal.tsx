@@ -60,25 +60,19 @@ const SingleCandidateModal: React.FC<Props> = ({
   isGroup,
   examName,
 }) => {
-  console.log(isGroup, "isGroup");
-  // const dispatch = useDispatch();
-  // const candidateGroupState = useSelector(
-  //   (state: AppState) => state.candidateGroup
-  // );
-  // const candidateState = useSelector((state: AppState) => state.candidates);
   const [candidates, setCandidates] = useState([]);
   const [candidate, setCandidate] = useState("");
   const [candidatesIds, setcandidatesIds] = useState<any>([]);
   const [step, setStep] = useState<number>(1);
-  const [image, setImage] = useState<any>("");
   const [openAssignModal, setOpenAssignModal] = React.useState<boolean>(false);
 
   const toggleAssignModal = () => setOpenAssignModal(!openAssignModal);
 
+  const close = !open;
   useEffect(() => {
-    setStep(2);
+    setStep(1);
     setcandidatesIds([]);
-  }, [!open]); //eslint-disable-line react-hooks/exhaustive-deps
+  }, [close]);
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setcandidatesIds({
@@ -112,35 +106,14 @@ const SingleCandidateModal: React.FC<Props> = ({
     const filtered: any = keys.filter(function (key: number) {
       return candidatesIds[key];
     });
-    if (image) {
-      const formdata = new FormData();
-      formdata.append("profile", image);
-      formdata.append("title", data.title);
-      formdata.append("description", data.description);
-      formdata.append(`userId`, filtered);
-      formdata.append(`userId`, JSON.stringify(filtered));
-      AddGroup(formdata);
-    } else {
-      const formdata = new FormData();
-      formdata.append("title", data.title);
-      formdata.append("description", data.description);
-      formdata.append(`userId`, JSON.stringify(filtered));
-      AddGroup(formdata);
-      toggleModal();
-    }
+
+    const formdata = new FormData();
+    formdata.append("title", data.title);
+    formdata.append("description", data.description);
+    formdata.append(`userId`, JSON.stringify(filtered));
+    AddGroup(formdata);
+    toggleModal();
   };
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: "application/pdf,.doc,.docx",
-    onDrop: (acceptedFiles) => {
-      if (acceptedFiles && acceptedFiles.length && acceptedFiles.length > 1) {
-        toast.warn("Please upload single file at a time");
-      } else if (acceptedFiles[0].size > 2000000) {
-        toast.warn("Please image of less than size 2 mb");
-      } else {
-        setImage(acceptedFiles[0]);
-      }
-    },
-  });
 
   useEffect(() => {
     {
@@ -264,8 +237,10 @@ const SingleCandidateModal: React.FC<Props> = ({
               validationSchema={candidateGroup}
             >
               {({ errors, touched }) => (
-                <Form className="w-[700px] m-8">
-                  <h2 className="text-center font-bold mb-2">Add details for your group</h2>
+                <Form className="w-[700px] mx-8 mb-4">
+                  <h2 className="text-center font-bold mb-2">
+                    Add details for your group
+                  </h2>
                   <Textinput
                     name="title"
                     text="Name"
@@ -281,14 +256,7 @@ const SingleCandidateModal: React.FC<Props> = ({
                       errors.description
                     }
                   />
-                  <h6 className="margin-top">Company Brochure</h6>
-                  <div {...getRootProps({ className: "dropzone" })}>
-                    <div className="file_btn_submit">
-                      Choose File
-                      <input {...getInputProps()} />
-                    </div>
-                    <div>{image.path}</div>
-                  </div>
+
                   <ButtonField type="submit" text="Submit" />
                 </Form>
               )}

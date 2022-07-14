@@ -47,7 +47,7 @@ const AssignExam = () => {
 
   console.log(incomingExams, "incomingExams");
   return (
-    <div>
+    <div className="mx-20">
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
           <section className="text-gray-600 body-font">

@@ -30,7 +30,7 @@ const Grouplist = ({ GroupData }) => {
   return (
     <div>
       <section className="text-gray-600 body-font">
-        <div className="container px-5 py-24 mx-auto">
+        <div className="container px-5 pt-24 pb-4 mx-auto">
           <section className="text-gray-600 body-font">
             <div className="container pb-24 mx-auto">
               <div className="lg:w-2/3 flex flex-col sm:flex-row sm:items-center items-start mx-auto">
@@ -50,8 +50,10 @@ const Grouplist = ({ GroupData }) => {
         </div>
       </section>
 
-      <section>
-        list of group
+      <section className="mx-20">
+       <h4 className="font-bold">
+         list of group
+        </h4>
         {GroupData.group.map((item, index) => (
           <>
             <Accordion content={item} title={item.name} isPast={false} />
