@@ -12,7 +12,6 @@ const Accordion = dynamic(
 );
 
 const Grouplist = ({ GroupData }) => {
-  console.log(GroupData,"DD")
   const [isGroup, setIsGroup] = useState<boolean>(false);
   const [showModal, setshowModal] = useState<boolean>(false);
   const [openModal, setOpenModal] = React.useState(false);
@@ -30,13 +29,12 @@ const Grouplist = ({ GroupData }) => {
   return (
     <div>
       <section className="text-gray-600 body-font">
-        <div className="container px-5 pt-24 pb-4 mx-auto">
+          <div className="px-20 py-4 mx-auto w-full">
           <section className="text-gray-600 body-font">
-            <div className="container pb-24 mx-auto">
-              <div className="lg:w-2/3 flex flex-col sm:flex-row sm:items-center items-start mx-auto">
-                <h1 className="flex-grow sm:pr-16 text-2xl font-medium title-font text-gray-900">
-                  Slow-carb next level shoindxgoitch ethical authentic,
-                  scenester sriracha forage.
+            <div className="w-full">
+              <div className="flex flex-col sm:flex-row sm:items-center items-start mx-auto">
+                <h1 className="flex-grow text-2xl font-medium title-font text-gray-900">
+                  Grouplist
                 </h1>
                 <button
                   onClick={handleAddGroupModal}
@@ -51,16 +49,14 @@ const Grouplist = ({ GroupData }) => {
       </section>
 
       <section className="mx-20">
-       <h4 className="font-bold">
-         list of group
-        </h4>
+        <h4 className="font-bold">list of group</h4>
         {GroupData.group.map((item, index) => (
           <>
             <Accordion content={item} title={item.name} isPast={false} />
           </>
         ))}
       </section>
-    
+
       <SingleCandidateModal
         isGroup={isGroup}
         open={showModal}

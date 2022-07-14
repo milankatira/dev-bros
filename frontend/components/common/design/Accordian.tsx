@@ -23,17 +23,31 @@ const Accordion = ({ isPast, content }: AccordionProps) => {
     NotifyMember(id);
   };
   return (
-    <div className="border border-indigo-400">
-      <div className={"bg-black p-4 flex justify-between text-white"}>
+    <div className="border border-gray-400">
+      <div className={"bg-white p-4 flex justify-between text-black"}>
         <td className="px-6 py-4">{content?._id}</td>
         <td className="px-6 py-4">{content?.description}</td>
         <td className="px-6 py-4">{content?.total_mark}</td>
         <td className="px-6 py-4">{content?.passing_mark}</td>
         <td className="px-6 py-4">{content?.exam_type}</td>
         {isOpened ? (
-          <button onClick={HandleOpening}>close</button>
+          <svg
+            className="w-4 h-4 m-4"
+            onClick={HandleOpening}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 384 512"
+          >
+            <path d="M352 352c-8.188 0-16.38-3.125-22.62-9.375L192 205.3l-137.4 137.4c-12.5 12.5-32.75 12.5-45.25 0s-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25C368.4 348.9 360.2 352 352 352z" />
+          </svg>
         ) : (
-          <button onClick={HandleOpening}>open</button>
+          <svg
+            className="w-4 h-4 m-4"
+            onClick={HandleOpening}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 384 512"
+          >
+            <path d="M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z" />
+          </svg>
         )}
       </div>
       <div

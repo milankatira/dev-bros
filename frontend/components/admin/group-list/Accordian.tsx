@@ -1,6 +1,5 @@
-import moment from "moment";
+import Link from "next/link";
 import React, { useState, useRef } from "react";
-import { NotifyMember } from "../../../api/client/compnay";
 type AccordionProps = {
   title: string;
   content: any;
@@ -8,7 +7,6 @@ type AccordionProps = {
 };
 
 const Accordion = ({ content }: AccordionProps) => {
-  console.log(content, "isPast");
   const [isOpened, setOpened] = useState<boolean>(false);
   const [height, setHeight] = useState<string>("0px");
   const contentElement = useRef(null);
@@ -17,14 +15,10 @@ const Accordion = ({ content }: AccordionProps) => {
     setOpened(!isOpened);
     setHeight(!isOpened ? `${contentElement.current.scrollHeight}px` : "0px");
   };
-
-  const HandleNotify = (id) => {
-    NotifyMember(id);
-  };
   return (
     <div className="border-b border-red-600">
       <div className="flex justify-between">
-        <td className="px-6 py-4">{content?.title}</td>
+        <td className="px-6 py-4 font-bold">{content?.title}</td>
         <div className="px-6 py-4">
           {isOpened ? (
             <svg
@@ -53,19 +47,48 @@ const Accordion = ({ content }: AccordionProps) => {
         style={{ height: height }}
         className="overflow-hidden transition-all duration-200"
       >
-        <h1>{content.title}</h1>
-        <h1>{content.description}</h1>
-        {/* <div className="flex justify-end m-2">
-          <button
-            onClick={() => {
-              setGroupId(content?._id);
-              setOpenAssignModal(true);
-            }}
-            className="p-2 rounded-md text-white bg-red-400"
-          >
-            + Assign
-          </button>
-        </div> */}
+        <div className="flex flex-row px-6 mb-4">
+          <h1 className="font-semibold">Desctiption:</h1>
+          <h1 className="ml-4">{content.description}</h1>
+        </div>
+          <table className="text-sm w-full text-left text-gray-500">
+            <thead className="text-xs uppercase bg-gray-50">
+              <tr>
+                <th scope="col" className="px-6 py-3">
+                  Name
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Email
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Phone
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {content.candidates.map((candidate: any, index: number) => (
+                <tr
+                  key={index}
+                  className=" border-b"
+                >
+                  <td className="px-6 py-4">
+                    {candidate?.firstName + " " + candidate?.lastName}
+                  </td>
+                  <td className="px-6 py-4">
+                    <Link href={`mailto:${candidate?.email}`}>
+                      {candidate?.email}
+                    </Link>
+                  </td>
+                  <td className="px-6 py-4">
+                    {" "}
+                    <Link href={`tel:91${candidate?.phoneNo}`}>
+                      {candidate?.phoneNo}
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
       </div>
     </div>
   );

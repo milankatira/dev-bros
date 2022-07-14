@@ -69,7 +69,7 @@ const Header = () => {
       className={
         navbar
           ? scrollDir == "scrolling up"
-            ? "sticky top-0 z-50 bg-gray-100 shadow-md"
+            ? "sticky top-0 z-50 shadow-2xl"
             : "hidden top-0 z-50 bg-white shadow-md"
           : "sticky top-0 z-50 bg-white shadow-md"
       }

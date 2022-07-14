@@ -1,6 +1,4 @@
-import moment from "moment";
 import React, { useState, useRef } from "react";
-import { NotifyMember } from "../../../api/client/compnay";
 type AccordionProps = {
   // title: string;
   content: any;
@@ -18,9 +16,6 @@ const Accordion = ({ content, setOpenAssignModal,setGroupId }: AccordionProps) =
     setHeight(!isOpened ? `${contentElement.current.scrollHeight}px` : "0px");
   };
 
-  const HandleNotify = (id) => {
-    NotifyMember(id);
-  };
   return (
     <div className="border-b border-red-600">
       <div className="flex justify-between">
