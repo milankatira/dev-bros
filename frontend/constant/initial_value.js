@@ -36,6 +36,7 @@ export const intialValue = {
         passingYear: "",
       },
     ],
+
     experience_details: [
       {
         company: "",
@@ -52,17 +53,6 @@ export const intialValue = {
         skill: "",
         yearExp: "",
         lastUsed: "",
-      },
-    ],
-    exam: [
-      {
-        exam_name: "",
-        date: "",
-        start_time: "",
-        end_time: "",
-        exam_type: "",
-        total_mark: "",
-        passing_mark: "",
       },
     ],
   },

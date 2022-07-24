@@ -9,6 +9,7 @@ const EducationModel = require("../database/education_details");
 const ExperienceModel = require("../database/professional_expericance");
 const UserPreferenceModal = require("../database/user_preferance");
 const userDataModel = require("../database/profileModel");
+const institutionModel=require("../database/institution");
 const cloudinary = require("cloudinary");
 const { getTokenForEmailVarification } = require("../helpers/auth");
 
@@ -294,7 +295,6 @@ exports.addProfile = catchAsyncError(async (req, res, next) => {
 
     console.log(imagePath, "imagepath");
     const authData = await userDataModel.findOne({ user_id: req.user.id });
-    console.log(authData, "authDATA");
     authData.profile_pic = imagePath;
     await authData.save();
   }
@@ -357,6 +357,26 @@ exports.addProfile = catchAsyncError(async (req, res, next) => {
   await UserPrederance.save();
 
   res.status(200).json({
+    success: true,
+    message: "user profile added successfully",
+  });
+});
+
+exports.getProfile = catchAsyncError(async (req, res, next) => {
+  const EducationDetail = await EducationModel.find({
+    user_id: req.user.id,
+  }).populate({
+    path: "institution",
+    model: institutionModel,
+    select:'name'
+  });
+  // populate: {
+  //       path: "candidates",
+  //       model: UserModel,
+  //       select: "name email phone",
+  //     },
+  res.status(200).json({
+    EducationDetail: EducationDetail,
     success: true,
     message: "user profile added successfully",
   });

@@ -3,6 +3,7 @@ import React, { createContext, useReducer, useContext } from "react";
 import Auth from "../reducer/Auth";
 
 import { user} from "../../api/client/user";
+
 import { login } from "../../api/auth";
 
 import { authStatusSuccess, setLoading } from "../actions/Auth";
@@ -39,22 +40,10 @@ function AuthProvider(props) {
   };
 
   const LoginUser = (packet) => {
-    console.log(`fff`, packet);
     dispatch(setLoading(true));
 
-    // user()
-    //   .then((res) => {
-    //     dispatch(setLoading(false));
-    //     dispatch(authStatusSuccess(res.data));
-    //   })
-    //   .catch((err) => {
-    //     dispatch(setLoading(false));
-    //   });
-
-    // dispatch(setLoading(true));
     login(packet)
       .then((res) => {
-        console.log(res.data, "kk");
         dispatch(setLoading(false));
         dispatch(authStatusSuccess(res.data));
       })

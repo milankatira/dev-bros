@@ -2,10 +2,9 @@ const express = require("express");
 
 const { isAuthenticUser } = require("../middleware/auth");
 
-const ExamController=require('../controller/exam')
+const ExamController = require("../controller/exam");
 
 const router = express.Router();
-
 
 router.route("/exam").get(isAuthenticUser, ExamController.GetAllExam);
 

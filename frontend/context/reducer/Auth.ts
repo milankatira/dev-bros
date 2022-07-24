@@ -1,27 +1,4 @@
 import * as types from "../constants/auth";
-
-// interface auth {
-//   signUp: { data: any, error: any };
-//   SignIn: { data: any, error: any };
-//   authUser: any;
-//   authError: any;
-//   authStatus: any;
-//   forgotPassword: { data: any, error: any };
-//   newPassword: { data: any, error: any };
-//   verifyEmail: { data: any, error: any };
-// }
-
-// export const initialState = {
-//   signUp: { data: null, error: null },
-//   SignIn: { data: null, error: null },
-//   authUser: null,
-//   authError: null,
-//   authStatus: null,
-//   forgotPassword: { data: null, error: null },
-//   newPassword: { data: null, error: null },
-//   verifyEmail: { data: null, error: null },
-// };
-
 const authReducer = (state, action) => {
   switch (action.type) {
     case types.AUTH_STATUS:

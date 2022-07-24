@@ -3,8 +3,10 @@ import { user } from "../api/client/user";
 import axios from "axios";
 import Link from "next/link";
 import { useAuthcontext } from "../context/context/Auth";
+import { server_url } from "../config/app_config";
 
-const Myprofile = ({ userData }) => {
+const Myprofile = ({ userData, profiledata }) => {
+  console.log(profiledata.EducationDetail[0].institution.name, "fff");
   const { auth, Auth_api } = useAuthcontext();
   console.log(auth.loading, "loading ...");
   return (
@@ -49,65 +51,42 @@ const Myprofile = ({ userData }) => {
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
                 <div className="px-6">
                   <div className="flex flex-wrap justify-center">
-                    <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
+                    <div className="w-full px-8 lg:order-1 flex justify-center">
                       <div className="relative">
                         <img
                           alt="..."
-                          src={userData?.profile?.profile_pic}
-                          className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                          src={`${server_url}/${userData.pic}`}
+                          className="shadow-xl rounded-full hover:shadow-2xl align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px h-[150px]"
                         />
                       </div>
                     </div>
-                    <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
-                      <div className="py-6 px-3 mt-32 sm:mt-0">
-                        <Link href="/profile">
-                          <button
-                            className="bg-sky-700 active:bg-sky-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
-                            type="button"
-                          >
-                            Connect
-                          </button>
-                        </Link>
-                      </div>
-                    </div>
-                    <div className="w-full lg:w-4/12 px-4 lg:order-1">
-                      <div className="flex justify-center py-4 lg:pt-4 pt-8">
-                        <div className="mr-4 p-3 text-center">
-                          <span className="text-xl font-bold block uppercase tracking-wide text-sky-600">
-                            22
-                          </span>
-                          <span className="text-sm text-sky-400">Friends</span>
-                        </div>
-                        <div className="mr-4 p-3 text-center">
-                          <span className="text-xl font-bold block uppercase tracking-wide text-sky-600">
-                            10
-                          </span>
-                          <span className="text-sm text-sky-400">Photos</span>
-                        </div>
-                        <div className="lg:mr-4 p-3 text-center">
-                          <span className="text-xl font-bold block uppercase tracking-wide text-sky-600">
-                            89
-                          </span>
-                          <span className="text-sm text-sky-400">Comments</span>
-                        </div>
-                      </div>
+                  </div>
+
+                  <div className="w-full px-4 text-center sm:text-right mt-0 sm:mt-0 flex sm:justify-end justify-center">
+                    <div className="py-6 px-3 mt-32 sm:mt-0">
+                      <Link href="/profile">
+                        <button
+                          className="bg-sky-700 active:bg-sky-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                          type="button"
+                        >
+                          Connect
+                        </button>
+                      </Link>
                     </div>
                   </div>
-                  <div className="text-center mt-12">
-                    <h3 className="text-4xl font-semibold leading-normal mb-2 text-sky-700 mb-2">
+
+                  <div className="text-center sm:mt-8">
+                    <h3 className="text-4xl font-semibold leading-normal text-sky-700 mb-4">
                       {userData?.user?.firstName} {userData?.user.lastName}
                     </h3>
-                    <div className="text-sm leading-normal mt-0 mb-2 text-sky-400 font-bold uppercase">
-                      <i className="fas fa-map-marker-alt mr-2 text-lg text-sky-400"></i>{" "}
-                      {userData?.profile?.location}
-                    </div>
-                    <div className="mb-2 text-sky-600 mt-10">
+
+                    <div className="mb-2 text-sky-600">
                       <i className="fas fa-briefcase mr-2 text-lg text-sky-400"></i>
-                      Solution Manager - Creative Tim Officer
+                      {profiledata.EducationDetail[0].description}
                     </div>
                     <div className="mb-2 text-sky-600">
                       <i className="fas fa-university mr-2 text-lg text-sky-400"></i>
-                      University of Computer Science
+                      {profiledata.EducationDetail[0].institution.name}
                     </div>
                   </div>
                   <div className="mt-10 py-10 border-t border-sky-200 text-center">
@@ -150,6 +129,15 @@ export async function getServerSideProps({ req }) {
       Cookie: req?.headers?.cookie,
     },
   });
+
+  const profile = await axios.get("http://localhost:4000/api/myprofile", {
+    withCredentials: true,
+    headers: {
+      "Access-Control-Allow-Credentials": true,
+      Cookie: req?.headers?.cookie,
+    },
+  });
   const data = await res.data;
-  return { props: { userData: data } };
+  const profiledata = await profile.data;
+  return { props: { userData: data, profiledata: profiledata } };
 }

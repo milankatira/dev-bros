@@ -15,12 +15,14 @@ const {
   updateUserRole,
   verifyUser,
   addProfile,
+  getProfile,
 } = require("../controller/userController");
 const { isAuthenticUser, authorizeRoles } = require("../middleware/auth");
 
 const router = express.Router();
 
 router.route("/register").post(registerUser);
+router.route("/myprofile").get(isAuthenticUser, getProfile);
 
 router.route("/verify/email/:token").post(verifyUser);
 
