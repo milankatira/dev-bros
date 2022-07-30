@@ -93,7 +93,7 @@ const Accordion = ({ isPast, content }: AccordionProps) => {
                   <td className="px-6 py-4" scope="col">
                     From {data?.start_time} to {data?.end_time}
                   </td>
-                  {!isPast && (
+                  {isPast && (
                     <td className="px-6 py-4" scope="col">
                       <Switch
                         checked={data?.notify}
