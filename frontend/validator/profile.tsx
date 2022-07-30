@@ -2,8 +2,8 @@ import * as yup from "yup";
 import moment from "moment";
 
 const dateObj = new Date();
-var numberOfDaysToAdd = 100 * 365;
-var result = dateObj.setDate(dateObj.getDate() + numberOfDaysToAdd);
+const numberOfDaysToAdd = 100 * 365;
+const result = dateObj.setDate(dateObj.getDate() + numberOfDaysToAdd);
 
 const form_validation = {
   firstName_required: "First Name is required.",

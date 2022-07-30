@@ -5,6 +5,7 @@ const app = express();
 const cookieParser = require("cookie-parser");
 
 app.use(express.json({ limit: "8mb" }));
+
 app.use(cookieParser());
 
 const bodyParser = require("body-parser");
@@ -29,7 +30,23 @@ const profile = require("./routes/profileRoutes");
 
 const company = require("./routes/company");
 
+const exam = require("./routes/exam");
+
 const dotenv = require("dotenv");
+
+const question = require("./routes/question");
+
+const codingquestion = require("./routes/codingquestion");
+
+const candidateGroup = require("./routes/candidates");
+
+const group = require("./routes/group");
+
+const assignExam = require("./routes/assignexam");
+
+const code = require("./routes/code");
+
+const result = require("./routes/result");
 
 dotenv.config({ path: "server/config/config.env" });
 
@@ -37,6 +54,14 @@ const cors = require("cors");
 const session = require("express-session");
 const RedisStore = require("connect-redis")(session);
 const RedisClient = require("./config/redis.config.js");
+
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 
 app.use(
   session({
@@ -47,19 +72,26 @@ app.use(
   })
 );
 
-// app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(fileUpload());
 
-const corsOptions = {
-  origin: process.env.SITE_URL,
-  credentials: true,
-  optionsSuccessStatus: 200,
-};
-
-app.use(cors(corsOptions));
 app.use(express.static(`${__dirname}/static`));
-app.use("/api", [product, user, order, profile, generic_data, jobs, company]);
+app.use("/api", [
+  product,
+  user,
+  order,
+  profile,
+  generic_data,
+  jobs,
+  company,
+  exam,
+  question,
+  candidateGroup,
+  group,
+  assignExam,
+  code,
+  result,
+  codingquestion,
+]);
 
 app.use(errorMiddleware);
 

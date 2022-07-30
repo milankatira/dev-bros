@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
 const myprofile = ({ userData, company }) => {
-  console.log(company, "company");
   return (
     <div>
       <main className="profile-page">
@@ -48,8 +47,8 @@ const myprofile = ({ userData, company }) => {
                     <div className="relative">
                       <img
                         alt="..."
-                        src={userData?.profile?.profile_pic}
-                        className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                        src={`${company.cover_picture}`}
+                        // className="shadow-xl rounded-full h-auto align-middle border-none absolute max-w-150-px w-40"
                       />
                     </div>
                   </div>
@@ -65,30 +64,15 @@ const myprofile = ({ userData, company }) => {
                       </Link>
                     </div>
                   </div>
-                  <div className="w-full lg:w-4/12 px-4 lg:order-1">
-                    <div className="flex justify-center py-4 lg:pt-4 pt-8">
-                      <div className="mr-4 p-3 text-center">
-                        <span className="text-xl font-bold block uppercase tracking-wide text-sky-600">
-                          22
-                        </span>
-                        <span className="text-sm text-sky-400">Friends</span>
-                      </div>
-                      <div className="mr-4 p-3 text-center">
-                        <span className="text-xl font-bold block uppercase tracking-wide text-sky-600">
-                          10
-                        </span>
-                        <span className="text-sm text-sky-400">Photos</span>
-                      </div>
-                      <div className="lg:mr-4 p-3 text-center">
-                        <span className="text-xl font-bold block uppercase tracking-wide text-sky-600">
-                          89
-                        </span>
-                        <span className="text-sm text-sky-400">Comments</span>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 <div className="text-center mt-12">
+                  <div className="w-full px-4 lg:order-2 flex justify-center">
+                    <img
+                      alt="..."
+                      src={`${company.cover_picture}`}
+                      className="shadow-xl rounded-full h-auto align-middle border-none absolute max-w-150-px w-40"
+                    />
+                  </div>
                   <h3 className="text-4xl font-semibold leading-normal mb-2 text-sky-700 mb-2">
                     {userData?.user?.firstName} {userData?.user.lastName}
                   </h3>

@@ -71,7 +71,6 @@ export default function CardSettings({ initialValue, handleSubmit }) {
 
                     <ButtonField
                       type="submit"
-                      // onClick={() => arrayHelpers.remove(index)}
                       text="Submit"
                     />
                   </div>

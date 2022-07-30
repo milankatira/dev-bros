@@ -11,6 +11,13 @@ export const intialValue = {
     password: "",
   },
 
+  assignExam: {
+    name: "",
+    date: "",
+    start_time: "",
+    end_time: "",
+  },
+
   profile: {
     firstName: "",
     lastName: "",
@@ -29,5 +36,38 @@ export const intialValue = {
       },
     ],
   },
-  
+
+  Exam: {
+    exam_name: "",
+    start_time: "",
+    end_time: "",
+    description: "",
+    exam_type: "",
+    date: "",
+    passing_mark: "",
+    total_mark: " ",
+    totalQuestion: " ",
+  },
+
+  mcqQuestions: {
+    questions: [
+      {
+        question: "",
+        mcqs: ["", "", "", ""],
+        answer: "",
+        level: "easy",
+      },
+    ],
+  },
+
+  codingQuestion: {
+    level: "",
+  },
+  exam_link: {
+    exam_link: "",
+  },
+  candidateGroup: {
+    title: "",
+    description: "",
+  },
 };

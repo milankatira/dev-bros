@@ -10,6 +10,9 @@ const Navbar = dynamic(() => import("../layouts/navbar"), {
   ssr: false,
 });
 
+
+import { AuthProvider } from "../context/context/Auth";
+
 const progress = new ProgressBar({
   size: 4,
   color: "#A855F7",
@@ -31,13 +34,14 @@ Router.events.on("routeChangeError", () => {
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
+    <AuthProvider>
       <Toaster position="top-center" reverseOrder={false} />
-        <Navbar/>
+      <Navbar />
       <CookiesProvider>
         <Component {...pageProps} />
       </CookiesProvider>
-    </>
+     
+    </AuthProvider>
   );
 }
 
