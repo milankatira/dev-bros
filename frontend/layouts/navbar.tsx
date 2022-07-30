@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+
 const Header = () => {
   const [navbar, setnavbar] = useState<boolean>(false);
   const changeBg = () => {
@@ -34,6 +35,7 @@ const Header = () => {
         ticking = false;
         return;
       }
+
       setScrollDir(scrollY > lastScrollY ? "scrolling down" : "scrolling up");
       lastScrollY = scrollY > 0 ? scrollY : 0;
       ticking = false;

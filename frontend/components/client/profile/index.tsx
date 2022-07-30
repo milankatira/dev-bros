@@ -1,28 +1,22 @@
 import React from "react";
 import CardSettings from "../../Cards/CardSettings";
 import { intialValue } from "../../../constant/initial_value";
+import { addProfile } from "../../../api/client/user";
 
-const index = ({
-  city,
-  degree,
-  institution,
-  designation,
-  fresher,
-  setfresher,
-  skill,
-  employementType,
-}) => {
+const index = () => {
+  const handleSubmit = (data: any) => {
+    const formdata = new FormData();
+
+    formdata.append("firstName", data.firstName);
+    formdata.append("lastName", data.lastName);
+
+    addProfile(formdata);
+  };
+
   return (
     <CardSettings
-      skill={skill}
-      fresher={fresher}
-      setfresher={setfresher}
-      city={city}
-      degree={degree}
-      institution={institution}
-      designation={designation}
-      employementType={employementType}
       initialValue={intialValue.profile}
+      handleSubmit={handleSubmit}
     />
   );
 };

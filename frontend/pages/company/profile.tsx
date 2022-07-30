@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
-import { getCompany } from "../../api/client/compnay";
 const myprofile = ({ userData, company }) => {
   console.log(company, "company");
   return (
