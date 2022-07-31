@@ -6,27 +6,24 @@ const Past = ({ exam, isPast }) => {
   return (
     <div>
       <table className="w-full text-sm text-left text-gray-500">
-        <div className="text-xs flex flex-row text-gray-700 uppercase bg-gray-50">
-          <h1 className="px-6 py-3">Exam name</h1>
-
-          <h1 className="px-6 py-3">Description</h1>
-
-          <h1 className="px-6 py-3">Total mark</h1>
-
-          <h1 className="px-6 py-3">Passing mark</h1>
-
-          <h1 className="px-6 py-3">Type</h1>
+        <div className="w-full flex justify-between text-xs flex-row text-gray-700 uppercase bg-gray-50">
+          <h1 className="px-2 py-4 border-2 w-full">Exam name</h1>
+          <h1 className="px-2 py-4 border-2 w-full">Description</h1>
+          <h1 className="px-2 py-4 border-2 w-full">Total mark</h1>
+          <h1 className="px-2 py-4 border-2 w-full">Passing mark</h1>
+          <h1 className="px-2 py-4 border-2 w-full">Type</h1>
+          <h1 className="px-2 py-4 border-2 w-full">ffrf </h1>
         </div>
         <tbody>
           {exam.map((data) => (
             <>
-              <tr key={data._id} className="bg-white border-b hover:bg-gray-50">
+              {/* <tr key={data._id} className="bg-white border-b hover:bg-gray-50"> */}
                 <Accordion
                   title={data.exam_name}
                   content={data}
                   isPast={isPast ? true : false}
                 />
-              </tr>
+              {/* </tr> */}
             </>
           ))}
         </tbody>
