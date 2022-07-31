@@ -72,7 +72,8 @@ export const get_single_question = (id) =>
 
 export const coding_question = (id) => `${server_url}/api/codingquestion/${id}`;
 
-export const singlecodingquestion = (id) => `${server_url}/api/singlecodingquestion/${id}`;
+export const singlecodingquestion = (id) =>
+  `${server_url}/api/singlecodingquestion/${id}`;
 
 //TODO CANDIDATES
 
@@ -101,3 +102,6 @@ export const SubmitExam = `${server_url}/api/submit_exam`;
 //TODO GROUP
 
 export const group = `${server_url}/api/group`;
+
+//TODO Exam Question
+export const ExamQuestion = (id) => `${server_url}/api/examquestion/${id}`;

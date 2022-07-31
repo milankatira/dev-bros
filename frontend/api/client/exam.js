@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { exam, exam_id } from "../../constant/api_url";
+import { exam, exam_id, ExamQuestion } from "../../constant/api_url";
 
 axios.defaults.withCredentials = true;
 
@@ -12,6 +12,16 @@ export const getExamById = async (id) => {
       throw err;
     });
 };
+
+export const GetExamQuestion = async (exam_id) => {
+  return await axios
+    .get(ExamQuestion(exam_id))
+    .then((response) => response)
+    .catch((err) => {
+      throw err;
+    });
+};
+
 
 export const GetAllExam = async (queryParams) => {
   return await axios

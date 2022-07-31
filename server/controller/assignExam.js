@@ -1,8 +1,9 @@
 const AssignExamModal = require("../database/assignExam");
 const ExamModel = require("../database/exam");
+// ExamModal
 const UserModel = require("../database/userModel");
 const GroupModel = require("../database/candidate_group");
-
+const AssignExamModel = require("../database/assignExam");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");
 const { v4: uuidv4 } = require("uuid");
@@ -107,18 +108,61 @@ exports.getAssignCandidate = catchAsyncError(async (req, res, next) => {
 });
 
 exports.updateNotifyStatus = catchAsyncError(async (req, res, next) => {
-  try {
-    const { id } = req.params;
+  const { id } = req.params;
 
-    const assignExam = await AssignExamModal.findByIdAndUpdate(id, {
-      notify: req.body.notify,
-    });
+  const assignExam = await AssignExamModal.findByIdAndUpdate(id, {
+    notify: req.body.notify,
+  });
 
-    res.status(201).json({
-      success: true,
-      assignExam,
-    });
-  } catch (error) {
-    return next(new ErrorHandler(error.message, 500));
-  }
+  res.status(201).json({
+    success: true,
+    assignExam,
+  });
+});
+
+exports.getMcqQuestion = catchAsyncError(async (req, res, next) => {
+  const { exam_id } = req.params;
+  const query1 = {
+    exam_id: mongoose.Types.ObjectId(exam_id),
+  };
+  const query = {
+    _id: mongoose.Types.ObjectId(exam_id),
+  };
+
+  const examData = await ExamModel.findById(exam_id);
+  const exam = await ExamModel.aggregate([
+    { $match: query },
+    {
+      $lookup: {
+        from: "questions",
+        as: "questions",
+        pipeline: [
+          { $match: query1 },
+          { $sample: { size: examData.totalQuestion } },
+        ],
+      },
+    },
+    {
+      $project: {
+        date: 1,
+        description: 1,
+        end_time: 1,
+        exam_name: 1,
+        exam_type: 1,
+        start_time: 1,
+        total_mark: 1,
+        user_id: 1,
+        _id: 1,
+        "questions._id": 1,
+        "questions.question": 1,
+        "questions.mcqs": 1,
+        "questions.level": 1,
+      },
+    },
+  ]);
+
+  res.status(201).json({
+    success: true,
+    exam,
+  });
 });
