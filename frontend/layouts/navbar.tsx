@@ -49,6 +49,7 @@ const Header = () => {
         ticking = false;
         return;
       }
+
       setScrollDir(scrollY > lastScrollY ? "scrolling down" : "scrolling up");
       lastScrollY = scrollY > 0 ? scrollY : 0;
       ticking = false;

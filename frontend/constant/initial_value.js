@@ -21,40 +21,6 @@ export const intialValue = {
   profile: {
     firstName: "",
     lastName: "",
-    location: "",
-    employmentType: "",
-    expectedSalary: "",
-    SalaryPreference: "",
-    preferedLocation: "",
-    education_details: [
-      {
-        degree: "",
-        institute: "",
-        educationDescription: "",
-        marks: "",
-        startedYear: "",
-        passingYear: "",
-      },
-    ],
-
-    experience_details: [
-      {
-        company: "",
-        designation: "",
-        experienceDescription: "",
-        startDate: "",
-        endDate: "",
-        currentlyWorking: false,
-        fresher: false,
-      },
-    ],
-    skills: [
-      {
-        skill: "",
-        yearExp: "",
-        lastUsed: "",
-      },
-    ],
   },
 
   company_profile: {

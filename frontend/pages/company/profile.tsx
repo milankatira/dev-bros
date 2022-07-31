@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
-import { server_url } from "../../config/app_config";
 const myprofile = ({ userData, company }) => {
-  console.log(userData, company.cover_picture, "");
   return (
     <div>
       <main className="profile-page">
@@ -49,7 +47,7 @@ const myprofile = ({ userData, company }) => {
                     <div className="relative">
                       <img
                         alt="..."
-                        src={`${server_url}/${company.cover_picture}`}
+                        src={`${company.cover_picture}`}
                         // className="shadow-xl rounded-full h-auto align-middle border-none absolute max-w-150-px w-40"
                       />
                     </div>
@@ -71,7 +69,7 @@ const myprofile = ({ userData, company }) => {
                   <div className="w-full px-4 lg:order-2 flex justify-center">
                     <img
                       alt="..."
-                      src={`${server_url}/${company.cover_picture}`}
+                      src={`${company.cover_picture}`}
                       className="shadow-xl rounded-full h-auto align-middle border-none absolute max-w-150-px w-40"
                     />
                   </div>
