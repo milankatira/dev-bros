@@ -1,8 +1,11 @@
 import moment from "moment";
 import React, { useState, useRef } from "react";
 import { NotifyMember } from "../../../api/client/compnay";
-import ButtonField from "./ButtonField";
-import Switch from "./switch";
+import ButtonField from "../../common/design/ButtonField";
+import Switch from "../../common/design/Switch";
+import ReportModal from '../assignExam/ResultModal';
+import Router from "next/router";
+import StatusModal from "./StatusModal";
 type AccordionProps = {
   title: string;
   content: any;
@@ -12,12 +15,35 @@ type AccordionProps = {
 const Accordion = ({ isPast, content }: AccordionProps) => {
   console.log(isPast, "isPast");
   const [isOpened, setOpened] = useState<boolean>(false);
+  const [showResultModal, setshowResultModal] = useState(false);
+  const [showStatusModal, setshowStatusModal] = useState(false);
+
+  const toggleResultModal = () => setshowResultModal(!showResultModal);
+
+    const toggleStatusModal = () => setshowStatusModal(!showStatusModal);
+
   const [height, setHeight] = useState<string>("0px");
   const contentElement = useRef(null);
 
   const HandleOpening = () => {
     setOpened(!isOpened);
     setHeight(!isOpened ? `${contentElement.current.scrollHeight}px` : "0px");
+  };
+
+  const handlerResult = (data: any) => {
+    setshowResultModal(true);
+    // const packet = {
+    //   assign_exam_id: data?._id,
+    // };
+    // if (row?.exam_type == "MCQ") {
+    //   GenerateReport(packet).then((res) => {
+    //     setResult(res?.data?.results?.report);
+    //   });
+    // } else {
+    //   GenerateCodingReport(packet).then((res) => {
+    //     setResult(res?.data?.results?.report);
+    //   });
+    // }
   };
 
   const HandleNotify = (id) => {
@@ -66,9 +92,12 @@ const Accordion = ({ isPast, content }: AccordionProps) => {
               <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">
                 Assign exam
               </h1>
-              <div className="h-1 w-[135px] bg-indigo-500 rounded"></div>
+              <div className="h-1 w-[170px] bg-indigo-500 rounded"></div>
             </div>
-            <ButtonField text="Assign Exam" />
+            <ButtonField
+              text="Assign Exam"
+              onClick={() => Router.push(`exam/${content?._id}`)}
+            />
           </div>
         </div>
         <table className="w-full text-sm text-left text-gray-500">
@@ -88,6 +117,7 @@ const Accordion = ({ isPast, content }: AccordionProps) => {
               <th scope="col" className="px-6 py-3">
                 Notify
               </th>
+              <th scope="col" className="px-6 py-3"></th>
               <th scope="col" className="px-6 py-3"></th>
             </tr>
           </thead>
@@ -121,11 +151,23 @@ const Accordion = ({ isPast, content }: AccordionProps) => {
                   )}
 
                   <td scope="col">
-                    <ButtonField text="check exam" />
+                    <ButtonField
+                      text="check exam"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handlerResult(data);
+                      }}
+                    />
                   </td>
 
                   <td scope="col">
-                    <ButtonField text="View Status" />
+                    <ButtonField
+                      text="View Status"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setshowStatusModal(true);
+                      }}
+                    />
                   </td>
                 </tr>
               );
@@ -133,6 +175,14 @@ const Accordion = ({ isPast, content }: AccordionProps) => {
           </tbody>
         </table>
       </div>
+      <ReportModal
+        open={showResultModal}
+        // handleClose={toggleResultModal}
+        // examdDetails={result}
+        setopen={setshowResultModal}
+        // exam={row}
+      />
+      <StatusModal open={showStatusModal} setopen={setshowStatusModal} />
     </div>
   );
 };

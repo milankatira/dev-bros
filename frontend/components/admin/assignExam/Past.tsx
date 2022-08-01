@@ -1,5 +1,5 @@
 import React from "react";
-import Accordion from "../../common/design/Accordian";
+import Accordion from "../../admin/assignExam/Accordian";
 
 const Past = ({ exam, isPast }) => {
   console.log(isPast, "past_exam");
