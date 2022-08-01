@@ -12,7 +12,7 @@ import {
 const Index = () => {
   const router = useRouter();
   const [questionData, setquestionData] = useState("");
-  const [questionState, setquestionState] = useState();
+  const [questionState, setquestionState] = useState<any>();
   console.log(questionState, "questionData__1");
   useEffect(() => {
     router.query.coding_question_id &&
@@ -52,6 +52,7 @@ const Index = () => {
         />
       ) : (
         <FormForQuestion
+          isEdit={false}
           handleSubmit={handleSubmit}
           intialValue={intialValue.codingQuestion}
           questionData={questionData}

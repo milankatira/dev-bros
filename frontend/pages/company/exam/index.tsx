@@ -84,7 +84,7 @@ const Index = () => {
     return () => cancel();
   }, [pageNumber]);
 
-  const observer = useRef();
+  const observer:any = useRef();
   const lastBookElementRef = useCallback(
     (node) => {
       if (loading) return;
@@ -133,8 +133,7 @@ const Index = () => {
                   inputLabel="examType"
                   options={["mcq", "coding"]}
                   defaultValue={searchExamType}
-                  onChange={(e) => setSearchExamType(e.target.value)}
-                />
+                  onChange={(e) => setSearchExamType(e.target.value)} name={""}                />
               </div>
               <div className="relative">
                 <button

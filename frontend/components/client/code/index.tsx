@@ -72,9 +72,9 @@ const Index = () => {
         width="90%"
         height="400px"
         theme="dark"
-        options={{
-          mode: "javascript",
-        }}
+        // options={{
+        //   mode: "javascript",
+        // }}
         autoFocus={true}
         extensions={[javascript({ jsx: true })]}
         onChange={(value, viewUpdate) => {
@@ -91,9 +91,9 @@ const Index = () => {
           width="90%"
           height="400px"
           theme="dark"
-          options={{
-            mode: "javascript",
-          }}
+          // options={{
+          //   mode: "javascript",
+          // }}
           autoFocus={true}
           extensions={[javascript({ jsx: true })]}
         />

@@ -1,16 +1,13 @@
-import Link from "next/link";
 import React, { useState } from "react";
 import Past from "../../components/admin/assignExam/Past";
 import { UseEffectOnce } from "../../hook/useEffectOnce";
 import { GetAssignCandidate } from "../../api/client/compnay";
 import moment from "moment";
 import Fade from "react-reveal/Fade";
-import Slide from "react-reveal/Slide";
-
 
 const AssignExam = () => {
   const [step, setstep] = useState("past");
-  const [exams, setexams] = useState();
+  const [exams, setexams] = useState([]);
   UseEffectOnce(() => {
     GetAssignCandidate().then((res) => {
       setexams(res.data.assignExam);

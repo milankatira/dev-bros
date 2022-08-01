@@ -47,14 +47,11 @@ const Mcq = ({ initial_value, setinitial_value }) => {
             : "not revisited"}
         </button>
         {initial_value[currentQuestion]?.mcqs?.map((answer, index) => {
-          console.log(
-            answer.candidateAns,
-            "answer",
-            initial_value[currentQuestion].candidateAns,
-            "mk"
-          );
           return (
-            <div className="flex bg-green-600 rounded-lg items-center p-4 mb-2">
+            <div
+              key={initial_value[currentQuestion]}
+              className="flex bg-green-600 rounded-lg items-center p-4 mb-2"
+            >
               <input
                 type="radio"
                 name={answer}

@@ -10,7 +10,7 @@ import {
 
 const Index = () => {
   const router = useRouter();
-  const [questionData, setquestionData] = useState([]);
+  const [questionData, setquestionData] = useState<any>([]);
 
   const handleSubmit = (data) => {
     const packet = {

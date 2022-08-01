@@ -23,6 +23,7 @@ declare module "component" {
     inputLabel?: string;
     styles?: string;
     defaultValue?: string | any;
+    onChange?: MyFunctionType;
   }
 
   export interface ModalFieldProps {

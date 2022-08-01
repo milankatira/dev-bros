@@ -72,16 +72,16 @@ export const Profile = yup.object().shape({
         marks: yup
           .number()
           .typeError(form_validation.marks_number)
-          .required(form_validation.marks)
-          .max(100, form_validation.maxMarks),
+          .required(form_validation.marks),
+          // .max(100, form_validation.maxMarks),
         startedYear: yup
           .date()
-          .required(form_validation.started_year)
-          .max(moment().toDate(), form_validation.currentYear),
+          .required(form_validation.started_year),
+          // .max(moment().toDate(), form_validation.currentYear),
 
         passingYear: yup
           .date()
-          .min(yup.ref("startedYear"), form_validation.passingYear)
+          // .min(yup.ref("startedYear"), form_validation.passingYear)
           .max(moment(result).toDate(), form_validation.passingYear_long)
           .required(form_validation.passing_year),
       })
@@ -100,13 +100,13 @@ export const Profile = yup.object().shape({
 
         startDate: yup
           .date()
-          .required(form_validation.start_date)
-          .max(moment().toDate(), form_validation.currentDate),
+          .required(form_validation.start_date),
+          // .max(moment().toDate(), form_validation.currentDate),
         endDate: yup
           .date()
-          .required(form_validation.end_date)
-          .min(yup.ref("startDate"), form_validation.enddate)
-          .max(moment().toDate(), form_validation.end_dates),
+          .required(form_validation.end_date),
+          // .min(yup.ref("startDate"), form_validation.enddate)
+          // .max(moment().toDate(), form_validation.end_dates),
         fresher: yup.boolean(),
       })
     )

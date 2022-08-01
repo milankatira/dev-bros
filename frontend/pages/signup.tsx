@@ -5,7 +5,7 @@ import ModalField from "../components/common/design/ModalField";
 import firebase from "../firebase/firebase";
 import { Formik, Form, Field } from "formik";
 import { intialValue } from "../constant/initial_value";
-import { signup } from "../validator/signup";
+import { Signup } from "../validator/signup";
 import { register } from "../api/auth/index";
 import Link from "next/link";
 const Auth = () => {
@@ -85,7 +85,7 @@ const Auth = () => {
     <div>
       <Formik
         initialValues={intialValue.signup}
-        validationSchema={signup}
+        validationSchema={Signup}
         onSubmit={(data) => handleRegister(data)}
       >
         {(props) => {
