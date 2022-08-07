@@ -1,33 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
 
-const Mcq = ({ initial_value, setinitial_value }) => {
-  // const Attamptedarray = initial_value.filter(
-  //   (data) => data.candidateAns !== ""
-  // );
-  // const UnAttamptedarray = initial_value.filter(
-  //   (data) => data.candidateAns === ""
-  // );
-  // const Revisitedarray = initial_value.filter(
-  //   (data) => data.revisited === true
-  // );
-  // console.log(
-  //   Attamptedarray,
-  //   UnAttamptedarray,
-  //   Revisitedarray,
-  //   "Attamptedarray"
-  // );
-
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+const Mcq = ({
+  initial_value,
+  setinitial_value,
+  currentQuestion,
+  setCurrentQuestion,
+  updateLocalstorage,
+}) => {
   const handleAnswerOption = (answer) => {
     const array = [...initial_value];
     array[currentQuestion].candidateAns = answer;
     setinitial_value(array);
+    updateLocalstorage();
   };
 
+  const handleNext = () => {
+    setCurrentQuestion(currentQuestion + 1);
+  };
+
+  const handlePrevious = () => {
+    setCurrentQuestion(currentQuestion - 1);
+  };
   const handleRevisitedChange = () => {
     const array = [...initial_value];
     array[currentQuestion].revisited = !array[currentQuestion].revisited;
     setinitial_value(array);
+    updateLocalstorage();
   };
 
   return (
@@ -56,7 +54,6 @@ const Mcq = ({ initial_value, setinitial_value }) => {
                 type="radio"
                 name={answer}
                 value={answer}
-                // checked={answer === "mkk"}
                 checked={answer == initial_value[currentQuestion].candidateAns}
                 onChange={() => handleAnswerOption(answer)}
               />
@@ -64,6 +61,22 @@ const Mcq = ({ initial_value, setinitial_value }) => {
             </div>
           );
         })}
+
+        <button
+          className="bg-red-100"
+          onClick={() => handleNext()}
+          disabled={currentQuestion === initial_value.length - 1}
+        >
+          next
+        </button>
+
+        <button
+          className="bg-red-100"
+          onClick={() => handlePrevious()}
+          disabled={currentQuestion === 0}
+        >
+          back
+        </button>
       </div>
     </div>
   );

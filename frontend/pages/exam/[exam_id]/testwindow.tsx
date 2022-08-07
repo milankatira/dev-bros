@@ -5,90 +5,35 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { Submitexam } from "../../../api/client/user";
-import { GetExamQuestion } from "../../../api/client/exam";
-import { UseEffectOnce } from "../../../hook/useEffectOnce";
 import Mcq from "../../../components/client/test/Mcq";
 export default function Home({ Data }) {
   const router = useRouter();
   const { exam_id } = router.query;
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedOptions, setSelectedOptions] = useState([]);
   const [initial_value, setinitial_value] = useState([]);
   const [questionType, setquestionType] = useState("all");
-  const [score, setScore] = useState(0);
-  const [showScore, setShowScore] = useState(false);
-  const Attamptedarray = initial_value.filter(
-    (data) => data.candidateAns !== ""
-  );
-  const UnAttamptedarray = initial_value.filter(
-    (data) => data.candidateAns === ""
-  );
-  const Revisitedarray = initial_value.filter(
-    (data) => data.revisited === true
-  );
-
-  const handleAnswerOption = (answer) => {
-    console.log(
-      initial_value[currentQuestion]?.candidateAns,
-      "intial_value",
-      currentQuestion,
-      initial_value[currentQuestion]
-    );
-    // array[currentPage - 1].candidateAns = value;
-    // setinitial_value([
-    //   ...initial_value,
-    //   (initial_value[currentQuestion].candidateAns = answer),
-    // ]);
-    // setSelectedOptions([...selectedOptions]);
-    const array = [...initial_value];
-
-    array[currentQuestion].candidateAns = answer;
-
-    setinitial_value(array);
-    console.log(initial_value, "...initial_value");
-  };
-
-  const handlePrevious = () => {
-    const prevQues = currentQuestion - 1;
-    prevQues >= 0 && setCurrentQuestion(prevQues);
-  };
-
-  const handleNext = () => {
-    const nextQues = currentQuestion + 1;
-    nextQues < questions.length && setCurrentQuestion(nextQues);
-  };
-
-  const handleSubmitButton = () => {
-    let newScore = 0;
-    for (let i = 0; i < questions.length; i++) {
-      questions[i].answerOptions.map(
-        (answer) =>
-          answer.isCorrect &&
-          answer.answer === selectedOptions[i]?.answerByUser &&
-          (newScore += 1)
-      );
-    }
-    setScore(newScore);
-    setShowScore(true);
-  };
 
   const handleSubmitExam = () => {
-    console.log();
-    const Array = [
-      {
-        question_id: exam_id,
-        answer: "ww",
-        level: "easy",
-      },
-    ];
+    const questions = initial_value.map((d) => {
+      return {
+        question_id: d._id,
+        answer: d.candidateAns || "",
+        level: d.level,
+      };
+    });
+
     const packet = {
       assign_exam_id: exam_id,
-      exam_id: exam_id,
-      questions: Array,
+      exam_id,
+      questions,
     };
     Submitexam(packet);
   };
 
+  const updateLocalstorage = () => {
+    localStorage.setItem("quest", JSON.stringify(initial_value));
+  };
   useEffect(() => {
     const initialValue = Data?.map((qus: any) => {
       return {
@@ -97,7 +42,12 @@ export default function Home({ Data }) {
         revisited: false,
       };
     });
-    setinitial_value(initialValue);
+    if (localStorage && localStorage.getItem("quest")) {
+      setinitial_value(JSON.parse(localStorage.getItem("quest")));
+    } else {
+      setinitial_value(initialValue);
+      localStorage.setItem("quest", JSON.stringify(initialValue));
+    }
   }, []);
 
   return (
@@ -153,7 +103,11 @@ export default function Home({ Data }) {
               id="navbar-cta"
             >
               <ul className="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                <li onClick={() => setquestionType("Rivisited")}>
+                <li
+                  onClick={() => {
+                    setquestionType("Rivisited"), setCurrentQuestion(0);
+                  }}
+                >
                   <a
                     className="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
                     aria-current="page"
@@ -162,15 +116,34 @@ export default function Home({ Data }) {
                   </a>
                 </li>
 
-                <li onClick={() => setquestionType("unattampted")}>
+                <li
+                  onClick={() => {
+                    setquestionType("all"), setCurrentQuestion(0);
+                  }}
+                >
+                  <a
+                    className="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
+                    aria-current="page"
+                  >
+                    All
+                  </a>
+                </li>
+
+                <li
+                  onClick={() => {
+                    setquestionType("unattampted"), setCurrentQuestion(0);
+                  }}
+                >
                   <a className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
                     unattampted
                   </a>
                 </li>
-                <li onClick={() => setquestionType("attampted")}>
-                  <a
-                    className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                  >
+                <li
+                  onClick={() => {
+                    setquestionType("attampted"), setCurrentQuestion(0);
+                  }}
+                >
+                  <a className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
                     attampted
                   </a>
                 </li>
@@ -179,65 +152,75 @@ export default function Home({ Data }) {
           </div>
         </nav>
 
+        <h1>dashboard</h1>
+
+        <div>
+          {initial_value?.map((d, i) => {
+            console.log(d.revisited, d.candidateAns == "");
+            return (
+              <h1
+                onClick={() => {
+                  setquestionType("all"), setCurrentQuestion(i);
+                }}
+                key={i}
+                className={`  ${
+                  d.revisited
+                    ? `bg-red-700`
+                    : d.candidateAns == ""
+                    ? `bg-red-300`
+                    : `bg-blue-300`
+                } p-4 m-2 rounded-full`}
+              >
+                {i}
+              </h1>
+            );
+          })}
+        </div>
         <div className="w-full">
           {questionType == "all" ? (
             <Mcq
+              setCurrentQuestion={setCurrentQuestion}
+              currentQuestion={currentQuestion}
               initial_value={initial_value}
               setinitial_value={setinitial_value}
+              updateLocalstorage={updateLocalstorage}
             />
           ) : questionType == "unattampted" ? (
             <Mcq
+              setCurrentQuestion={setCurrentQuestion}
+              currentQuestion={currentQuestion}
               initial_value={initial_value.filter(
                 (data) => data.candidateAns == ""
               )}
               setinitial_value={setinitial_value}
+              updateLocalstorage={updateLocalstorage}
             />
           ) : questionType == "attampted" ? (
             <Mcq
+              setCurrentQuestion={setCurrentQuestion}
+              currentQuestion={currentQuestion}
               initial_value={initial_value.filter(
                 (data) => data.candidateAns !== ""
               )}
               setinitial_value={setinitial_value}
+              updateLocalstorage={updateLocalstorage}
             />
           ) : (
             <Mcq
+              setCurrentQuestion={setCurrentQuestion}
+              currentQuestion={currentQuestion}
               initial_value={initial_value.filter(
                 (data) => data.revisited == true
               )}
               setinitial_value={setinitial_value}
+              updateLocalstorage={updateLocalstorage}
             />
           )}
-          {/* initial_value.filter(
-   (data) => data.candidateAns !== ""
- ); */}
         </div>
-        {/* <div className="flex flex-col items-start w-full">
-          <h4 className="mt-10 text-xl text-white/60">{Data.length}</h4>
-          <p>{currentQuestion}</p>
-          <div className="mt-4 text-2xl text-white">
-            {initial_value[currentQuestion]?.question}
-          </div>
-        </div> */}
 
-        {/* <div className="flex flex-col w-full">
-          {initial_value[currentQuestion]?.mcqs?.map((answer, index) => {
-            console.log(answer.candidateAns, "answer");
-            return (
-              <div className="flex bg-green-600 rounded-lg items-center p-4 mb-2">
-                <input
-                  type="radio"
-                  name={answer}
-                  value={answer}
-                  checked={answer === "mkk"}
-                  // checked={answer == answer.candidateAns}
-                  onChange={() => handleAnswerOption(answer)}
-                />
-                <span className="ml-4">{answer}</span>
-              </div>
-            );
-          })}
-        </div>
-       */}
+        <button className="bg-red-400" onClick={() => handleSubmitExam()}>
+          Submit
+        </button>
       </>
     </div>
   );
