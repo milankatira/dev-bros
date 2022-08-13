@@ -3,7 +3,7 @@ import React, { useState, useRef } from "react";
 import { NotifyMember } from "../../../api/client/compnay";
 import ButtonField from "../../common/design/ButtonField";
 import Switch from "../../common/design/Switch";
-import ReportModal from '../assignExam/ResultModal';
+import ReportModal from "../assignExam/ResultModal";
 import Router from "next/router";
 import StatusModal from "./StatusModal";
 import { GenerateExamReport } from "../../../api/client/exam";
@@ -21,7 +21,7 @@ const Accordion = ({ isPast, content }: AccordionProps) => {
 
   const toggleResultModal = () => setshowResultModal(!showResultModal);
 
-    const toggleStatusModal = () => setshowStatusModal(!showStatusModal);
+  const toggleStatusModal = () => setshowStatusModal(!showStatusModal);
 
   const [height, setHeight] = useState<string>("0px");
   const contentElement = useRef(null);
@@ -36,7 +36,7 @@ const Accordion = ({ isPast, content }: AccordionProps) => {
     const packet = {
       assign_exam_id: data?._id,
     };
-     GenerateExamReport(packet);
+    GenerateExamReport(packet);
   };
 
   const HandleNotify = (id) => {
@@ -50,8 +50,7 @@ const Accordion = ({ isPast, content }: AccordionProps) => {
         <h1 className="px-2 py-4 border-2 w-full">{content?.total_mark}</h1>
         <h1 className="px-2 py-4 border-2 w-full">{content?.passing_mark}</h1>
         <h1 className="px-2 py-4 border-2 w-full">{content?.exam_type}</h1>
-        {/* <h1 className="px-2 py-4 border-2 w-full">{content?.exam_type}</h1> */}
-
+    
         <div className="px-2 border-2 w-full">
           {isOpened ? (
             <svg

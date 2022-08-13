@@ -1,4 +1,5 @@
 const ResultModal = require("../database/result");
+const UserModel = require("../database/userModel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");
 const mongoose = require("mongoose");
@@ -149,14 +150,11 @@ exports.generateExamReport = catchAsyncError(async (req, res, next) => {
     },
   ]);
 
-  console.log(results, "results");
   if (results && results.length > 0) {
     const newReport = Promise.all(
-      results.map(async (result) =>
-      {
+      results.map(async (result) => {
         const exam = await ResultModal.findById(result._id).populate("exam_id");
-        if (exam)
-        {
+        if (exam) {
           const newResult = await ResultModal.findByIdAndUpdate(
             result._id,
             {
@@ -170,8 +168,11 @@ exports.generateExamReport = catchAsyncError(async (req, res, next) => {
               hard_correct: result.hard_correct,
             },
             { new: true }
-          )
-          .populate({ path: "candidate_id", select: "name email phone" });
+          ).populate({
+            path: "candidate_id",
+            model: UserModel,
+            select: "firstName lastName email phoneNo",
+          });
           return newResult;
         }
       })
@@ -181,15 +182,14 @@ exports.generateExamReport = catchAsyncError(async (req, res, next) => {
     });
 
     const newGeneratedReport = await reportDetails;
-    // return newGeneratedReport;
     res.status(201).json({
       success: true,
-      newGeneratedReport,
+      results: newGeneratedReport,
+    });
+  } else {
+    res.status(201).json({
+      success: true,
+      results,
     });
   }
-  res.status(201).json({
-    success: true,
-    results,
-  });
-  // return null;
 });
