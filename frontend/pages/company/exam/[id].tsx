@@ -7,7 +7,6 @@ import SelectOptionModal from "../../../components/admin/common/SelectOptionModa
 import CandidateGroupModal from "../../../components/admin/common/CandidateGroupModal";
 import SingleCandidateModal from "../../../components/admin/common/SingleCandidateModal";
 import moment from "moment";
-import ButtonField from "../../../components/common/design/ButtonField";
 import { UseEffectOnce } from "../../../hook/useEffectOnce";
 import {
   getallQuestion,
@@ -111,8 +110,6 @@ const Index = ({ Data }) => {
     });
   };
 
-  // deleteExam(id)
-
   const handleDeleteHandler = (exam_id: string | string[]) => {
     Swal.fire({
       title: "Are you sure?",
@@ -134,7 +131,6 @@ const Index = ({ Data }) => {
             Router.push("/company/exam");
           })
           .catch((err) => {
-            console.log(err?.data, err?.response.data.message, "err");
             Swal.fire("Error!", err?.response?.data?.message, "error");
           });
       } else {
@@ -144,9 +140,9 @@ const Index = ({ Data }) => {
   };
 
   return (
-    <div className="flex flex-row">
-      <section className="w-2/3 mt-4 ml-4">
-        <section className="text-gray-600 body-font overflow-hidden shadow-lg">
+    <div className="flex lg:flex-row flex-col">
+      <section className="lg:w-2/3 w-full flex justify-center mt-4">
+        <section className="w-full bg-red-200 mx-4 rounded overflow-hidden shadow-lg">
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2 font-sans">
               Test Information
@@ -187,7 +183,7 @@ const Index = ({ Data }) => {
                 ) : (
                   <button
                     onClick={() => {
-                      Router.push(`/company/${Data._id}/codingquestion`);
+                      Router.push(`/company/${Data._id}/questions`);
                     }}
                     className="bg-purple-700 text-white font-bold p-2 rounded-lg text-center"
                   >
@@ -214,8 +210,8 @@ const Index = ({ Data }) => {
           </div>
         </section>
       </section>
-      <section className="w-1/3 flex justify-center mt-4">
-        <div className="w-full mx-4 rounded overflow-hidden shadow-lg">
+      <section className="lg:w-1/3 w-full flex justify-center mt-4">
+        <div className="w-full mx-4 bg-red-200 rounded overflow-hidden shadow-lg">
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">Exam summery</div>
           </div>
@@ -252,14 +248,15 @@ const Index = ({ Data }) => {
             </div>
           </div>
 
-          <div className="mt-8 pl-6">
+          <div className="mt-8 px-6">
             <span className="px-3 py-1 bg-gray-100 rounded-full text-lg font-bold text-gray-900">
               Actions
             </span>
-            <div className="flex flex-row items-center mt-4 mb-2 flex-wrap">
+
+            <div className="flex flex-row mb-4 flex-wrap -mx-1">
               <button
                 onClick={() => setOpenEditExamModal(true)}
-                className="bg-slate-100 p-2 rounded-md text-base font-bold flex flex-row items-center"
+                className="bg-slate-100 mx-2 mt-4 p-2 rounded-md text-base font-bold flex flex-row items-center"
               >
                 <svg
                   className="h-4 w-auto mr-2"
@@ -270,26 +267,25 @@ const Index = ({ Data }) => {
                 </svg>
                 Edit
               </button>
-              {Data.exam_type == "MCQ" && (
-                <button
-                  disabled={Data.exam_type == "CODING"}
-                  onClick={() => setOpenPrintModal(true)}
-                  className="ml-4 bg-slate-100 p-2 rounded-md text-base font-bold flex flex-row items-center"
+
+              <button
+                disabled={Data.exam_type == "CODING"}
+                onClick={() => setOpenPrintModal(true)}
+                className="mx-2 mt-4 bg-slate-100 p-2 rounded-md text-base font-bold flex flex-row items-center"
+              >
+                <svg
+                  className="h-4 w-auto mr-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
                 >
-                  <svg
-                    className="h-4 w-auto mr-2"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                  >
-                    <path d="M448 192H64C28.65 192 0 220.7 0 256v96c0 17.67 14.33 32 32 32h32v96c0 17.67 14.33 32 32 32h320c17.67 0 32-14.33 32-32v-96h32c17.67 0 32-14.33 32-32V256C512 220.7 483.3 192 448 192zM384 448H128v-96h256V448zM432 296c-13.25 0-24-10.75-24-24c0-13.27 10.75-24 24-24s24 10.73 24 24C456 285.3 445.3 296 432 296zM128 64h229.5L384 90.51V160h64V77.25c0-8.484-3.375-16.62-9.375-22.62l-45.25-45.25C387.4 3.375 379.2 0 370.8 0H96C78.34 0 64 14.33 64 32v128h64V64z" />
-                  </svg>
-                  Print
-                </button>
-              )}
+                  <path d="M448 192H64C28.65 192 0 220.7 0 256v96c0 17.67 14.33 32 32 32h32v96c0 17.67 14.33 32 32 32h320c17.67 0 32-14.33 32-32v-96h32c17.67 0 32-14.33 32-32V256C512 220.7 483.3 192 448 192zM384 448H128v-96h256V448zM432 296c-13.25 0-24-10.75-24-24c0-13.27 10.75-24 24-24s24 10.73 24 24C456 285.3 445.3 296 432 296zM128 64h229.5L384 90.51V160h64V77.25c0-8.484-3.375-16.62-9.375-22.62l-45.25-45.25C387.4 3.375 379.2 0 370.8 0H96C78.34 0 64 14.33 64 32v128h64V64z" />
+                </svg>
+                Print
+              </button>
 
               <button
                 onClick={() => handleDeleteHandler(id)}
-                className="ml-4 bg-slate-100 p-2 rounded-md text-base font-bold  flex flex-row items-center"
+                className="mx-2 mt-4 bg-slate-100 p-2 rounded-md text-base font-bold  flex flex-row items-center"
               >
                 <svg
                   className="h-4 w-auto mr-2"
@@ -303,13 +299,12 @@ const Index = ({ Data }) => {
 
               <button
                 onClick={() => setOptionOptionModal(true)}
-                className="ml-4 bg-slate-100 p-2 rounded-md text-base font-bold  flex flex-row items-center"
+                className="mx-2 mt-4 bg-slate-100 p-2 rounded-md text-base font-bold  flex flex-row items-center"
               >
                 Assign test
               </button>
-
               <Link href="preview">
-                <button className="mt-4 bg-slate-100 p-2 rounded-md text-base font-bold  flex flex-row items-center">
+                <button className="mx-2 mt-4 bg-slate-100 p-2 rounded-md text-base font-bold  flex flex-row items-center">
                   Preview
                 </button>
               </Link>
