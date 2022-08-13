@@ -16,7 +16,7 @@ exports.AddResult = catchAsyncError(async (req, res, next) => {
     if (checkExam) {
       return next(new ErrorHandler("exam is already submitted", 400));
     }
-    
+
     const result = await ResultModal.create({
       candidate_id: req.user.id,
       assign_exam_id,
@@ -152,9 +152,11 @@ exports.generateExamReport = catchAsyncError(async (req, res, next) => {
   console.log(results, "results");
   if (results && results.length > 0) {
     const newReport = Promise.all(
-      await results.map(async (result) => {
+      results.map(async (result) =>
+      {
         const exam = await ResultModal.findById(result._id).populate("exam_id");
-        if (exam) {
+        if (exam)
+        {
           const newResult = await ResultModal.findByIdAndUpdate(
             result._id,
             {
@@ -168,7 +170,8 @@ exports.generateExamReport = catchAsyncError(async (req, res, next) => {
               hard_correct: result.hard_correct,
             },
             { new: true }
-          ).populate({ path: "candidate_id", select: "name email phone" });
+          )
+          .populate({ path: "candidate_id", select: "name email phone" });
           return newResult;
         }
       })
@@ -186,7 +189,7 @@ exports.generateExamReport = catchAsyncError(async (req, res, next) => {
   }
   res.status(201).json({
     success: true,
-    //  result,
+    results,
   });
   // return null;
 });

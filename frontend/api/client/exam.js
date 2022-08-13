@@ -1,6 +1,11 @@
 import axios from "axios";
 
-import { exam, exam_id, ExamQuestion } from "../../constant/api_url";
+import {
+  exam,
+  exam_id,
+  ExamQuestion,
+  generateExamReport,
+} from "../../constant/api_url";
 
 axios.defaults.withCredentials = true;
 
@@ -12,6 +17,17 @@ export const getExamById = async (id) => {
       throw err;
     });
 };
+
+
+export const GenerateExamReport = async (packet) => {
+  return await axios
+    .post(generateExamReport, packet)
+    .then((response) => response)
+    .catch((err) => {
+      throw err;
+    });
+};
+
 
 export const GetExamQuestion = async (exam_id) => {
   return await axios

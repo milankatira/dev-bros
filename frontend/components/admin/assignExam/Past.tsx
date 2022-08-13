@@ -2,7 +2,6 @@ import React from "react";
 import Accordion from "../../admin/assignExam/Accordian";
 
 const Past = ({ exam, isPast }) => {
-  console.log(isPast, "past_exam");
   return (
     <div>
       <table className="w-full text-sm text-left text-gray-500">
@@ -17,13 +16,11 @@ const Past = ({ exam, isPast }) => {
         <tbody>
           {exam.map((data) => (
             <>
-              {/* <tr key={data._id} className="bg-white border-b hover:bg-gray-50"> */}
-                <Accordion
-                  title={data.exam_name}
-                  content={data}
-                  isPast={isPast ? true : false}
-                />
-              {/* </tr> */}
+              <Accordion
+                title={data.exam_name}
+                content={data}
+                isPast={isPast ? true : false}
+              />
             </>
           ))}
         </tbody>

@@ -9,7 +9,7 @@ import Mcq from "../../../components/client/test/Mcq";
 export default function Home({ Data }) {
   const router = useRouter();
   const { exam_id } = router.query;
-
+console.log(router.query._id,"RR")
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [initial_value, setinitial_value] = useState([]);
   const [questionType, setquestionType] = useState("all");
@@ -24,7 +24,7 @@ export default function Home({ Data }) {
     });
 
     const packet = {
-      assign_exam_id: exam_id,
+      assign_exam_id: router.query._id,
       exam_id,
       questions,
     };

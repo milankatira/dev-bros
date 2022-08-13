@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.route("/submit_exam").post(isAuthenticUser, AddResult);
 
-router.route("/generate_exam_report").get( generateExamReport);
+router.route("/generate_exam_report").post(generateExamReport);
 
 // generateExamReport;
 module.exports = router;

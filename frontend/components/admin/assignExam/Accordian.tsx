@@ -6,6 +6,7 @@ import Switch from "../../common/design/Switch";
 import ReportModal from '../assignExam/ResultModal';
 import Router from "next/router";
 import StatusModal from "./StatusModal";
+import { GenerateExamReport } from "../../../api/client/exam";
 type AccordionProps = {
   title: string;
   content: any;
@@ -32,18 +33,10 @@ const Accordion = ({ isPast, content }: AccordionProps) => {
 
   const handlerResult = (data: any) => {
     setshowResultModal(true);
-    // const packet = {
-    //   assign_exam_id: data?._id,
-    // };
-    // if (row?.exam_type == "MCQ") {
-    //   GenerateReport(packet).then((res) => {
-    //     setResult(res?.data?.results?.report);
-    //   });
-    // } else {
-    //   GenerateCodingReport(packet).then((res) => {
-    //     setResult(res?.data?.results?.report);
-    //   });
-    // }
+    const packet = {
+      assign_exam_id: data?._id,
+    };
+     GenerateExamReport(packet);
   };
 
   const HandleNotify = (id) => {
