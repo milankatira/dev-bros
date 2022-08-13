@@ -39,6 +39,7 @@
     "moment-timezone": "^0.5.34",
     "mongoose": "^6.3.4",
     "next": "12.1.5",
+    "next-pwa": "^5.2.23",
     "next-themes": "^0.2.0",
     "react": "^18.2.0",
     "react-codemirror2": "^7.2.1",
