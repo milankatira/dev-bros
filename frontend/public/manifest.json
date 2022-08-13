@@ -1,22 +1,22 @@
 {
-  "name": "next-pwa",
-  "short_name": "next-pwa",
-  "display": "standalone",
-  "orientation": "portrait",
-  "theme_color": "#FFFFFF",
-  "background_color": "#FFFFFF",
-  "start_url": "/",
+  "name": "Next PWA demo",
+  "short_name": "Mext PWA",
   "icons": [
     {
-      "src": "/icons/android-chrome-192x192.png",
+      "src": "/icon.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
+
     {
-      "src": "/icons/icon-512x512.png",
+      "src": "/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
-  ]
+  ],
+  "theme_color": "#FFFFFF",
+  "background_color": "#FFFFFF",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait"
 }
