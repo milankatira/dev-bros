@@ -1,6 +1,28 @@
 {
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "react-hooks"
+  ],
   "extends": [
-    "next",
-    "next/core-web-vitals"
-  ]
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "@typescript-eslint/no-explicit-any": 0,
+    "react-hooks/exhaustive-deps": "warn",
+    "react/prop-types": "off",
+    "react/jsx-no-duplicate-props": 0
+  },
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "detect"
+    }
+  }
 }

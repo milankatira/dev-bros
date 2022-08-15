@@ -2,11 +2,12 @@ import React from 'react'
 
 import { ButtonFieldProps } from "component";
 
-const ButtonField: React.FC<ButtonFieldProps> = ({ text, onClick }) => {
+const ButtonField: React.FC<ButtonFieldProps> = ({ text,type, onClick }) => {
   return (
     <button
+    type={type}
       onClick={onClick}
-      className="text-white font-medium rounded-lg bg-blue-500 border py-2 px-8 focus:focus:border-blue-500 focus:ring-2 focus:ring-blue-300 text-base outline-none transition-colors duration-200 ease-in-out hover:bg-blue-600 "
+      className="bg-gray-700 active:bg-blue-600 text-white font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
     >
       {text}
     </button>

@@ -49,7 +49,7 @@ const city = ({ city }) => {
             className=" mt-3 bg-blue-700 active:bg-blue-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
             type="button"
             onClick={() =>
-              axios.put(`http://localhost:8000/api/v1/city/${_id}`, { name: City })
+              axios.put(`http://localhost:3001/api/city/${_id}`, { name: City })
             }
           >
             Submit
@@ -64,7 +64,7 @@ export default city;
 
 export async function getServerSideProps(context) {
   let city = await axios.get(
-    `http://localhost:8000/api/v1/city/${context.query._id}`
+    `http://localhost:3001/api/city/${context.query._id}`
   );
   return {
     props: { city: city?.data?.city },

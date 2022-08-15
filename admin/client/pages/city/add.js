@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Sidebar from "../../components/layout/sidebar";
+
 const add = () => {
   const [city, setcity] = useState("");
   return (
@@ -43,7 +44,11 @@ const add = () => {
             className=" mt-3 bg-blue-700 active:bg-blue-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
             type="button"
             onClick={() =>
-              axios.post("http://localhost:8000/api/v1/city", {name:city})
+              axios.post(
+                "http://localhost:3001/api/city",
+                { name: city },
+                { withCredentials: true }
+              )
             }
           >
             Submit

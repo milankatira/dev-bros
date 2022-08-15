@@ -188,6 +188,7 @@ button,
 select {
   /* 1 */
   text-transform: none;
+
 }
 
 /**
@@ -599,14 +600,18 @@ textarea::placeholder {
 }
 
 select {
+  cursor: pointer;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2371717a' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
   background-position: right 0.5rem center;
   background-repeat: no-repeat;
   background-size: 1.5em 1.5em;
   padding-right: 2.5rem;
   -webkit-print-color-adjust: exact;
-  color-adjust: exact;
+  print-color-adjust: exact;
 }
+
+
+
 
 [multiple] {
   background-image: initial;
@@ -614,8 +619,8 @@ select {
   background-repeat: unset;
   background-size: initial;
   padding-right: 0.75rem;
-  -webkit-print-color-adjust: unset;
-  color-adjust: unset;
+  /* -webkit-print-color-adjust: unset; */
+  print-color-adjust: unset;
 }
 
 [type="checkbox"],
@@ -623,8 +628,7 @@ select {
   -webkit-appearance: none;
   appearance: none;
   padding: 0;
-  -webkit-print-color-adjust: exact;
-  color-adjust: exact;
+  print-color-adjust: exact;
   display: inline-block;
   vertical-align: middle;
   background-origin: border-box;
@@ -4222,4 +4226,13 @@ select {
 }
 
 @media (min-width: 1536px) {
+}
+
+button[disabled]{
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.utilsBox {
+ 
 }

@@ -1,26 +1,35 @@
-const User = require("../models/userModel");
+const User = require("../database/userModel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
+const UserSkillModel = require("../database/user_skill");
+const EducationModel = require("../database/education_details");
+const ExperienceModel = require("../database/professional_expericance");
+const UserPreferenceModal = require("../database/user_preferance");
+const userDataModel = require("../database/profileModel");
+const institutionModel=require("../database/institution");
 const cloudinary = require("cloudinary");
 const { getTokenForEmailVarification } = require("../helpers/auth");
 
 const { checkTokenForEmailVerification } = require("../helpers/checkauth");
 
 const dotenv = require("dotenv");
-
+const Jimp = require("jimp");
+const path = require("path");
 dotenv.config({ path: "../config/config.env" });
 
 exports.registerUser = catchAsyncError(async (req, res, next) => {
-  const { firstName, lastName, email, password, phoneNo } = req.body;
+  const { firstName, lastName, email, password, phoneNo, role } = req.body;
+
   const user = await User.create({
     firstName,
     lastName,
     email,
     password,
     phoneNo,
+    role,
   });
 
   const tokenForEmailVarification = await getTokenForEmailVarification({
@@ -41,7 +50,6 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
 exports.verifyUser = catchAsyncError(async (req, res, next) => {
   const { token } = req.params;
 
-  // console.log(token);
   try {
     const decodedToken = await checkTokenForEmailVerification(token);
     console.log(decodedToken);
@@ -180,11 +188,19 @@ exports.resetPassword = catchAsyncError(async (req, res, next) => {
 
 exports.getUsserDetails = catchAsyncError(async (req, res, next) => {
   const user = await User.findById(req.user.id);
-
+  const pic = await userDataModel.findOne({ user_id: req.user.id });
+  if (pic && pic.profile_pic)
   res.status(200).json({
     status: true,
     user,
+    pic: pic.profile_pic
   });
+  else {
+     res.status(200).json({
+       status: true,
+       user,
+     });
+  }
 });
 
 exports.updatePassword = catchAsyncError(async (req, res, next) => {
@@ -239,6 +255,130 @@ exports.updateProfile = catchAsyncError(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
+  });
+});
+
+exports.addProfile = catchAsyncError(async (req, res, next) => {
+  const {
+    employment_type,
+    expected_salary,
+    salary_preference,
+    willing_to_relocate,
+    prefered_location,
+    skills,
+    fresher,
+    profile_img,
+    experience_details,
+    education_details,
+    location,
+  } = req.body;
+
+  if (location) {
+    const user_location = await User.findById(req.user.id);
+    user_location.location = location;
+    await user_location.save();
+  }
+
+  if (profile_img) {
+    // Image Base64
+    const buffer = Buffer.from(
+      profile_img.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""),
+      "base64"
+    );
+    const imagePath = `${Date.now()}-${Math.round(Math.random() * 1e9)}.png`;
+    // 32478362874-3242342342343432.png
+
+    const jimResp = await Jimp.read(buffer);
+    jimResp
+      .resize(150, Jimp.AUTO)
+      .write(path.resolve(__dirname, `../static/${imagePath}`));
+
+    console.log(imagePath, "imagepath");
+    const authData = await userDataModel.findOne({ user_id: req.user.id });
+    authData.profile_pic = imagePath;
+    await authData.save();
+  }
+
+  await Promise.all(
+    JSON.parse(skills).map(async (singleSkills) => {
+      const skill = new UserSkillModel({
+        skill: singleSkills.skill,
+        year_of_experience: singleSkills.yearExp,
+        last_used: singleSkills.lastUsed,
+        user_id: req.user.id,
+      });
+      await skill.save();
+    })
+  );
+
+  await Promise.all(
+    JSON.parse(education_details).map(async (singleValue) => {
+      const educationData = new EducationModel({
+        degree: singleValue.degree,
+        institution: singleValue.institute,
+        description: singleValue.educationDescription,
+        started_year: singleValue.startedYear,
+        passing_year: singleValue.passingYear,
+        marks: singleValue.marks,
+        user_id: req.user.id,
+      });
+      await educationData.save();
+    })
+  );
+
+  if (!fresher) {
+    // store experience data into professional_experience table
+    await Promise.all(
+      JSON.parse(experience_details).map(async (singleValue) => {
+        const experienceData = new ExperienceModel({
+          company: singleValue.company,
+          designation: singleValue.designation,
+          description: singleValue.experienceDescription,
+          start_at: singleValue.startDate,
+          end_at: singleValue.endDate,
+          is_current_employement: singleValue.currentlyWorking,
+          user_id: req.user.id,
+        });
+        await experienceData.save();
+      })
+    );
+  }
+
+  //  store value in user_preference
+  const UserPrederance = new UserPreferenceModal({
+    user_id: req.user.id,
+    employment_type,
+    expected_salary,
+    salary_preference,
+    willing_to_relocate,
+    prefered_location,
+  });
+
+  await UserPrederance.save();
+
+  res.status(200).json({
+    success: true,
+    message: "user profile added successfully",
+  });
+});
+
+exports.getProfile = catchAsyncError(async (req, res, next) => {
+  const EducationDetail = await EducationModel.find({
+    user_id: req.user.id,
+  }).populate({
+    path: "institution",
+    model: institutionModel,
+    select:'name'
+  });
+  // populate: {
+  //       path: "candidates",
+  //       model: UserModel,
+  //       select: "name email phone",
+  //     },
+  res.status(200).json({
+    EducationDetail: EducationDetail,
+    success: true,
+    message: "user profile added successfully",
   });
 });
 

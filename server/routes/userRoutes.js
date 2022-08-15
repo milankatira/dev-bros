@@ -14,12 +14,15 @@ const {
   getUserByid,
   updateUserRole,
   verifyUser,
+  addProfile,
+  getProfile,
 } = require("../controller/userController");
 const { isAuthenticUser, authorizeRoles } = require("../middleware/auth");
 
 const router = express.Router();
 
 router.route("/register").post(registerUser);
+router.route("/myprofile").get(isAuthenticUser, getProfile);
 
 router.route("/verify/email/:token").post(verifyUser);
 
@@ -35,8 +38,11 @@ router.route("/password/update").put(isAuthenticUser, updatePassword);
 
 router.route("/me").get(isAuthenticUser, getUsserDetails);
 
+router.route("/add-profile").post(isAuthenticUser, addProfile);
+
 router.route("/me/update").put(isAuthenticUser, updateProfile);
 
+router.route("/me/add-profile");
 router
   .route("/admin/users")
   .get(isAuthenticUser, authorizeRoles("admin"), getAllUser);

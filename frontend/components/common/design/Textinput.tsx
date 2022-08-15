@@ -1,3 +1,4 @@
+import React from "react";
 import { InputFieldProps } from "component";
 import { Field, ErrorMessage } from "formik";
 
@@ -13,8 +14,8 @@ const Textinput: React.FC<InputFieldProps> = ({
   return (
     <div className="relative mb-4">
       <label
-        htmlFor="email"
-        className="leading-7 font-bold text-sm text-gray-600"
+        htmlFor={name}
+        className="block uppercase text-gray-600 text-xs font-bold mb-2"
       >
         {text}
       </label>
@@ -22,13 +23,11 @@ const Textinput: React.FC<InputFieldProps> = ({
         name={name && name}
         type={type}
         error={error}
-        // value={value}
-        // onChange={onChange}
         placeholder={placeholder}
-        className="w-full bg-white rounded-lg border-2 border-gray-300 focus:border-blue-200 focus:ring-1 focus:ring-blue-200 text-lg font-sans font-medium outline-none text-gray-700 py-1 px-3 leading-7 transition-colors duration-200 ease-in-out"
+        className="border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
       />
 
-      <span className="text-red-600">{error}</span>
+      <span className="text-red-500 font-sans font-semibold">{error}</span>
     </div>
   );
 };

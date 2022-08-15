@@ -6,7 +6,6 @@ const catchAsyncError = require("../middleware/catchAsyncError");
 exports.AddCity = catchAsyncError(async (req, res, next) => {
   try {
     const city = await City.create(req.body);
-
     res.status(201).json({
       success: true,
       city,
