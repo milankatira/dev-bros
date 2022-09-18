@@ -12,7 +12,7 @@
     "nodemon": "^2.0.2"
   },
   "dependencies": {
-    "admin-bro": "^2.2.4",
+    "admin-bro": "^4.0.1",
     "admin-bro-expressjs": "^2.0.1",
     "admin-bro-mongoose": "^0.5.0",
     "cookie-parser": "^1.4.5",
