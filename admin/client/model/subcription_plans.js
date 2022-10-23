@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const SubcriptionSchema = new mongoose.Schema({
   name: {
@@ -22,4 +22,4 @@ const SubcriptionSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('subcription_plans', SubcriptionSchema);
+module.exports = mongoose.model("subcription_plans", SubcriptionSchema);

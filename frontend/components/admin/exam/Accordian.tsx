@@ -6,7 +6,11 @@ type AccordionProps = {
   setOpenAssignModal: any;
 };
 
-const Accordion = ({ content, setOpenAssignModal,setGroupId }: AccordionProps) => {
+const Accordion = ({
+  content,
+  setOpenAssignModal,
+  setGroupId,
+}: AccordionProps) => {
   const [isOpened, setOpened] = useState<boolean>(false);
   const [height, setHeight] = useState<string>("0px");
   const contentElement = useRef(null);

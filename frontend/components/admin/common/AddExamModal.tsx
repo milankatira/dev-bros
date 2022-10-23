@@ -18,7 +18,6 @@ interface Props {
 }
 import { useExamcontext } from "../../../context/context/Exam";
 
-
 const AddExamModal: any = ({
   exam_id,
   toggleModal,
@@ -62,7 +61,7 @@ const AddExamModal: any = ({
           toggleModal();
         });
       } else {
-        Exam_api.AddExam(packet,toggleModal);
+        Exam_api.AddExam(packet, toggleModal);
         addExam(packet).then((res) => {
           // toggleModal();
         });

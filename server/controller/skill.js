@@ -1,4 +1,4 @@
-const Skill=require("../database/skills");
+const Skill = require("../database/skills");
 
 const catchAsyncError = require("../middleware/catchAsyncError");
 
@@ -10,4 +10,3 @@ exports.GetSkill = catchAsyncError(async (req, res, next) => {
     skill,
   });
 });
-

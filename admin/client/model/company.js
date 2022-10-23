@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
@@ -7,16 +7,18 @@ const CompanySchema = new Schema({
     type: String,
     required: true,
   },
-  address: [{
-    street: {
-      type: String,
-      required: true,
+  address: [
+    {
+      street: {
+        type: String,
+        required: true,
+      },
+      location: {
+        type: Schema.Types.ObjectId,
+        ref: "city",
+      },
     },
-    location: {
-      type: Schema.Types.ObjectId,
-      ref: 'city',
-    }
-  }],
+  ],
   description: {
     type: String,
     required: true,
@@ -41,8 +43,8 @@ const CompanySchema = new Schema({
   },
   headquter: {
     type: Schema.Types.ObjectId,
-    ref: 'city',
+    ref: "city",
   },
 });
 
-module.exports = mongoose.model('company', CompanySchema);
+module.exports = mongoose.model("company", CompanySchema);

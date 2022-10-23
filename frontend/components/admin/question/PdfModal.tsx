@@ -53,8 +53,8 @@ const AddQuesModal: React.FC<Props> = ({
           </section>
           <hr className=" border border-gray-600 w-full" />
 
-            <div className="overflow-y-scroll h-[400px]">
-          <PDFExport paperSize="A4" margin="1cm" ref={pdfExportComponent}>
+          <div className="overflow-y-scroll h-[400px]">
+            <PDFExport paperSize="A4" margin="1cm" ref={pdfExportComponent}>
               <section className="text-gray-600 body-font">
                 <div className="container px-5 py-2 mx-auto flex justify-center font-bold">
                   <h1>Our offline exam paper</h1>
@@ -150,8 +150,8 @@ const AddQuesModal: React.FC<Props> = ({
                     </div>
                   ))}
               </section>
-          </PDFExport>
-            </div>
+            </PDFExport>
+          </div>
           <div className="flex justify-center my-2">
             <div className="mr-2">
               <button

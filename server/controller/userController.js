@@ -9,7 +9,7 @@ const EducationModel = require("../database/education_details");
 const ExperienceModel = require("../database/professional_expericance");
 const UserPreferenceModal = require("../database/user_preferance");
 const userDataModel = require("../database/profileModel");
-const institutionModel=require("../database/institution");
+const institutionModel = require("../database/institution");
 const cloudinary = require("cloudinary");
 const { getTokenForEmailVarification } = require("../helpers/auth");
 
@@ -190,16 +190,16 @@ exports.getUsserDetails = catchAsyncError(async (req, res, next) => {
   const user = await User.findById(req.user.id);
   const pic = await userDataModel.findOne({ user_id: req.user.id });
   if (pic && pic.profile_pic)
-  res.status(200).json({
-    status: true,
-    user,
-    pic: pic.profile_pic
-  });
+    res.status(200).json({
+      status: true,
+      user,
+      pic: pic.profile_pic,
+    });
   else {
-     res.status(200).json({
-       status: true,
-       user,
-     });
+    res.status(200).json({
+      status: true,
+      user,
+    });
   }
 });
 
@@ -368,7 +368,7 @@ exports.getProfile = catchAsyncError(async (req, res, next) => {
   }).populate({
     path: "institution",
     model: institutionModel,
-    select:'name'
+    select: "name",
   });
   // populate: {
   //       path: "candidates",

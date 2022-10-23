@@ -1,14 +1,11 @@
 import React from "react";
 
 export interface Props {
-    open: boolean | any;
-    children?: any;
-  }
+  open: boolean | any;
+  children?: any;
+}
 
-const CustomModalField: React.FC<Props> = ({
-  open,
-  children,
-}) => {
+const CustomModalField: React.FC<Props> = ({ open, children }) => {
   return (
     <>
       {open ? (

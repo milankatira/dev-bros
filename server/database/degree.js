@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
@@ -13,4 +13,4 @@ const DegreeSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('degree', DegreeSchema);
+module.exports = mongoose.model("degree", DegreeSchema);

@@ -7,7 +7,6 @@ const form_validation = {
   password_long: "Password is too long.",
 };
 export const Login = yup.object().shape({
-
   email: yup.string().email().required(form_validation.email_required),
   password: yup
     .string()

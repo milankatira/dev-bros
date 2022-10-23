@@ -99,7 +99,7 @@ export const notifyStatus = (id) => `${server_url}/api/notify/${id}`;
 
 export const SubmitExam = `${server_url}/api/submit_exam`;
 
-export const generateExamReport=`${server_url}/api/generate_exam_report`;
+export const generateExamReport = `${server_url}/api/generate_exam_report`;
 
 //TODO GROUP
 

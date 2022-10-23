@@ -19,12 +19,10 @@ const Index = () => {
     };
     if (router.query.question_id) {
       updateSingleQuestion(router.query.question_id, packet);
-      Router.push(
-        `/company/exam/${router.query.exam_id}`
-      );
+      Router.push(`/company/exam/${router.query.exam_id}`);
     } else {
       addQuestion(packet);
-       Router.push(`/company/exam/${router.query.exam_id}`);
+      Router.push(`/company/exam/${router.query.exam_id}`);
     }
   };
 

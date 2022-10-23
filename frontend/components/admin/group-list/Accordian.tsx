@@ -51,44 +51,41 @@ const Accordion = ({ content }: AccordionProps) => {
           <h1 className="font-semibold">Desctiption:</h1>
           <h1 className="ml-4">{content.description}</h1>
         </div>
-          <table className="text-sm w-full text-left text-gray-500">
-            <thead className="text-xs uppercase bg-gray-50">
-              <tr>
-                <th scope="col" className="px-6 py-3">
-                  Name
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Email
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Phone
-                </th>
+        <table className="text-sm w-full text-left text-gray-500">
+          <thead className="text-xs uppercase bg-gray-50">
+            <tr>
+              <th scope="col" className="px-6 py-3">
+                Name
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Email
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Phone
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {content.candidates.map((candidate: any, index: number) => (
+              <tr key={index} className=" border-b">
+                <td className="px-6 py-4">
+                  {candidate?.firstName + " " + candidate?.lastName}
+                </td>
+                <td className="px-6 py-4">
+                  <Link href={`mailto:${candidate?.email}`}>
+                    {candidate?.email}
+                  </Link>
+                </td>
+                <td className="px-6 py-4">
+                  {" "}
+                  <Link href={`tel:91${candidate?.phoneNo}`}>
+                    {candidate?.phoneNo}
+                  </Link>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {content.candidates.map((candidate: any, index: number) => (
-                <tr
-                  key={index}
-                  className=" border-b"
-                >
-                  <td className="px-6 py-4">
-                    {candidate?.firstName + " " + candidate?.lastName}
-                  </td>
-                  <td className="px-6 py-4">
-                    <Link href={`mailto:${candidate?.email}`}>
-                      {candidate?.email}
-                    </Link>
-                  </td>
-                  <td className="px-6 py-4">
-                    {" "}
-                    <Link href={`tel:91${candidate?.phoneNo}`}>
-                      {candidate?.phoneNo}
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

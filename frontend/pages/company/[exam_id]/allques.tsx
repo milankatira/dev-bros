@@ -108,8 +108,6 @@ export default function Home({ Data, examdata }) {
               </h4>
             </div>
 
-
-
             <div className="mt-4 text-2xl">
               {Data[currentQuestion].question}
             </div>

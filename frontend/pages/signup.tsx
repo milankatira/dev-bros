@@ -89,7 +89,6 @@ const Auth = () => {
         onSubmit={(data) => handleRegister(data)}
       >
         {(props) => {
-          
           return (
             <Form>
               <div className="mx-auto mt-20 px-4 h-full flex flex-col justify-center align-middle">

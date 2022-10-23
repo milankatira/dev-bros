@@ -12,9 +12,7 @@ const AssignExam = () => {
 
   return (
     <div className="mx-20">
-      {exams && exams.length > 0 && (
-        <Past isPast={true} exam={exams} />
-      )}
+      {exams && exams.length > 0 && <Past isPast={true} exam={exams} />}
     </div>
   );
 };

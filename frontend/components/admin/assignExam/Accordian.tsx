@@ -50,7 +50,7 @@ const Accordion = ({ isPast, content }: AccordionProps) => {
         <h1 className="px-2 py-4 border-2 w-full">{content?.total_mark}</h1>
         <h1 className="px-2 py-4 border-2 w-full">{content?.passing_mark}</h1>
         <h1 className="px-2 py-4 border-2 w-full">{content?.exam_type}</h1>
-    
+
         <div className="px-2 border-2 w-full">
           {isOpened ? (
             <svg

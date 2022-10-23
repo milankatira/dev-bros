@@ -83,7 +83,7 @@ export const GetAssignCandidate = async () => {
     });
 };
 
-export const NotifyMember = async (id,packet) => {
+export const NotifyMember = async (id, packet) => {
   return await axios
     .post(notifyStatus(id), packet)
     .then((response) => response)

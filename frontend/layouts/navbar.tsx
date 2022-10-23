@@ -9,7 +9,7 @@ import { useAuthcontext } from "../context/context/Auth";
 import { UseEffectOnce } from "../hook/useEffectOnce";
 import { server_url } from "../config/app_config";
 const Header = () => {
-    const { theme, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const { auth, Auth_api } = useAuthcontext();
   const [navbar, setnavbar] = useState<boolean>(false);
 

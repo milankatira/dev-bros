@@ -18,7 +18,6 @@ const Question = () => {
   const router = useRouter();
   const { question_id } = router.query;
 
- 
   const handleSubmit = (data) => {
     const packet = {
       data,
@@ -29,9 +28,7 @@ const Question = () => {
 
   return (
     <div>
-      
-      <McqQuestions/>
-
+      <McqQuestions />
     </div>
   );
 };

@@ -29,7 +29,7 @@ const Grouplist = ({ GroupData }) => {
   return (
     <div>
       <section className="text-gray-600 body-font">
-          <div className="px-20 py-4 mx-auto w-full">
+        <div className="px-20 py-4 mx-auto w-full">
           <section className="text-gray-600 body-font">
             <div className="w-full">
               <div className="flex flex-col sm:flex-row sm:items-center items-start mx-auto">

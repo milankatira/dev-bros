@@ -1,5 +1,5 @@
 import moment from "moment";
-import Router  from "next/router";
+import Router from "next/router";
 import React, { useState, useRef } from "react";
 import { NotifyMember } from "../../../api/client/compnay";
 import ButtonField from "../../common/design/ButtonField";
@@ -8,7 +8,7 @@ type AccordionProps = {
   content: any;
   // isPast: boolean;
   DeleteHandler;
-  exam_id: string | string [];
+  exam_id: string | string[];
 };
 
 const Accordion = ({ content, DeleteHandler, exam_id }: AccordionProps) => {
