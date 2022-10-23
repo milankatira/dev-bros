@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const connectDatabase = () => {
   mongoose
-    .connect("mongodb://localhost:27017/dev_bros", {
+    .connect("mongodb+srv://milankics:Milan%40110@cluster0.rltgjre.mongodb.net/devbros", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
