@@ -55,25 +55,27 @@ const Index = () => {
       initial_value &&
       initial_value.questions &&
       initial_value.questions[0] &&
-      initial_value.questions[0].question ? (
-        <>
-          <FormForQuestion
-            isEdit={true}
-            intialValue={initial_value}
-            handleSubmit={handleSubmit}
-          />
-        </>
-      ) : (
-        !router.query.question_id && (
-          <>
-            <FormForQuestion
-              isEdit={false}
-              intialValue={intialValue.mcqQuestions}
-              handleSubmit={handleSubmit}
-            />
-          </>
-        )
-      )}
+      initial_value.questions[0].question
+        ? (
+            <>
+              <FormForQuestion
+                isEdit={true}
+                intialValue={initial_value}
+                handleSubmit={handleSubmit}
+              />
+            </>
+          )
+        : (
+            !router.query.question_id && (
+              <>
+                <FormForQuestion
+                  isEdit={false}
+                  intialValue={intialValue.mcqQuestions}
+                  handleSubmit={handleSubmit}
+                />
+              </>
+            )
+          )}
     </div>
   );
 };

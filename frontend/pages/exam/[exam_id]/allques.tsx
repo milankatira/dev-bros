@@ -1,4 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
 // import questions from "./questions.json";
 import Head from "next/head";
 import { useState } from "react";

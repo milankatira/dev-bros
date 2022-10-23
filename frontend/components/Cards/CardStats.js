@@ -42,8 +42,8 @@ export default function CardStats({
                   statArrow === "up"
                     ? "fas fa-arrow-up"
                     : statArrow === "down"
-                    ? "fas fa-arrow-down"
-                    : ""
+                      ? "fas fa-arrow-down"
+                      : ""
                 }
               ></i>{" "}
               {statPercent}%

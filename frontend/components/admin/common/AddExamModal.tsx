@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import CustomModalField from "../../../components/common/design/CustomModal";
-import HeaderTitleContainer from "../../../components/common/design/HeaderTitleContainer";
 import { UseEffectOnce } from "../../../hook/useEffectOnce";
-// import BasicTextinput from "../../common/design/BasicTextinput";
 import { exam_type } from "../../constant/app_constant";
-import { Formik, Form, Field, FieldArray } from "formik";
-import { intialValue } from "../../../constant/initial_value";
 import BasicTextinput from "../../common/design/BasicTextInput";
 import { addExam, updateExam } from "../../../api/client/exam";
 import toast from "react-hot-toast";
@@ -73,31 +69,33 @@ const AddExamModal: any = ({
     <div>
       <CustomModalField open={open}>
         <div className="flex justify-between p-2">
-          {step !== 1 ? (
-            <div className="flex justify-center">
-              <button
-                className="backNextBtn1 backBtn1"
-                onClick={() => setStep(step - 1)}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                  />
-                </svg>
-              </button>
-            </div>
-          ) : (
-            <div></div>
-          )}
+          {step !== 1
+            ? (
+                <div className="flex justify-center">
+                  <button
+                    className="backNextBtn1 backBtn1"
+                    onClick={() => setStep(step - 1)}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              )
+            : (
+                <div></div>
+              )}
 
           <h6>create New Test</h6>
 
@@ -255,28 +253,30 @@ const AddExamModal: any = ({
           )}
 
           <footer className="w-full flex justify-end mr-5">
-            {step !== 2 ? (
-              <button
-                className="backNextBtn nextBtn"
-                onClick={() => setStep(step + 1)}
-                disabled={step === 1 && examData?.exam_type == ""}
-              >
+            {step !== 2
+              ? (
+                  <button
+                    className="backNextBtn nextBtn"
+                    onClick={() => setStep(step + 1)}
+                    disabled={step === 1 && examData?.exam_type == ""}
+                  >
                 Next
-              </button>
-            ) : (
-              <button
-                className="backNextBtn nextBtn"
-                onClick={handleSubmit}
-                disabled={
-                  examData?.exam_name === "" ||
+                  </button>
+                )
+              : (
+                  <button
+                    className="backNextBtn nextBtn"
+                    onClick={handleSubmit}
+                    disabled={
+                      examData?.exam_name === "" ||
                   examData?.description === "" ||
                   examData?.total_mark === "" ||
                   examData?.passing_mark === ""
-                }
-              >
-                {exam_id ? "Update" : "Create"} Test
-              </button>
-            )}
+                    }
+                  >
+                    {exam_id ? "Update" : "Create"} Test
+                  </button>
+                )}
           </footer>
         </div>
       </CustomModalField>
