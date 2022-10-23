@@ -7,7 +7,6 @@ import ButtonField from "../../common/design/ButtonField";
 import Textinput from "../../common/design/Textinput";
 import { intialValue } from "../../../constant/initial_value";
 import { Login } from "../../../validator/login";
-import { login } from "../../../api/auth/index";
 import toast from "react-hot-toast";
 import Router from "next/router";
 import { useAuthcontext } from "../../../context/context/Auth";
@@ -33,7 +32,6 @@ const NewLogin = () => {
           maxAge: 60 * 60 * 24 * 1, // 1 day
           path: "/",
         });
-        //  ("Set-Cookie", serialized);
         setCookies("token", res.data.token);
         Router.push("/myprofile");
       })
