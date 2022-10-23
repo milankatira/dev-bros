@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import "../styles/globals.css";
 import ProgressBar from "@badrap/bar-of-progress";
 import Router from "next/router";
@@ -9,7 +9,7 @@ import dynamic from "next/dynamic";
 const Navbar = dynamic(() => import("../layouts/navbar"), {
   ssr: false,
 });
-
+import { ExamProvider } from "../context/context/Exam";
 
 import { AuthProvider } from "../context/context/Auth";
 
@@ -35,12 +35,13 @@ Router.events.on("routeChangeError", () => {
 function MyApp({ Component, pageProps }) {
   return (
     <AuthProvider>
-      <Toaster position="top-center" reverseOrder={false} />
-      <Navbar />
-      <CookiesProvider>
-        <Component {...pageProps} />
-      </CookiesProvider>
-     
+      <ExamProvider>
+        <Toaster position="top-center" reverseOrder={false} />
+        <Navbar />
+        <CookiesProvider>
+          <Component {...pageProps} />
+        </CookiesProvider>
+      </ExamProvider>
     </AuthProvider>
   );
 }
