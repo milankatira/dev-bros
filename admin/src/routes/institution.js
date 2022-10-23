@@ -11,6 +11,9 @@ const router = express.Router();
 
 router.route("/institution").get(GetInstitution).post(AddInstitution);
 
-router.route("/institution/:id").put(UpdateInstitution).delete(DeleteInstitution);
+router
+  .route("/institution/:id")
+  .put(UpdateInstitution)
+  .delete(DeleteInstitution);
 
 module.exports = router;

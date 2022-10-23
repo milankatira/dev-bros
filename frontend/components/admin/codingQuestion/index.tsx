@@ -42,23 +42,25 @@ const Index = () => {
       {questionData &&
       questionData &&
       questionState &&
-      questionState.level !== undefined ? (
-        <FormForQuestion
-          isEdit={true}
-          handleSubmit={handleSubmit}
-          intialValue={questionState}
-          questionData={questionData}
-          setquestionData={setquestionData}
-        />
-      ) : (
-        <FormForQuestion
-          isEdit={false}
-          handleSubmit={handleSubmit}
-          intialValue={intialValue.codingQuestion}
-          questionData={questionData}
-          setquestionData={setquestionData}
-        />
-      )}
+      questionState.level !== undefined
+        ? (
+            <FormForQuestion
+              isEdit={true}
+              handleSubmit={handleSubmit}
+              intialValue={questionState}
+              questionData={questionData}
+              setquestionData={setquestionData}
+            />
+          )
+        : (
+            <FormForQuestion
+              isEdit={false}
+              handleSubmit={handleSubmit}
+              intialValue={intialValue.codingQuestion}
+              questionData={questionData}
+              setquestionData={setquestionData}
+            />
+          )}
     </div>
   );
 };

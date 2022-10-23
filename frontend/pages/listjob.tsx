@@ -49,10 +49,8 @@ const listJob = ({ jobData }) => {
     <div>
       <section className="text-gray-600 body-font overflow-hidden">
         <div className="container px-5 py-24 mx-auto">
-          
           <div className="shadow p-5 rounded-lg bg-white">
             <div className="relative">
- 
               <input
                 type="text"
                 placeholder="Search by listing, location, bedroom number..."
@@ -134,7 +132,7 @@ const listJob = ({ jobData }) => {
           {jobData &&
             jobData.map((job, index) => {
               return (
-                <div key={index} >
+                <div key={index}>
                   <Listjob key={index} job={job} />;
                 </div>
               );

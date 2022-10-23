@@ -12,7 +12,7 @@ const router = express.Router();
 
 const { isAuthenticUser, authorizeRoles } = require("../middleware/auth");
 
-router.route("/order/new").post(isAuthenticUser,newOrder);
+router.route("/order/new").post(isAuthenticUser, newOrder);
 
 router.route("/order/:id").get(isAuthenticUser, getSingleOrder);
 
@@ -26,6 +26,5 @@ router
   .route("/admin/order/:id")
   .put(isAuthenticUser, authorizeRoles("admin"), updateOrder)
   .delete(isAuthenticUser, authorizeRoles("admin"), deleteOrder);
-
 
 module.exports = router;

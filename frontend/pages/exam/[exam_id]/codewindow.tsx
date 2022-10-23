@@ -1,11 +1,11 @@
-import React from 'react'
-import Code from '../../../components/client/code';
+import React from "react";
+import Code from "../../../components/client/code";
 const codewindow = () => {
   return (
     <div>
-      <Code/>
+      <Code />
     </div>
-  )
-}
+  );
+};
 
-export default codewindow
+export default codewindow;

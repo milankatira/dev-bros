@@ -102,5 +102,3 @@ export const getEmployementType = () => {
       throw err;
     });
 };
-
-

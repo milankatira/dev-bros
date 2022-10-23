@@ -188,7 +188,6 @@ button,
 select {
   /* 1 */
   text-transform: none;
-
 }
 
 /**
@@ -609,9 +608,6 @@ select {
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
 }
-
-
-
 
 [multiple] {
   background-image: initial;
@@ -4228,11 +4224,10 @@ select {
 @media (min-width: 1536px) {
 }
 
-button[disabled]{
+button[disabled] {
   background-color: #cccccc;
   color: #666666;
 }
 
 .utilsBox {
- 
 }

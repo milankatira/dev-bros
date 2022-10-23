@@ -48,7 +48,7 @@ const userSchema = new mongoose.Schema({
 
   location: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'city',
+    ref: "city",
   },
   createdAt: {
     type: Date,

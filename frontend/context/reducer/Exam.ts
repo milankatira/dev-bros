@@ -1,6 +1,6 @@
 import * as types from "../constants/exam";
 
-const examReducer = (state , action) => {
+const examReducer = (state, action) => {
   switch (action.type) {
     case types.ADD_EXAM_SUCCESS:
       return {

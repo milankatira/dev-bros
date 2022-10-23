@@ -1,10 +1,8 @@
-import React from 'react'
+import React from "react";
 
-const Previous = ({exam}) => {
-  console.log(exam,"prev_exam")
-  return (
-    <div>previous</div>
-  )
-}
+const Previous = ({ exam }) => {
+  console.log(exam, "prev_exam");
+  return <div>previous</div>;
+};
 
-export default Previous
+export default Previous;

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Router from "next/router";
-import Link from 'next/link';
+import Link from "next/link";
 import Sidebar from "../components/layout/sidebar";
 const dashboard = ({ city }) => {
-  console.log(city,"city")
+  console.log(city, "city");
   const [check, setcheck] = useState();
   const [List, setList] = useState(city);
   const [MasterChecked, setMasterChecked] = useState();
@@ -31,7 +31,6 @@ const dashboard = ({ city }) => {
     setcheck(e.target.checked);
     ListData.push(item);
     console.log(ListData, "List");
-
 
     // // setcheck(e.target.value)
     // let tempList = List;
@@ -180,12 +179,10 @@ const dashboard = ({ city }) => {
                     <td class="px-6 py-4">{data?._id}</td>
                     <td class="px-6 py-4 text-right">
                       <Link href={`/city/${data?._id}`}>
-                      <a
-                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                        >
-                        Edit
-                      </a>
-                        </Link>
+                        <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                          Edit
+                        </a>
+                      </Link>
                     </td>
                   </tr>
                 );
@@ -200,8 +197,7 @@ const dashboard = ({ city }) => {
 
 export default dashboard;
 
-export async function getServerSideProps({req,res}) {
-
+export async function getServerSideProps({ req, res }) {
   let city = await axios.get("http://localhost:3001/api/city");
   return {
     props: { city: city?.data?.city },

@@ -1,31 +1,30 @@
 /** @format */
 
-import City from '../../../model/city';
-import connectDb from '../../../utils/mongodb';
-import { performance } from 'perf_hooks';
-import redis from 'redis';
-import util from 'util';
+import City from "../../../model/city";
+import connectDb from "../../../utils/mongodb";
+import { performance } from "perf_hooks";
+import redis from "redis";
+import util from "util";
 
 const redisPort = 6379;
 const client = redis.createClient(redisPort);
-const key = 'example-key';
+const key = "example-key";
 
 export default async (req, res) => {
   connectDb();
   const { method } = req;
 
   switch (method) {
-    case 'GET':
+    case "GET":
       await GetCity(req, res);
       break;
-    case 'POST':
+    case "POST":
       await AddCity(req, res);
       break;
     default:
-      res.setHeader('Allow', ['GET', 'POST']);
+      res.setHeader("Allow", ["GET", "POST"]);
       res.status(405).end(`Method ${method} Not Allowed`);
       break;
-      
   }
 };
 
@@ -47,7 +46,7 @@ const AddCity = async (req, res) => {
 const GetCity = async (req, res) => {
   try {
     const city = await City.find();
-    console.log(city, 'city');
+    console.log(city, "city");
 
     res.status(200).json({
       success: true,
@@ -72,17 +71,15 @@ const handler = async (req, res) => {
     if (response) {
       res.status(200).json(JSON.parse(response));
     } else {
-      console.log("FFFFF")
+      console.log("FFFFF");
       const data = await City.find();
       client.setex(key, 2, JSON.stringify(data));
       res.status(200).json(data);
     }
 
     const endTime = performance.now();
-    console.log(
-      `Call took ${endTime - startTime} milliseconds`
-    );
+    console.log(`Call took ${endTime - startTime} milliseconds`);
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    res.status(500).json({ error: "Server error" });
   }
 };

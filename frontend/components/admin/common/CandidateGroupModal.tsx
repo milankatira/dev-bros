@@ -138,7 +138,7 @@ const CandidateGroupModal: React.FC<Props> = ({
     >
       <div className="w-[700px] border-2 border-red-500 rounded-lg">
         <div className="flex justify-between p-4">
-          <div>{" "}</div>
+          <div> </div>
           <h4
             // variant="h6"
             // component="span"

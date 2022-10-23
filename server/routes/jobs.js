@@ -2,7 +2,7 @@ const { isAuthenticUser } = require("../middleware/auth");
 
 const express = require("express");
 
-const { AddJob,GetAllJobs } = require("../controller/jobs");
+const { AddJob, GetAllJobs } = require("../controller/jobs");
 
 const router = express.Router();
 

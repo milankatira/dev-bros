@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react";
 
-const ListJob = ({job}) => {
+const ListJob = ({ job }) => {
   return (
     <div className="py-8 flex flex-wrap md:flex-nowrap">
       <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
@@ -36,6 +36,6 @@ const ListJob = ({job}) => {
       </div>
     </div>
   );
-}
+};
 
-export default ListJob
+export default ListJob;

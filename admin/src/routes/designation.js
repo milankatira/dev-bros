@@ -11,6 +11,9 @@ const router = express.Router();
 
 router.route("/designation").get(GetDesignation).post(AddDesignation);
 
-router.route("/designation/:id").put(UpdateDesignation).delete(DeleteDesignation);
+router
+  .route("/designation/:id")
+  .put(UpdateDesignation)
+  .delete(DeleteDesignation);
 
 module.exports = router;

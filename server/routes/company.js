@@ -2,7 +2,11 @@ const express = require("express");
 
 const { isAuthenticUser } = require("../middleware/auth");
 
-const { AddCompany,getCompany,updateCompany } = require("../controller/company");
+const {
+  AddCompany,
+  getCompany,
+  updateCompany,
+} = require("../controller/company");
 
 const router = express.Router();
 

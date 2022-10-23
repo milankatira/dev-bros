@@ -60,14 +60,14 @@ export default function MyProfile() {
         <div className="w-full lg:w-10/12 px-4">
           {city && degree && institution && designation && (
             <Myprofile
-              // fresher={fresher}
-              // setfresher={setfresher}
-              // city={city}
-              // degree={degree}
-              // institution={institution}
-              // designation={designation}
-              // skill={skill}
-              // employementType={employementType}
+            // fresher={fresher}
+            // setfresher={setfresher}
+            // city={city}
+            // degree={degree}
+            // institution={institution}
+            // designation={designation}
+            // skill={skill}
+            // employementType={employementType}
             />
           )}
         </div>

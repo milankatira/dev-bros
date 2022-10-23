@@ -2,9 +2,7 @@ import React from "react";
 
 const Switch = ({ onClick, checked }) => {
   return (
-    <label
-      className="inline-flex relative items-center cursor-pointer"
-    >
+    <label className="inline-flex relative items-center cursor-pointer">
       <input
         type="checkbox"
         value=""

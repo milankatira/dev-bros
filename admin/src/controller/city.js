@@ -1,4 +1,4 @@
-const City=require("../model/city");
+const City = require("../model/city");
 
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");
@@ -61,8 +61,6 @@ exports.GetCity = catchAsyncError(async (req, res, next) => {
     city,
   });
 });
-
-
 
 exports.GetCityByid = catchAsyncError(async (req, res, next) => {
   let city = await City.findById(req.params.id);

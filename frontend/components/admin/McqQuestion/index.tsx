@@ -19,12 +19,10 @@ const Index = () => {
     };
     if (router.query.question_id) {
       updateSingleQuestion(router.query.question_id, packet);
-      Router.push(
-        `/company/exam/${router.query.exam_id}`
-      );
+      Router.push(`/company/exam/${router.query.exam_id}`);
     } else {
       addQuestion(packet);
-       Router.push(`/company/exam/${router.query.exam_id}`);
+      Router.push(`/company/exam/${router.query.exam_id}`);
     }
   };
 
@@ -57,25 +55,27 @@ const Index = () => {
       initial_value &&
       initial_value.questions &&
       initial_value.questions[0] &&
-      initial_value.questions[0].question ? (
-        <>
-          <FormForQuestion
-            isEdit={true}
-            intialValue={initial_value}
-            handleSubmit={handleSubmit}
-          />
-        </>
-      ) : (
-        !router.query.question_id && (
-          <>
-            <FormForQuestion
-              isEdit={false}
-              intialValue={intialValue.mcqQuestions}
-              handleSubmit={handleSubmit}
-            />
-          </>
-        )
-      )}
+      initial_value.questions[0].question
+        ? (
+            <>
+              <FormForQuestion
+                isEdit={true}
+                intialValue={initial_value}
+                handleSubmit={handleSubmit}
+              />
+            </>
+          )
+        : (
+            !router.query.question_id && (
+              <>
+                <FormForQuestion
+                  isEdit={false}
+                  intialValue={intialValue.mcqQuestions}
+                  handleSubmit={handleSubmit}
+                />
+              </>
+            )
+          )}
     </div>
   );
 };

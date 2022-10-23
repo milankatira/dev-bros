@@ -49,12 +49,6 @@ exports.getcodingquestionbyId = catchAsyncError(async (req, res, next) => {
   }
 });
 
-
-
-
-
-
-
 exports.updateQuestion = catchAsyncError(async (req, res, next) => {
   try {
     const packet = {

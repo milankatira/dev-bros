@@ -1,11 +1,11 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
 const SkillsSchema = new Schema({
   skill: {
     type: Schema.Types.ObjectId,
-    ref: 'skills',
+    ref: "skills",
   },
   year_of_experience: {
     type: Number,
@@ -17,8 +17,8 @@ const SkillsSchema = new Schema({
   },
   user_id: {
     type: Schema.Types.ObjectId,
-    ref: 'users',
+    ref: "users",
   },
 });
 
-module.exports = mongoose.model('user_skills', SkillsSchema);
+module.exports = mongoose.model("user_skills", SkillsSchema);

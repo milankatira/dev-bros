@@ -67,7 +67,6 @@ const AssignExamModal: React.FC<Props> = ({
         {({ errors, touched }) => (
           <Form className="w-[700px] p-4">
             <div className="flex justify-between p-2">
-           
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 256 512"
@@ -154,7 +153,10 @@ const AssignExamModal: React.FC<Props> = ({
                 </div>
               </div>
               <footer className="flex justify-end">
-                <button type="submit" className="p-2 rounded-lg bg-red-500 text-white">
+                <button
+                  type="submit"
+                  className="p-2 rounded-lg bg-red-500 text-white"
+                >
                   Submit
                 </button>
               </footer>

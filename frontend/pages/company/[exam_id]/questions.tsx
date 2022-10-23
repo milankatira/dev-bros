@@ -1,11 +1,11 @@
-import React from 'react'
-import McqQuestions from '../../../components/admin/McqQuestion';
+import React from "react";
+import McqQuestions from "../../../components/admin/McqQuestion";
 const questions = () => {
   return (
     <div>
-      <McqQuestions/>
+      <McqQuestions />
     </div>
-  )
-}
+  );
+};
 
-export default questions
+export default questions;
