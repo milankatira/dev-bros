@@ -1,7 +1,7 @@
 export const APP_CONSTANT = {
-  login:"login",
-  signup:"signup",
-}
+  login: "login",
+  signup: "signup",
+};
 
 const masterConfig = {
   local: {
@@ -16,7 +16,6 @@ const masterConfig = {
 };
 
 export const { server_url } = masterConfig[process.env.ENV];
-
 
 export const exam_type = {
   MCQ: "MCQ",

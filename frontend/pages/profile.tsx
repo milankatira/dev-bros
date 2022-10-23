@@ -6,7 +6,7 @@ export default function MyProfile() {
     <>
       <div className="flex mt-10 items-center justify-center">
         <div className="w-full lg:w-10/12 px-4">
-          <Myprofile  />
+          <Myprofile />
         </div>
       </div>
     </>

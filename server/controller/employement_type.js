@@ -10,4 +10,3 @@ exports.GetEmployement_type = catchAsyncError(async (req, res, next) => {
     Employement_type,
   });
 });
-

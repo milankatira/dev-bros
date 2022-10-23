@@ -20,7 +20,7 @@ const Auth = ({ name, redirect }) => {
     } else if (name == APP_CONSTANT.signup) {
       await signup(packet)
         .then((res) => {
-          Swal.fire("Good job!",res.data.message, "success");
+          Swal.fire("Good job!", res.data.message, "success");
         })
         .catch((err) => {
           Swal.fire("Error!", err.response.data.error, "error");

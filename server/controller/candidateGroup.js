@@ -1,7 +1,7 @@
 const GroupModal = require("../database/candidate_group");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");
-const UserModel=require("../database/userModel")
+const UserModel = require("../database/userModel");
 exports.AddGroup = catchAsyncError(async (req, res, next) => {
   try {
     const { profile_url, name, title, description, userId } = req.body;
@@ -30,11 +30,12 @@ exports.GetGroup = catchAsyncError(async (req, res, next) => {
       req.query && req.query.itemsPerPage ? req.query.itemsPerPage : 10;
     const skip = req.query && req.query.offset ? req.query.offset : 0;
 
-    const group = await GroupModal.find({ user_id: req.user.id }).populate({
-      path: "candidates",
-      select: "firstName lastName email phoneNo",
-      model: UserModel,
-    })
+    const group = await GroupModal.find({ user_id: req.user.id })
+      .populate({
+        path: "candidates",
+        select: "firstName lastName email phoneNo",
+        model: UserModel,
+      })
       .limit(Number(limit))
       .skip(Number(skip));
 

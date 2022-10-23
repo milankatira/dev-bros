@@ -1,9 +1,9 @@
 declare module "component" {
-  type MyFunctionType = (arg:any) => void;
+  type MyFunctionType = (arg: any) => void;
   export interface ButtonFieldProps {
     text?: string | any;
     onClick?: MyFunctionType;
-    type?: 'submit' | 'reset' | 'button' | undefined;
+    type?: "submit" | "reset" | "button" | undefined;
   }
   export interface InputFieldProps {
     value?: string | any;
@@ -15,7 +15,6 @@ declare module "component" {
     error?: string | any;
   }
 
-  
   export interface SelectFieldProps {
     error?: string | any;
     options?: any;
@@ -31,6 +30,6 @@ declare module "component" {
     open: boolean | any;
     setopen: any;
     children?: any;
-    handleSubmit ?: any;
+    handleSubmit?: any;
   }
 }

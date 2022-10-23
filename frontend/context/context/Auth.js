@@ -2,7 +2,7 @@ import React, { createContext, useReducer, useContext } from "react";
 
 import Auth from "../reducer/Auth";
 
-import { user} from "../../api/client/user";
+import { user } from "../../api/client/user";
 
 import { login } from "../../api/auth";
 

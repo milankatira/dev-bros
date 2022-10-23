@@ -17,8 +17,7 @@ exports.Create_profile = catchAsyncError(async (req, res, next) => {
       success: true,
       profile,
     });
-  } 
-  catch (error) {
+  } catch (error) {
     return next(new ErrorHandler(error.message, 500));
   }
 });

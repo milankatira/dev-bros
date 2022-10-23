@@ -1,15 +1,15 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
 const EducationDetailsSchema = new Schema({
   degree: {
     type: Schema.Types.ObjectId,
-    ref: 'degree',
+    ref: "degree",
   },
   institution: {
     type: Schema.Types.ObjectId,
-    ref: 'institution',
+    ref: "institution",
   },
   description: {
     type: String,
@@ -29,8 +29,8 @@ const EducationDetailsSchema = new Schema({
   },
   user_id: {
     type: Schema.Types.ObjectId,
-    ref: 'users',
+    ref: "users",
   },
 });
 
-module.exports = mongoose.model('education_details', EducationDetailsSchema);
+module.exports = mongoose.model("education_details", EducationDetailsSchema);

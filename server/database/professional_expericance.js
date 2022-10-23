@@ -1,18 +1,18 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
 const ProfessionalExperienceSchema = new Schema({
   user_id: {
     type: Schema.Types.ObjectId,
-    ref: 'users',
+    ref: "users",
   },
   company: {
     type: String,
   },
   designation: {
     type: Schema.Types.ObjectId,
-    ref: 'designation',
+    ref: "designation",
   },
   description: {
     type: String,
@@ -32,4 +32,7 @@ const ProfessionalExperienceSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('professional_experience', ProfessionalExperienceSchema);
+module.exports = mongoose.model(
+  "professional_experience",
+  ProfessionalExperienceSchema
+);

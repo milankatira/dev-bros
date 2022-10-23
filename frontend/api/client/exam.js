@@ -18,7 +18,6 @@ export const getExamById = async (id) => {
     });
 };
 
-
 export const GenerateExamReport = async (packet) => {
   return await axios
     .post(generateExamReport, packet)
@@ -28,7 +27,6 @@ export const GenerateExamReport = async (packet) => {
     });
 };
 
-
 export const GetExamQuestion = async (exam_id) => {
   return await axios
     .get(ExamQuestion(exam_id))
@@ -37,7 +35,6 @@ export const GetExamQuestion = async (exam_id) => {
       throw err;
     });
 };
-
 
 export const GetAllExam = async (queryParams) => {
   return await axios

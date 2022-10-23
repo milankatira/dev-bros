@@ -158,38 +158,42 @@ const Index = ({ Data }) => {
             <div className="my-4">
               <div className="font-bold text-sm flex flex-row justify-between">
                 Questions
-                {Data.exam_type == "CODING" ? (
-                  codingQuestionData ? (
-                    <button
-                      onClick={() => {
-                        Router.push(
-                          `/company/${Data._id}/coding/${codingQuestionData[0]._id}`
-                        );
-                      }}
-                      className="bg-purple-700 text-white font-bold p-2 rounded-lg text-center"
-                    >
+                {Data.exam_type == "CODING"
+                  ? (
+                      codingQuestionData
+                        ? (
+                            <button
+                              onClick={() => {
+                                Router.push(
+                                  `/company/${Data._id}/coding/${codingQuestionData[0]._id}`
+                                );
+                              }}
+                              className="bg-purple-700 text-white font-bold p-2 rounded-lg text-center"
+                            >
                       Edit Question
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => {
-                        Router.push(`/company/${Data._id}/codingquestion`);
-                      }}
-                      className="bg-purple-700 text-white font-bold p-2 rounded-lg text-center"
-                    >
+                            </button>
+                          )
+                        : (
+                            <button
+                              onClick={() => {
+                                Router.push(`/company/${Data._id}/codingquestion`);
+                              }}
+                              className="bg-purple-700 text-white font-bold p-2 rounded-lg text-center"
+                            >
                       + Add Question
-                    </button>
-                  )
-                ) : (
-                  <button
-                    onClick={() => {
-                      Router.push(`/company/${Data._id}/questions`);
-                    }}
-                    className="bg-purple-700 text-white font-bold p-2 rounded-lg text-center"
-                  >
+                            </button>
+                          )
+                    )
+                  : (
+                      <button
+                        onClick={() => {
+                          Router.push(`/company/${Data._id}/questions`);
+                        }}
+                        className="bg-purple-700 text-white font-bold p-2 rounded-lg text-center"
+                      >
                     + Add Question
-                  </button>
-                )}
+                      </button>
+                    )}
               </div>
             </div>
             {questions &&

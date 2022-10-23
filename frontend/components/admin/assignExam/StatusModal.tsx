@@ -30,9 +30,9 @@ export default function StatusModal({ open, setopen }) {
                 <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
                   I always felt like I could do anything. That’s the main thing
                   people are controlled by! Thoughts- their perception of
-                  themselves!  slowed down by their perception of
-                  themselves. If  taught you can’t do anything, you won’t
-                  do anything. I was taught I could do everything.
+                  themselves! slowed down by their perception of themselves. If
+                  taught you can’t do anything, you won’t do anything. I was
+                  taught I could do everything.
                 </p>
               </div>
               {/*footer*/}

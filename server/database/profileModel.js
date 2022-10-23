@@ -9,10 +9,10 @@ const profileSchema = new mongoose.Schema({
     type: String,
     required: [true, "please enter location"],
   },
-  user_id:{
+  user_id: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
-  }
+  },
 });
 
 module.exports = mongoose.model("Profile", profileSchema);

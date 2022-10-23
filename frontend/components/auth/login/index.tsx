@@ -22,7 +22,7 @@ const NewLogin = () => {
       email: data.email,
       password: data.password,
     };
-     Auth_api.LoginUser(packet)
+    Auth_api.LoginUser(packet)
       .then((res) => {
         toast.success(res?.data?.message);
         const serialized = cookie.serialize("token", res?.data?.token, {
@@ -89,7 +89,7 @@ const NewLogin = () => {
                               }
                             />
                           </div>
-             
+
                           <div>
                             <label className="inline-flex items-center cursor-pointer">
                               <input
@@ -107,7 +107,6 @@ const NewLogin = () => {
                           <div className="text-center mt-6">
                             <ButtonField text="Signup" />
                           </div>
-                          
                         </div>
                       </div>
                     </div>
@@ -127,7 +126,7 @@ const NewLogin = () => {
                             href="#pablo"
                             className="text-gray-600 text-sm font-semibold"
                           >
-                        Create new account
+                            Create new account
                           </a>
                         </Link>
                       </div>

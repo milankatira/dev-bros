@@ -24,11 +24,15 @@ exports.UpdateSubcriptionPlan = catchAsyncError(async (req, res, next) => {
       return next(new ErrorHandler("subcription_plan not found", 404));
     }
 
-    subcription_plan = await SubcriptionPlan.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-      useFindAndModify: false,
-    });
+    subcription_plan = await SubcriptionPlan.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+      }
+    );
 
     res.status(201).json({
       success: true,

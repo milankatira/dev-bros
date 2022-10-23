@@ -13,17 +13,14 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
   const user = await User.create(req.body);
 
   sendToken(user, 201, res);
-
 });
-
-
 
 exports.loginUser = catchAsyncError(async (req, res, next) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return next(new ErrorHandler("please provide email and password", 400));
   }
-  const user = await User.findOne({ email })
+  const user = await User.findOne({ email });
   if (!user) {
     return next(new ErrorHandler("email or password is incorrect", 400));
   }
@@ -33,5 +30,3 @@ exports.loginUser = catchAsyncError(async (req, res, next) => {
   }
   sendToken(user, 200, res);
 });
-
-
