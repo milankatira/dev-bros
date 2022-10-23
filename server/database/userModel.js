@@ -41,7 +41,7 @@ const userSchema = new mongoose.Schema({
 
   role: {
     type: String,
-    enum: ["user", "company", "admin"],
+    enum: ["candidate", "company", "admin"],
     default: "user",
     required: [true, "Please enter your role"],
   },
