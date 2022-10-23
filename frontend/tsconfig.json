@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "hook/useInfinateScroll.jsx", "validator/signup.js"  ],
+, "hook/useInfinateScroll.jsx", "validator/signup.js", "context/context/Exam.js"  ],
   "exclude": [
     "node_modules"
   ]

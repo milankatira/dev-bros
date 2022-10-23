@@ -16,6 +16,8 @@ interface Props {
   setExamData: any;
   examData: any;
 }
+import { useExamcontext } from "../../../context/context/Exam";
+
 
 const AddExamModal: any = ({
   exam_id,
@@ -25,6 +27,8 @@ const AddExamModal: any = ({
   examData,
 }) => {
   const [step, setStep] = useState<number>(1);
+  const { Exam_api } = useExamcontext();
+
   UseEffectOnce(() => {
     setStep(1);
   });
@@ -58,8 +62,9 @@ const AddExamModal: any = ({
           toggleModal();
         });
       } else {
+        Exam_api.AddExam(packet,toggleModal);
         addExam(packet).then((res) => {
-          toggleModal();
+          // toggleModal();
         });
       }
     }

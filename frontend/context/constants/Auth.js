@@ -1,4 +1,3 @@
-// REDUX ACTION TYPES
 export const AUTH_STATUS = "AUTH_STATUS";
 
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
