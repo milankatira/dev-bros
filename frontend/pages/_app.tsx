@@ -10,8 +10,8 @@ const Navbar = dynamic(() => import("../layouts/navbar"), {
   ssr: false,
 });
 import { ExamProvider } from "../context/context/Exam";
-
 import { AuthProvider } from "../context/context/Auth";
+import { LoadingProvider, useLoadingcontext } from "../context/context/Loading";
 import Loading from "../components/common/design/Loading";
 
 const progress = new ProgressBar({
@@ -35,16 +35,18 @@ Router.events.on("routeChangeError", () => {
 
 function MyApp({ Component, pageProps }) {
   return (
-    <AuthProvider>
-      <ExamProvider>
-        <Loading />
-        <Toaster position="top-center" reverseOrder={false} />
-        <Navbar />
-        <CookiesProvider>
-          <Component {...pageProps} />
-        </CookiesProvider>
-      </ExamProvider>
-    </AuthProvider>
+    <LoadingProvider>
+      <AuthProvider>
+        <ExamProvider>
+          <Loading />
+          <Toaster position="top-center" reverseOrder={false} />
+          <Navbar />
+          <CookiesProvider>
+            <Component {...pageProps} />
+          </CookiesProvider>
+        </ExamProvider>
+      </AuthProvider>
+    </LoadingProvider>
   );
 }
 

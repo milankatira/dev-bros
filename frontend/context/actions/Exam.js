@@ -1,16 +1,4 @@
 import * as types from "../constants/exam";
-// import Router from "next/router";
-// import { toast } from "react-toastify";
-// import { routes } from "../../constant/routes";
-// import {
-//   addExamData,
-//   updateExamData,
-//   getExamData,
-//   getExamDataById,
-//   deleteExamData,
-// } from "../../api_calls/exam";
-
-// import { setLoading } from "./loading";
 
 export const addExamDataSuccess = (data) => ({
   type: types.ADD_EXAM_SUCCESS,
