@@ -12,6 +12,7 @@ const Navbar = dynamic(() => import("../layouts/navbar"), {
 import { ExamProvider } from "../context/context/Exam";
 
 import { AuthProvider } from "../context/context/Auth";
+import Loading from "../components/common/design/Loading";
 
 const progress = new ProgressBar({
   size: 4,
@@ -36,6 +37,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <AuthProvider>
       <ExamProvider>
+        <Loading />
         <Toaster position="top-center" reverseOrder={false} />
         <Navbar />
         <CookiesProvider>

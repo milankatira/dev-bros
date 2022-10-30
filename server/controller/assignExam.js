@@ -1,6 +1,5 @@
 const AssignExamModal = require("../database/assignExam");
 const ExamModel = require("../database/exam");
-// ExamModal
 const UserModel = require("../database/userModel");
 const GroupModel = require("../database/candidate_group");
 const AssignExamModel = require("../database/assignExam");
