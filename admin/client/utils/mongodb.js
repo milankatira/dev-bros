@@ -1,12 +1,12 @@
 /** @format */
 
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const MONGO_URL = 'mongodb://localhost:27017/dev_bros';
+const MONGO_URL = "mongodb://localhost:27017/dev_bros";
 
 if (!MONGO_URL) {
   throw new Error(
-    'Please define the MONGO_URL environment variable inside .env.local'
+    "Please define the MONGO_URL environment variable inside .env.local"
   );
 }
 
@@ -31,11 +31,9 @@ async function dbConnect() {
       bufferCommands: false,
     };
 
-    cached.promise = mongoose
-      .connect(MONGO_URL, opts)
-      .then((mongoose) => {
-        return mongoose;
-      });
+    cached.promise = mongoose.connect(MONGO_URL, opts).then((mongoose) => {
+      return mongoose;
+    });
   }
   cached.conn = await cached.promise;
   return cached.conn;

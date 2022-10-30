@@ -73,11 +73,9 @@ export const Profile = yup.object().shape({
           .number()
           .typeError(form_validation.marks_number)
           .required(form_validation.marks),
-          // .max(100, form_validation.maxMarks),
-        startedYear: yup
-          .date()
-          .required(form_validation.started_year),
-          // .max(moment().toDate(), form_validation.currentYear),
+        // .max(100, form_validation.maxMarks),
+        startedYear: yup.date().required(form_validation.started_year),
+        // .max(moment().toDate(), form_validation.currentYear),
 
         passingYear: yup
           .date()
@@ -98,15 +96,11 @@ export const Profile = yup.object().shape({
           .string()
           .required(form_validation.description),
 
-        startDate: yup
-          .date()
-          .required(form_validation.start_date),
-          // .max(moment().toDate(), form_validation.currentDate),
-        endDate: yup
-          .date()
-          .required(form_validation.end_date),
-          // .min(yup.ref("startDate"), form_validation.enddate)
-          // .max(moment().toDate(), form_validation.end_dates),
+        startDate: yup.date().required(form_validation.start_date),
+        // .max(moment().toDate(), form_validation.currentDate),
+        endDate: yup.date().required(form_validation.end_date),
+        // .min(yup.ref("startDate"), form_validation.enddate)
+        // .max(moment().toDate(), form_validation.end_dates),
         fresher: yup.boolean(),
       })
     )

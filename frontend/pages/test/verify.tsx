@@ -7,7 +7,7 @@ import ButtonField from "../../components/common/design/ButtonField";
 import Textinput from "../../components/common/design/Textinput";
 import { intialValue } from "../../constant/initial_value";
 import { Login } from "../../validator/login";
-import { ExamLinkValidation} from '../../validator/exam';
+import { ExamLinkValidation } from "../../validator/exam";
 import { login } from "../../api/auth";
 import toast from "react-hot-toast";
 import Router from "next/router";
@@ -59,7 +59,6 @@ const newlogin = () => {
                         <hr className="mt-6 border-b-1 border-gray-300" />
                       </div>
                       <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                       
                         <div>
                           <div className="relative w-full mb-3">
                             <Textinput

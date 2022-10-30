@@ -69,10 +69,7 @@ export default function CardSettings({ initialValue, handleSubmit }) {
                     </div>
                     <hr className="my-6 border-b-1 border-blueGray-300" />
 
-                    <ButtonField
-                      type="submit"
-                      text="Submit"
-                    />
+                    <ButtonField type="submit" text="Submit" />
                   </div>
                 </div>
               </div>

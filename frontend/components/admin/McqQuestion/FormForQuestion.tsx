@@ -67,89 +67,91 @@ const FormForQuestion = ({ intialValue, handleSubmit, isEdit }) => {
                                         {values.questions[index]?.mcqs &&
                                         values.questions[index]?.mcqs?.length >
                                           0 ? (
-                                          values.questions[index]?.mcqs.map(
-                                            (mcqData: any, i: number) => (
-                                              <div
-                                                className="form-container5"
-                                                key={i}
-                                              >
-                                                <div>
-                                                  <div className="flex flex-row items-center">
-                                                    <Field
-                                                      type="radio"
-                                                      variant="outlined"
-                                                      name={`questions[${index}].answer`}
-                                                      value={mcqData}
-                                                      className="radio-input1"
-                                                      disabled={!mcqData}
-                                                    />
-                                                    {/* &nbsp; */}
-                                                    <div className="ml-2 w-full">
-                                                      <Textinput
-                                                        // fullWidth
-                                                        // className="w-full"
-                                                        name={`questions[${index}].mcqs[${i}]`}
-                                                        // defaultValue={mcqData}
-                                                        placeholder={`Answer Choice ${
-                                                          i + 1
-                                                        }`}
-                                                      />
-                                                    </div>
+                                              values.questions[index]?.mcqs.map(
+                                                (mcqData: any, i: number) => (
+                                                  <div
+                                                    className="form-container5"
+                                                    key={i}
+                                                  >
+                                                    <div>
+                                                      <div className="flex flex-row items-center">
+                                                        <Field
+                                                          type="radio"
+                                                          variant="outlined"
+                                                          name={`questions[${index}].answer`}
+                                                          value={mcqData}
+                                                          className="radio-input1"
+                                                          disabled={!mcqData}
+                                                        />
+                                                        {/* &nbsp; */}
+                                                        <div className="ml-2 w-full">
+                                                          <Textinput
+                                                            // fullWidth
+                                                            // className="w-full"
+                                                            name={`questions[${index}].mcqs[${i}]`}
+                                                            // defaultValue={mcqData}
+                                                            placeholder={`Answer Choice ${
+                                                              i + 1
+                                                            }`}
+                                                          />
+                                                        </div>
 
-                                                    {values.questions[index]
-                                                      ?.mcqs?.length > 2 && (
-                                                      <div>
-                                                        <svg
-                                                          onClick={() =>
-                                                            arrayHelpers.remove(
-                                                              i
-                                                            )
-                                                          }
-                                                          className="ml-4 h-4 w-4"
-                                                          xmlns="http://www.w3.org/2000/svg"
-                                                          viewBox="0 0 320 512"
-                                                        >
-                                                          <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" />
-                                                        </svg>
+                                                        {values.questions[index]
+                                                          ?.mcqs?.length > 2 && (
+                                                          <div>
+                                                            <svg
+                                                              onClick={() =>
+                                                                arrayHelpers.remove(
+                                                                  i
+                                                                )
+                                                              }
+                                                              className="ml-4 h-4 w-4"
+                                                              xmlns="http://www.w3.org/2000/svg"
+                                                              viewBox="0 0 320 512"
+                                                            >
+                                                              <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" />
+                                                            </svg>
+                                                          </div>
+                                                        )}
                                                       </div>
-                                                    )}
+                                                    </div>
                                                   </div>
-                                                </div>
-                                              </div>
-                                            )
-                                          )
-                                        ) : (
-                                          <button
-                                            onClick={() =>
-                                              arrayHelpers.push("")
-                                            }
-                                            // buttonText="Add mcq"
-                                          >
+                                                )
+                                              )
+                                            ) : (
+                                              <button
+                                                onClick={() =>
+                                                  arrayHelpers.push("")
+                                                }
+                                                // buttonText="Add mcq"
+                                              >
                                             add
-                                          </button>
-                                        )}
+                                              </button>
+                                            )}
                                         <div>
                                           <div className="form-container5 job_list_link">
                                             {values.questions[index]?.mcqs
-                                              ?.length ? (
-                                              <>
-                                                <button
-                                                  onClick={() =>
-                                                    arrayHelpers.push("")
-                                                  }
-                                                  className="flex justify-between items-center p-2 bg-gray-100 rounded-lg text-black"
-                                                >
-                                                  <svg
-                                                    className="w-4 h-4 mr-2 text-black"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 448 512"
-                                                  >
-                                                    <path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z" />
-                                                  </svg>
+                                              ?.length
+                                              ? (
+                                                  <>
+                                                    <button
+                                                      onClick={() =>
+                                                        arrayHelpers.push("")
+                                                      }
+                                                      className="flex justify-between items-center p-2 bg-gray-100 rounded-lg text-black"
+                                                    >
+                                                      <svg
+                                                        className="w-4 h-4 mr-2 text-black"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 448 512"
+                                                      >
+                                                        <path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z" />
+                                                      </svg>
                                                   Add new choice
-                                                </button>
-                                              </>
-                                            ) : null}
+                                                    </button>
+                                                  </>
+                                                )
+                                              : null}
                                           </div>
                                         </div>
                                       </div>

@@ -52,7 +52,6 @@ exports.payment = (req, res) => {
     .catch((err) => console.log("error", err));
 };
 
-
 exports.sendStripeApiKey = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({ stripeApiKey: process.env.STRIPE_API_KEY });
 });

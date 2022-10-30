@@ -36,7 +36,6 @@ exports.AddJob = catchAsyncError(async (req, res, next) => {
   }
 });
 
-
 exports.GetAllJobs = catchAsyncError(async (req, res, next) => {
   try {
     const jobs = await Jobs.find();

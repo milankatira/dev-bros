@@ -39,7 +39,6 @@ exports.createProduct = catchAsyncError(async (req, res, next) => {
   });
 });
 
-
 exports.getAdminProducts = catchAsyncError(async (req, res, next) => {
   const products = await Product.find();
 
@@ -48,7 +47,6 @@ exports.getAdminProducts = catchAsyncError(async (req, res, next) => {
     products,
   });
 });
-
 
 //get all product
 exports.getAllProducts = catchAsyncError(async (req, res) => {

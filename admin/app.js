@@ -26,11 +26,11 @@ const degree = require("./src/routes/degree");
 
 const designation = require("./src/routes/designation");
 
-const institution=require("./src/routes/institution");
+const institution = require("./src/routes/institution");
 
-const user_roll=require("./src/routes/user_roll");
+const user_roll = require("./src/routes/user_roll");
 
-const plan=require("./src/routes/plan");
+const plan = require("./src/routes/plan");
 
 const subscription_plan = require("./src/routes/subscription_plans");
 
@@ -61,9 +61,7 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 
-
 app.use(cors(corsOptions));
-
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -87,7 +85,7 @@ app.use("/api/v1", user_roll);
 
 app.use("/api/v1", plan);
 
-app.use("/api/v1",subscription_plan);
+app.use("/api/v1", subscription_plan);
 
 app.use(errorMiddleware);
 

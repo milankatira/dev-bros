@@ -264,7 +264,8 @@ export default function Sidebar() {
                 <a
                   href="https://www.creative-tim.com/learning-lab/tailwind/nextjs/colors/notus"
                   target="_blank"
-                  className="text-sky-700 hover:text-sky-500 text-sm block mb-4 no-underline font-semibold" rel="noreferrer"
+                  className="text-sky-700 hover:text-sky-500 text-sm block mb-4 no-underline font-semibold"
+                  rel="noreferrer"
                 >
                   <i className="fas fa-paint-brush mr-2 text-sky-300 text-base"></i>
                   Styles
@@ -275,7 +276,8 @@ export default function Sidebar() {
                 <a
                   href="https://www.creative-tim.com/learning-lab/tailwind/nextjs/alerts/notus"
                   target="_blank"
-                  className="text-sky-700 hover:text-sky-500 text-sm block mb-4 no-underline font-semibold" rel="noreferrer"
+                  className="text-sky-700 hover:text-sky-500 text-sm block mb-4 no-underline font-semibold"
+                  rel="noreferrer"
                 >
                   <i className="fab fa-css3-alt mr-2 text-sky-300 text-base"></i>
                   CSS Components
@@ -286,7 +288,8 @@ export default function Sidebar() {
                 <a
                   href="https://www.creative-tim.com/learning-lab/tailwind/angular/overview/notus"
                   target="_blank"
-                  className="text-sky-700 hover:text-sky-500 text-sm block mb-4 no-underline font-semibold" rel="noreferrer"
+                  className="text-sky-700 hover:text-sky-500 text-sm block mb-4 no-underline font-semibold"
+                  rel="noreferrer"
                 >
                   <i className="fab fa-angular mr-2 text-sky-300 text-base"></i>
                   Angular
@@ -297,7 +300,8 @@ export default function Sidebar() {
                 <a
                   href="https://www.creative-tim.com/learning-lab/tailwind/js/overview/notus"
                   target="_blank"
-                  className="text-sky-700 hover:text-sky-500 text-sm block mb-4 no-underline font-semibold" rel="noreferrer"
+                  className="text-sky-700 hover:text-sky-500 text-sm block mb-4 no-underline font-semibold"
+                  rel="noreferrer"
                 >
                   <i className="fab fa-js-square mr-2 text-sky-300 text-base"></i>
                   Javascript
@@ -308,7 +312,8 @@ export default function Sidebar() {
                 <a
                   href="https://www.creative-tim.com/learning-lab/tailwind/nextjs/overview/notus"
                   target="_blank"
-                  className="text-sky-700 hover:text-sky-500 text-sm block mb-4 no-underline font-semibold" rel="noreferrer"
+                  className="text-sky-700 hover:text-sky-500 text-sm block mb-4 no-underline font-semibold"
+                  rel="noreferrer"
                 >
                   <i className="fab fa-react mr-2 text-sky-300 text-base"></i>
                   NextJS
@@ -319,7 +324,8 @@ export default function Sidebar() {
                 <a
                   href="https://www.creative-tim.com/learning-lab/tailwind/react/overview/notus"
                   target="_blank"
-                  className="text-sky-700 hover:text-sky-500 text-sm block mb-4 no-underline font-semibold" rel="noreferrer"
+                  className="text-sky-700 hover:text-sky-500 text-sm block mb-4 no-underline font-semibold"
+                  rel="noreferrer"
                 >
                   <i className="fab fa-react mr-2 text-sky-300 text-base"></i>
                   React
@@ -330,7 +336,8 @@ export default function Sidebar() {
                 <a
                   href="https://www.creative-tim.com/learning-lab/tailwind/svelte/overview/notus"
                   target="_blank"
-                  className="text-sky-700 hover:text-sky-500 text-sm block mb-4 no-underline font-semibold" rel="noreferrer"
+                  className="text-sky-700 hover:text-sky-500 text-sm block mb-4 no-underline font-semibold"
+                  rel="noreferrer"
                 >
                   <i className="fas fa-link mr-2 text-sky-300 text-base"></i>
                   Svelte
@@ -341,7 +348,8 @@ export default function Sidebar() {
                 <a
                   href="https://www.creative-tim.com/learning-lab/tailwind/vue/overview/notus"
                   target="_blank"
-                  className="text-sky-700 hover:text-sky-500 text-sm block mb-4 no-underline font-semibold" rel="noreferrer"
+                  className="text-sky-700 hover:text-sky-500 text-sm block mb-4 no-underline font-semibold"
+                  rel="noreferrer"
                 >
                   <i className="fab fa-vuejs mr-2 text-sky-300 text-base"></i>
                   VueJS

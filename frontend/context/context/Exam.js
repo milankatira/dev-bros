@@ -30,7 +30,7 @@ function ExamProvider(props) {
   const [exam, dispatch] = useReducer(Exam, initialState);
   const [hasMore, setHasMore] = useState(false);
   const [myexam, setmyexam] = useState([]);
-  const GetExam = async (isUpdate,params, cancelToken) => {
+  const GetExam = async (isUpdate, params, cancelToken) => {
     dispatch(setExamLoading(true));
     await axios({
       method: "GET",

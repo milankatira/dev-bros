@@ -5,7 +5,7 @@ import ButtonField from "../components/common/design/ButtonField";
 import { GetAssignExam } from "../api/client/compnay";
 import { UseEffectOnce } from "../hook/useEffectOnce";
 import moment from "moment";
-import  Router  from "next/router";
+import Router from "next/router";
 
 const Myexam = () => {
   const [exam, setexam] = useState([]);
@@ -87,7 +87,10 @@ const Myexam = () => {
               {exam &&
                 exam.map((data) => {
                   return (
-                    <tr key={data._id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <tr
+                      key={data._id}
+                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                    >
                       <th
                         scope="row"
                         className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"

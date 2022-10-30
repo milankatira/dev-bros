@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const preview = () => {
   return (
@@ -54,8 +54,8 @@ const preview = () => {
             <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
               Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
               gentrify, subway tile poke farm-to-table. Franzen you probably
-              heard of them man bun deep jianbing selfies heirloom prism
-              food truck ugh squid celiac humblebrag.
+              heard of them man bun deep jianbing selfies heirloom prism food
+              truck ugh squid celiac humblebrag.
             </p>
           </div>
           <div className="flex flex-wrap -m-4 text-center">
@@ -232,6 +232,6 @@ const preview = () => {
       </footer>
     </div>
   );
-}
+};
 
-export default preview
+export default preview;

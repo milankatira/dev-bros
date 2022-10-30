@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const UserRollsSchema = new mongoose.Schema({
   name: {
@@ -7,4 +7,4 @@ const UserRollsSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('user_rolls', UserRollsSchema);
+module.exports = mongoose.model("user_rolls", UserRollsSchema);

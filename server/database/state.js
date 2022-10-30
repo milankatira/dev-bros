@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
@@ -9,8 +9,8 @@ const StateSchema = new Schema({
   },
   country: {
     type: Schema.Types.ObjectId,
-    ref: 'country',
+    ref: "country",
   },
 });
 
-module.exports = mongoose.model('state', StateSchema);
+module.exports = mongoose.model("state", StateSchema);

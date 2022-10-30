@@ -9,8 +9,8 @@ const form_validation = {
   totalQuestion: "exam name is requred.",
   passing_mark_less: "passing mark is less then passing marks.",
   exam_link: "exam link is requred.",
-  exam_link_short:"exam link is too short.",
-  exam_link_long:"exam link is too long.",
+  exam_link_short: "exam link is too short.",
+  exam_link_long: "exam link is too long.",
 };
 export const ExamValidation = yup.object().shape({
   exam_name: yup.string().required(form_validation.exam_name),
