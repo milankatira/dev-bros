@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 import React from "react";
 
 export interface Props {
@@ -8,24 +9,20 @@ export interface Props {
 const CustomModalField: React.FC<Props> = ({ open, children }) => {
   return (
     <>
-      {
-        open
-          ?
-            // eslint-disable-next-line multiline-ternary
-            (
-              <>
-                <div className="justify-center items-center flex overflow-x-hidden fixed inset-0 z-50 outline-none focus:outline-none  overflow-y-hidden">
-                  <div className="relative w-auto my-6 mx-auto max-w-3xl">
-                    {/*content*/}
-                    <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                      {/*body*/}
-                      <div>{children}</div>
-                    </div>
-                  </div>
-                </div>
-                <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-              </>
-            ) : null}
+      {open ? (
+        <>
+          <div className="justify-center items-center flex overflow-x-hidden fixed inset-0 z-50 outline-none focus:outline-none  overflow-y-hidden">
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              {/*content*/}
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                {/*body*/}
+                <div>{children}</div>
+              </div>
+            </div>
+          </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+        </>
+      ) : null}
     </>
   );
 };

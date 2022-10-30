@@ -83,40 +83,38 @@ export default function Index({ userData }) {
 
   return (
     city &&
-    (userData
-      ? (
-          <UpdateProfile
-            userData={companyProfile}
-            city={city}
-            logo={logo}
-            setmylogo={setmylogo}
-            setmyimage={setmyimage}
-            setlogo={setlogo}
-            image={image}
-            setImage={setImage}
-            handleSubmit={handleSubmit}
-            handleImage={handleImage}
-            initialValues={company_initial_value}
-            description={description}
-            setDescription={setDescription}
-          />
-        )
-      : (
-          <UpdateProfile
-            userData={null}
-            city={city}
-            logo={logo}
-            setmylogo={setmylogo}
-            setmyimage={setmyimage}
-            setlogo={setlogo}
-            image={image}
-            setImage={setImage}
-            handleSubmit={handleSubmit}
-            handleImage={handleImage}
-            initialValues={intialValue.company_profile}
-            description={description}
-            setDescription={setDescription}
-          />
-        ))
+    (userData ? (
+      <UpdateProfile
+        userData={companyProfile}
+        city={city}
+        logo={logo}
+        setmylogo={setmylogo}
+        setmyimage={setmyimage}
+        setlogo={setlogo}
+        image={image}
+        setImage={setImage}
+        handleSubmit={handleSubmit}
+        handleImage={handleImage}
+        initialValues={company_initial_value}
+        description={description}
+        setDescription={setDescription}
+      />
+    ) : (
+      <UpdateProfile
+        userData={null}
+        city={city}
+        logo={logo}
+        setmylogo={setmylogo}
+        setmyimage={setmyimage}
+        setlogo={setlogo}
+        image={image}
+        setImage={setImage}
+        handleSubmit={handleSubmit}
+        handleImage={handleImage}
+        initialValues={intialValue.company_profile}
+        description={description}
+        setDescription={setDescription}
+      />
+    ))
   );
 }

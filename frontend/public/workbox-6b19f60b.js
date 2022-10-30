@@ -1942,14 +1942,14 @@ define("./workbox-6b19f60b.js", ["exports"], function (exports) {
       const hasCacheUpdateCallback = this.hasCallback("cacheDidUpdate");
       const oldResponse = hasCacheUpdateCallback
         ? await cacheMatchIgnoreParams(
-          // TODO(philipwalton): the `__WB_REVISION__` param is a precaching
-          // feature. Consider into ways to only add this behavior if using
-          // precaching.
-          cache,
-          effectiveRequest.clone(),
-          ["__WB_REVISION__"],
-          matchOptions
-        )
+            // TODO(philipwalton): the `__WB_REVISION__` param is a precaching
+            // feature. Consider into ways to only add this behavior if using
+            // precaching.
+            cache,
+            effectiveRequest.clone(),
+            ["__WB_REVISION__"],
+            matchOptions
+          )
         : null;
 
       {

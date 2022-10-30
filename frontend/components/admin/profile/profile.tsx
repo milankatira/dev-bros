@@ -65,33 +65,29 @@ export default function UpdateProfile({
                                 {...getRootProps()}
                               >
                                 <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                                  {logo
-                                    ? (
-                                        <img
-                                          src={URL.createObjectURL(logo)}
-                                          alt="..."
-                                          className="h-full w-full"
-                                        />
-                                      )
-                                    : userData
-                                      ? (
-                                          <>
-                                            <img
-                                              src={`${server_url}/${userData?.logo}`}
-                                              alt="..."
-                                              className="h-full w-full"
-                                            />
-                                          </>
-                                        )
-                                      : (
-                                          <svg
-                                            className="h-full w-full text-gray-300"
-                                            fill="currentColor"
-                                            viewBox="0 0 24 24"
-                                          >
-                                            <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                                          </svg>
-                                        )}
+                                  {logo ? (
+                                    <img
+                                      src={URL.createObjectURL(logo)}
+                                      alt="..."
+                                      className="h-full w-full"
+                                    />
+                                  ) : userData ? (
+                                    <>
+                                      <img
+                                        src={`${server_url}/${userData?.logo}`}
+                                        alt="..."
+                                        className="h-full w-full"
+                                      />
+                                    </>
+                                  ) : (
+                                    <svg
+                                      className="h-full w-full text-gray-300"
+                                      fill="currentColor"
+                                      viewBox="0 0 24 24"
+                                    >
+                                      <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                    </svg>
+                                  )}
                                 </span>
                                 <button
                                   type="button"
@@ -126,78 +122,74 @@ export default function UpdateProfile({
                                 </p>
                               </div>
 
-                              {!image
-                                ? (
-                                    userData
-                                      ? (
-                                          <div
-                                            className="mt-1 flex justify-center border-gray-300 border-dashed rounded-md"
-                                            {...getRootProps()}
-                                          >
-                                            <img
-                                              src={`${server_url}/${userData?.cover_picture}`}
-                                              alt="..."
-                                              className="mt-1 w-full h-auto  flex justify-center rounded-lg"
-                                            />
-                                          </div>
-                                        )
-                                      : (
-                                          <div
-                                            className="mt-1 flex justify-center border-2 border-gray-300 border-dashed rounded-md"
-                                            {...getRootProps()}
-                                          >
-                                            <div className="space-y-1 text-center">
-                                              <svg
-                                                className="mx-auto h-12 w-12 text-gray-400"
-                                                stroke="currentColor"
-                                                fill="none"
-                                                viewBox="0 0 48 48"
-                                                aria-hidden="true"
-                                              >
-                                                <path
-                                                  d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                                                  strokeWidth={2}
-                                                  strokeLinecap="round"
-                                                  strokeLinejoin="round"
-                                                />
-                                              </svg>
-                                              <div className="flex text-sm text-gray-600">
-                                                <label
-                                                  htmlFor="file-upload"
-                                                  className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
-                                                >
-                                                  <span>Upload a file</span>
-
-                                                  <button
-                                                    id="file-upload"
-                                                    name="file-upload"
-                                                    className="sr-only"
-                                                  />
-                                                </label>
-                                                <p className="pl-1">or drag and drop</p>
-                                              </div>
-                                              <p className="text-xs text-gray-500">
-                                        PNG, JPG, GIF up to 10MB
-                                              </p>
-                                            </div>
-                                          </div>
-                                        )
-                                  )
-                                : (
-                                    <>
-                                      <div
-                                        className="mt-1 flex justify-center border-gray-300 border-dashed rounded-md"
-                                        {...getRootProps()}
+                              {!image ? (
+                                userData ? (
+                                  <div
+                                    className="mt-1 flex justify-center border-gray-300 border-dashed rounded-md"
+                                    {...getRootProps()}
+                                  >
+                                    <img
+                                      src={`${server_url}/${userData?.cover_picture}`}
+                                      alt="..."
+                                      className="mt-1 w-full h-auto  flex justify-center rounded-lg"
+                                    />
+                                  </div>
+                                ) : (
+                                  <div
+                                    className="mt-1 flex justify-center border-2 border-gray-300 border-dashed rounded-md"
+                                    {...getRootProps()}
+                                  >
+                                    <div className="space-y-1 text-center">
+                                      <svg
+                                        className="mx-auto h-12 w-12 text-gray-400"
+                                        stroke="currentColor"
+                                        fill="none"
+                                        viewBox="0 0 48 48"
+                                        aria-hidden="true"
                                       >
-                                        <img
-                                          src={URL.createObjectURL(image)}
-                                          alt="..."
-                                          className="mt-1  flex justify-center rounded-lg"
+                                        <path
+                                          d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                                          strokeWidth={2}
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
                                         />
+                                      </svg>
+                                      <div className="flex text-sm text-gray-600">
+                                        <label
+                                          htmlFor="file-upload"
+                                          className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                                        >
+                                          <span>Upload a file</span>
+
+                                          <button
+                                            id="file-upload"
+                                            name="file-upload"
+                                            className="sr-only"
+                                          />
+                                        </label>
+                                        <p className="pl-1">or drag and drop</p>
                                       </div>
-                                      <p>{image && image.path}</p>
-                                    </>
-                                  )}
+                                      <p className="text-xs text-gray-500">
+                                        PNG, JPG, GIF up to 10MB
+                                      </p>
+                                    </div>
+                                  </div>
+                                )
+                              ) : (
+                                <>
+                                  <div
+                                    className="mt-1 flex justify-center border-gray-300 border-dashed rounded-md"
+                                    {...getRootProps()}
+                                  >
+                                    <img
+                                      src={URL.createObjectURL(image)}
+                                      alt="..."
+                                      className="mt-1  flex justify-center rounded-lg"
+                                    />
+                                  </div>
+                                  <p>{image && image.path}</p>
+                                </>
+                              )}
                             </section>
                           )}
                         </Dropzone>
@@ -305,37 +297,33 @@ export default function UpdateProfile({
                                   </div>
 
                                   <div className="flex ml-auto mr-0">
-                                    {values.address.length !== 1
-                                      ? (
-                                          <div className=" w-6/12 px-4">
-                                            <div className="relative w-full mb-3 flex items-end">
-                                              <ButtonField
-                                                onClick={() =>
-                                                  arrayHelpers.remove(index)
-                                                }
-                                                text="Remove"
-                                              />
-                                            </div>
-                                          </div>
-                                        )
-                                      : null}
-                                    {values.address.length === index + 1
-                                      ? (
-                                          <div className="w-6/12 px-4">
-                                            <div className="relative w-full mb-3">
-                                              <ButtonField
-                                                onClick={() =>
-                                                  arrayHelpers.push({
-                                                    city: "",
-                                                    street: "",
-                                                  })
-                                                }
-                                                text="Add"
-                                              />
-                                            </div>
-                                          </div>
-                                        )
-                                      : null}
+                                    {values.address.length !== 1 ? (
+                                      <div className=" w-6/12 px-4">
+                                        <div className="relative w-full mb-3 flex items-end">
+                                          <ButtonField
+                                            onClick={() =>
+                                              arrayHelpers.remove(index)
+                                            }
+                                            text="Remove"
+                                          />
+                                        </div>
+                                      </div>
+                                    ) : null}
+                                    {values.address.length === index + 1 ? (
+                                      <div className="w-6/12 px-4">
+                                        <div className="relative w-full mb-3">
+                                          <ButtonField
+                                            onClick={() =>
+                                              arrayHelpers.push({
+                                                city: "",
+                                                street: "",
+                                              })
+                                            }
+                                            text="Add"
+                                          />
+                                        </div>
+                                      </div>
+                                    ) : null}
                                   </div>
                                 </div>
                               ))}
