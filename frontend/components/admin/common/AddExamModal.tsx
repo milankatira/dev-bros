@@ -69,33 +69,31 @@ const AddExamModal: any = ({
     <div>
       <CustomModalField open={open}>
         <div className="flex justify-between p-2">
-          {step !== 1
-            ? (
-                <div className="flex justify-center">
-                  <button
-                    className="backNextBtn1 backBtn1"
-                    onClick={() => setStep(step - 1)}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              )
-            : (
-                <div></div>
-              )}
+          {step !== 1 ? (
+            <div className="flex justify-center">
+              <button
+                className="backNextBtn1 backBtn1"
+                onClick={() => setStep(step - 1)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                  />
+                </svg>
+              </button>
+            </div>
+          ) : (
+            <div></div>
+          )}
 
           <h6>create New Test</h6>
 
@@ -253,30 +251,28 @@ const AddExamModal: any = ({
           )}
 
           <footer className="w-full flex justify-end mr-5">
-            {step !== 2
-              ? (
-                  <button
-                    className="backNextBtn nextBtn"
-                    onClick={() => setStep(step + 1)}
-                    disabled={step === 1 && examData?.exam_type == ""}
-                  >
+            {step !== 2 ? (
+              <button
+                className="backNextBtn nextBtn"
+                onClick={() => setStep(step + 1)}
+                disabled={step === 1 && examData?.exam_type == ""}
+              >
                 Next
-                  </button>
-                )
-              : (
-                  <button
-                    className="backNextBtn nextBtn"
-                    onClick={handleSubmit}
-                    disabled={
-                      examData?.exam_name === "" ||
+              </button>
+            ) : (
+              <button
+                className="backNextBtn nextBtn"
+                onClick={handleSubmit}
+                disabled={
+                  examData?.exam_name === "" ||
                   examData?.description === "" ||
                   examData?.total_mark === "" ||
                   examData?.passing_mark === ""
-                    }
-                  >
-                    {exam_id ? "Update" : "Create"} Test
-                  </button>
-                )}
+                }
+              >
+                {exam_id ? "Update" : "Create"} Test
+              </button>
+            )}
           </footer>
         </div>
       </CustomModalField>

@@ -4229,5 +4229,28 @@ button[disabled] {
   color: #666666;
 }
 
-.utilsBox {
+.loadingbg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  height: 100vh;
+  width: 100vw;
+  display: block;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.loadingbg > div {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-root {
+  position: "fixed";
+  top: "50%";
+  right: "50%";
+  z-index: 999;
 }

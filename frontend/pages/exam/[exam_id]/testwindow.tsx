@@ -167,8 +167,8 @@ export default function Home({ Data }) {
                   d.revisited
                     ? `bg-red-700`
                     : d.candidateAns == ""
-                      ? `bg-red-300`
-                      : `bg-blue-300`
+                    ? `bg-red-300`
+                    : `bg-blue-300`
                 } p-4 m-2 rounded-full`}
               >
                 {i}
@@ -177,51 +177,45 @@ export default function Home({ Data }) {
           })}
         </div>
         <div className="w-full">
-          {questionType == "all"
-            ? (
-                <Mcq
-                  setCurrentQuestion={setCurrentQuestion}
-                  currentQuestion={currentQuestion}
-                  initial_value={initial_value}
-                  setinitial_value={setinitial_value}
-                  updateLocalstorage={updateLocalstorage}
-                />
-              )
-            : questionType == "unattampted"
-              ? (
-                  <Mcq
-                    setCurrentQuestion={setCurrentQuestion}
-                    currentQuestion={currentQuestion}
-                    initial_value={initial_value.filter(
-                      (data) => data.candidateAns == ""
-                    )}
-                    setinitial_value={setinitial_value}
-                    updateLocalstorage={updateLocalstorage}
-                  />
-                )
-              : questionType == "attampted"
-                ? (
-                    <Mcq
-                      setCurrentQuestion={setCurrentQuestion}
-                      currentQuestion={currentQuestion}
-                      initial_value={initial_value.filter(
-                        (data) => data.candidateAns !== ""
-                      )}
-                      setinitial_value={setinitial_value}
-                      updateLocalstorage={updateLocalstorage}
-                    />
-                  )
-                : (
-                    <Mcq
-                      setCurrentQuestion={setCurrentQuestion}
-                      currentQuestion={currentQuestion}
-                      initial_value={initial_value.filter(
-                        (data) => data.revisited == true
-                      )}
-                      setinitial_value={setinitial_value}
-                      updateLocalstorage={updateLocalstorage}
-                    />
-                  )}
+          {questionType == "all" ? (
+            <Mcq
+              setCurrentQuestion={setCurrentQuestion}
+              currentQuestion={currentQuestion}
+              initial_value={initial_value}
+              setinitial_value={setinitial_value}
+              updateLocalstorage={updateLocalstorage}
+            />
+          ) : questionType == "unattampted" ? (
+            <Mcq
+              setCurrentQuestion={setCurrentQuestion}
+              currentQuestion={currentQuestion}
+              initial_value={initial_value.filter(
+                (data) => data.candidateAns == ""
+              )}
+              setinitial_value={setinitial_value}
+              updateLocalstorage={updateLocalstorage}
+            />
+          ) : questionType == "attampted" ? (
+            <Mcq
+              setCurrentQuestion={setCurrentQuestion}
+              currentQuestion={currentQuestion}
+              initial_value={initial_value.filter(
+                (data) => data.candidateAns !== ""
+              )}
+              setinitial_value={setinitial_value}
+              updateLocalstorage={updateLocalstorage}
+            />
+          ) : (
+            <Mcq
+              setCurrentQuestion={setCurrentQuestion}
+              currentQuestion={currentQuestion}
+              initial_value={initial_value.filter(
+                (data) => data.revisited == true
+              )}
+              setinitial_value={setinitial_value}
+              updateLocalstorage={updateLocalstorage}
+            />
+          )}
         </div>
 
         <button className="bg-red-400" onClick={() => handleSubmitExam()}>
