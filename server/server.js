@@ -6,7 +6,7 @@ const cloudinary = require("cloudinary");
 
 const connectDatabase = require("./config/databse");
 
-dotenv.config({ path: "server/config/config.env" });
+dotenv.config({ path: "./config/config.env" });
 
 process.on("uncaughtException", (err) => {
   console.log(`Error:${err.message}`);

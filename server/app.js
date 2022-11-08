@@ -48,7 +48,7 @@ const code = require("./routes/code");
 
 const result = require("./routes/result");
 
-dotenv.config({ path: "server/config/config.env" });
+dotenv.config({ path: "./config/config.env" });
 
 const cors = require("cors");
 const session = require("express-session");
@@ -62,7 +62,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
+console.log(process.env.SESSION_SECRET);
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
