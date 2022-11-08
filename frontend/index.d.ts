@@ -1,6 +1,7 @@
 declare module "component" {
   type MyFunctionType = (arg: any) => void;
   export interface ButtonFieldProps {
+    disabled?: boolean;
     text?: string | any;
     onClick?: MyFunctionType;
     type?: "submit" | "reset" | "button" | undefined;

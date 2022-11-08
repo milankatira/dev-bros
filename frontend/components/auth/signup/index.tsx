@@ -8,11 +8,14 @@ import { intialValue } from "../../../constant/initial_value";
 import { Signup } from "../../../validator/signup";
 import { register } from "../../../api/auth";
 import Link from "next/link";
+import PhoneInput from "react-phone-number-input";
 const Index = () => {
   const [mobile, setmobile] = useState("");
   const [otp, setotp] = useState("");
   const [open, setopen] = useState(false);
   const [confirmResult, setconfirmResult] = useState(null);
+  const [IsPhoneValidate, setIsPhoneValidate] = useState(false);
+  const [phoneNumber, setphoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
 
   const verifyPhoneNumber = async () => {
@@ -58,7 +61,7 @@ const Index = () => {
         console.log(confirmOtp);
         if (confirmOtp) {
           console.log("Phone number verified successfully!");
-          //  setIsPhoneValidate(true);
+          setIsPhoneValidate(true);
           //  dispatch(setLoading(false));
         }
       } else {
@@ -185,9 +188,13 @@ const Index = () => {
                           />
                         </div>
 
-                        <div className="mb-5 flex justify-end">
-                          <ButtonField type="submit" text="signup" />
-                        </div>
+                        {/* <div className="mb-5 flex justify-end"> */}
+                        <ButtonField
+                          type="submit"
+                          text="signup"
+                          disabled={!IsPhoneValidate}
+                        />
+                        {/* </div> */}
 
                         <div>
                           <label className="inline-flex items-center cursor-pointer">

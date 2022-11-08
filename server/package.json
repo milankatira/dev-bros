@@ -5,8 +5,8 @@
   "main": "server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server/server.js",
-    "dev": "nodemon server/server.js",
+    "start": "nodemon server.js",
+    "dev": "nodemon server.js",
     "format": "npm run format:write && npm run lint:fix",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",

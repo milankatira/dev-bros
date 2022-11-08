@@ -35,18 +35,18 @@ Router.events.on("routeChangeError", () => {
 
 function MyApp({ Component, pageProps }) {
   return (
-    <LoadingProvider>
-      <AuthProvider>
-        <ExamProvider>
-          <Loading />
-          <Toaster position="top-center" reverseOrder={false} />
-          <Navbar />
-          <CookiesProvider>
-            <Component {...pageProps} />
-          </CookiesProvider>
-        </ExamProvider>
-      </AuthProvider>
-    </LoadingProvider>
+    // <LoadingProvider>
+    <AuthProvider>
+      <ExamProvider>
+        {/* <Loading /> */}
+        <Toaster position="top-center" reverseOrder={false} />
+        <Navbar />
+        <CookiesProvider>
+          <Component {...pageProps} />
+        </CookiesProvider>
+      </ExamProvider>
+    </AuthProvider>
+    // {/* </LoadingProvider> */}
   );
 }
 
