@@ -9,6 +9,7 @@ import { Signup } from "../../../validator/signup";
 import { register } from "../../../api/auth";
 import Link from "next/link";
 import PhoneInput from "react-phone-number-input";
+import FullWidthButtonField from "../../common/design/FullWidthButtonField";
 const Index = () => {
   const [mobile, setmobile] = useState("");
   const [otp, setotp] = useState("");
@@ -188,13 +189,11 @@ const Index = () => {
                           />
                         </div>
 
-                        {/* <div className="mb-5 flex justify-end"> */}
-                        <ButtonField
+                        <FullWidthButtonField
                           type="submit"
                           text="signup"
                           disabled={!IsPhoneValidate}
                         />
-                        {/* </div> */}
 
                         <div>
                           <label className="inline-flex items-center cursor-pointer">
