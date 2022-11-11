@@ -1,5 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
-import questions from "./questions.json";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
@@ -9,7 +7,6 @@ import Mcq from "../../../components/client/test/Mcq";
 export default function Home({ Data }) {
   const router = useRouter();
   const { exam_id } = router.query;
-  console.log(router.query._id, "RR");
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [initial_value, setinitial_value] = useState([]);
   const [questionType, setquestionType] = useState("all");
@@ -167,8 +164,8 @@ export default function Home({ Data }) {
                   d.revisited
                     ? `bg-red-700`
                     : d.candidateAns == ""
-                    ? `bg-red-300`
-                    : `bg-blue-300`
+                      ? `bg-red-300`
+                      : `bg-blue-300`
                 } p-4 m-2 rounded-full`}
               >
                 {i}
@@ -177,45 +174,51 @@ export default function Home({ Data }) {
           })}
         </div>
         <div className="w-full">
-          {questionType == "all" ? (
-            <Mcq
-              setCurrentQuestion={setCurrentQuestion}
-              currentQuestion={currentQuestion}
-              initial_value={initial_value}
-              setinitial_value={setinitial_value}
-              updateLocalstorage={updateLocalstorage}
-            />
-          ) : questionType == "unattampted" ? (
-            <Mcq
-              setCurrentQuestion={setCurrentQuestion}
-              currentQuestion={currentQuestion}
-              initial_value={initial_value.filter(
-                (data) => data.candidateAns == ""
-              )}
-              setinitial_value={setinitial_value}
-              updateLocalstorage={updateLocalstorage}
-            />
-          ) : questionType == "attampted" ? (
-            <Mcq
-              setCurrentQuestion={setCurrentQuestion}
-              currentQuestion={currentQuestion}
-              initial_value={initial_value.filter(
-                (data) => data.candidateAns !== ""
-              )}
-              setinitial_value={setinitial_value}
-              updateLocalstorage={updateLocalstorage}
-            />
-          ) : (
-            <Mcq
-              setCurrentQuestion={setCurrentQuestion}
-              currentQuestion={currentQuestion}
-              initial_value={initial_value.filter(
-                (data) => data.revisited == true
-              )}
-              setinitial_value={setinitial_value}
-              updateLocalstorage={updateLocalstorage}
-            />
-          )}
+          {questionType == "all"
+            ? (
+                <Mcq
+                  setCurrentQuestion={setCurrentQuestion}
+                  currentQuestion={currentQuestion}
+                  initial_value={initial_value}
+                  setinitial_value={setinitial_value}
+                  updateLocalstorage={updateLocalstorage}
+                />
+              )
+            : questionType == "unattampted"
+              ? (
+                  <Mcq
+                    setCurrentQuestion={setCurrentQuestion}
+                    currentQuestion={currentQuestion}
+                    initial_value={initial_value.filter(
+                      (data) => data.candidateAns == ""
+                    )}
+                    setinitial_value={setinitial_value}
+                    updateLocalstorage={updateLocalstorage}
+                  />
+                )
+              : questionType == "attampted"
+                ? (
+                    <Mcq
+                      setCurrentQuestion={setCurrentQuestion}
+                      currentQuestion={currentQuestion}
+                      initial_value={initial_value.filter(
+                        (data) => data.candidateAns !== ""
+                      )}
+                      setinitial_value={setinitial_value}
+                      updateLocalstorage={updateLocalstorage}
+                    />
+                  )
+                : (
+                    <Mcq
+                      setCurrentQuestion={setCurrentQuestion}
+                      currentQuestion={currentQuestion}
+                      initial_value={initial_value.filter(
+                        (data) => data.revisited == true
+                      )}
+                      setinitial_value={setinitial_value}
+                      updateLocalstorage={updateLocalstorage}
+                    />
+                  )}
         </div>
 
         <button className="bg-red-400" onClick={() => handleSubmitExam()}>

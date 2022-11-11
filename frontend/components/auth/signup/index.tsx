@@ -8,7 +8,6 @@ import { intialValue } from "../../../constant/initial_value";
 import { Signup } from "../../../validator/signup";
 import { register } from "../../../api/auth";
 import Link from "next/link";
-import PhoneInput from "react-phone-number-input";
 import FullWidthButtonField from "../../common/design/FullWidthButtonField";
 const Index = () => {
   const [mobile, setmobile] = useState("");

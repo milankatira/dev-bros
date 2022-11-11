@@ -2,7 +2,12 @@ import React from "react";
 
 import { ButtonFieldProps } from "component";
 
-const ButtonField: React.FC<ButtonFieldProps> = ({ text, type, onClick, disabled }) => {
+const ButtonField: React.FC<ButtonFieldProps> = ({
+  text,
+  type,
+  onClick,
+  disabled,
+}) => {
   return (
     <button
       disabled={disabled}
