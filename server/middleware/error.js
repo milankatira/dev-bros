@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const ErrorHandler = require("../utils/errorhandler");
 
 module.exports = (err, req, res, next) => {
