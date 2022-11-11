@@ -15,6 +15,7 @@ const Index = () => {
   const [otp, setotp] = useState("");
   const [open, setopen] = useState(false);
   const [confirmResult, setconfirmResult] = useState(null);
+  console.log(confirmResult);
   const [IsPhoneValidate, setIsPhoneValidate] = useState(false);
   const [phoneNumber, setphoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
@@ -154,7 +155,7 @@ const Index = () => {
                         <div className="relative w-full mb-3">
                           <Textinput
                             text="password"
-                            type="text"
+                            type="password"
                             name="password"
                             placeholder="********"
                             error={
