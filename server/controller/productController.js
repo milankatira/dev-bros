@@ -4,9 +4,7 @@ const catchAsyncError = require("../middleware/catchAsyncError");
 const ApiFeatures = require("../utils/apifeatures");
 const cloudinary = require("cloudinary");
 
-//createproduct--admin
-
-exports.createProduct = catchAsyncError(async (req, res, next) => {
+exports.createProduct = catchAsyncError(async (req, res) => {
   let images = [];
 
   if (typeof req.body.images === "string") {
@@ -39,7 +37,7 @@ exports.createProduct = catchAsyncError(async (req, res, next) => {
   });
 });
 
-exports.getAdminProducts = catchAsyncError(async (req, res, next) => {
+exports.getAdminProducts = catchAsyncError(async (req, res) => {
   const products = await Product.find();
 
   res.status(200).json({
@@ -122,7 +120,7 @@ exports.deleteProduct = catchAsyncError(async (req, res, next) => {
   });
 });
 
-exports.createProductReview = catchAsyncError(async (req, res, next) => {
+exports.createProductReview = catchAsyncError(async (req, res) => {
   const { rating, comment, productId } = req.body;
 
   const review = {
@@ -222,7 +220,7 @@ exports.deleteReview = catchAsyncError(async (req, res, next) => {
   const product = await Product.findById(req.query.productId);
 
   if (!product) {
-    return next(new ErrorHander("Product not found", 404));
+    return next(new ErrorHandler("Product not found", 404));
   }
 
   const reviews = product.reviews.filter(

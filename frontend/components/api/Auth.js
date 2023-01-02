@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Url } from "../constant/url_constant";
+
 export const login = (packet) =>
   axios
     .post(Url.login, packet)

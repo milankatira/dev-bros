@@ -54,7 +54,7 @@ exports.DeleteInstitution = catchAsyncError(async (req, res, next) => {
   });
 });
 
-exports.GetInstitution = catchAsyncError(async (req, res, next) => {
+exports.GetInstitution = catchAsyncError(async (req, res) => {
   const institution = await Institution.find();
 
   res.status(200).json({

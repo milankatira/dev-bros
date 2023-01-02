@@ -52,7 +52,7 @@ exports.DeleteState = catchAsyncError(async (req, res, next) => {
   });
 });
 
-exports.GetState = catchAsyncError(async (req, res, next) => {
+exports.GetState = catchAsyncError(async (req, res) => {
   const state = await State.find();
 
   res.status(200).json({

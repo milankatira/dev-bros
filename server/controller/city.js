@@ -53,7 +53,7 @@ exports.DeleteCity = catchAsyncError(async (req, res, next) => {
   });
 });
 
-exports.GetCity = catchAsyncError(async (req, res, next) => {
+exports.GetCity = catchAsyncError(async (req, res) => {
   const city = await City.find();
   res.status(200).json({
     success: true,
@@ -61,7 +61,7 @@ exports.GetCity = catchAsyncError(async (req, res, next) => {
   });
 });
 
-exports.GetCityByid = catchAsyncError(async (req, res, next) => {
+exports.GetCityByid = catchAsyncError(async (req, res) => {
   let city = await City.findById(req.params.id);
   res.status(200).json({
     success: true,

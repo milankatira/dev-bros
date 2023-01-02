@@ -54,7 +54,7 @@ exports.DeleteUserRoll = catchAsyncError(async (req, res, next) => {
   });
 });
 
-exports.GetUserRoll = catchAsyncError(async (req, res, next) => {
+exports.GetUserRoll = catchAsyncError(async (req, res) => {
   const userRoll = await UserRoll.find();
 
   res.status(200).json({

@@ -34,7 +34,7 @@ exports.AddResult = catchAsyncError(async (req, res, next) => {
   }
 });
 
-exports.generateExamReport = catchAsyncError(async (req, res, next) => {
+exports.generateExamReport = catchAsyncError(async (req, res) => {
   const { assign_exam_id } = req.body;
   const query = {
     assign_exam_id: mongoose.Types.ObjectId(assign_exam_id),

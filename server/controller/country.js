@@ -53,7 +53,7 @@ exports.DeleteCountry = catchAsyncError(async (req, res, next) => {
   });
 });
 
-exports.GetCountry = catchAsyncError(async (req, res, next) => {
+exports.GetCountry = catchAsyncError(async (req, res) => {
   const country = await Country.find();
 
   res.status(200).json({

@@ -54,7 +54,7 @@ exports.DeleteDesignation = catchAsyncError(async (req, res, next) => {
   });
 });
 
-exports.GetDesignation = catchAsyncError(async (req, res, next) => {
+exports.GetDesignation = catchAsyncError(async (req, res) => {
   const designation = await Designation.find();
 
   res.status(200).json({

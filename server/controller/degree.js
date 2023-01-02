@@ -54,7 +54,7 @@ exports.DeleteDegree = catchAsyncError(async (req, res, next) => {
   });
 });
 
-exports.GetDegree = catchAsyncError(async (req, res, next) => {
+exports.GetDegree = catchAsyncError(async (req, res) => {
   const degree = await Degree.find();
 
   res.status(200).json({

@@ -68,8 +68,7 @@ exports.AddQuestionById = catchAsyncError(async (req, res, next) => {
 
 exports.updateQuestion = catchAsyncError(async (req, res, next) => {
   try {
-    const { question, mcqs, answer, level, exam_id } =
-      req.body.data.questions[0];
+    const { question, mcqs, answer, level } = req.body.data.questions[0];
     const { id } = req.params;
 
     const packet = {

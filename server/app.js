@@ -8,8 +8,6 @@ app.use(express.json({ limit: "8mb" }));
 
 app.use(cookieParser());
 
-const bodyParser = require("body-parser");
-
 const fileUpload = require("express-fileupload");
 
 const errorMiddleware = require("./middleware/error");
@@ -23,8 +21,6 @@ const jobs = require("./routes/jobs");
 const order = require("./routes/orderRoutes");
 
 const generic_data = require("./routes/generic_data");
-
-const payment = require("./routes/paymentRoute");
 
 const profile = require("./routes/profileRoutes");
 

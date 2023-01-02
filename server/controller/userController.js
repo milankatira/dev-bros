@@ -20,7 +20,7 @@ const Jimp = require("jimp");
 const path = require("path");
 dotenv.config({ path: "../config/config.env" });
 
-exports.registerUser = catchAsyncError(async (req, res, next) => {
+exports.registerUser = catchAsyncError(async (req, res) => {
   const { firstName, lastName, email, password, phoneNo, role } = req.body;
 
   const user = await User.create({
@@ -47,7 +47,7 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
   sendToken(user, 201, res);
 });
 
-exports.verifyUser = catchAsyncError(async (req, res, next) => {
+exports.verifyUser = catchAsyncError(async (req, res) => {
   const { token } = req.params;
 
   try {
@@ -103,7 +103,7 @@ exports.loginUser = catchAsyncError(async (req, res, next) => {
   sendToken(user, 200, res);
 });
 
-exports.logout = catchAsyncError(async (req, res, next) => {
+exports.logout = catchAsyncError(async (req, res) => {
   res.cookie("token", null, {
     expires: new Date(Date.now()),
     httpOnly: true,
@@ -186,7 +186,7 @@ exports.resetPassword = catchAsyncError(async (req, res, next) => {
   sendToken(user, 200, res);
 });
 
-exports.getUsserDetails = catchAsyncError(async (req, res, next) => {
+exports.getUsserDetails = catchAsyncError(async (req, res) => {
   const user = await User.findById(req.user.id);
   const pic = await userDataModel.findOne({ user_id: req.user.id });
   if (pic && pic.profile_pic)
@@ -222,7 +222,7 @@ exports.updatePassword = catchAsyncError(async (req, res, next) => {
   sendToken(user, 200, res);
 });
 
-exports.updateProfile = catchAsyncError(async (req, res, next) => {
+exports.updateProfile = catchAsyncError(async (req, res) => {
   const newUserData = {
     name: req.body.name,
     email: req.body.email,
@@ -258,7 +258,7 @@ exports.updateProfile = catchAsyncError(async (req, res, next) => {
   });
 });
 
-exports.addProfile = catchAsyncError(async (req, res, next) => {
+exports.addProfile = catchAsyncError(async (req, res) => {
   const {
     employment_type,
     expected_salary,
@@ -362,7 +362,7 @@ exports.addProfile = catchAsyncError(async (req, res, next) => {
   });
 });
 
-exports.getProfile = catchAsyncError(async (req, res, next) => {
+exports.getProfile = catchAsyncError(async (req, res) => {
   const EducationDetail = await EducationModel.find({
     user_id: req.user.id,
   }).populate({
@@ -382,7 +382,7 @@ exports.getProfile = catchAsyncError(async (req, res, next) => {
   });
 });
 
-exports.getAllUser = catchAsyncError(async (req, res, next) => {
+exports.getAllUser = catchAsyncError(async (req, res) => {
   const users = await User.find();
 
   res.status(200).json({
@@ -406,14 +406,14 @@ exports.getUserByid = catchAsyncError(async (req, res, next) => {
   });
 });
 
-exports.updateUserRole = catchAsyncError(async (req, res, next) => {
+exports.updateUserRole = catchAsyncError(async (req, res) => {
   const newUserData = {
     name: req.body.name,
     email: req.body.email,
     role: req.body.role,
   };
 
-  const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+  await User.findByIdAndUpdate(req.user.id, newUserData, {
     new: true,
     runValidators: true,
     useFindAndModify: false,

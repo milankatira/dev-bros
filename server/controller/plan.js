@@ -54,7 +54,7 @@ exports.DeletePlan = catchAsyncError(async (req, res, next) => {
   });
 });
 
-exports.GetPlan = catchAsyncError(async (req, res, next) => {
+exports.GetPlan = catchAsyncError(async (req, res) => {
   const plan = await Plan.find();
 
   res.status(200).json({

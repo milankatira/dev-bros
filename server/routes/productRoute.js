@@ -7,7 +7,6 @@ const {
   getProductsDetails,
   createProductReview,
   getProductReviews,
-  deleteProductReview,
   getAdminProducts,
   deleteReview,
 } = require("../controller/productController");

@@ -15,10 +15,6 @@ const sendToken = (user, statusCode, res) => {
     "visited=true; Max-Age=3000; HttpOnly, Secure"
   );
 
-  const options = {
-    expires: new Date(Date.now() + 70000000),
-    httpOnly: true,
-  };
   res.cookie("cokkieName", "Rrr", { maxAge: 900000, httpOnly: true });
 
   res.cookie("access", token, {

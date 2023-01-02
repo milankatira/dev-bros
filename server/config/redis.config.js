@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const redis = require("redis");
 const bluebird = require("bluebird");
 

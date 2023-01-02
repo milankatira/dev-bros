@@ -58,7 +58,7 @@ exports.DeleteSubcriptionPlan = catchAsyncError(async (req, res, next) => {
   });
 });
 
-exports.GetSubcriptionPlan = catchAsyncError(async (req, res, next) => {
+exports.GetSubcriptionPlan = catchAsyncError(async (req, res) => {
   const subcription_plan = await SubcriptionPlan.find();
 
   res.status(200).json({

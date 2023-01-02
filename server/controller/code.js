@@ -2,7 +2,7 @@ const jdoodle = require("jdoodle-api");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");
 
-exports.compileCode = catchAsyncError(async (req, res) => {
+exports.compileCode = catchAsyncError(async (req, res, next) => {
   try {
     const { code, languag } = req.body;
     const language = {

@@ -2,7 +2,6 @@ const AssignExamModal = require("../database/assignExam");
 const ExamModel = require("../database/exam");
 const UserModel = require("../database/userModel");
 const GroupModel = require("../database/candidate_group");
-const AssignExamModel = require("../database/assignExam");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");
 const { v4: uuidv4 } = require("uuid");
@@ -106,7 +105,7 @@ exports.getAssignCandidate = catchAsyncError(async (req, res, next) => {
   }
 });
 
-exports.updateNotifyStatus = catchAsyncError(async (req, res, next) => {
+exports.updateNotifyStatus = catchAsyncError(async (req, res) => {
   const { id } = req.params;
 
   const assignExam = await AssignExamModal.findByIdAndUpdate(id, {
@@ -119,7 +118,7 @@ exports.updateNotifyStatus = catchAsyncError(async (req, res, next) => {
   });
 });
 
-exports.getMcqQuestion = catchAsyncError(async (req, res, next) => {
+exports.getMcqQuestion = catchAsyncError(async (req, res) => {
   const { exam_id } = req.params;
   const query1 = {
     exam_id: mongoose.Types.ObjectId(exam_id),
