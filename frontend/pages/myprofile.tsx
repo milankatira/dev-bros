@@ -6,7 +6,6 @@ import { useAuthcontext } from "../context/context/Auth";
 import { server_url } from "../config/app_config";
 
 const Myprofile = ({ userData, profiledata }) => {
-  console.log(profiledata.EducationDetail[0].institution.name, "fff");
   const { auth, Auth_api } = useAuthcontext();
   console.log(auth.loading, "loading ...");
   return (
@@ -79,15 +78,6 @@ const Myprofile = ({ userData, profiledata }) => {
                     <h3 className="text-4xl font-semibold leading-normal text-sky-700 mb-4">
                       {userData?.user?.firstName} {userData?.user.lastName}
                     </h3>
-
-                    <div className="mb-2 text-sky-600">
-                      <i className="fas fa-briefcase mr-2 text-lg text-sky-400"></i>
-                      {profiledata.EducationDetail[0].description}
-                    </div>
-                    <div className="mb-2 text-sky-600">
-                      <i className="fas fa-university mr-2 text-lg text-sky-400"></i>
-                      {profiledata.EducationDetail[0].institution.name}
-                    </div>
                   </div>
                   <div className="mt-10 py-10 border-t border-sky-200 text-center">
                     <div className="flex flex-wrap justify-center">
