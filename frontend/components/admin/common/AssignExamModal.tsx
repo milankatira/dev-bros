@@ -31,7 +31,6 @@ const AssignExamModal: React.FC<Props> = ({
   toggleModal,
   handleAssignCandidate,
 }) => {
-  //eslint-disable-line react-hooks/exhaustive-deps
   const minDate: string = moment(new Date()).format("YYYY-MM-DD").toString();
   const time = momentTz().tz("Asia/Kolkata").format("HH:mm");
 

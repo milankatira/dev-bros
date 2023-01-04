@@ -1,5 +1,4 @@
-/* eslint-disable react/react-in-jsx-scope */
-// import questions from "./questions.json";
+import React from "react";
 import Head from "next/head";
 import { useState } from "react";
 import { useRouter } from "next/router";

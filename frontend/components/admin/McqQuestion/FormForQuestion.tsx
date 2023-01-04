@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 import React, { useState } from "react";
 import { Formik, Form, FieldArray, Field } from "formik";
 import { mcqQuestions } from "../../../validator/mcqQuestion";
@@ -131,8 +132,7 @@ const FormForQuestion = ({ intialValue, handleSubmit, isEdit }) => {
                                         <div>
                                           <div className="form-container5 job_list_link">
                                             {values.questions[index]?.mcqs
-                                              ?.length
-                                              ? (
+                                              ?.length ? (
                                                   <>
                                                     <button
                                                       onClick={() =>
@@ -150,8 +150,7 @@ const FormForQuestion = ({ intialValue, handleSubmit, isEdit }) => {
                                                   Add new choice
                                                     </button>
                                                   </>
-                                                )
-                                              : null}
+                                                ) : null}
                                           </div>
                                         </div>
                                       </div>

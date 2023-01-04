@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 import React, { useEffect, useState } from "react";
 // import CloseIcon from "@material-ui/icons/Close";
 // import { useDispatch, useSelector } from "react-redux";
@@ -192,24 +193,22 @@ const SingleCandidateModal: React.FC<Props> = ({
                   {candidates.map((candidate: any, index: number) => (
                     <tr key={candidate._id} className="bg-white border-b ">
                       <td>
-                        {isGroup
-                          ? (
-                              <input
-                                type="checkbox"
-                                checked={candidatesIds[candidate?._id]}
-                                onChange={handleCheckboxChange}
-                                name={candidate?._id}
-                                value={candidate?._id ? candidate?._id : ""}
-                              />
-                            )
-                          : (
-                              <input
-                                type="radio"
-                                id="myCheck"
-                                name="candidate"
-                                onClick={() => setCandidate(candidate._id)}
-                              />
-                            )}
+                        {isGroup ? (
+                          <input
+                            type="checkbox"
+                            checked={candidatesIds[candidate?._id]}
+                            onChange={handleCheckboxChange}
+                            name={candidate?._id}
+                            value={candidate?._id ? candidate?._id : ""}
+                          />
+                        ) : (
+                          <input
+                            type="radio"
+                            id="myCheck"
+                            name="candidate"
+                            onClick={() => setCandidate(candidate._id)}
+                          />
+                        )}
                       </td>
 
                       <td className="px-6 py-4">

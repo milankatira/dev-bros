@@ -55,7 +55,7 @@ export const resetPassword = (token, packet) => {
 
 export const updatePassword = (packet) => {
   axios
-    .put(update_password_url, packet)
+    .put(updatePassword, packet)
     .then((response) => response)
     .catch((err) => {
       throw err;

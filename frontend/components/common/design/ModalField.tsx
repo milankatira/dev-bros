@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 import React from "react";
 import { ModalFieldProps } from "component";
 const ModalField: React.FC<ModalFieldProps> = ({

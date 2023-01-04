@@ -116,7 +116,7 @@ const CandidateGroupModal: React.FC<Props> = ({
 
   useEffect(() => {
     setExpanded(false);
-  }, [!open]); //eslint-disable-line react-hooks/exhaustive-deps
+  }, [!open]);
 
   const HandleChange = (event: any, value: any) => {
     setPage(value);

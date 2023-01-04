@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 import moment from "moment";
 import Router from "next/router";
 import React, { useState, useRef } from "react";
