@@ -171,23 +171,6 @@ Don't forget to give the project a star! Thanks again!
 
 
 
-<!-- LICENSE -->
-## License
-
-This repository is owned by EXUN INNOVATION LLP
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- CONTACT -->
-## Contact
-
-<!-- AYUSH PAHWA  -->
-
-<!-- Project Link: [https://github.com/Wendor-in/wendor-refiller-dashboard-prod](https://github.com/Wendor-in/wendor-refiller-dashboard-prod) -->
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
@@ -195,3 +178,4 @@ This repository is owned by EXUN INNOVATION LLP
 ## Acknowledgments
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
