@@ -84,7 +84,7 @@ const Index = () => {
       ...data,
       phoneNo: mobile,
     };
-    register(packet).then(res=>toast.success(res.data.message));
+    register(packet).then((res) => toast.success(res.data.message));
   };
   return (
     <div>

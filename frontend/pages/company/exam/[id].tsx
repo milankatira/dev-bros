@@ -142,7 +142,7 @@ const Index = ({ Data }) => {
   return (
     <div className="flex lg:flex-row flex-col">
       <section className="lg:w-2/3 w-full flex justify-center mt-4">
-        <section className="w-full bg-red-200 mx-4 rounded overflow-hidden shadow-lg">
+        <section className="w-full mx-4 rounded overflow-hidden shadow-lg">
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2 font-sans">
               Test Information
@@ -215,7 +215,7 @@ const Index = ({ Data }) => {
         </section>
       </section>
       <section className="lg:w-1/3 w-full flex justify-center mt-4">
-        <div className="w-full mx-4 bg-red-200 rounded overflow-hidden shadow-lg">
+        <div className="w-full mx-4 rounded overflow-hidden shadow-lg">
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">Exam summery</div>
           </div>

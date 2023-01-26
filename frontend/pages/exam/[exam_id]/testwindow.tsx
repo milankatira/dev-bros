@@ -53,13 +53,17 @@ export default function Home({ Data }) {
   return (
     <div className="flex w-full flex-col px-5 h-screen justify-center items-center">
       <>
-
         <h1>dashboard</h1>
 
         <div className="flex flex-row">
           {initial_value?.map((d, i) => {
             return (
-              <QuestionList i={i} setCurrentQuestion={setCurrentQuestion} setquestionType={setquestionType} d={d}/>
+              <QuestionList
+                i={i}
+                setCurrentQuestion={setCurrentQuestion}
+                setquestionType={setquestionType}
+                d={d}
+              />
             );
           })}
         </div>
@@ -111,7 +115,7 @@ export default function Home({ Data }) {
                   )}
         </div>
         <br />
-        <ButtonField text="Sumbit" onClick={() => handleSubmitExam()}/>
+        <ButtonField text="Sumbit" onClick={() => handleSubmitExam()} />
       </>
     </div>
   );

@@ -12,7 +12,6 @@ import { toast } from "react-hot-toast";
 import { setCookies } from "cookies-next";
 import Router from "next/router";
 
-
 export const Authcontext = createContext();
 
 //!TODO INITIAL STATE
@@ -54,7 +53,6 @@ function AuthProvider(props) {
         setCookies("token", res.data.token);
         toast.success(res?.data?.message);
         Router.push("/myprofile");
-
       })
       .catch((err) => {
         toast.error(err?.response?.data?.message || "error");

@@ -12,7 +12,7 @@ import { ExamProvider } from "../context/context/Exam";
 import { AuthProvider } from "../context/context/Auth";
 import { LoadingProvider, useLoadingcontext } from "../context/context/Loading";
 import Loading from "../components/common/design/Loading";
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
 const progress = new ProgressBar({
   size: 4,
   color: "#A855F7",

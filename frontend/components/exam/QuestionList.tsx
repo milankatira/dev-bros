@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const QuestionList = ({ i, setCurrentQuestion, setquestionType, d }) => {
   return (
@@ -22,4 +22,4 @@ const QuestionList = ({ i, setCurrentQuestion, setquestionType, d }) => {
   );
 };
 
-export default QuestionList
+export default QuestionList;

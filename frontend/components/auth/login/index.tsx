@@ -23,7 +23,7 @@ const NewLogin = () => {
       email: data.email,
       password: data.password,
     };
-    Auth_api.LoginUser(packet)
+    Auth_api.LoginUser(packet);
   };
 
   return (

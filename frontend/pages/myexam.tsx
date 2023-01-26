@@ -128,7 +128,6 @@ const Myexam = () => {
             </tbody>
           </table>
         </div>
-
       </section>
     </div>
   );
