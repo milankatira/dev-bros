@@ -1,4 +1,5 @@
 import React from "react";
+import ButtonField from "../../common/design/ButtonField";
 
 const Mcq = ({
   initial_value,
@@ -48,7 +49,7 @@ const Mcq = ({
           return (
             <div
               key={initial_value[currentQuestion]}
-              className="flex bg-green-600 rounded-lg items-center p-4 mb-2"
+              className="flex bg-green-200 rounded-lg items-center p-4 mb-2"
             >
               <input
                 type="radio"
@@ -62,21 +63,19 @@ const Mcq = ({
           );
         })}
 
-        <button
-          className="bg-red-100"
-          onClick={() => handleNext()}
-          disabled={currentQuestion === initial_value.length - 1}
-        >
-          next
-        </button>
-
-        <button
-          className="bg-red-100"
-          onClick={() => handlePrevious()}
-          disabled={currentQuestion === 0}
-        >
-          back
-        </button>
+        <div className="flex justify-between">
+          <ButtonField
+            text="back"
+            onClick={() => handlePrevious()}
+            disabled={currentQuestion === 0}
+          />
+          <br />
+          <ButtonField
+            text="next"
+            onClick={() => handleNext()}
+            disabled={currentQuestion === initial_value.length - 1}
+          />
+        </div>
       </div>
     </div>
   );

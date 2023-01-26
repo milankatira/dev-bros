@@ -17,27 +17,13 @@ const NewLogin = () => {
     email: string;
     password: string;
   }
+
   const onFormSubmit = async (data: Data) => {
     const packet = {
       email: data.email,
       password: data.password,
     };
     Auth_api.LoginUser(packet)
-      .then((res) => {
-        toast.success(res?.data?.message);
-        const serialized = cookie.serialize("token", res?.data?.token, {
-          httpOnly: false,
-          secure: process.env.MODE_ENV !== "development",
-          sameSite: "strict",
-          maxAge: 60 * 60 * 24 * 1, // 1 day
-          path: "/",
-        });
-        setCookies("token", res.data.token);
-        Router.push("/myprofile");
-      })
-      .catch((err) => {
-        toast.error(err?.response?.data?.message);
-      });
   };
 
   return (

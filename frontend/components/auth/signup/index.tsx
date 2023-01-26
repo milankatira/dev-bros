@@ -9,6 +9,7 @@ import { Signup } from "../../../validator/signup";
 import { register } from "../../../api/auth";
 import Link from "next/link";
 import FullWidthButtonField from "../../common/design/FullWidthButtonField";
+import toast from "react-hot-toast";
 const Index = () => {
   const [mobile, setmobile] = useState("");
   const [otp, setotp] = useState("");
@@ -83,7 +84,7 @@ const Index = () => {
       ...data,
       phoneNo: mobile,
     };
-    register(packet);
+    register(packet).then(res=>toast.success(res.data.message));
   };
   return (
     <div>

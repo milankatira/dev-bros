@@ -7,6 +7,11 @@ import { user } from "../../api/client/user";
 import { login } from "../../api/auth";
 
 import { authStatusSuccess, setLoading } from "../actions/Auth";
+import { toast } from "react-hot-toast";
+
+import { setCookies } from "cookies-next";
+import Router from "next/router";
+
 
 export const Authcontext = createContext();
 
@@ -46,8 +51,13 @@ function AuthProvider(props) {
       .then((res) => {
         dispatch(setLoading(false));
         dispatch(authStatusSuccess(res.data));
+        setCookies("token", res.data.token);
+        toast.success(res?.data?.message);
+        Router.push("/myprofile");
+
       })
       .catch((err) => {
+        toast.error(err?.response?.data?.message || "error");
         dispatch(setLoading(false));
       });
   };

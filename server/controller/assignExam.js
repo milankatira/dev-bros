@@ -47,8 +47,18 @@ exports.AddAssignExam = catchAsyncError(async (req, res, next) => {
 
 exports.GetAssignExam = catchAsyncError(async (req, res, next) => {
   try {
+    console.log("calling")
     const assignExam = await AssignExamModal.find({
       company_id: req.user.id,
+    }).populate({
+      path: "group_id",
+      model: GroupModel,
+      select: "candiidates",
+      populate: {
+        path: "candidates",
+        model: UserModel,
+        select: "name email phone",
+      },
     });
     res.status(201).json({
       success: true,
