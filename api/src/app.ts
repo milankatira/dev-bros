@@ -15,11 +15,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 app.use('/api/v1/static', express.static(`${__dirname}/static`));
-
 app.listen(process.env.ENV !== 'test' ? PORT : 0, async () => {
-  await db();
 
+  await db();
   console.log(`Listening on port ${PORT}`);
+
 });
 
 export default app;
