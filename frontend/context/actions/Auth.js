@@ -1,4 +1,4 @@
-import * as types from "../constants/auth";
+import * as types from "../constants/Auth";
 
 export const setLoginSuccess = (data) => {
   return {

@@ -1,4 +1,4 @@
-import * as types from "../constants/exam";
+import * as types from "../constants/Exam";
 
 const examReducer = (state, action) => {
   switch (action.type) {

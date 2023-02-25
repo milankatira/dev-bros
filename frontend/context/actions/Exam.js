@@ -1,4 +1,4 @@
-import * as types from "../constants/exam";
+import * as types from "../constants/Exam";
 
 export const addExamDataSuccess = (data) => ({
   type: types.ADD_EXAM_SUCCESS,

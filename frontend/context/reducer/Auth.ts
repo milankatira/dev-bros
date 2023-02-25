@@ -1,4 +1,4 @@
-import * as types from "../constants/auth";
+import * as types from "../constants/Auth";
 const authReducer = (state, action) => {
   switch (action.type) {
     case types.AUTH_STATUS:
