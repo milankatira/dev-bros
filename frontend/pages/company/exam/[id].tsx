@@ -32,6 +32,7 @@ const Index = ({ Data }) => {
   const [isGroup, setIsGroup] = React.useState(false);
   const [questions, setquestions] = useState([]);
   const [codingQuestionData, setcodingQuestionData] = useState([]);
+  console.log(codingQuestionData, "codingQuestionData");
   const [questionsDatas, setquestionsDatas] = useState([]);
   const [openEditExamModal, setOpenEditExamModal] = useState(false);
   const [open, setOpen] = useState<boolean>(false);
@@ -68,8 +69,11 @@ const Index = ({ Data }) => {
     console.log(Data.exam_type == "CODING", "vg");
 
     if (Data.exam_type == "CODING") {
-      getCodingQuestion(id).then((res) =>
+      getCodingQuestion(id).then((res) =>{
+
+        console.log(res.data,"data")
         setcodingQuestionData(res.data.codingquestionData)
+      }
       );
     } else {
       getQuestion(id).then((res) => setquestions(res.data.Data));
@@ -160,7 +164,7 @@ const Index = ({ Data }) => {
                 Questions
                 {Data.exam_type == "CODING"
                   ? (
-                      codingQuestionData
+                      codingQuestionData.length > 0
                         ? (
                             <button
                               onClick={() => {
@@ -180,7 +184,7 @@ const Index = ({ Data }) => {
                               }}
                               className="bg-purple-700 text-white font-bold p-2 rounded-lg text-center"
                             >
-                      + Add Question
+                            + Add Question
                             </button>
                           )
                     )

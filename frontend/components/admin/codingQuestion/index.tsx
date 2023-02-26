@@ -13,7 +13,7 @@ const Index = () => {
   const router = useRouter();
   const [questionData, setquestionData] = useState("");
   const [questionState, setquestionState] = useState<any>();
-  console.log(questionState, "questionData__1");
+  // console.log(questionState, "questionData__1");
   useEffect(() => {
     router.query.coding_question_id &&
       getsingleCodingQuestion(router.query.coding_question_id).then((res) => {
@@ -37,30 +37,32 @@ const Index = () => {
     }
   };
 
+
+  console.log(
+    questionState?.level !== undefined
+    ,"questionData");
   return (
     <div>
-      {questionData &&
-      questionData &&
-      questionState &&
-      questionState.level !== undefined
-        ? (
-            <FormForQuestion
-              isEdit={true}
-              handleSubmit={handleSubmit}
-              intialValue={questionState}
-              questionData={questionData}
-              setquestionData={setquestionData}
-            />
-          )
-        : (
-            <FormForQuestion
-              isEdit={false}
-              handleSubmit={handleSubmit}
-              intialValue={intialValue.codingQuestion}
-              questionData={questionData}
-              setquestionData={setquestionData}
-            />
-          )}
+      {
+        questionState?.level !== undefined
+          ? (
+              <FormForQuestion
+                isEdit={true}
+                handleSubmit={handleSubmit}
+                intialValue={questionState}
+                questionData={questionData}
+                setquestionData={setquestionData}
+              />
+            )
+          : (
+              <FormForQuestion
+                isEdit={false}
+                handleSubmit={handleSubmit}
+                intialValue={intialValue.codingQuestion}
+                questionData={questionData}
+                setquestionData={setquestionData}
+              />
+            )}
     </div>
   );
 };
