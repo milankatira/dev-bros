@@ -103,6 +103,9 @@ export const generateExamReport = `${server_url}/api/generate_exam_report`;
 
 export const updateExamReport = `${server_url}/api/update_exam_report`;
 
+export const getExamStatus = (assign_exam_id: string) =>
+  `${server_url}/api/getStatus/${assign_exam_id}`;
+
 //TODO GROUP
 
 export const group = `${server_url}/api/group`;

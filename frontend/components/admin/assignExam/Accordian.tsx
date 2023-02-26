@@ -6,7 +6,7 @@ import Switch from "../../common/design/Switch";
 import ReportModal from "../assignExam/ResultModal";
 import Router from "next/router";
 import StatusModal from "./StatusModal";
-import { GenerateExamReport } from "../../../api/client/exam";
+import { GenerateExamReport, GetExamStatus } from "../../../api/client/exam";
 type AccordionProps = {
   title: string;
   content: any;
@@ -18,6 +18,7 @@ const Accordion = ({ isPast, content }: AccordionProps) => {
   const [showResultModal, setshowResultModal] = useState(false);
   const [showStatusModal, setshowStatusModal] = useState(false);
   const [resultData, setresultData] = useState([]);
+  const [statusData, setstatusData] = useState([])
   const toggleResultModal = () => setshowResultModal(!showResultModal);
 
   const toggleStatusModal = () => setshowStatusModal(!showStatusModal);
@@ -37,6 +38,13 @@ const Accordion = ({ isPast, content }: AccordionProps) => {
     const result:any=await GenerateExamReport(packet);
     setresultData(result.data.results);
     setshowResultModal(true);
+  };
+
+
+  const handleStaus = async (data: any) => {
+    const statusData=await GetExamStatus(data?._id)
+    setshowStatusModal(true);
+    setstatusData(statusData.data.results.exams);
   };
 
   const HandleNotify = (id) => {
@@ -159,7 +167,7 @@ const Accordion = ({ isPast, content }: AccordionProps) => {
                       text="View Status"
                       onClick={(e) => {
                         e.stopPropagation();
-                        setshowStatusModal(true);
+                        handleStaus(data);
                       }}
                     />
                   </td>
@@ -177,7 +185,11 @@ const Accordion = ({ isPast, content }: AccordionProps) => {
         setopen={setshowResultModal}
         // exam={row}
       />
-      <StatusModal open={showStatusModal} setopen={setshowStatusModal} />
+      <StatusModal
+        open={showStatusModal}
+        setopen={setshowStatusModal}
+        statusData={statusData}
+      />
     </div>
   );
 };

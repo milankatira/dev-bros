@@ -1,8 +1,10 @@
 import React from "react";
 import CustomModalField from "../../common/design/CustomModal";
 
-export default function StatusModal({ open, setopen }) {
+export default function StatusModal({ open, setopen, statusData }) {
   // const [open, setopen] = React.useState(false);
+
+  console.log(statusData, "statusData");
   return (
     <CustomModalField open={open}>
       <>
@@ -27,13 +29,37 @@ export default function StatusModal({ open, setopen }) {
               </div>
               {/*body*/}
               <div className="relative p-6 flex-auto">
-                <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
-                  I always felt like I could do anything. That’s the main thing
-                  people are controlled by! Thoughts- their perception of
-                  themselves! slowed down by their perception of themselves. If
-                  taught you can’t do anything, you won’t do anything. I was
-                  taught I could do everything.
-                </p>
+                <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                  <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                      <tr>
+                        <th scope="col" className="px-6 py-3">
+                          status
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                          email
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                          name
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {statusData?.map((item) => (
+                        <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                          <th
+                            scope="row"
+                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                          >
+                            {item.status}
+                          </th>
+                          <td className="px-6 py-4">{item.user.email}</td>
+                          <td className="px-6 py-4">{item.user.firstName + " " + item.user.lastName}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
               {/*footer*/}
               <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
@@ -43,13 +69,6 @@ export default function StatusModal({ open, setopen }) {
                   onClick={() => setopen(false)}
                 >
                   Close
-                </button>
-                <button
-                  className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                  type="button"
-                  onClick={() => setopen(false)}
-                >
-                  Save Changes
                 </button>
               </div>
             </div>

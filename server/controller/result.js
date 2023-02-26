@@ -1,5 +1,6 @@
 const ResultModal = require("../database/result");
 const UserModel = require("../database/userModel");
+const AssignModel=require("../database/assignExam");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");
 const mongoose = require("mongoose");
@@ -10,6 +11,8 @@ const moment = require("moment");
 const sendExamEmail = require("../helpers/email");
 const AssignModal = require("../database/assignExam");
 const ExamModal = require("../database/exam");
+const GroupModel=require("../database/candidate_group");
+const { status } = require("../constant/status");
 
 exports.AddResult = catchAsyncError(async (req, res, next) => {
   try {
@@ -296,4 +299,108 @@ exports.updateResultController = catchAsyncError(async (req, res) => {
       results: generatesReport,
     });
   }
+});
+
+exports.getCandidateStatus = catchAsyncError(async (req, res) => {
+  
+    const { assign_exam_id } = req.params;
+
+    const getCandidateStatus = async (assign_exam_id) => {
+      try {
+        const examData = await AssignModel.findById(assign_exam_id);
+
+        await AssignModel.populate(examData, {
+          path: "candidate_id",
+          model: UserModel,
+          select: "firstName lastName email phone",
+        });
+
+        await AssignModel.populate(examData, {
+          path: "exam_id",
+          model: ExamModal,
+          select: "exam_type",
+        });
+        const exam = await AssignModel.populate(examData, {
+          path: "group_id",
+          model: GroupModel,
+          select: "candiidates",
+          populate: {
+            path: "candidates",
+            model: UserModel,
+            select: "firstName lastName email phone",
+          },
+        });
+        let results;
+
+        // if (examData.exam_id.exam_type === exam_type.MCQ) {
+          results = await ResultModal.find({
+            assign_exam_id,
+          }).populate({ path: "candidate_id", select: "name email phone" });
+        // } else {
+        //   results = await CodingResultModal.find({
+        //     assign_exam_id,
+        //   }).populate({ path: "candidate_id", select: "name email phone" });
+        // }
+
+        const resultData = [];
+
+        await results.forEach((result) => {
+          resultData.push({
+            user: result.candidate_id,
+            result: result.is_passed,
+            status: result.status,
+            user_marks: result.user_marks,
+          });
+        });
+
+        if (!examData.isGroup) {
+          const ResultData = resultData.filter(
+            (d) => String(d.user._id) === String(examData.candidate_id._id)
+          );
+          if (ResultData.length > 0) {
+            if (ResultData[0].user_marks == null) {
+              return [
+                { status: ResultData[0].status, user: examData.candidate_id },
+              ];
+            }
+            return [
+              {
+                status: ResultData[0].result ? status.pass : status.fail,
+                user: examData.candidate_id,
+              },
+            ];
+          }
+          return [{ status: status.notStarted, user: examData.candidate_id }];
+        }
+
+        const GroupexamReport = await exam.group_id.candidates.map((user) => {
+          const ResultData = resultData.filter(
+            (d) => String(d.user._id) === String(user._id)
+          );
+          if (ResultData.length > 0) {
+            if (ResultData[0].user_marks == null) {
+              return { status: ResultData[0].status, user };
+            }
+            return {
+              status: ResultData[0].result ? status.pass : status.fail,
+              user,
+            };
+          }
+          return { status: status.notStarted, user };
+        });
+
+        return GroupexamReport;
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+
+    const exams = await getCandidateStatus(assign_exam_id);
+    return res.status(200).json({
+      status: "success",
+      message: "suucessss",
+      results: {
+        exams,
+      },
+    });
 });

@@ -5,6 +5,7 @@ import {
   exam_id,
   ExamQuestion,
   generateExamReport,
+  getExamStatus,
   updateExamReport,
 } from "../../constant/api_url";
 
@@ -27,6 +28,15 @@ export const GenerateExamReport = async (packet) => {
       throw err;
     });
 };
+
+export const GetExamStatus=async(assign_exam_id)=>{
+  return await axios
+    .get(getExamStatus(assign_exam_id))
+    .then((response) => response)
+    .catch((err) => {
+      throw err;
+    });
+}
 
 export const UpdateExamReport=async(packet)=>{
   return await axios
