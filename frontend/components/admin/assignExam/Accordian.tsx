@@ -14,11 +14,10 @@ type AccordionProps = {
 };
 
 const Accordion = ({ isPast, content }: AccordionProps) => {
-  console.log(isPast, "isPast");
   const [isOpened, setOpened] = useState<boolean>(false);
   const [showResultModal, setshowResultModal] = useState(false);
   const [showStatusModal, setshowStatusModal] = useState(false);
-
+  const [resultData, setresultData] = useState([]);
   const toggleResultModal = () => setshowResultModal(!showResultModal);
 
   const toggleStatusModal = () => setshowStatusModal(!showStatusModal);
@@ -31,12 +30,13 @@ const Accordion = ({ isPast, content }: AccordionProps) => {
     setHeight(!isOpened ? `${contentElement.current.scrollHeight}px` : "0px");
   };
 
-  const handlerResult = (data: any) => {
-    setshowResultModal(true);
+  const handlerResult = async(data: any) => {
     const packet = {
       assign_exam_id: data?._id,
     };
-    GenerateExamReport(packet);
+    const result:any=await GenerateExamReport(packet);
+    setresultData(result.data.results);
+    setshowResultModal(true);
   };
 
   const HandleNotify = (id) => {
@@ -170,6 +170,7 @@ const Accordion = ({ isPast, content }: AccordionProps) => {
         </table>
       </div>
       <ReportModal
+        resultData={resultData}
         open={showResultModal}
         // handleClose={toggleResultModal}
         // examdDetails={result}

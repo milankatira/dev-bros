@@ -3,6 +3,13 @@ const UserModel = require("../database/userModel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");
 const mongoose = require("mongoose");
+const path = require("path");
+const hogan = require("hogan.js");
+const fs = require("fs");
+const moment = require("moment");
+const sendExamEmail = require("../helpers/email");
+const AssignModal = require("../database/assignExam");
+const ExamModal = require("../database/exam");
 
 exports.AddResult = catchAsyncError(async (req, res, next) => {
   try {
@@ -187,9 +194,106 @@ exports.generateExamReport = catchAsyncError(async (req, res) => {
       results: newGeneratedReport,
     });
   } else {
+    const getReportdata = async (resultData) => {
+      const { assign_exam_id } = resultData;
+
+      const results = await ResultModal.find({
+        assign_exam_id,
+      }).populate({ path: "candidate_id", select: "name email phone" });
+      return results;
+    };
+
+    const existingReport = await getReportdata(req.body);
     res.status(201).json({
       success: true,
-      results,
+      results: existingReport,
+    });
+  }
+});
+
+exports.updateResultController = catchAsyncError(async (req, res) => {
+  const { id, user_marks, assign_exam_id } = req.body;
+  const findExamDetails = async (resultData) => {
+    const { assign_exam_id } = resultData;
+    const exam = await AssignModal.findById(assign_exam_id).populate({
+      path: "exam_id",
+      model: ExamModal,
+      select: "description exam_type user_id",
+      populate: {
+        path: "user_id",
+        model: UserModel,
+        select: "phone email company_id",
+        // populate: {
+        //   path: "company_id",
+        //   model: UserModel,
+        // },
+      },
+    });
+
+    return exam;
+  };
+
+  const updateResult = async (id, user_marks) => {
+    const exam = await ResultModal.findById(id).populate("exam_id");
+    if (exam) {
+      const passingMark = exam.exam_id.passing_mark;
+      const isPassed = passingMark <= user_marks;
+      const newResult = await ResultModal.findByIdAndUpdate(
+        id,
+        {
+          user_marks,
+          total: exam.exam_id.total_mark,
+          passing_marks: exam.exam_id.passing_mark,
+          is_passed: isPassed,
+        },
+        { new: true }
+      ).populate({ path: "candidate_id", select: "name email phone" });
+      return newResult;
+    }
+  };
+
+  const generatesReport = await updateResult(id, user_marks, assign_exam_id);
+  if (generatesReport) {
+    const email = [];
+    // eslint-disable-next-line array-callback-return
+    if (generatesReport.is_passed) {
+      email.push(generatesReport.candidate_id.email);
+    }
+    if (email.length > 0) {
+      const packet = {
+        assign_exam_id,
+      };
+      const examDetails = await findExamDetails(packet);
+      const template = fs.readFileSync(
+        path.join(__dirname, "../email-template", "email_passed_exam.hjs"),
+        "utf-8"
+      );
+      const compiledTemplate = hogan.compile(template);
+
+      let singleMail;
+      if (email.length === 1) {
+        singleMail = true;
+      } else {
+        singleMail = false;
+      }
+
+      await sendExamEmail(
+        singleMail,
+        email,
+        email,
+        `Hirefast-Result declaration from ${examDetails.name}`,
+        "",
+        compiledTemplate.render({
+          examDetails,
+          date: moment(examDetails.date).format("DD/MM/YYYY"),
+        })
+      );
+    }
+    // return generatesReport;
+
+    res.status(201).json({
+      success: true,
+      results: generatesReport,
     });
   }
 });

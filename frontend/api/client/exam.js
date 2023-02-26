@@ -5,6 +5,7 @@ import {
   exam_id,
   ExamQuestion,
   generateExamReport,
+  updateExamReport,
 } from "../../constant/api_url";
 
 axios.defaults.withCredentials = true;
@@ -26,6 +27,16 @@ export const GenerateExamReport = async (packet) => {
       throw err;
     });
 };
+
+export const UpdateExamReport=async(packet)=>{
+  return await axios
+    .post(updateExamReport, packet)
+    .then((response) => response)
+    .catch((err) => {
+      throw err;
+    });
+}
+
 
 export const GetExamQuestion = async (exam_id) => {
   return await axios

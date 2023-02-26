@@ -33,7 +33,7 @@ const assigned_candidates = new Schema(
     },
     candidate_id: {
       type: Schema.Types.ObjectId,
-      ref: "users",
+      ref: "user",
     },
     group_id: {
       type: Schema.Types.ObjectId,

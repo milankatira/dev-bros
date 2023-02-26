@@ -4,7 +4,7 @@ export const intialValue = {
     lastName: "",
     email: "",
     password: "",
-    role: "candidate",
+    role: "company",
   },
   signin: {
     email: "",

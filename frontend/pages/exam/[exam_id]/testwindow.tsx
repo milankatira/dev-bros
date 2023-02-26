@@ -132,6 +132,7 @@ export async function getServerSideProps({ req, query }) {
       },
     }
   );
+
   const data = await res.data;
   return { props: { Data: data.exam[0].questions } };
 }

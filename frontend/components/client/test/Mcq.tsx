@@ -33,8 +33,7 @@ const Mcq = ({
     <div className="w-full">
       <div className="flex flex-col items-start w-full">
         <h4 className="mt-10 text-xl text-white/60">{initial_value.length}</h4>
-        <p>{currentQuestion}</p>
-        <div className="mt-4 text-2xl text-white">
+        <div className="mt-4 text-2xl text-black">
           {initial_value[currentQuestion]?.question}
         </div>
       </div>

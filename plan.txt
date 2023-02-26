@@ -1,0 +1,2 @@
+1.add all routes in constant and use it fix redirect issue after signUp
+2.

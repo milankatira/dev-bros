@@ -1,25 +1,30 @@
-import React, { useEffect } from "react";
-import { GenerateExamReport } from "../../../api/client/exam";
+import React, { useState } from "react";
+import { UpdateExamReport } from "../../../api/client/exam";
 import CustomModalField from "../../common/design/CustomModal";
+import ButtonField from "../../common/design/ButtonField";
 
-export default function ResultModal({ open, setopen }) {
-  // useEffect(() => {
-  //   GenerateExamReport({
-  //     assign_exam_id(),
-  //   });
-  // }, []);
-  // const [open, setopen] = React.useState(false);
+export default function ResultModal({ open, setopen, resultData }) {
+
+  const result = resultData[0];
+  const [user_marks, setuser_marks]:any = useState(0);
+
+  const payload = {
+    id: result?._id,
+    user_marks,
+    assign_exam_id: result?.assign_exam_id,
+  };
+
+  const handleSubmit=()=>{
+    UpdateExamReport(payload)
+    setopen(false);
+  }
+
   return (
     <CustomModalField open={open}>
       <>
-        <div
-          className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
-          onClick={() => setopen(false)}
-        >
+        <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
           <div className="relative w-auto my-6 mx-auto max-w-3xl">
-            {/*content*/}
             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-              {/*header*/}
               <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
                 <h3 className="text-3xl font-semibold">Result Modal </h3>
                 <button
@@ -32,15 +37,54 @@ export default function ResultModal({ open, setopen }) {
                 </button>
               </div>
               {/*body*/}
-              <div className="relative p-6 flex-auto">
-                <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
-                  I always felt like I could do anything. That’s the main thing
-                  people are controlled by! Thoughts- their perception of
-                  themselves! slowed down by their perception of themselves. If
-                  taught you can’t do anything, you won’t do anything. I was
-                  taught I could do everything.
-                </p>
-              </div>
+              {result &&
+                (result.user_marks == null
+                  ? (
+                      <div>
+                        <div className="flex flex-row justify-between p-4 text-lg">
+                          <p> easy_count</p>
+                          <p> {result.easy_count}</p>
+                        </div>
+
+                        <div className="flex flex-row justify-between p-4 text-lg">
+                          <p> easy_correct</p>
+                          <p> {result.easy_correct}</p>
+                        </div>
+
+                        <div className="flex flex-row justify-between p-4 text-lg">
+                          <p> medium_count</p>
+                          <p> {result.medium_count}</p>
+                        </div>
+
+                        <div className="flex flex-row justify-between p-4 text-lg">
+                          <p> medium_correct</p>
+                          <p> {result.medium_correct}</p>
+                        </div>
+
+                        <div className="flex flex-row justify-between p-4 text-lg">
+                          <p> hard_count</p>
+                          <p> {result.hard_count}</p>
+                        </div>
+
+                        <div className="flex flex-row justify-between p-4 text-lg">
+                          <p> hard_correct</p>
+                          <p> {result.hard_correct}</p>
+                        </div>
+
+                        <input
+                          type="number"
+                          value={user_marks}
+                          onChange={(e) => setuser_marks(e.target.value)}
+                        />
+                        <ButtonField text="submit" onClick={() => handleSubmit()} />
+                      </div>
+                    )
+                  : (
+                      <>
+                        <h1>{result.user_marks}</h1>
+                        <h2>{result.is_passed ? "passed":"fails"}</h2>
+                      </>
+                    ))}
               {/*footer*/}
               <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                 <button
@@ -49,13 +93,6 @@ export default function ResultModal({ open, setopen }) {
                   onClick={() => setopen(false)}
                 >
                   Close
-                </button>
-                <button
-                  className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                  type="button"
-                  onClick={() => setopen(false)}
-                >
-                  Save Changes
                 </button>
               </div>
             </div>

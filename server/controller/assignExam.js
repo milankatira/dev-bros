@@ -47,7 +47,7 @@ exports.AddAssignExam = catchAsyncError(async (req, res, next) => {
 
 exports.GetAssignExam = catchAsyncError(async (req, res, next) => {
   try {
-    console.log("calling")
+    console.log("calling");
     const assignExam = await AssignExamModal.find({
       company_id: req.user.id,
     }).populate({

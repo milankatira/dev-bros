@@ -6,7 +6,7 @@ const ResultsSchema = new Schema(
   {
     candidate_id: {
       type: Schema.Types.ObjectId,
-      ref: "users",
+      ref: "user",
     },
     assign_exam_id: {
       type: Schema.Types.ObjectId,
