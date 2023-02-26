@@ -54,7 +54,9 @@ export default function StatusModal({ open, setopen, statusData }) {
                             {item.status}
                           </th>
                           <td className="px-6 py-4">{item.user.email}</td>
-                          <td className="px-6 py-4">{item.user.firstName + " " + item.user.lastName}</td>
+                          <td className="px-6 py-4">
+                            {item.user.firstName + " " + item.user.lastName}
+                          </td>
                         </tr>
                       ))}
                     </tbody>

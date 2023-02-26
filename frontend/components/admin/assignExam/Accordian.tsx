@@ -18,7 +18,7 @@ const Accordion = ({ isPast, content }: AccordionProps) => {
   const [showResultModal, setshowResultModal] = useState(false);
   const [showStatusModal, setshowStatusModal] = useState(false);
   const [resultData, setresultData] = useState([]);
-  const [statusData, setstatusData] = useState([])
+  const [statusData, setstatusData] = useState([]);
   const toggleResultModal = () => setshowResultModal(!showResultModal);
 
   const toggleStatusModal = () => setshowStatusModal(!showStatusModal);
@@ -31,18 +31,17 @@ const Accordion = ({ isPast, content }: AccordionProps) => {
     setHeight(!isOpened ? `${contentElement.current.scrollHeight}px` : "0px");
   };
 
-  const handlerResult = async(data: any) => {
+  const handlerResult = async (data: any) => {
     const packet = {
       assign_exam_id: data?._id,
     };
-    const result:any=await GenerateExamReport(packet);
+    const result: any = await GenerateExamReport(packet);
     setresultData(result.data.results);
     setshowResultModal(true);
   };
 
-
   const handleStaus = async (data: any) => {
-    const statusData=await GetExamStatus(data?._id)
+    const statusData = await GetExamStatus(data?._id);
     setshowStatusModal(true);
     setstatusData(statusData.data.results.exams);
   };

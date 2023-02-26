@@ -4,9 +4,8 @@ import CustomModalField from "../../common/design/CustomModal";
 import ButtonField from "../../common/design/ButtonField";
 
 export default function ResultModal({ open, setopen, resultData }) {
-
   const result = resultData[0];
-  const [user_marks, setuser_marks]:any = useState(0);
+  const [user_marks, setuser_marks]: any = useState(0);
 
   const payload = {
     id: result?._id,
@@ -14,10 +13,10 @@ export default function ResultModal({ open, setopen, resultData }) {
     assign_exam_id: result?.assign_exam_id,
   };
 
-  const handleSubmit=()=>{
-    UpdateExamReport(payload)
+  const handleSubmit = () => {
+    UpdateExamReport(payload);
     setopen(false);
-  }
+  };
 
   return (
     <CustomModalField open={open}>
@@ -82,7 +81,7 @@ export default function ResultModal({ open, setopen, resultData }) {
                   : (
                       <>
                         <h1>{result.user_marks}</h1>
-                        <h2>{result.is_passed ? "passed":"fails"}</h2>
+                        <h2>{result.is_passed ? "passed" : "fails"}</h2>
                       </>
                     ))}
               {/*footer*/}
