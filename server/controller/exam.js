@@ -2,6 +2,8 @@ const ExamModal = require("../database/exam");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");
 const UserModel = require("../database/userModel");
+const ResultModal = require("../database/result");
+const { default: mongoose } = require("mongoose");
 
 exports.AddExam = catchAsyncError(async (req, res, next) => {
   try {
@@ -108,4 +110,55 @@ exports.GetAllExam = catchAsyncError(async (req, res, next) => {
   } catch (error) {
     return next(new ErrorHandler(error.message, 500));
   }
+});
+
+exports.getMyresult = catchAsyncError(async (req, res) => {
+  const getMyresult = async (userId) => {
+    try {
+      const query = {
+        candidate_id: mongoose.Types.ObjectId(userId),
+      };
+      const Result = await ResultModal.aggregate([
+        { $match: query },
+        {
+          $lookup: {
+            from: "exams",
+            localField: "exam_id",
+            foreignField: "_id",
+            as: "exam",
+          },
+        },
+        { $sort: { createdAt: -1 } },
+      ]);
+
+      // const CodeingResult = await CodingResultAModal.aggregate([
+      //   { $match: query },
+      //   {
+      //     $lookup: {
+      //       from: "exams",
+      //       localField: "exam_id",
+      //       foreignField: "_id",
+      //       as: "exam",
+      //     },
+      //   },
+      //   { $sort: { createdAt: -1 } },
+      // ]);
+      const Data = [...Result];
+      return Data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  
+  const Result = await getMyresult(req.user.id);
+
+  return res.status(200).json({
+    status: "success",
+    message: "result fetch successfully",
+    results: {
+      Result,
+    },
+  });
 });

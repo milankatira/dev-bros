@@ -6,6 +6,7 @@ import {
   ExamQuestion,
   generateExamReport,
   getExamStatus,
+  myResult,
   updateExamReport,
 } from "../../constant/api_url";
 
@@ -86,6 +87,15 @@ export const updateExam = async (id, packet) => {
 export const deleteExam = async (id) => {
   return await axios
     .delete(exam_id(id))
+    .then((response) => response)
+    .catch((err) => {
+      throw err;
+    });
+};
+
+export const MyResult = async () => {
+  return await axios
+    .get(myResult)
     .then((response) => response)
     .catch((err) => {
       throw err;

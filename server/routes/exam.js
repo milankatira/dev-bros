@@ -16,4 +16,6 @@ router.route("/exam/:id").put(isAuthenticUser, ExamController.UpdateExam);
 
 router.route("/exam/:id").delete(isAuthenticUser, ExamController.deleteExam);
 
+router.route("/result").get(isAuthenticUser, ExamController.getMyresult);
+
 module.exports = router;
