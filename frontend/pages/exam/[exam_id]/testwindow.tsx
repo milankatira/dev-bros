@@ -42,12 +42,9 @@ export default function Home({ Data }) {
         revisited: false,
       };
     });
-    if (localStorage && localStorage.getItem("quest")) {
-      setinitial_value(JSON.parse(localStorage.getItem("quest")));
-    } else {
-      setinitial_value(initialValue);
-      localStorage.setItem("quest", JSON.stringify(initialValue));
-    }
+
+    setinitial_value(initialValue);
+    localStorage.setItem("quest", JSON.stringify(initialValue));
   }, []);
 
   return (
@@ -134,5 +131,6 @@ export async function getServerSideProps({ req, query }) {
   );
 
   const data = await res.data;
+  console.log(data.exam[0].questions, "data");
   return { props: { Data: data.exam[0].questions } };
 }

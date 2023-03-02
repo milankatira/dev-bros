@@ -145,8 +145,8 @@ exports.getMcqQuestion = catchAsyncError(async (req, res) => {
         from: "questions",
         as: "questions",
         pipeline: [
-          { $match: query1 },
-          { $sample: { size: examData.totalQuestion } },
+          { $match: query1 }
+          // { $sample: { size: examData.totalQuestion } },
         ],
       },
     },
@@ -169,6 +169,8 @@ exports.getMcqQuestion = catchAsyncError(async (req, res) => {
     },
   ]);
 
+
+  console.log(exam,"examResults");
   res.status(201).json({
     success: true,
     exam,
