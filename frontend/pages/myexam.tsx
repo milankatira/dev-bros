@@ -11,6 +11,7 @@ import ResultModal from "../components/admin/myExam/ResultModal";
 const Myexam = () => {
   const [exam, setexam] = useState([]);
   const [result, setresult] = useState([]);
+  const [id, setid] = useState("");
 
   const [resultModal, setresultModal] = useState(false);
 
@@ -27,47 +28,6 @@ const Myexam = () => {
 
   return (
     <div className="mx-auto mt-20 px-4 h-full flex flex-col justify-center">
-      <div className="flex content-center items-center justify-start h-full border-4 border-red-200 ">
-        <div className="w-full lg:w-8/12 px-4">
-          <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-200 border-0">
-            <div className="rounded-t mb-0 px-6 py-6">
-              <div className="btn-wrapper text-center font-bold text-xl">
-                Verify link
-              </div>
-              <hr className="mt-6 border-b-1 border-gray-300" />
-            </div>
-            <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-              <div>
-                <div className="relative w-full mb-3 flex justify-between items-center">
-                  <input
-                    type="text"
-                    name="exam_link"
-                    placeholder="enter your exam secrets"
-                  />
-
-                  <div className="text-center">
-                    <ButtonField text="Verify" />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="inline-flex items-center cursor-pointer">
-                    <input
-                      id="customCheckLogin"
-                      type="checkbox"
-                      defaultChecked
-                      className="form-checkbox border-0 rounded text-gray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
-                    />
-                    <span className="ml-2 text-sm font-semibold text-gray-600">
-                      Agree with term and condition
-                    </span>
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <section className="text-gray-600 body-font">
         <div className="overflow-x-auto relative">
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -115,7 +75,9 @@ const Myexam = () => {
                         ).length > 0
                           ? (
                               <svg
-                                onClick={() => setresultModal(true)}
+                                onClick={() => {
+                                  setresultModal(true), setid(data._id);
+                                }}
                                 className="w-6 h-6"
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 576 512"
@@ -150,7 +112,7 @@ const Myexam = () => {
         <ResultModal
           open={resultModal}
           setopen={setresultModal}
-          resultData={result}
+          resultData={result.filter((item) => item.assign_exam_id == id)}
         />
       </section>
     </div>
