@@ -2,7 +2,6 @@ import React from "react";
 import CustomModalField from "../../common/design/CustomModal";
 
 export default function ResultModal({ open, setopen, resultData }) {
-
   return (
     <CustomModalField open={open}>
       <>
@@ -21,7 +20,7 @@ export default function ResultModal({ open, setopen, resultData }) {
                 </button>
               </div>
               {/*body*/}
-              {resultData[0]?.is_passed ? <div>right</div>:<div>wrong</div>}
+              {resultData[0]?.is_passed ? <div>right</div> : <div>wrong</div>}
               {/*footer*/}
               <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                 <button

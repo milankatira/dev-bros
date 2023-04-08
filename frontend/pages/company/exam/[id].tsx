@@ -69,12 +69,10 @@ const Index = ({ Data }) => {
     console.log(Data.exam_type == "CODING", "vg");
 
     if (Data.exam_type == "CODING") {
-      getCodingQuestion(id).then((res) =>{
-
-        console.log(res.data,"data")
-        setcodingQuestionData(res.data.codingquestionData)
-      }
-      );
+      getCodingQuestion(id).then((res) => {
+        console.log(res.data, "data");
+        setcodingQuestionData(res.data.codingquestionData);
+      });
     } else {
       getQuestion(id).then((res) => setquestions(res.data.Data));
       getallQuestion(id).then((res) => setquestionsDatas(res.data.Data));
@@ -184,7 +182,7 @@ const Index = ({ Data }) => {
                               }}
                               className="bg-purple-700 text-white font-bold p-2 rounded-lg text-center"
                             >
-                            + Add Question
+                      + Add Question
                             </button>
                           )
                     )

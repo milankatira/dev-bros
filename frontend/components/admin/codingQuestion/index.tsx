@@ -37,32 +37,28 @@ const Index = () => {
     }
   };
 
-
-  console.log(
-    questionState?.level !== undefined
-    ,"questionData");
+  console.log(questionState?.level !== undefined, "questionData");
   return (
     <div>
-      {
-        questionState?.level !== undefined
-          ? (
-              <FormForQuestion
-                isEdit={true}
-                handleSubmit={handleSubmit}
-                intialValue={questionState}
-                questionData={questionData}
-                setquestionData={setquestionData}
-              />
-            )
-          : (
-              <FormForQuestion
-                isEdit={false}
-                handleSubmit={handleSubmit}
-                intialValue={intialValue.codingQuestion}
-                questionData={questionData}
-                setquestionData={setquestionData}
-              />
-            )}
+      {questionState?.level !== undefined
+        ? (
+            <FormForQuestion
+              isEdit={true}
+              handleSubmit={handleSubmit}
+              intialValue={questionState}
+              questionData={questionData}
+              setquestionData={setquestionData}
+            />
+          )
+        : (
+            <FormForQuestion
+              isEdit={false}
+              handleSubmit={handleSubmit}
+              intialValue={intialValue.codingQuestion}
+              questionData={questionData}
+              setquestionData={setquestionData}
+            />
+          )}
     </div>
   );
 };

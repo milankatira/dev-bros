@@ -11,7 +11,6 @@ const FormForQuestion = ({
   setquestionData,
   isEdit,
 }) => {
-
   const LEVELS = [
     { name: "easy", _id: "easy" },
     { name: "medium", _id: "medium" },
@@ -42,7 +41,7 @@ const FormForQuestion = ({
                   type="submit"
                   className="p-2 text-white rounded-md bg-red-500"
                 >
-                    submit{" "}
+                  submit{" "}
                 </button>
               </div>
               <div>
@@ -60,19 +59,19 @@ const FormForQuestion = ({
                       "insertdatetime media table paste code help wordcount",
                     ],
                     toolbar:
-                        "undo redo | formatselect | " +
-                        "bold italic backcolor | alignleft aligncenter " +
-                        "alignright alignjustify | bullist numlist outdent indent | " +
-                        "removeformat | help",
+                      "undo redo | formatselect | " +
+                      "bold italic backcolor | alignleft aligncenter " +
+                      "alignright alignjustify | bullist numlist outdent indent | " +
+                      "removeformat | help",
                   }}
                 />
 
                 <SelectField
                   error={
                     touched.questions &&
-                      touched?.questions?.level &&
-                      errors.questions &&
-                      errors?.questions?.level
+                    touched?.questions?.level &&
+                    errors.questions &&
+                    errors?.questions?.level
                   }
                   options={LEVELS}
                   name={`level`}
@@ -86,7 +85,7 @@ const FormForQuestion = ({
         );
       }}
     </Formik>
-  )
+  );
 };
 
 export default FormForQuestion;
